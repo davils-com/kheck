@@ -1,0 +1,59 @@
+// Klib ABI Dump
+// Targets: [wasmJs]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <com.davils:kheck-kollect>
+final class com.davils.kheck.kollect/LoggingMetrics : kotlin/AutoCloseable { // com.davils.kheck.kollect/LoggingMetrics|null[0]
+    final val registrations // com.davils.kheck.kollect/LoggingMetrics.registrations|{}registrations[0]
+        final fun <get-registrations>(): kotlin.collections/List<com.davils.kollect.core/Registration<com.davils.kollect.core/ObservedFamily>> // com.davils.kheck.kollect/LoggingMetrics.registrations.<get-registrations>|<get-registrations>(){}[0]
+
+    final fun close() // com.davils.kheck.kollect/LoggingMetrics.close|close(){}[0]
+    final fun toString(): kotlin/String // com.davils.kheck.kollect/LoggingMetrics.toString|toString(){}[0]
+}
+
+final object com.davils.kheck.kollect/LoggingMetricNames { // com.davils.kheck.kollect/LoggingMetricNames|null[0]
+    final const val DROPPED // com.davils.kheck.kollect/LoggingMetricNames.DROPPED|{}DROPPED[0]
+        final fun <get-DROPPED>(): kotlin/String // com.davils.kheck.kollect/LoggingMetricNames.DROPPED.<get-DROPPED>|<get-DROPPED>(){}[0]
+    final const val DROPPED_AFTER_CLOSE // com.davils.kheck.kollect/LoggingMetricNames.DROPPED_AFTER_CLOSE|{}DROPPED_AFTER_CLOSE[0]
+        final fun <get-DROPPED_AFTER_CLOSE>(): kotlin/String // com.davils.kheck.kollect/LoggingMetricNames.DROPPED_AFTER_CLOSE.<get-DROPPED_AFTER_CLOSE>|<get-DROPPED_AFTER_CLOSE>(){}[0]
+    final const val FAILED_LISTENERS // com.davils.kheck.kollect/LoggingMetricNames.FAILED_LISTENERS|{}FAILED_LISTENERS[0]
+        final fun <get-FAILED_LISTENERS>(): kotlin/String // com.davils.kheck.kollect/LoggingMetricNames.FAILED_LISTENERS.<get-FAILED_LISTENERS>|<get-FAILED_LISTENERS>(){}[0]
+    final const val INTAKE // com.davils.kheck.kollect/LoggingMetricNames.INTAKE|{}INTAKE[0]
+        final fun <get-INTAKE>(): kotlin/String // com.davils.kheck.kollect/LoggingMetricNames.INTAKE.<get-INTAKE>|<get-INTAKE>(){}[0]
+    final const val INTAKE_QUEUED // com.davils.kheck.kollect/LoggingMetricNames.INTAKE_QUEUED|{}INTAKE_QUEUED[0]
+        final fun <get-INTAKE_QUEUED>(): kotlin/String // com.davils.kheck.kollect/LoggingMetricNames.INTAKE_QUEUED.<get-INTAKE_QUEUED>|<get-INTAKE_QUEUED>(){}[0]
+    final const val INTAKE_SATURATION // com.davils.kheck.kollect/LoggingMetricNames.INTAKE_SATURATION|{}INTAKE_SATURATION[0]
+        final fun <get-INTAKE_SATURATION>(): kotlin/String // com.davils.kheck.kollect/LoggingMetricNames.INTAKE_SATURATION.<get-INTAKE_SATURATION>|<get-INTAKE_SATURATION>(){}[0]
+    final const val LEVEL // com.davils.kheck.kollect/LoggingMetricNames.LEVEL|{}LEVEL[0]
+        final fun <get-LEVEL>(): kotlin/String // com.davils.kheck.kollect/LoggingMetricNames.LEVEL.<get-LEVEL>|<get-LEVEL>(){}[0]
+    final const val MASKED // com.davils.kheck.kollect/LoggingMetricNames.MASKED|{}MASKED[0]
+        final fun <get-MASKED>(): kotlin/String // com.davils.kheck.kollect/LoggingMetricNames.MASKED.<get-MASKED>|<get-MASKED>(){}[0]
+    final const val REASON // com.davils.kheck.kollect/LoggingMetricNames.REASON|{}REASON[0]
+        final fun <get-REASON>(): kotlin/String // com.davils.kheck.kollect/LoggingMetricNames.REASON.<get-REASON>|<get-REASON>(){}[0]
+    final const val RECORDS // com.davils.kheck.kollect/LoggingMetricNames.RECORDS|{}RECORDS[0]
+        final fun <get-RECORDS>(): kotlin/String // com.davils.kheck.kollect/LoggingMetricNames.RECORDS.<get-RECORDS>|<get-RECORDS>(){}[0]
+    final const val REENTRANT // com.davils.kheck.kollect/LoggingMetricNames.REENTRANT|{}REENTRANT[0]
+        final fun <get-REENTRANT>(): kotlin/String // com.davils.kheck.kollect/LoggingMetricNames.REENTRANT.<get-REENTRANT>|<get-REENTRANT>(){}[0]
+    final const val RULE // com.davils.kheck.kollect/LoggingMetricNames.RULE|{}RULE[0]
+        final fun <get-RULE>(): kotlin/String // com.davils.kheck.kollect/LoggingMetricNames.RULE.<get-RULE>|<get-RULE>(){}[0]
+    final const val SINK // com.davils.kheck.kollect/LoggingMetricNames.SINK|{}SINK[0]
+        final fun <get-SINK>(): kotlin/String // com.davils.kheck.kollect/LoggingMetricNames.SINK.<get-SINK>|<get-SINK>(){}[0]
+    final const val SINK_FAILED // com.davils.kheck.kollect/LoggingMetricNames.SINK_FAILED|{}SINK_FAILED[0]
+        final fun <get-SINK_FAILED>(): kotlin/String // com.davils.kheck.kollect/LoggingMetricNames.SINK_FAILED.<get-SINK_FAILED>|<get-SINK_FAILED>(){}[0]
+    final const val SINK_FAILING // com.davils.kheck.kollect/LoggingMetricNames.SINK_FAILING|{}SINK_FAILING[0]
+        final fun <get-SINK_FAILING>(): kotlin/String // com.davils.kheck.kollect/LoggingMetricNames.SINK_FAILING.<get-SINK_FAILING>|<get-SINK_FAILING>(){}[0]
+    final const val SINK_QUEUED // com.davils.kheck.kollect/LoggingMetricNames.SINK_QUEUED|{}SINK_QUEUED[0]
+        final fun <get-SINK_QUEUED>(): kotlin/String // com.davils.kheck.kollect/LoggingMetricNames.SINK_QUEUED.<get-SINK_QUEUED>|<get-SINK_QUEUED>(){}[0]
+    final const val SINK_WRITE_TIME // com.davils.kheck.kollect/LoggingMetricNames.SINK_WRITE_TIME|{}SINK_WRITE_TIME[0]
+        final fun <get-SINK_WRITE_TIME>(): kotlin/String // com.davils.kheck.kollect/LoggingMetricNames.SINK_WRITE_TIME.<get-SINK_WRITE_TIME>|<get-SINK_WRITE_TIME>(){}[0]
+    final const val SINK_WRITTEN // com.davils.kheck.kollect/LoggingMetricNames.SINK_WRITTEN|{}SINK_WRITTEN[0]
+        final fun <get-SINK_WRITTEN>(): kotlin/String // com.davils.kheck.kollect/LoggingMetricNames.SINK_WRITTEN.<get-SINK_WRITTEN>|<get-SINK_WRITTEN>(){}[0]
+    final const val SUPPRESSED // com.davils.kheck.kollect/LoggingMetricNames.SUPPRESSED|{}SUPPRESSED[0]
+        final fun <get-SUPPRESSED>(): kotlin/String // com.davils.kheck.kollect/LoggingMetricNames.SUPPRESSED.<get-SUPPRESSED>|<get-SUPPRESSED>(){}[0]
+}
+
+final fun (com.davils.kheck.core/Logging).com.davils.kheck.kollect/healthIndicator(): com.davils.kollect.core.health/HealthIndicator // com.davils.kheck.kollect/healthIndicator|healthIndicator@com.davils.kheck.core.Logging(){}[0]
+final fun (com.davils.kollect.core/MeterRegistry).com.davils.kheck.kollect/bindLogging(com.davils.kheck.core/Logging): com.davils.kheck.kollect/LoggingMetrics // com.davils.kheck.kollect/bindLogging|bindLogging@com.davils.kollect.core.MeterRegistry(com.davils.kheck.core.Logging){}[0]

@@ -1,0 +1,34 @@
+public final class com/davils/kheck/kollect/LoggingBindingsKt {
+	public static final fun bindLogging (Lcom/davils/kollect/core/MeterRegistry;Lcom/davils/kheck/core/Logging;)Lcom/davils/kheck/kollect/LoggingMetrics;
+	public static final fun healthIndicator (Lcom/davils/kheck/core/Logging;)Lcom/davils/kollect/core/health/HealthIndicator;
+}
+
+public final class com/davils/kheck/kollect/LoggingMetricNames {
+	public static final field DROPPED Ljava/lang/String;
+	public static final field DROPPED_AFTER_CLOSE Ljava/lang/String;
+	public static final field FAILED_LISTENERS Ljava/lang/String;
+	public static final field INSTANCE Lcom/davils/kheck/kollect/LoggingMetricNames;
+	public static final field INTAKE Ljava/lang/String;
+	public static final field INTAKE_QUEUED Ljava/lang/String;
+	public static final field INTAKE_SATURATION Ljava/lang/String;
+	public static final field LEVEL Ljava/lang/String;
+	public static final field MASKED Ljava/lang/String;
+	public static final field REASON Ljava/lang/String;
+	public static final field RECORDS Ljava/lang/String;
+	public static final field REENTRANT Ljava/lang/String;
+	public static final field RULE Ljava/lang/String;
+	public static final field SINK Ljava/lang/String;
+	public static final field SINK_FAILED Ljava/lang/String;
+	public static final field SINK_FAILING Ljava/lang/String;
+	public static final field SINK_QUEUED Ljava/lang/String;
+	public static final field SINK_WRITE_TIME Ljava/lang/String;
+	public static final field SINK_WRITTEN Ljava/lang/String;
+	public static final field SUPPRESSED Ljava/lang/String;
+}
+
+public final class com/davils/kheck/kollect/LoggingMetrics : java/lang/AutoCloseable {
+	public fun close ()V
+	public final fun getRegistrations ()Ljava/util/List;
+	public fun toString ()Ljava/lang/String;
+}
+
