@@ -1,0 +1,17 @@
+public final class com/davils/kheck/slf4j/BridgeServiceProvider : org/slf4j/spi/SLF4JServiceProvider {
+	public fun <init> ()V
+	public fun getLoggerFactory ()Lorg/slf4j/ILoggerFactory;
+	public fun getMDCAdapter ()Lorg/slf4j/spi/MDCAdapter;
+	public fun getMarkerFactory ()Lorg/slf4j/IMarkerFactory;
+	public fun getRequestedApiVersion ()Ljava/lang/String;
+	public fun initialize ()V
+}
+
+public final class com/davils/kheck/slf4j/Slf4jBridge {
+	public static final field INSTANCE Lcom/davils/kheck/slf4j/Slf4jBridge;
+	public final fun attach (Lcom/davils/kheck/core/Logging;)V
+	public final fun detach ()V
+	public final fun getLost ()J
+	public final fun isAttached ()Z
+}
+
