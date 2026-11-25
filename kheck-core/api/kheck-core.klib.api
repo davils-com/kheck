@@ -1,0 +1,1607 @@
+// Klib ABI Dump
+// Targets: [wasmJs]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <com.davils:kheck-core>
+final enum class com.davils.kheck.core.format.json/JsonLayout : kotlin/Enum<com.davils.kheck.core.format.json/JsonLayout> { // com.davils.kheck.core.format.json/JsonLayout|null[0]
+    enum entry Ecs // com.davils.kheck.core.format.json/JsonLayout.Ecs|null[0]
+    enum entry Logstash // com.davils.kheck.core.format.json/JsonLayout.Logstash|null[0]
+    enum entry OpenTelemetry // com.davils.kheck.core.format.json/JsonLayout.OpenTelemetry|null[0]
+    enum entry Standard // com.davils.kheck.core.format.json/JsonLayout.Standard|null[0]
+
+    final val entries // com.davils.kheck.core.format.json/JsonLayout.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.kheck.core.format.json/JsonLayout> // com.davils.kheck.core.format.json/JsonLayout.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.kheck.core.format.json/JsonLayout // com.davils.kheck.core.format.json/JsonLayout.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.kheck.core.format.json/JsonLayout> // com.davils.kheck.core.format.json/JsonLayout.values|values#static(){}[0]
+}
+
+final enum class com.davils.kheck.core.format.json/TimestampPrecision : kotlin/Enum<com.davils.kheck.core.format.json/TimestampPrecision> { // com.davils.kheck.core.format.json/TimestampPrecision|null[0]
+    enum entry Microseconds // com.davils.kheck.core.format.json/TimestampPrecision.Microseconds|null[0]
+    enum entry Milliseconds // com.davils.kheck.core.format.json/TimestampPrecision.Milliseconds|null[0]
+    enum entry Nanoseconds // com.davils.kheck.core.format.json/TimestampPrecision.Nanoseconds|null[0]
+
+    final val digits // com.davils.kheck.core.format.json/TimestampPrecision.digits|{}digits[0]
+        final fun <get-digits>(): kotlin/Int // com.davils.kheck.core.format.json/TimestampPrecision.digits.<get-digits>|<get-digits>(){}[0]
+    final val entries // com.davils.kheck.core.format.json/TimestampPrecision.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.kheck.core.format.json/TimestampPrecision> // com.davils.kheck.core.format.json/TimestampPrecision.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.kheck.core.format.json/TimestampPrecision // com.davils.kheck.core.format.json/TimestampPrecision.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.kheck.core.format.json/TimestampPrecision> // com.davils.kheck.core.format.json/TimestampPrecision.values|values#static(){}[0]
+}
+
+final enum class com.davils.kheck.core.format.plain/Alignment : kotlin/Enum<com.davils.kheck.core.format.plain/Alignment> { // com.davils.kheck.core.format.plain/Alignment|null[0]
+    enum entry End // com.davils.kheck.core.format.plain/Alignment.End|null[0]
+    enum entry Start // com.davils.kheck.core.format.plain/Alignment.Start|null[0]
+
+    final val entries // com.davils.kheck.core.format.plain/Alignment.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.kheck.core.format.plain/Alignment> // com.davils.kheck.core.format.plain/Alignment.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.kheck.core.format.plain/Alignment // com.davils.kheck.core.format.plain/Alignment.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.kheck.core.format.plain/Alignment> // com.davils.kheck.core.format.plain/Alignment.values|values#static(){}[0]
+}
+
+final enum class com.davils.kheck.core.format/TimestampFormat : kotlin/Enum<com.davils.kheck.core.format/TimestampFormat> { // com.davils.kheck.core.format/TimestampFormat|null[0]
+    enum entry DateTime // com.davils.kheck.core.format/TimestampFormat.DateTime|null[0]
+    enum entry EpochMillis // com.davils.kheck.core.format/TimestampFormat.EpochMillis|null[0]
+    enum entry Iso // com.davils.kheck.core.format/TimestampFormat.Iso|null[0]
+    enum entry IsoUtc // com.davils.kheck.core.format/TimestampFormat.IsoUtc|null[0]
+    enum entry Time // com.davils.kheck.core.format/TimestampFormat.Time|null[0]
+
+    final val entries // com.davils.kheck.core.format/TimestampFormat.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.kheck.core.format/TimestampFormat> // com.davils.kheck.core.format/TimestampFormat.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.kheck.core.format/TimestampFormat // com.davils.kheck.core.format/TimestampFormat.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.kheck.core.format/TimestampFormat> // com.davils.kheck.core.format/TimestampFormat.values|values#static(){}[0]
+}
+
+final enum class com.davils.kheck.core.health/HealthStatus : kotlin/Enum<com.davils.kheck.core.health/HealthStatus> { // com.davils.kheck.core.health/HealthStatus|null[0]
+    enum entry Degraded // com.davils.kheck.core.health/HealthStatus.Degraded|null[0]
+    enum entry Down // com.davils.kheck.core.health/HealthStatus.Down|null[0]
+    enum entry Up // com.davils.kheck.core.health/HealthStatus.Up|null[0]
+
+    final val entries // com.davils.kheck.core.health/HealthStatus.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.kheck.core.health/HealthStatus> // com.davils.kheck.core.health/HealthStatus.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.kheck.core.health/HealthStatus // com.davils.kheck.core.health/HealthStatus.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.kheck.core.health/HealthStatus> // com.davils.kheck.core.health/HealthStatus.values|values#static(){}[0]
+}
+
+final enum class com.davils.kheck.core.statistics/Suppression : kotlin/Enum<com.davils.kheck.core.statistics/Suppression> { // com.davils.kheck.core.statistics/Suppression|null[0]
+    enum entry Deduplicated // com.davils.kheck.core.statistics/Suppression.Deduplicated|null[0]
+    enum entry Filtered // com.davils.kheck.core.statistics/Suppression.Filtered|null[0]
+    enum entry RateLimited // com.davils.kheck.core.statistics/Suppression.RateLimited|null[0]
+    enum entry Sampled // com.davils.kheck.core.statistics/Suppression.Sampled|null[0]
+
+    final val entries // com.davils.kheck.core.statistics/Suppression.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.kheck.core.statistics/Suppression> // com.davils.kheck.core.statistics/Suppression.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.kheck.core.statistics/Suppression // com.davils.kheck.core.statistics/Suppression.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.kheck.core.statistics/Suppression> // com.davils.kheck.core.statistics/Suppression.values|values#static(){}[0]
+}
+
+final enum class com.davils.kheck.core.style/ColorDepth : kotlin/Enum<com.davils.kheck.core.style/ColorDepth> { // com.davils.kheck.core.style/ColorDepth|null[0]
+    enum entry Ansi16 // com.davils.kheck.core.style/ColorDepth.Ansi16|null[0]
+    enum entry Ansi256 // com.davils.kheck.core.style/ColorDepth.Ansi256|null[0]
+    enum entry None // com.davils.kheck.core.style/ColorDepth.None|null[0]
+    enum entry TrueColor // com.davils.kheck.core.style/ColorDepth.TrueColor|null[0]
+
+    final val entries // com.davils.kheck.core.style/ColorDepth.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.kheck.core.style/ColorDepth> // com.davils.kheck.core.style/ColorDepth.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.kheck.core.style/ColorDepth // com.davils.kheck.core.style/ColorDepth.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.kheck.core.style/ColorDepth> // com.davils.kheck.core.style/ColorDepth.values|values#static(){}[0]
+}
+
+final enum class com.davils.kheck.core.style/ColorMode : kotlin/Enum<com.davils.kheck.core.style/ColorMode> { // com.davils.kheck.core.style/ColorMode|null[0]
+    enum entry Always // com.davils.kheck.core.style/ColorMode.Always|null[0]
+    enum entry Auto // com.davils.kheck.core.style/ColorMode.Auto|null[0]
+    enum entry Never // com.davils.kheck.core.style/ColorMode.Never|null[0]
+
+    final val entries // com.davils.kheck.core.style/ColorMode.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.kheck.core.style/ColorMode> // com.davils.kheck.core.style/ColorMode.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.kheck.core.style/ColorMode // com.davils.kheck.core.style/ColorMode.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.kheck.core.style/ColorMode> // com.davils.kheck.core.style/ColorMode.values|values#static(){}[0]
+}
+
+final enum class com.davils.kheck.core.terminal/ConsoleTarget : kotlin/Enum<com.davils.kheck.core.terminal/ConsoleTarget> { // com.davils.kheck.core.terminal/ConsoleTarget|null[0]
+    enum entry StandardError // com.davils.kheck.core.terminal/ConsoleTarget.StandardError|null[0]
+    enum entry StandardOutput // com.davils.kheck.core.terminal/ConsoleTarget.StandardOutput|null[0]
+
+    final val entries // com.davils.kheck.core.terminal/ConsoleTarget.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.kheck.core.terminal/ConsoleTarget> // com.davils.kheck.core.terminal/ConsoleTarget.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.kheck.core.terminal/ConsoleTarget // com.davils.kheck.core.terminal/ConsoleTarget.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.kheck.core.terminal/ConsoleTarget> // com.davils.kheck.core.terminal/ConsoleTarget.values|values#static(){}[0]
+}
+
+abstract fun interface com.davils.kheck.core.diagnostics/LogDiagnostics { // com.davils.kheck.core.diagnostics/LogDiagnostics|null[0]
+    abstract fun report(kotlin/String) // com.davils.kheck.core.diagnostics/LogDiagnostics.report|report(kotlin.String){}[0]
+
+    final object Companion { // com.davils.kheck.core.diagnostics/LogDiagnostics.Companion|null[0]
+        final val Silent // com.davils.kheck.core.diagnostics/LogDiagnostics.Companion.Silent|{}Silent[0]
+            final fun <get-Silent>(): com.davils.kheck.core.diagnostics/LogDiagnostics // com.davils.kheck.core.diagnostics/LogDiagnostics.Companion.Silent.<get-Silent>|<get-Silent>(){}[0]
+        final val StandardError // com.davils.kheck.core.diagnostics/LogDiagnostics.Companion.StandardError|{}StandardError[0]
+            final fun <get-StandardError>(): com.davils.kheck.core.diagnostics/LogDiagnostics // com.davils.kheck.core.diagnostics/LogDiagnostics.Companion.StandardError.<get-StandardError>|<get-StandardError>(){}[0]
+    }
+}
+
+abstract fun interface com.davils.kheck.core.filter/LogFilter { // com.davils.kheck.core.filter/LogFilter|null[0]
+    abstract fun accept(com.davils.kheck.core.record/LogRecord): kotlin/Boolean // com.davils.kheck.core.filter/LogFilter.accept|accept(com.davils.kheck.core.record.LogRecord){}[0]
+}
+
+abstract fun interface com.davils.kheck.core.format/LogEncoder { // com.davils.kheck.core.format/LogEncoder|null[0]
+    abstract fun encode(com.davils.kheck.core.record/LogRecord, kotlin.text/StringBuilder) // com.davils.kheck.core.format/LogEncoder.encode|encode(com.davils.kheck.core.record.LogRecord;kotlin.text.StringBuilder){}[0]
+}
+
+abstract fun interface com.davils.kheck.core.health/HealthRule { // com.davils.kheck.core.health/HealthRule|null[0]
+    abstract fun evaluate(com.davils.kheck.core.statistics/LoggingStatistics): com.davils.kheck.core.health/LoggingHealth // com.davils.kheck.core.health/HealthRule.evaluate|evaluate(com.davils.kheck.core.statistics.LoggingStatistics){}[0]
+}
+
+abstract fun interface com.davils.kheck.core.mask/MaskingValidator { // com.davils.kheck.core.mask/MaskingValidator|null[0]
+    abstract fun isMatch(kotlin/String): kotlin/Boolean // com.davils.kheck.core.mask/MaskingValidator.isMatch|isMatch(kotlin.String){}[0]
+}
+
+abstract fun interface com.davils.kheck.core/LoggingEventListener { // com.davils.kheck.core/LoggingEventListener|null[0]
+    abstract fun onEvent(com.davils.kheck.core/LoggingEvent) // com.davils.kheck.core/LoggingEventListener.onEvent|onEvent(com.davils.kheck.core.LoggingEvent){}[0]
+}
+
+abstract interface com.davils.kheck.core.format/LogFormat { // com.davils.kheck.core.format/LogFormat|null[0]
+    abstract val colorMode // com.davils.kheck.core.format/LogFormat.colorMode|{}colorMode[0]
+        abstract fun <get-colorMode>(): com.davils.kheck.core.style/ColorMode // com.davils.kheck.core.format/LogFormat.colorMode.<get-colorMode>|<get-colorMode>(){}[0]
+
+    abstract fun encoder(com.davils.kheck.core.style/ColorDepth): com.davils.kheck.core.format/LogEncoder // com.davils.kheck.core.format/LogFormat.encoder|encoder(com.davils.kheck.core.style.ColorDepth){}[0]
+}
+
+abstract interface com.davils.kheck.core.sink/LogSink { // com.davils.kheck.core.sink/LogSink|null[0]
+    abstract suspend fun write(kotlin.collections/List<com.davils.kheck.core.sink/LogLine>) // com.davils.kheck.core.sink/LogSink.write|write(kotlin.collections.List<com.davils.kheck.core.sink.LogLine>){}[0]
+    open fun colorDepth(com.davils.kheck.core.style/ColorMode): com.davils.kheck.core.style/ColorDepth // com.davils.kheck.core.sink/LogSink.colorDepth|colorDepth(com.davils.kheck.core.style.ColorMode){}[0]
+    open suspend fun close() // com.davils.kheck.core.sink/LogSink.close|close(){}[0]
+    open suspend fun flush() // com.davils.kheck.core.sink/LogSink.flush|flush(){}[0]
+    open suspend fun open() // com.davils.kheck.core.sink/LogSink.open|open(){}[0]
+}
+
+abstract interface com.davils.kheck.core.sink/LogSinkConfiguration : com.davils.kore.core.validation/Validatable { // com.davils.kheck.core.sink/LogSinkConfiguration|null[0]
+    abstract val options // com.davils.kheck.core.sink/LogSinkConfiguration.options|{}options[0]
+        abstract fun <get-options>(): com.davils.kheck.core.sink/LogSinkOptions // com.davils.kheck.core.sink/LogSinkConfiguration.options.<get-options>|<get-options>(){}[0]
+}
+
+abstract interface com.davils.kheck.core.terminal/Terminal { // com.davils.kheck.core.terminal/Terminal|null[0]
+    abstract fun isInteractive(com.davils.kheck.core.terminal/ConsoleTarget): kotlin/Boolean // com.davils.kheck.core.terminal/Terminal.isInteractive|isInteractive(com.davils.kheck.core.terminal.ConsoleTarget){}[0]
+    abstract fun write(com.davils.kheck.core.terminal/ConsoleTarget, kotlin/String) // com.davils.kheck.core.terminal/Terminal.write|write(com.davils.kheck.core.terminal.ConsoleTarget;kotlin.String){}[0]
+
+    final object Companion { // com.davils.kheck.core.terminal/Terminal.Companion|null[0]
+        final val SYSTEM // com.davils.kheck.core.terminal/Terminal.Companion.SYSTEM|{}SYSTEM[0]
+            final fun <get-SYSTEM>(): com.davils.kheck.core.terminal/Terminal // com.davils.kheck.core.terminal/Terminal.Companion.SYSTEM.<get-SYSTEM>|<get-SYSTEM>(){}[0]
+    }
+}
+
+sealed interface com.davils.kheck.core.format.plain/PlainSegment { // com.davils.kheck.core.format.plain/PlainSegment|null[0]
+    final class Caller : com.davils.kheck.core.format.plain/PlainSegment { // com.davils.kheck.core.format.plain/PlainSegment.Caller|null[0]
+        constructor <init>(com.davils.kheck.core.format.plain/SegmentAffix, com.davils.kheck.core.format.plain/SegmentFrame, com.davils.kheck.core.style/SegmentStyle) // com.davils.kheck.core.format.plain/PlainSegment.Caller.<init>|<init>(com.davils.kheck.core.format.plain.SegmentAffix;com.davils.kheck.core.format.plain.SegmentFrame;com.davils.kheck.core.style.SegmentStyle){}[0]
+
+        final val affix // com.davils.kheck.core.format.plain/PlainSegment.Caller.affix|{}affix[0]
+            final fun <get-affix>(): com.davils.kheck.core.format.plain/SegmentAffix // com.davils.kheck.core.format.plain/PlainSegment.Caller.affix.<get-affix>|<get-affix>(){}[0]
+        final val frame // com.davils.kheck.core.format.plain/PlainSegment.Caller.frame|{}frame[0]
+            final fun <get-frame>(): com.davils.kheck.core.format.plain/SegmentFrame // com.davils.kheck.core.format.plain/PlainSegment.Caller.frame.<get-frame>|<get-frame>(){}[0]
+        final val style // com.davils.kheck.core.format.plain/PlainSegment.Caller.style|{}style[0]
+            final fun <get-style>(): com.davils.kheck.core.style/SegmentStyle // com.davils.kheck.core.format.plain/PlainSegment.Caller.style.<get-style>|<get-style>(){}[0]
+    }
+
+    final class Cause : com.davils.kheck.core.format.plain/PlainSegment { // com.davils.kheck.core.format.plain/PlainSegment.Cause|null[0]
+        constructor <init>(com.davils.kheck.core.format.plain/CauseLayout) // com.davils.kheck.core.format.plain/PlainSegment.Cause.<init>|<init>(com.davils.kheck.core.format.plain.CauseLayout){}[0]
+
+        final val layout // com.davils.kheck.core.format.plain/PlainSegment.Cause.layout|{}layout[0]
+            final fun <get-layout>(): com.davils.kheck.core.format.plain/CauseLayout // com.davils.kheck.core.format.plain/PlainSegment.Cause.layout.<get-layout>|<get-layout>(){}[0]
+    }
+
+    final class Context : com.davils.kheck.core.format.plain/PlainSegment { // com.davils.kheck.core.format.plain/PlainSegment.Context|null[0]
+        constructor <init>(com.davils.kheck.core.format.plain/EntriesLayout) // com.davils.kheck.core.format.plain/PlainSegment.Context.<init>|<init>(com.davils.kheck.core.format.plain.EntriesLayout){}[0]
+
+        final val layout // com.davils.kheck.core.format.plain/PlainSegment.Context.layout|{}layout[0]
+            final fun <get-layout>(): com.davils.kheck.core.format.plain/EntriesLayout // com.davils.kheck.core.format.plain/PlainSegment.Context.layout.<get-layout>|<get-layout>(){}[0]
+    }
+
+    final class Fields : com.davils.kheck.core.format.plain/PlainSegment { // com.davils.kheck.core.format.plain/PlainSegment.Fields|null[0]
+        constructor <init>(com.davils.kheck.core.format.plain/EntriesLayout) // com.davils.kheck.core.format.plain/PlainSegment.Fields.<init>|<init>(com.davils.kheck.core.format.plain.EntriesLayout){}[0]
+
+        final val layout // com.davils.kheck.core.format.plain/PlainSegment.Fields.layout|{}layout[0]
+            final fun <get-layout>(): com.davils.kheck.core.format.plain/EntriesLayout // com.davils.kheck.core.format.plain/PlainSegment.Fields.layout.<get-layout>|<get-layout>(){}[0]
+    }
+
+    final class Level : com.davils.kheck.core.format.plain/PlainSegment { // com.davils.kheck.core.format.plain/PlainSegment.Level|null[0]
+        constructor <init>(com.davils.kheck.core.format.plain/SegmentFrame, com.davils.kheck.core.style/SegmentStyle) // com.davils.kheck.core.format.plain/PlainSegment.Level.<init>|<init>(com.davils.kheck.core.format.plain.SegmentFrame;com.davils.kheck.core.style.SegmentStyle){}[0]
+
+        final val frame // com.davils.kheck.core.format.plain/PlainSegment.Level.frame|{}frame[0]
+            final fun <get-frame>(): com.davils.kheck.core.format.plain/SegmentFrame // com.davils.kheck.core.format.plain/PlainSegment.Level.frame.<get-frame>|<get-frame>(){}[0]
+        final val style // com.davils.kheck.core.format.plain/PlainSegment.Level.style|{}style[0]
+            final fun <get-style>(): com.davils.kheck.core.style/SegmentStyle // com.davils.kheck.core.format.plain/PlainSegment.Level.style.<get-style>|<get-style>(){}[0]
+    }
+
+    final class Logger : com.davils.kheck.core.format.plain/PlainSegment { // com.davils.kheck.core.format.plain/PlainSegment.Logger|null[0]
+        constructor <init>(kotlin/Int, com.davils.kheck.core.format.plain/SegmentFrame, com.davils.kheck.core.style/SegmentStyle) // com.davils.kheck.core.format.plain/PlainSegment.Logger.<init>|<init>(kotlin.Int;com.davils.kheck.core.format.plain.SegmentFrame;com.davils.kheck.core.style.SegmentStyle){}[0]
+
+        final val abbreviation // com.davils.kheck.core.format.plain/PlainSegment.Logger.abbreviation|{}abbreviation[0]
+            final fun <get-abbreviation>(): kotlin/Int // com.davils.kheck.core.format.plain/PlainSegment.Logger.abbreviation.<get-abbreviation>|<get-abbreviation>(){}[0]
+        final val frame // com.davils.kheck.core.format.plain/PlainSegment.Logger.frame|{}frame[0]
+            final fun <get-frame>(): com.davils.kheck.core.format.plain/SegmentFrame // com.davils.kheck.core.format.plain/PlainSegment.Logger.frame.<get-frame>|<get-frame>(){}[0]
+        final val style // com.davils.kheck.core.format.plain/PlainSegment.Logger.style|{}style[0]
+            final fun <get-style>(): com.davils.kheck.core.style/SegmentStyle // com.davils.kheck.core.format.plain/PlainSegment.Logger.style.<get-style>|<get-style>(){}[0]
+    }
+
+    final class Markers : com.davils.kheck.core.format.plain/PlainSegment { // com.davils.kheck.core.format.plain/PlainSegment.Markers|null[0]
+        constructor <init>(com.davils.kheck.core.format.plain/SegmentAffix, com.davils.kheck.core.format.plain/SegmentFrame, com.davils.kheck.core.style/SegmentStyle) // com.davils.kheck.core.format.plain/PlainSegment.Markers.<init>|<init>(com.davils.kheck.core.format.plain.SegmentAffix;com.davils.kheck.core.format.plain.SegmentFrame;com.davils.kheck.core.style.SegmentStyle){}[0]
+
+        final val affix // com.davils.kheck.core.format.plain/PlainSegment.Markers.affix|{}affix[0]
+            final fun <get-affix>(): com.davils.kheck.core.format.plain/SegmentAffix // com.davils.kheck.core.format.plain/PlainSegment.Markers.affix.<get-affix>|<get-affix>(){}[0]
+        final val frame // com.davils.kheck.core.format.plain/PlainSegment.Markers.frame|{}frame[0]
+            final fun <get-frame>(): com.davils.kheck.core.format.plain/SegmentFrame // com.davils.kheck.core.format.plain/PlainSegment.Markers.frame.<get-frame>|<get-frame>(){}[0]
+        final val style // com.davils.kheck.core.format.plain/PlainSegment.Markers.style|{}style[0]
+            final fun <get-style>(): com.davils.kheck.core.style/SegmentStyle // com.davils.kheck.core.format.plain/PlainSegment.Markers.style.<get-style>|<get-style>(){}[0]
+    }
+
+    final class Message : com.davils.kheck.core.format.plain/PlainSegment { // com.davils.kheck.core.format.plain/PlainSegment.Message|null[0]
+        constructor <init>(com.davils.kheck.core.format.plain/SegmentFrame, com.davils.kheck.core.style/SegmentStyle) // com.davils.kheck.core.format.plain/PlainSegment.Message.<init>|<init>(com.davils.kheck.core.format.plain.SegmentFrame;com.davils.kheck.core.style.SegmentStyle){}[0]
+
+        final val frame // com.davils.kheck.core.format.plain/PlainSegment.Message.frame|{}frame[0]
+            final fun <get-frame>(): com.davils.kheck.core.format.plain/SegmentFrame // com.davils.kheck.core.format.plain/PlainSegment.Message.frame.<get-frame>|<get-frame>(){}[0]
+        final val style // com.davils.kheck.core.format.plain/PlainSegment.Message.style|{}style[0]
+            final fun <get-style>(): com.davils.kheck.core.style/SegmentStyle // com.davils.kheck.core.format.plain/PlainSegment.Message.style.<get-style>|<get-style>(){}[0]
+    }
+
+    final class Sequence : com.davils.kheck.core.format.plain/PlainSegment { // com.davils.kheck.core.format.plain/PlainSegment.Sequence|null[0]
+        constructor <init>(com.davils.kheck.core.format.plain/SegmentFrame, com.davils.kheck.core.style/SegmentStyle) // com.davils.kheck.core.format.plain/PlainSegment.Sequence.<init>|<init>(com.davils.kheck.core.format.plain.SegmentFrame;com.davils.kheck.core.style.SegmentStyle){}[0]
+
+        final val frame // com.davils.kheck.core.format.plain/PlainSegment.Sequence.frame|{}frame[0]
+            final fun <get-frame>(): com.davils.kheck.core.format.plain/SegmentFrame // com.davils.kheck.core.format.plain/PlainSegment.Sequence.frame.<get-frame>|<get-frame>(){}[0]
+        final val style // com.davils.kheck.core.format.plain/PlainSegment.Sequence.style|{}style[0]
+            final fun <get-style>(): com.davils.kheck.core.style/SegmentStyle // com.davils.kheck.core.format.plain/PlainSegment.Sequence.style.<get-style>|<get-style>(){}[0]
+    }
+
+    final class Text : com.davils.kheck.core.format.plain/PlainSegment { // com.davils.kheck.core.format.plain/PlainSegment.Text|null[0]
+        constructor <init>(kotlin/String, com.davils.kheck.core.style/SegmentStyle) // com.davils.kheck.core.format.plain/PlainSegment.Text.<init>|<init>(kotlin.String;com.davils.kheck.core.style.SegmentStyle){}[0]
+
+        final val style // com.davils.kheck.core.format.plain/PlainSegment.Text.style|{}style[0]
+            final fun <get-style>(): com.davils.kheck.core.style/SegmentStyle // com.davils.kheck.core.format.plain/PlainSegment.Text.style.<get-style>|<get-style>(){}[0]
+        final val value // com.davils.kheck.core.format.plain/PlainSegment.Text.value|{}value[0]
+            final fun <get-value>(): kotlin/String // com.davils.kheck.core.format.plain/PlainSegment.Text.value.<get-value>|<get-value>(){}[0]
+    }
+
+    final class Thread : com.davils.kheck.core.format.plain/PlainSegment { // com.davils.kheck.core.format.plain/PlainSegment.Thread|null[0]
+        constructor <init>(com.davils.kheck.core.format.plain/SegmentFrame, com.davils.kheck.core.style/SegmentStyle) // com.davils.kheck.core.format.plain/PlainSegment.Thread.<init>|<init>(com.davils.kheck.core.format.plain.SegmentFrame;com.davils.kheck.core.style.SegmentStyle){}[0]
+
+        final val frame // com.davils.kheck.core.format.plain/PlainSegment.Thread.frame|{}frame[0]
+            final fun <get-frame>(): com.davils.kheck.core.format.plain/SegmentFrame // com.davils.kheck.core.format.plain/PlainSegment.Thread.frame.<get-frame>|<get-frame>(){}[0]
+        final val style // com.davils.kheck.core.format.plain/PlainSegment.Thread.style|{}style[0]
+            final fun <get-style>(): com.davils.kheck.core.style/SegmentStyle // com.davils.kheck.core.format.plain/PlainSegment.Thread.style.<get-style>|<get-style>(){}[0]
+    }
+
+    final class Timestamp : com.davils.kheck.core.format.plain/PlainSegment { // com.davils.kheck.core.format.plain/PlainSegment.Timestamp|null[0]
+        constructor <init>(com.davils.kheck.core.format/TimestampFormat, com.davils.kheck.core.format.plain/SegmentFrame, com.davils.kheck.core.style/SegmentStyle) // com.davils.kheck.core.format.plain/PlainSegment.Timestamp.<init>|<init>(com.davils.kheck.core.format.TimestampFormat;com.davils.kheck.core.format.plain.SegmentFrame;com.davils.kheck.core.style.SegmentStyle){}[0]
+
+        final val format // com.davils.kheck.core.format.plain/PlainSegment.Timestamp.format|{}format[0]
+            final fun <get-format>(): com.davils.kheck.core.format/TimestampFormat // com.davils.kheck.core.format.plain/PlainSegment.Timestamp.format.<get-format>|<get-format>(){}[0]
+        final val frame // com.davils.kheck.core.format.plain/PlainSegment.Timestamp.frame|{}frame[0]
+            final fun <get-frame>(): com.davils.kheck.core.format.plain/SegmentFrame // com.davils.kheck.core.format.plain/PlainSegment.Timestamp.frame.<get-frame>|<get-frame>(){}[0]
+        final val style // com.davils.kheck.core.format.plain/PlainSegment.Timestamp.style|{}style[0]
+            final fun <get-style>(): com.davils.kheck.core.style/SegmentStyle // com.davils.kheck.core.format.plain/PlainSegment.Timestamp.style.<get-style>|<get-style>(){}[0]
+    }
+}
+
+sealed interface com.davils.kheck.core.mask/Mask { // com.davils.kheck.core.mask/Mask|null[0]
+    final class Fixed : com.davils.kheck.core.mask/Mask { // com.davils.kheck.core.mask/Mask.Fixed|null[0]
+        constructor <init>(kotlin/String) // com.davils.kheck.core.mask/Mask.Fixed.<init>|<init>(kotlin.String){}[0]
+
+        final val replacement // com.davils.kheck.core.mask/Mask.Fixed.replacement|{}replacement[0]
+            final fun <get-replacement>(): kotlin/String // com.davils.kheck.core.mask/Mask.Fixed.replacement.<get-replacement>|<get-replacement>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.kheck.core.mask/Mask.Fixed.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.kheck.core.mask/Mask.Fixed.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.davils.kheck.core.mask/Mask.Fixed.toString|toString(){}[0]
+    }
+
+    final class Partial : com.davils.kheck.core.mask/Mask { // com.davils.kheck.core.mask/Mask.Partial|null[0]
+        constructor <init>(kotlin/Int, kotlin/Int) // com.davils.kheck.core.mask/Mask.Partial.<init>|<init>(kotlin.Int;kotlin.Int){}[0]
+
+        final val keepEnd // com.davils.kheck.core.mask/Mask.Partial.keepEnd|{}keepEnd[0]
+            final fun <get-keepEnd>(): kotlin/Int // com.davils.kheck.core.mask/Mask.Partial.keepEnd.<get-keepEnd>|<get-keepEnd>(){}[0]
+        final val keepStart // com.davils.kheck.core.mask/Mask.Partial.keepStart|{}keepStart[0]
+            final fun <get-keepStart>(): kotlin/Int // com.davils.kheck.core.mask/Mask.Partial.keepStart.<get-keepStart>|<get-keepStart>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.kheck.core.mask/Mask.Partial.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.kheck.core.mask/Mask.Partial.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.davils.kheck.core.mask/Mask.Partial.toString|toString(){}[0]
+    }
+
+    final object Full : com.davils.kheck.core.mask/Mask { // com.davils.kheck.core.mask/Mask.Full|null[0]
+        final fun toString(): kotlin/String // com.davils.kheck.core.mask/Mask.Full.toString|toString(){}[0]
+    }
+
+    final object Hash : com.davils.kheck.core.mask/Mask { // com.davils.kheck.core.mask/Mask.Hash|null[0]
+        final fun toString(): kotlin/String // com.davils.kheck.core.mask/Mask.Hash.toString|toString(){}[0]
+    }
+
+    final object Remove : com.davils.kheck.core.mask/Mask { // com.davils.kheck.core.mask/Mask.Remove|null[0]
+        final fun toString(): kotlin/String // com.davils.kheck.core.mask/Mask.Remove.toString|toString(){}[0]
+    }
+}
+
+sealed interface com.davils.kheck.core.sample/RateLimitKey { // com.davils.kheck.core.sample/RateLimitKey|null[0]
+    final class PerField : com.davils.kheck.core.sample/RateLimitKey { // com.davils.kheck.core.sample/RateLimitKey.PerField|null[0]
+        constructor <init>(kotlin/String) // com.davils.kheck.core.sample/RateLimitKey.PerField.<init>|<init>(kotlin.String){}[0]
+
+        final val name // com.davils.kheck.core.sample/RateLimitKey.PerField.name|{}name[0]
+            final fun <get-name>(): kotlin/String // com.davils.kheck.core.sample/RateLimitKey.PerField.name.<get-name>|<get-name>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.kheck.core.sample/RateLimitKey.PerField.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.kheck.core.sample/RateLimitKey.PerField.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.davils.kheck.core.sample/RateLimitKey.PerField.toString|toString(){}[0]
+    }
+
+    final object Global : com.davils.kheck.core.sample/RateLimitKey { // com.davils.kheck.core.sample/RateLimitKey.Global|null[0]
+        final fun toString(): kotlin/String // com.davils.kheck.core.sample/RateLimitKey.Global.toString|toString(){}[0]
+    }
+
+    final object PerLevel : com.davils.kheck.core.sample/RateLimitKey { // com.davils.kheck.core.sample/RateLimitKey.PerLevel|null[0]
+        final fun toString(): kotlin/String // com.davils.kheck.core.sample/RateLimitKey.PerLevel.toString|toString(){}[0]
+    }
+
+    final object PerLogger : com.davils.kheck.core.sample/RateLimitKey { // com.davils.kheck.core.sample/RateLimitKey.PerLogger|null[0]
+        final fun toString(): kotlin/String // com.davils.kheck.core.sample/RateLimitKey.PerLogger.toString|toString(){}[0]
+    }
+}
+
+sealed interface com.davils.kheck.core.sink/LogOverflow { // com.davils.kheck.core.sink/LogOverflow|null[0]
+    final class Block : com.davils.kheck.core.sink/LogOverflow { // com.davils.kheck.core.sink/LogOverflow.Block|null[0]
+        constructor <init>(kotlin.time/Duration) // com.davils.kheck.core.sink/LogOverflow.Block.<init>|<init>(kotlin.time.Duration){}[0]
+
+        final val maxWait // com.davils.kheck.core.sink/LogOverflow.Block.maxWait|{}maxWait[0]
+            final fun <get-maxWait>(): kotlin.time/Duration // com.davils.kheck.core.sink/LogOverflow.Block.maxWait.<get-maxWait>|<get-maxWait>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.kheck.core.sink/LogOverflow.Block.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.kheck.core.sink/LogOverflow.Block.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.davils.kheck.core.sink/LogOverflow.Block.toString|toString(){}[0]
+    }
+
+    final object DropNewest : com.davils.kheck.core.sink/LogOverflow { // com.davils.kheck.core.sink/LogOverflow.DropNewest|null[0]
+        final fun toString(): kotlin/String // com.davils.kheck.core.sink/LogOverflow.DropNewest.toString|toString(){}[0]
+    }
+
+    final object DropOldest : com.davils.kheck.core.sink/LogOverflow { // com.davils.kheck.core.sink/LogOverflow.DropOldest|null[0]
+        final fun toString(): kotlin/String // com.davils.kheck.core.sink/LogOverflow.DropOldest.toString|toString(){}[0]
+    }
+}
+
+sealed interface com.davils.kheck.core.style/Color { // com.davils.kheck.core.style/Color|null[0]
+    final class Indexed : com.davils.kheck.core.style/Color { // com.davils.kheck.core.style/Color.Indexed|null[0]
+        constructor <init>(kotlin/Int) // com.davils.kheck.core.style/Color.Indexed.<init>|<init>(kotlin.Int){}[0]
+
+        final val index // com.davils.kheck.core.style/Color.Indexed.index|{}index[0]
+            final fun <get-index>(): kotlin/Int // com.davils.kheck.core.style/Color.Indexed.index.<get-index>|<get-index>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.kheck.core.style/Color.Indexed.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.kheck.core.style/Color.Indexed.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.davils.kheck.core.style/Color.Indexed.toString|toString(){}[0]
+    }
+
+    final class Rgb : com.davils.kheck.core.style/Color { // com.davils.kheck.core.style/Color.Rgb|null[0]
+        constructor <init>(kotlin/Int, kotlin/Int, kotlin/Int) // com.davils.kheck.core.style/Color.Rgb.<init>|<init>(kotlin.Int;kotlin.Int;kotlin.Int){}[0]
+
+        final val blue // com.davils.kheck.core.style/Color.Rgb.blue|{}blue[0]
+            final fun <get-blue>(): kotlin/Int // com.davils.kheck.core.style/Color.Rgb.blue.<get-blue>|<get-blue>(){}[0]
+        final val green // com.davils.kheck.core.style/Color.Rgb.green|{}green[0]
+            final fun <get-green>(): kotlin/Int // com.davils.kheck.core.style/Color.Rgb.green.<get-green>|<get-green>(){}[0]
+        final val red // com.davils.kheck.core.style/Color.Rgb.red|{}red[0]
+            final fun <get-red>(): kotlin/Int // com.davils.kheck.core.style/Color.Rgb.red.<get-red>|<get-red>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.kheck.core.style/Color.Rgb.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.kheck.core.style/Color.Rgb.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.davils.kheck.core.style/Color.Rgb.toString|toString(){}[0]
+    }
+
+    final object Companion { // com.davils.kheck.core.style/Color.Companion|null[0]
+        final val Black // com.davils.kheck.core.style/Color.Companion.Black|{}Black[0]
+            final fun <get-Black>(): com.davils.kheck.core.style/Color // com.davils.kheck.core.style/Color.Companion.Black.<get-Black>|<get-Black>(){}[0]
+        final val Blue // com.davils.kheck.core.style/Color.Companion.Blue|{}Blue[0]
+            final fun <get-Blue>(): com.davils.kheck.core.style/Color // com.davils.kheck.core.style/Color.Companion.Blue.<get-Blue>|<get-Blue>(){}[0]
+        final val BrightBlack // com.davils.kheck.core.style/Color.Companion.BrightBlack|{}BrightBlack[0]
+            final fun <get-BrightBlack>(): com.davils.kheck.core.style/Color // com.davils.kheck.core.style/Color.Companion.BrightBlack.<get-BrightBlack>|<get-BrightBlack>(){}[0]
+        final val BrightBlue // com.davils.kheck.core.style/Color.Companion.BrightBlue|{}BrightBlue[0]
+            final fun <get-BrightBlue>(): com.davils.kheck.core.style/Color // com.davils.kheck.core.style/Color.Companion.BrightBlue.<get-BrightBlue>|<get-BrightBlue>(){}[0]
+        final val BrightCyan // com.davils.kheck.core.style/Color.Companion.BrightCyan|{}BrightCyan[0]
+            final fun <get-BrightCyan>(): com.davils.kheck.core.style/Color // com.davils.kheck.core.style/Color.Companion.BrightCyan.<get-BrightCyan>|<get-BrightCyan>(){}[0]
+        final val BrightGreen // com.davils.kheck.core.style/Color.Companion.BrightGreen|{}BrightGreen[0]
+            final fun <get-BrightGreen>(): com.davils.kheck.core.style/Color // com.davils.kheck.core.style/Color.Companion.BrightGreen.<get-BrightGreen>|<get-BrightGreen>(){}[0]
+        final val BrightMagenta // com.davils.kheck.core.style/Color.Companion.BrightMagenta|{}BrightMagenta[0]
+            final fun <get-BrightMagenta>(): com.davils.kheck.core.style/Color // com.davils.kheck.core.style/Color.Companion.BrightMagenta.<get-BrightMagenta>|<get-BrightMagenta>(){}[0]
+        final val BrightRed // com.davils.kheck.core.style/Color.Companion.BrightRed|{}BrightRed[0]
+            final fun <get-BrightRed>(): com.davils.kheck.core.style/Color // com.davils.kheck.core.style/Color.Companion.BrightRed.<get-BrightRed>|<get-BrightRed>(){}[0]
+        final val BrightWhite // com.davils.kheck.core.style/Color.Companion.BrightWhite|{}BrightWhite[0]
+            final fun <get-BrightWhite>(): com.davils.kheck.core.style/Color // com.davils.kheck.core.style/Color.Companion.BrightWhite.<get-BrightWhite>|<get-BrightWhite>(){}[0]
+        final val BrightYellow // com.davils.kheck.core.style/Color.Companion.BrightYellow|{}BrightYellow[0]
+            final fun <get-BrightYellow>(): com.davils.kheck.core.style/Color // com.davils.kheck.core.style/Color.Companion.BrightYellow.<get-BrightYellow>|<get-BrightYellow>(){}[0]
+        final val Cyan // com.davils.kheck.core.style/Color.Companion.Cyan|{}Cyan[0]
+            final fun <get-Cyan>(): com.davils.kheck.core.style/Color // com.davils.kheck.core.style/Color.Companion.Cyan.<get-Cyan>|<get-Cyan>(){}[0]
+        final val Green // com.davils.kheck.core.style/Color.Companion.Green|{}Green[0]
+            final fun <get-Green>(): com.davils.kheck.core.style/Color // com.davils.kheck.core.style/Color.Companion.Green.<get-Green>|<get-Green>(){}[0]
+        final val Magenta // com.davils.kheck.core.style/Color.Companion.Magenta|{}Magenta[0]
+            final fun <get-Magenta>(): com.davils.kheck.core.style/Color // com.davils.kheck.core.style/Color.Companion.Magenta.<get-Magenta>|<get-Magenta>(){}[0]
+        final val Red // com.davils.kheck.core.style/Color.Companion.Red|{}Red[0]
+            final fun <get-Red>(): com.davils.kheck.core.style/Color // com.davils.kheck.core.style/Color.Companion.Red.<get-Red>|<get-Red>(){}[0]
+        final val White // com.davils.kheck.core.style/Color.Companion.White|{}White[0]
+            final fun <get-White>(): com.davils.kheck.core.style/Color // com.davils.kheck.core.style/Color.Companion.White.<get-White>|<get-White>(){}[0]
+        final val Yellow // com.davils.kheck.core.style/Color.Companion.Yellow|{}Yellow[0]
+            final fun <get-Yellow>(): com.davils.kheck.core.style/Color // com.davils.kheck.core.style/Color.Companion.Yellow.<get-Yellow>|<get-Yellow>(){}[0]
+
+        final fun hex(kotlin/String): com.davils.kheck.core.style/Color // com.davils.kheck.core.style/Color.Companion.hex|hex(kotlin.String){}[0]
+    }
+}
+
+sealed interface com.davils.kheck.core/LoggingEvent { // com.davils.kheck.core/LoggingEvent|null[0]
+    final class ConfigurationRejected : com.davils.kheck.core/LoggingEvent { // com.davils.kheck.core/LoggingEvent.ConfigurationRejected|null[0]
+        final val report // com.davils.kheck.core/LoggingEvent.ConfigurationRejected.report|{}report[0]
+            final fun <get-report>(): com.davils.kore.core.validation.report/ValidationReport // com.davils.kheck.core/LoggingEvent.ConfigurationRejected.report.<get-report>|<get-report>(){}[0]
+
+        final fun toString(): kotlin/String // com.davils.kheck.core/LoggingEvent.ConfigurationRejected.toString|toString(){}[0]
+    }
+
+    final class RecordsDropped : com.davils.kheck.core/LoggingEvent { // com.davils.kheck.core/LoggingEvent.RecordsDropped|null[0]
+        final val count // com.davils.kheck.core/LoggingEvent.RecordsDropped.count|{}count[0]
+            final fun <get-count>(): kotlin/Long // com.davils.kheck.core/LoggingEvent.RecordsDropped.count.<get-count>|<get-count>(){}[0]
+        final val sink // com.davils.kheck.core/LoggingEvent.RecordsDropped.sink|{}sink[0]
+            final fun <get-sink>(): kotlin/String // com.davils.kheck.core/LoggingEvent.RecordsDropped.sink.<get-sink>|<get-sink>(){}[0]
+
+        final fun toString(): kotlin/String // com.davils.kheck.core/LoggingEvent.RecordsDropped.toString|toString(){}[0]
+    }
+
+    final class SinkFailed : com.davils.kheck.core/LoggingEvent { // com.davils.kheck.core/LoggingEvent.SinkFailed|null[0]
+        final val cause // com.davils.kheck.core/LoggingEvent.SinkFailed.cause|{}cause[0]
+            final fun <get-cause>(): kotlin/Throwable // com.davils.kheck.core/LoggingEvent.SinkFailed.cause.<get-cause>|<get-cause>(){}[0]
+        final val sink // com.davils.kheck.core/LoggingEvent.SinkFailed.sink|{}sink[0]
+            final fun <get-sink>(): kotlin/String // com.davils.kheck.core/LoggingEvent.SinkFailed.sink.<get-sink>|<get-sink>(){}[0]
+
+        final fun toString(): kotlin/String // com.davils.kheck.core/LoggingEvent.SinkFailed.toString|toString(){}[0]
+    }
+
+    final class SinkRecovered : com.davils.kheck.core/LoggingEvent { // com.davils.kheck.core/LoggingEvent.SinkRecovered|null[0]
+        final val sink // com.davils.kheck.core/LoggingEvent.SinkRecovered.sink|{}sink[0]
+            final fun <get-sink>(): kotlin/String // com.davils.kheck.core/LoggingEvent.SinkRecovered.sink.<get-sink>|<get-sink>(){}[0]
+
+        final fun toString(): kotlin/String // com.davils.kheck.core/LoggingEvent.SinkRecovered.toString|toString(){}[0]
+    }
+
+    final object ConfigurationApplied : com.davils.kheck.core/LoggingEvent { // com.davils.kheck.core/LoggingEvent.ConfigurationApplied|null[0]
+        final fun toString(): kotlin/String // com.davils.kheck.core/LoggingEvent.ConfigurationApplied.toString|toString(){}[0]
+    }
+}
+
+sealed interface com.davils.kheck.core/Reconfiguration { // com.davils.kheck.core/Reconfiguration|null[0]
+    final class Rejected : com.davils.kheck.core/Reconfiguration { // com.davils.kheck.core/Reconfiguration.Rejected|null[0]
+        final val report // com.davils.kheck.core/Reconfiguration.Rejected.report|{}report[0]
+            final fun <get-report>(): com.davils.kore.core.validation.report/ValidationReport // com.davils.kheck.core/Reconfiguration.Rejected.report.<get-report>|<get-report>(){}[0]
+
+        final fun toString(): kotlin/String // com.davils.kheck.core/Reconfiguration.Rejected.toString|toString(){}[0]
+    }
+
+    final object Applied : com.davils.kheck.core/Reconfiguration { // com.davils.kheck.core/Reconfiguration.Applied|null[0]
+        final fun toString(): kotlin/String // com.davils.kheck.core/Reconfiguration.Applied.toString|toString(){}[0]
+    }
+
+    final object Closed : com.davils.kheck.core/Reconfiguration { // com.davils.kheck.core/Reconfiguration.Closed|null[0]
+        final fun toString(): kotlin/String // com.davils.kheck.core/Reconfiguration.Closed.toString|toString(){}[0]
+    }
+}
+
+abstract class <#A: com.davils.kheck.core.sink/LogSinkConfiguration> com.davils.kheck.core.sink/LogSinkBuilder : com.davils.kore.core.dsl/ValidatingBuilder<#A> { // com.davils.kheck.core.sink/LogSinkBuilder|null[0]
+    constructor <init>() // com.davils.kheck.core.sink/LogSinkBuilder.<init>|<init>(){}[0]
+
+    final var capacity // com.davils.kheck.core.sink/LogSinkBuilder.capacity|{}capacity[0]
+        final fun <get-capacity>(): kotlin/Int // com.davils.kheck.core.sink/LogSinkBuilder.capacity.<get-capacity>|<get-capacity>(){}[0]
+        final fun <set-capacity>(kotlin/Int) // com.davils.kheck.core.sink/LogSinkBuilder.capacity.<set-capacity>|<set-capacity>(kotlin.Int){}[0]
+    final var fallback // com.davils.kheck.core.sink/LogSinkBuilder.fallback|{}fallback[0]
+        final fun <get-fallback>(): kotlin/String? // com.davils.kheck.core.sink/LogSinkBuilder.fallback.<get-fallback>|<get-fallback>(){}[0]
+        final fun <set-fallback>(kotlin/String?) // com.davils.kheck.core.sink/LogSinkBuilder.fallback.<set-fallback>|<set-fallback>(kotlin.String?){}[0]
+    final var format // com.davils.kheck.core.sink/LogSinkBuilder.format|{}format[0]
+        final fun <get-format>(): com.davils.kheck.core.format/LogFormat // com.davils.kheck.core.sink/LogSinkBuilder.format.<get-format>|<get-format>(){}[0]
+        final fun <set-format>(com.davils.kheck.core.format/LogFormat) // com.davils.kheck.core.sink/LogSinkBuilder.format.<set-format>|<set-format>(com.davils.kheck.core.format.LogFormat){}[0]
+    final var isExclusive // com.davils.kheck.core.sink/LogSinkBuilder.isExclusive|{}isExclusive[0]
+        final fun <get-isExclusive>(): kotlin/Boolean // com.davils.kheck.core.sink/LogSinkBuilder.isExclusive.<get-isExclusive>|<get-isExclusive>(){}[0]
+        final fun <set-isExclusive>(kotlin/Boolean) // com.davils.kheck.core.sink/LogSinkBuilder.isExclusive.<set-isExclusive>|<set-isExclusive>(kotlin.Boolean){}[0]
+    final var level // com.davils.kheck.core.sink/LogSinkBuilder.level|{}level[0]
+        final fun <get-level>(): com.davils.kheck.api/LogLevel // com.davils.kheck.core.sink/LogSinkBuilder.level.<get-level>|<get-level>(){}[0]
+        final fun <set-level>(com.davils.kheck.api/LogLevel) // com.davils.kheck.core.sink/LogSinkBuilder.level.<set-level>|<set-level>(com.davils.kheck.api.LogLevel){}[0]
+    final var markers // com.davils.kheck.core.sink/LogSinkBuilder.markers|{}markers[0]
+        final fun <get-markers>(): kotlin.collections/Set<com.davils.kheck.api.record/LogMarker> // com.davils.kheck.core.sink/LogSinkBuilder.markers.<get-markers>|<get-markers>(){}[0]
+        final fun <set-markers>(kotlin.collections/Set<com.davils.kheck.api.record/LogMarker>) // com.davils.kheck.core.sink/LogSinkBuilder.markers.<set-markers>|<set-markers>(kotlin.collections.Set<com.davils.kheck.api.record.LogMarker>){}[0]
+    final var maxBatch // com.davils.kheck.core.sink/LogSinkBuilder.maxBatch|{}maxBatch[0]
+        final fun <get-maxBatch>(): kotlin/Int // com.davils.kheck.core.sink/LogSinkBuilder.maxBatch.<get-maxBatch>|<get-maxBatch>(){}[0]
+        final fun <set-maxBatch>(kotlin/Int) // com.davils.kheck.core.sink/LogSinkBuilder.maxBatch.<set-maxBatch>|<set-maxBatch>(kotlin.Int){}[0]
+    final var overflow // com.davils.kheck.core.sink/LogSinkBuilder.overflow|{}overflow[0]
+        final fun <get-overflow>(): com.davils.kheck.core.sink/LogOverflow // com.davils.kheck.core.sink/LogSinkBuilder.overflow.<get-overflow>|<get-overflow>(){}[0]
+        final fun <set-overflow>(com.davils.kheck.core.sink/LogOverflow) // com.davils.kheck.core.sink/LogSinkBuilder.overflow.<set-overflow>|<set-overflow>(com.davils.kheck.core.sink.LogOverflow){}[0]
+
+    final fun filter(com.davils.kheck.core.filter/LogFilter) // com.davils.kheck.core.sink/LogSinkBuilder.filter|filter(com.davils.kheck.core.filter.LogFilter){}[0]
+    final fun options(): com.davils.kheck.core.sink/LogSinkOptions // com.davils.kheck.core.sink/LogSinkBuilder.options|options(){}[0]
+    final fun retry(kotlin/Int, kotlin.time/Duration, kotlin.time/Duration = ...) // com.davils.kheck.core.sink/LogSinkBuilder.retry|retry(kotlin.Int;kotlin.time.Duration;kotlin.time.Duration){}[0]
+
+    final object Companion { // com.davils.kheck.core.sink/LogSinkBuilder.Companion|null[0]
+        final const val DEFAULT_CAPACITY // com.davils.kheck.core.sink/LogSinkBuilder.Companion.DEFAULT_CAPACITY|{}DEFAULT_CAPACITY[0]
+            final fun <get-DEFAULT_CAPACITY>(): kotlin/Int // com.davils.kheck.core.sink/LogSinkBuilder.Companion.DEFAULT_CAPACITY.<get-DEFAULT_CAPACITY>|<get-DEFAULT_CAPACITY>(){}[0]
+        final const val DEFAULT_MAX_BATCH // com.davils.kheck.core.sink/LogSinkBuilder.Companion.DEFAULT_MAX_BATCH|{}DEFAULT_MAX_BATCH[0]
+            final fun <get-DEFAULT_MAX_BATCH>(): kotlin/Int // com.davils.kheck.core.sink/LogSinkBuilder.Companion.DEFAULT_MAX_BATCH.<get-DEFAULT_MAX_BATCH>|<get-DEFAULT_MAX_BATCH>(){}[0]
+    }
+}
+
+final class com.davils.kheck.core.context/LogContext : kotlin.coroutines/AbstractCoroutineContextElement { // com.davils.kheck.core.context/LogContext|null[0]
+    constructor <init>(kotlin.collections/Map<kotlin/String, com.davils.kheck.api.record/LogValue>) // com.davils.kheck.core.context/LogContext.<init>|<init>(kotlin.collections.Map<kotlin.String,com.davils.kheck.api.record.LogValue>){}[0]
+
+    final val fields // com.davils.kheck.core.context/LogContext.fields|{}fields[0]
+        final fun <get-fields>(): kotlin.collections/Map<kotlin/String, com.davils.kheck.api.record/LogValue> // com.davils.kheck.core.context/LogContext.fields.<get-fields>|<get-fields>(){}[0]
+
+    final fun toString(): kotlin/String // com.davils.kheck.core.context/LogContext.toString|toString(){}[0]
+
+    final object Key : kotlin.coroutines/CoroutineContext.Key<com.davils.kheck.core.context/LogContext> // com.davils.kheck.core.context/LogContext.Key|null[0]
+}
+
+final class com.davils.kheck.core.format.json/JsonFormat : com.davils.kheck.core.format/LogFormat, com.davils.kore.core.validation/Validatable { // com.davils.kheck.core.format.json/JsonFormat|null[0]
+    final val colorMode // com.davils.kheck.core.format.json/JsonFormat.colorMode|{}colorMode[0]
+        final fun <get-colorMode>(): com.davils.kheck.core.style/ColorMode // com.davils.kheck.core.format.json/JsonFormat.colorMode.<get-colorMode>|<get-colorMode>(){}[0]
+    final val excludedPackages // com.davils.kheck.core.format.json/JsonFormat.excludedPackages|{}excludedPackages[0]
+        final fun <get-excludedPackages>(): kotlin.collections/List<kotlin/String> // com.davils.kheck.core.format.json/JsonFormat.excludedPackages.<get-excludedPackages>|<get-excludedPackages>(){}[0]
+    final val isSequenceIncluded // com.davils.kheck.core.format.json/JsonFormat.isSequenceIncluded|{}isSequenceIncluded[0]
+        final fun <get-isSequenceIncluded>(): kotlin/Boolean // com.davils.kheck.core.format.json/JsonFormat.isSequenceIncluded.<get-isSequenceIncluded>|<get-isSequenceIncluded>(){}[0]
+    final val layout // com.davils.kheck.core.format.json/JsonFormat.layout|{}layout[0]
+        final fun <get-layout>(): com.davils.kheck.core.format.json/JsonLayout // com.davils.kheck.core.format.json/JsonFormat.layout.<get-layout>|<get-layout>(){}[0]
+    final val maxCauses // com.davils.kheck.core.format.json/JsonFormat.maxCauses|{}maxCauses[0]
+        final fun <get-maxCauses>(): kotlin/Int // com.davils.kheck.core.format.json/JsonFormat.maxCauses.<get-maxCauses>|<get-maxCauses>(){}[0]
+    final val maxFrames // com.davils.kheck.core.format.json/JsonFormat.maxFrames|{}maxFrames[0]
+        final fun <get-maxFrames>(): kotlin/Int // com.davils.kheck.core.format.json/JsonFormat.maxFrames.<get-maxFrames>|<get-maxFrames>(){}[0]
+    final val precision // com.davils.kheck.core.format.json/JsonFormat.precision|{}precision[0]
+        final fun <get-precision>(): com.davils.kheck.core.format.json/TimestampPrecision // com.davils.kheck.core.format.json/JsonFormat.precision.<get-precision>|<get-precision>(){}[0]
+
+    final fun (com.davils.kore.core.validation/ValidationScope).validate() // com.davils.kheck.core.format.json/JsonFormat.validate|validate@com.davils.kore.core.validation.ValidationScope(){}[0]
+    final fun encoder(com.davils.kheck.core.style/ColorDepth): com.davils.kheck.core.format/LogEncoder // com.davils.kheck.core.format.json/JsonFormat.encoder|encoder(com.davils.kheck.core.style.ColorDepth){}[0]
+    final fun toString(): kotlin/String // com.davils.kheck.core.format.json/JsonFormat.toString|toString(){}[0]
+}
+
+final class com.davils.kheck.core.format.json/JsonFormatBuilder : com.davils.kore.core.dsl/ValidatingBuilder<com.davils.kheck.core.format.json/JsonFormat> { // com.davils.kheck.core.format.json/JsonFormatBuilder|null[0]
+    final var isSequenceIncluded // com.davils.kheck.core.format.json/JsonFormatBuilder.isSequenceIncluded|{}isSequenceIncluded[0]
+        final fun <get-isSequenceIncluded>(): kotlin/Boolean // com.davils.kheck.core.format.json/JsonFormatBuilder.isSequenceIncluded.<get-isSequenceIncluded>|<get-isSequenceIncluded>(){}[0]
+        final fun <set-isSequenceIncluded>(kotlin/Boolean) // com.davils.kheck.core.format.json/JsonFormatBuilder.isSequenceIncluded.<set-isSequenceIncluded>|<set-isSequenceIncluded>(kotlin.Boolean){}[0]
+    final var layout // com.davils.kheck.core.format.json/JsonFormatBuilder.layout|{}layout[0]
+        final fun <get-layout>(): com.davils.kheck.core.format.json/JsonLayout // com.davils.kheck.core.format.json/JsonFormatBuilder.layout.<get-layout>|<get-layout>(){}[0]
+        final fun <set-layout>(com.davils.kheck.core.format.json/JsonLayout) // com.davils.kheck.core.format.json/JsonFormatBuilder.layout.<set-layout>|<set-layout>(com.davils.kheck.core.format.json.JsonLayout){}[0]
+    final var maxCauses // com.davils.kheck.core.format.json/JsonFormatBuilder.maxCauses|{}maxCauses[0]
+        final fun <get-maxCauses>(): kotlin/Int // com.davils.kheck.core.format.json/JsonFormatBuilder.maxCauses.<get-maxCauses>|<get-maxCauses>(){}[0]
+        final fun <set-maxCauses>(kotlin/Int) // com.davils.kheck.core.format.json/JsonFormatBuilder.maxCauses.<set-maxCauses>|<set-maxCauses>(kotlin.Int){}[0]
+    final var maxFrames // com.davils.kheck.core.format.json/JsonFormatBuilder.maxFrames|{}maxFrames[0]
+        final fun <get-maxFrames>(): kotlin/Int // com.davils.kheck.core.format.json/JsonFormatBuilder.maxFrames.<get-maxFrames>|<get-maxFrames>(){}[0]
+        final fun <set-maxFrames>(kotlin/Int) // com.davils.kheck.core.format.json/JsonFormatBuilder.maxFrames.<set-maxFrames>|<set-maxFrames>(kotlin.Int){}[0]
+    final var precision // com.davils.kheck.core.format.json/JsonFormatBuilder.precision|{}precision[0]
+        final fun <get-precision>(): com.davils.kheck.core.format.json/TimestampPrecision // com.davils.kheck.core.format.json/JsonFormatBuilder.precision.<get-precision>|<get-precision>(){}[0]
+        final fun <set-precision>(com.davils.kheck.core.format.json/TimestampPrecision) // com.davils.kheck.core.format.json/JsonFormatBuilder.precision.<set-precision>|<set-precision>(com.davils.kheck.core.format.json.TimestampPrecision){}[0]
+
+    final fun exclude(kotlin/Array<out kotlin/String>...) // com.davils.kheck.core.format.json/JsonFormatBuilder.exclude|exclude(kotlin.Array<out|kotlin.String>...){}[0]
+
+    final object Companion { // com.davils.kheck.core.format.json/JsonFormatBuilder.Companion|null[0]
+        final const val DEFAULT_MAX_CAUSES // com.davils.kheck.core.format.json/JsonFormatBuilder.Companion.DEFAULT_MAX_CAUSES|{}DEFAULT_MAX_CAUSES[0]
+            final fun <get-DEFAULT_MAX_CAUSES>(): kotlin/Int // com.davils.kheck.core.format.json/JsonFormatBuilder.Companion.DEFAULT_MAX_CAUSES.<get-DEFAULT_MAX_CAUSES>|<get-DEFAULT_MAX_CAUSES>(){}[0]
+        final const val DEFAULT_MAX_FRAMES // com.davils.kheck.core.format.json/JsonFormatBuilder.Companion.DEFAULT_MAX_FRAMES|{}DEFAULT_MAX_FRAMES[0]
+            final fun <get-DEFAULT_MAX_FRAMES>(): kotlin/Int // com.davils.kheck.core.format.json/JsonFormatBuilder.Companion.DEFAULT_MAX_FRAMES.<get-DEFAULT_MAX_FRAMES>|<get-DEFAULT_MAX_FRAMES>(){}[0]
+    }
+}
+
+final class com.davils.kheck.core.format.plain.builder/CauseSegmentBuilder { // com.davils.kheck.core.format.plain.builder/CauseSegmentBuilder|null[0]
+    final var indent // com.davils.kheck.core.format.plain.builder/CauseSegmentBuilder.indent|{}indent[0]
+        final fun <get-indent>(): kotlin/String // com.davils.kheck.core.format.plain.builder/CauseSegmentBuilder.indent.<get-indent>|<get-indent>(){}[0]
+        final fun <set-indent>(kotlin/String) // com.davils.kheck.core.format.plain.builder/CauseSegmentBuilder.indent.<set-indent>|<set-indent>(kotlin.String){}[0]
+    final var isSuppressedIncluded // com.davils.kheck.core.format.plain.builder/CauseSegmentBuilder.isSuppressedIncluded|{}isSuppressedIncluded[0]
+        final fun <get-isSuppressedIncluded>(): kotlin/Boolean // com.davils.kheck.core.format.plain.builder/CauseSegmentBuilder.isSuppressedIncluded.<get-isSuppressedIncluded>|<get-isSuppressedIncluded>(){}[0]
+        final fun <set-isSuppressedIncluded>(kotlin/Boolean) // com.davils.kheck.core.format.plain.builder/CauseSegmentBuilder.isSuppressedIncluded.<set-isSuppressedIncluded>|<set-isSuppressedIncluded>(kotlin.Boolean){}[0]
+    final var maxCauses // com.davils.kheck.core.format.plain.builder/CauseSegmentBuilder.maxCauses|{}maxCauses[0]
+        final fun <get-maxCauses>(): kotlin/Int // com.davils.kheck.core.format.plain.builder/CauseSegmentBuilder.maxCauses.<get-maxCauses>|<get-maxCauses>(){}[0]
+        final fun <set-maxCauses>(kotlin/Int) // com.davils.kheck.core.format.plain.builder/CauseSegmentBuilder.maxCauses.<set-maxCauses>|<set-maxCauses>(kotlin.Int){}[0]
+    final var maxFrames // com.davils.kheck.core.format.plain.builder/CauseSegmentBuilder.maxFrames|{}maxFrames[0]
+        final fun <get-maxFrames>(): kotlin/Int // com.davils.kheck.core.format.plain.builder/CauseSegmentBuilder.maxFrames.<get-maxFrames>|<get-maxFrames>(){}[0]
+        final fun <set-maxFrames>(kotlin/Int) // com.davils.kheck.core.format.plain.builder/CauseSegmentBuilder.maxFrames.<set-maxFrames>|<set-maxFrames>(kotlin.Int){}[0]
+
+    final fun exclude(kotlin/Array<out kotlin/String>...) // com.davils.kheck.core.format.plain.builder/CauseSegmentBuilder.exclude|exclude(kotlin.Array<out|kotlin.String>...){}[0]
+    final fun frame(kotlin/Function1<com.davils.kheck.core.style/TextStyleBuilder, kotlin/Unit>) // com.davils.kheck.core.format.plain.builder/CauseSegmentBuilder.frame|frame(kotlin.Function1<com.davils.kheck.core.style.TextStyleBuilder,kotlin.Unit>){}[0]
+    final fun label(kotlin/Function1<com.davils.kheck.core.style/TextStyleBuilder, kotlin/Unit>) // com.davils.kheck.core.format.plain.builder/CauseSegmentBuilder.label|label(kotlin.Function1<com.davils.kheck.core.style.TextStyleBuilder,kotlin.Unit>){}[0]
+    final fun location(kotlin/Function1<com.davils.kheck.core.style/TextStyleBuilder, kotlin/Unit>) // com.davils.kheck.core.format.plain.builder/CauseSegmentBuilder.location|location(kotlin.Function1<com.davils.kheck.core.style.TextStyleBuilder,kotlin.Unit>){}[0]
+    final fun message(kotlin/Function1<com.davils.kheck.core.style/TextStyleBuilder, kotlin/Unit>) // com.davils.kheck.core.format.plain.builder/CauseSegmentBuilder.message|message(kotlin.Function1<com.davils.kheck.core.style.TextStyleBuilder,kotlin.Unit>){}[0]
+    final fun type(kotlin/Function1<com.davils.kheck.core.style/TextStyleBuilder, kotlin/Unit>) // com.davils.kheck.core.format.plain.builder/CauseSegmentBuilder.type|type(kotlin.Function1<com.davils.kheck.core.style.TextStyleBuilder,kotlin.Unit>){}[0]
+}
+
+final class com.davils.kheck.core.format.plain.builder/EntriesSegmentBuilder { // com.davils.kheck.core.format.plain.builder/EntriesSegmentBuilder|null[0]
+    final var prefix // com.davils.kheck.core.format.plain.builder/EntriesSegmentBuilder.prefix|{}prefix[0]
+        final fun <get-prefix>(): kotlin/String // com.davils.kheck.core.format.plain.builder/EntriesSegmentBuilder.prefix.<get-prefix>|<get-prefix>(){}[0]
+        final fun <set-prefix>(kotlin/String) // com.davils.kheck.core.format.plain.builder/EntriesSegmentBuilder.prefix.<set-prefix>|<set-prefix>(kotlin.String){}[0]
+    final var separator // com.davils.kheck.core.format.plain.builder/EntriesSegmentBuilder.separator|{}separator[0]
+        final fun <get-separator>(): kotlin/String // com.davils.kheck.core.format.plain.builder/EntriesSegmentBuilder.separator.<get-separator>|<get-separator>(){}[0]
+        final fun <set-separator>(kotlin/String) // com.davils.kheck.core.format.plain.builder/EntriesSegmentBuilder.separator.<set-separator>|<set-separator>(kotlin.String){}[0]
+    final var suffix // com.davils.kheck.core.format.plain.builder/EntriesSegmentBuilder.suffix|{}suffix[0]
+        final fun <get-suffix>(): kotlin/String // com.davils.kheck.core.format.plain.builder/EntriesSegmentBuilder.suffix.<get-suffix>|<get-suffix>(){}[0]
+        final fun <set-suffix>(kotlin/String) // com.davils.kheck.core.format.plain.builder/EntriesSegmentBuilder.suffix.<set-suffix>|<set-suffix>(kotlin.String){}[0]
+
+    final fun key(kotlin/Function1<com.davils.kheck.core.style/SegmentStyleBuilder, kotlin/Unit>) // com.davils.kheck.core.format.plain.builder/EntriesSegmentBuilder.key|key(kotlin.Function1<com.davils.kheck.core.style.SegmentStyleBuilder,kotlin.Unit>){}[0]
+    final fun punctuation(kotlin/Function1<com.davils.kheck.core.style/SegmentStyleBuilder, kotlin/Unit>) // com.davils.kheck.core.format.plain.builder/EntriesSegmentBuilder.punctuation|punctuation(kotlin.Function1<com.davils.kheck.core.style.SegmentStyleBuilder,kotlin.Unit>){}[0]
+    final fun value(kotlin/Function1<com.davils.kheck.core.style/SegmentStyleBuilder, kotlin/Unit>) // com.davils.kheck.core.format.plain.builder/EntriesSegmentBuilder.value|value(kotlin.Function1<com.davils.kheck.core.style.SegmentStyleBuilder,kotlin.Unit>){}[0]
+}
+
+final class com.davils.kheck.core.format.plain.builder/OptionalSegmentBuilder : com.davils.kheck.core.format.plain.builder/SegmentBuilder { // com.davils.kheck.core.format.plain.builder/OptionalSegmentBuilder|null[0]
+    final var prefix // com.davils.kheck.core.format.plain.builder/OptionalSegmentBuilder.prefix|{}prefix[0]
+        final fun <get-prefix>(): kotlin/String // com.davils.kheck.core.format.plain.builder/OptionalSegmentBuilder.prefix.<get-prefix>|<get-prefix>(){}[0]
+        final fun <set-prefix>(kotlin/String) // com.davils.kheck.core.format.plain.builder/OptionalSegmentBuilder.prefix.<set-prefix>|<set-prefix>(kotlin.String){}[0]
+    final var suffix // com.davils.kheck.core.format.plain.builder/OptionalSegmentBuilder.suffix|{}suffix[0]
+        final fun <get-suffix>(): kotlin/String // com.davils.kheck.core.format.plain.builder/OptionalSegmentBuilder.suffix.<get-suffix>|<get-suffix>(){}[0]
+        final fun <set-suffix>(kotlin/String) // com.davils.kheck.core.format.plain.builder/OptionalSegmentBuilder.suffix.<set-suffix>|<set-suffix>(kotlin.String){}[0]
+}
+
+final class com.davils.kheck.core.format.plain.builder/PlainLayoutBuilder { // com.davils.kheck.core.format.plain.builder/PlainLayoutBuilder|null[0]
+    final fun caller(kotlin/Function1<com.davils.kheck.core.format.plain.builder/OptionalSegmentBuilder, kotlin/Unit> = ...) // com.davils.kheck.core.format.plain.builder/PlainLayoutBuilder.caller|caller(kotlin.Function1<com.davils.kheck.core.format.plain.builder.OptionalSegmentBuilder,kotlin.Unit>){}[0]
+    final fun cause(kotlin/Function1<com.davils.kheck.core.format.plain.builder/CauseSegmentBuilder, kotlin/Unit> = ...) // com.davils.kheck.core.format.plain.builder/PlainLayoutBuilder.cause|cause(kotlin.Function1<com.davils.kheck.core.format.plain.builder.CauseSegmentBuilder,kotlin.Unit>){}[0]
+    final fun context(kotlin/Function1<com.davils.kheck.core.format.plain.builder/EntriesSegmentBuilder, kotlin/Unit> = ...) // com.davils.kheck.core.format.plain.builder/PlainLayoutBuilder.context|context(kotlin.Function1<com.davils.kheck.core.format.plain.builder.EntriesSegmentBuilder,kotlin.Unit>){}[0]
+    final fun fields(kotlin/Function1<com.davils.kheck.core.format.plain.builder/EntriesSegmentBuilder, kotlin/Unit> = ...) // com.davils.kheck.core.format.plain.builder/PlainLayoutBuilder.fields|fields(kotlin.Function1<com.davils.kheck.core.format.plain.builder.EntriesSegmentBuilder,kotlin.Unit>){}[0]
+    final fun level(kotlin/Function1<com.davils.kheck.core.format.plain.builder/SegmentBuilder, kotlin/Unit> = ...) // com.davils.kheck.core.format.plain.builder/PlainLayoutBuilder.level|level(kotlin.Function1<com.davils.kheck.core.format.plain.builder.SegmentBuilder,kotlin.Unit>){}[0]
+    final fun logger(kotlin/Int = ..., kotlin/Function1<com.davils.kheck.core.format.plain.builder/SegmentBuilder, kotlin/Unit> = ...) // com.davils.kheck.core.format.plain.builder/PlainLayoutBuilder.logger|logger(kotlin.Int;kotlin.Function1<com.davils.kheck.core.format.plain.builder.SegmentBuilder,kotlin.Unit>){}[0]
+    final fun markers(kotlin/Function1<com.davils.kheck.core.format.plain.builder/OptionalSegmentBuilder, kotlin/Unit> = ...) // com.davils.kheck.core.format.plain.builder/PlainLayoutBuilder.markers|markers(kotlin.Function1<com.davils.kheck.core.format.plain.builder.OptionalSegmentBuilder,kotlin.Unit>){}[0]
+    final fun message(kotlin/Function1<com.davils.kheck.core.format.plain.builder/SegmentBuilder, kotlin/Unit> = ...) // com.davils.kheck.core.format.plain.builder/PlainLayoutBuilder.message|message(kotlin.Function1<com.davils.kheck.core.format.plain.builder.SegmentBuilder,kotlin.Unit>){}[0]
+    final fun sequence(kotlin/Function1<com.davils.kheck.core.format.plain.builder/SegmentBuilder, kotlin/Unit> = ...) // com.davils.kheck.core.format.plain.builder/PlainLayoutBuilder.sequence|sequence(kotlin.Function1<com.davils.kheck.core.format.plain.builder.SegmentBuilder,kotlin.Unit>){}[0]
+    final fun text(kotlin/String, kotlin/Function1<com.davils.kheck.core.style/SegmentStyleBuilder, kotlin/Unit> = ...) // com.davils.kheck.core.format.plain.builder/PlainLayoutBuilder.text|text(kotlin.String;kotlin.Function1<com.davils.kheck.core.style.SegmentStyleBuilder,kotlin.Unit>){}[0]
+    final fun thread(kotlin/Function1<com.davils.kheck.core.format.plain.builder/SegmentBuilder, kotlin/Unit> = ...) // com.davils.kheck.core.format.plain.builder/PlainLayoutBuilder.thread|thread(kotlin.Function1<com.davils.kheck.core.format.plain.builder.SegmentBuilder,kotlin.Unit>){}[0]
+    final fun timestamp(com.davils.kheck.core.format/TimestampFormat = ..., kotlin/Function1<com.davils.kheck.core.format.plain.builder/SegmentBuilder, kotlin/Unit> = ...) // com.davils.kheck.core.format.plain.builder/PlainLayoutBuilder.timestamp|timestamp(com.davils.kheck.core.format.TimestampFormat;kotlin.Function1<com.davils.kheck.core.format.plain.builder.SegmentBuilder,kotlin.Unit>){}[0]
+}
+
+final class com.davils.kheck.core.format.plain/CauseLayout { // com.davils.kheck.core.format.plain/CauseLayout|null[0]
+    constructor <init>(kotlin/Int, kotlin/Int, kotlin/Boolean, kotlin.collections/List<kotlin/String>, kotlin/String, com.davils.kheck.core.format.plain/CauseStyles) // com.davils.kheck.core.format.plain/CauseLayout.<init>|<init>(kotlin.Int;kotlin.Int;kotlin.Boolean;kotlin.collections.List<kotlin.String>;kotlin.String;com.davils.kheck.core.format.plain.CauseStyles){}[0]
+
+    final val excludedPackages // com.davils.kheck.core.format.plain/CauseLayout.excludedPackages|{}excludedPackages[0]
+        final fun <get-excludedPackages>(): kotlin.collections/List<kotlin/String> // com.davils.kheck.core.format.plain/CauseLayout.excludedPackages.<get-excludedPackages>|<get-excludedPackages>(){}[0]
+    final val indent // com.davils.kheck.core.format.plain/CauseLayout.indent|{}indent[0]
+        final fun <get-indent>(): kotlin/String // com.davils.kheck.core.format.plain/CauseLayout.indent.<get-indent>|<get-indent>(){}[0]
+    final val isSuppressedIncluded // com.davils.kheck.core.format.plain/CauseLayout.isSuppressedIncluded|{}isSuppressedIncluded[0]
+        final fun <get-isSuppressedIncluded>(): kotlin/Boolean // com.davils.kheck.core.format.plain/CauseLayout.isSuppressedIncluded.<get-isSuppressedIncluded>|<get-isSuppressedIncluded>(){}[0]
+    final val maxCauses // com.davils.kheck.core.format.plain/CauseLayout.maxCauses|{}maxCauses[0]
+        final fun <get-maxCauses>(): kotlin/Int // com.davils.kheck.core.format.plain/CauseLayout.maxCauses.<get-maxCauses>|<get-maxCauses>(){}[0]
+    final val maxFrames // com.davils.kheck.core.format.plain/CauseLayout.maxFrames|{}maxFrames[0]
+        final fun <get-maxFrames>(): kotlin/Int // com.davils.kheck.core.format.plain/CauseLayout.maxFrames.<get-maxFrames>|<get-maxFrames>(){}[0]
+    final val styles // com.davils.kheck.core.format.plain/CauseLayout.styles|{}styles[0]
+        final fun <get-styles>(): com.davils.kheck.core.format.plain/CauseStyles // com.davils.kheck.core.format.plain/CauseLayout.styles.<get-styles>|<get-styles>(){}[0]
+
+    final fun toString(): kotlin/String // com.davils.kheck.core.format.plain/CauseLayout.toString|toString(){}[0]
+}
+
+final class com.davils.kheck.core.format.plain/CauseStyles { // com.davils.kheck.core.format.plain/CauseStyles|null[0]
+    constructor <init>(com.davils.kheck.core.style/TextStyle = ..., com.davils.kheck.core.style/TextStyle = ..., com.davils.kheck.core.style/TextStyle = ..., com.davils.kheck.core.style/TextStyle = ..., com.davils.kheck.core.style/TextStyle = ...) // com.davils.kheck.core.format.plain/CauseStyles.<init>|<init>(com.davils.kheck.core.style.TextStyle;com.davils.kheck.core.style.TextStyle;com.davils.kheck.core.style.TextStyle;com.davils.kheck.core.style.TextStyle;com.davils.kheck.core.style.TextStyle){}[0]
+
+    final val frame // com.davils.kheck.core.format.plain/CauseStyles.frame|{}frame[0]
+        final fun <get-frame>(): com.davils.kheck.core.style/TextStyle // com.davils.kheck.core.format.plain/CauseStyles.frame.<get-frame>|<get-frame>(){}[0]
+    final val label // com.davils.kheck.core.format.plain/CauseStyles.label|{}label[0]
+        final fun <get-label>(): com.davils.kheck.core.style/TextStyle // com.davils.kheck.core.format.plain/CauseStyles.label.<get-label>|<get-label>(){}[0]
+    final val location // com.davils.kheck.core.format.plain/CauseStyles.location|{}location[0]
+        final fun <get-location>(): com.davils.kheck.core.style/TextStyle // com.davils.kheck.core.format.plain/CauseStyles.location.<get-location>|<get-location>(){}[0]
+    final val message // com.davils.kheck.core.format.plain/CauseStyles.message|{}message[0]
+        final fun <get-message>(): com.davils.kheck.core.style/TextStyle // com.davils.kheck.core.format.plain/CauseStyles.message.<get-message>|<get-message>(){}[0]
+    final val type // com.davils.kheck.core.format.plain/CauseStyles.type|{}type[0]
+        final fun <get-type>(): com.davils.kheck.core.style/TextStyle // com.davils.kheck.core.format.plain/CauseStyles.type.<get-type>|<get-type>(){}[0]
+
+    final fun toString(): kotlin/String // com.davils.kheck.core.format.plain/CauseStyles.toString|toString(){}[0]
+}
+
+final class com.davils.kheck.core.format.plain/EntriesLayout { // com.davils.kheck.core.format.plain/EntriesLayout|null[0]
+    constructor <init>(com.davils.kheck.core.format.plain/SegmentAffix, kotlin/String, com.davils.kheck.core.format.plain/EntryStyles) // com.davils.kheck.core.format.plain/EntriesLayout.<init>|<init>(com.davils.kheck.core.format.plain.SegmentAffix;kotlin.String;com.davils.kheck.core.format.plain.EntryStyles){}[0]
+
+    final val affix // com.davils.kheck.core.format.plain/EntriesLayout.affix|{}affix[0]
+        final fun <get-affix>(): com.davils.kheck.core.format.plain/SegmentAffix // com.davils.kheck.core.format.plain/EntriesLayout.affix.<get-affix>|<get-affix>(){}[0]
+    final val separator // com.davils.kheck.core.format.plain/EntriesLayout.separator|{}separator[0]
+        final fun <get-separator>(): kotlin/String // com.davils.kheck.core.format.plain/EntriesLayout.separator.<get-separator>|<get-separator>(){}[0]
+    final val styles // com.davils.kheck.core.format.plain/EntriesLayout.styles|{}styles[0]
+        final fun <get-styles>(): com.davils.kheck.core.format.plain/EntryStyles // com.davils.kheck.core.format.plain/EntriesLayout.styles.<get-styles>|<get-styles>(){}[0]
+
+    final fun toString(): kotlin/String // com.davils.kheck.core.format.plain/EntriesLayout.toString|toString(){}[0]
+}
+
+final class com.davils.kheck.core.format.plain/EntryStyles { // com.davils.kheck.core.format.plain/EntryStyles|null[0]
+    constructor <init>(com.davils.kheck.core.style/SegmentStyle = ..., com.davils.kheck.core.style/SegmentStyle = ..., com.davils.kheck.core.style/SegmentStyle = ...) // com.davils.kheck.core.format.plain/EntryStyles.<init>|<init>(com.davils.kheck.core.style.SegmentStyle;com.davils.kheck.core.style.SegmentStyle;com.davils.kheck.core.style.SegmentStyle){}[0]
+
+    final val key // com.davils.kheck.core.format.plain/EntryStyles.key|{}key[0]
+        final fun <get-key>(): com.davils.kheck.core.style/SegmentStyle // com.davils.kheck.core.format.plain/EntryStyles.key.<get-key>|<get-key>(){}[0]
+    final val punctuation // com.davils.kheck.core.format.plain/EntryStyles.punctuation|{}punctuation[0]
+        final fun <get-punctuation>(): com.davils.kheck.core.style/SegmentStyle // com.davils.kheck.core.format.plain/EntryStyles.punctuation.<get-punctuation>|<get-punctuation>(){}[0]
+    final val value // com.davils.kheck.core.format.plain/EntryStyles.value|{}value[0]
+        final fun <get-value>(): com.davils.kheck.core.style/SegmentStyle // com.davils.kheck.core.format.plain/EntryStyles.value.<get-value>|<get-value>(){}[0]
+
+    final fun toString(): kotlin/String // com.davils.kheck.core.format.plain/EntryStyles.toString|toString(){}[0]
+}
+
+final class com.davils.kheck.core.format.plain/PlainFormat : com.davils.kheck.core.format/LogFormat, com.davils.kore.core.validation/Validatable { // com.davils.kheck.core.format.plain/PlainFormat|null[0]
+    final val colorMode // com.davils.kheck.core.format.plain/PlainFormat.colorMode|{}colorMode[0]
+        final fun <get-colorMode>(): com.davils.kheck.core.style/ColorMode // com.davils.kheck.core.format.plain/PlainFormat.colorMode.<get-colorMode>|<get-colorMode>(){}[0]
+    final val segments // com.davils.kheck.core.format.plain/PlainFormat.segments|{}segments[0]
+        final fun <get-segments>(): kotlin.collections/List<com.davils.kheck.core.format.plain/PlainSegment> // com.davils.kheck.core.format.plain/PlainFormat.segments.<get-segments>|<get-segments>(){}[0]
+    final val theme // com.davils.kheck.core.format.plain/PlainFormat.theme|{}theme[0]
+        final fun <get-theme>(): com.davils.kheck.core.format.plain/PlainTheme // com.davils.kheck.core.format.plain/PlainFormat.theme.<get-theme>|<get-theme>(){}[0]
+    final val zone // com.davils.kheck.core.format.plain/PlainFormat.zone|{}zone[0]
+        final fun <get-zone>(): kotlinx.datetime/TimeZone // com.davils.kheck.core.format.plain/PlainFormat.zone.<get-zone>|<get-zone>(){}[0]
+
+    final fun (com.davils.kore.core.validation/ValidationScope).validate() // com.davils.kheck.core.format.plain/PlainFormat.validate|validate@com.davils.kore.core.validation.ValidationScope(){}[0]
+    final fun encoder(com.davils.kheck.core.style/ColorDepth): com.davils.kheck.core.format/LogEncoder // com.davils.kheck.core.format.plain/PlainFormat.encoder|encoder(com.davils.kheck.core.style.ColorDepth){}[0]
+    final fun toString(): kotlin/String // com.davils.kheck.core.format.plain/PlainFormat.toString|toString(){}[0]
+}
+
+final class com.davils.kheck.core.format.plain/PlainFormatBuilder : com.davils.kore.core.dsl/ValidatingBuilder<com.davils.kheck.core.format.plain/PlainFormat> { // com.davils.kheck.core.format.plain/PlainFormatBuilder|null[0]
+    final var colorMode // com.davils.kheck.core.format.plain/PlainFormatBuilder.colorMode|{}colorMode[0]
+        final fun <get-colorMode>(): com.davils.kheck.core.style/ColorMode // com.davils.kheck.core.format.plain/PlainFormatBuilder.colorMode.<get-colorMode>|<get-colorMode>(){}[0]
+        final fun <set-colorMode>(com.davils.kheck.core.style/ColorMode) // com.davils.kheck.core.format.plain/PlainFormatBuilder.colorMode.<set-colorMode>|<set-colorMode>(com.davils.kheck.core.style.ColorMode){}[0]
+    final var theme // com.davils.kheck.core.format.plain/PlainFormatBuilder.theme|{}theme[0]
+        final fun <get-theme>(): com.davils.kheck.core.format.plain/PlainTheme // com.davils.kheck.core.format.plain/PlainFormatBuilder.theme.<get-theme>|<get-theme>(){}[0]
+        final fun <set-theme>(com.davils.kheck.core.format.plain/PlainTheme) // com.davils.kheck.core.format.plain/PlainFormatBuilder.theme.<set-theme>|<set-theme>(com.davils.kheck.core.format.plain.PlainTheme){}[0]
+    final var zone // com.davils.kheck.core.format.plain/PlainFormatBuilder.zone|{}zone[0]
+        final fun <get-zone>(): kotlinx.datetime/TimeZone // com.davils.kheck.core.format.plain/PlainFormatBuilder.zone.<get-zone>|<get-zone>(){}[0]
+        final fun <set-zone>(kotlinx.datetime/TimeZone) // com.davils.kheck.core.format.plain/PlainFormatBuilder.zone.<set-zone>|<set-zone>(kotlinx.datetime.TimeZone){}[0]
+
+    final fun layout(kotlin/Function1<com.davils.kheck.core.format.plain.builder/PlainLayoutBuilder, kotlin/Unit>) // com.davils.kheck.core.format.plain/PlainFormatBuilder.layout|layout(kotlin.Function1<com.davils.kheck.core.format.plain.builder.PlainLayoutBuilder,kotlin.Unit>){}[0]
+
+    final object Companion { // com.davils.kheck.core.format.plain/PlainFormatBuilder.Companion|null[0]
+        final val DEFAULT_LAYOUT // com.davils.kheck.core.format.plain/PlainFormatBuilder.Companion.DEFAULT_LAYOUT|{}DEFAULT_LAYOUT[0]
+            final fun <get-DEFAULT_LAYOUT>(): kotlin/Function1<com.davils.kheck.core.format.plain.builder/PlainLayoutBuilder, kotlin/Unit> // com.davils.kheck.core.format.plain/PlainFormatBuilder.Companion.DEFAULT_LAYOUT.<get-DEFAULT_LAYOUT>|<get-DEFAULT_LAYOUT>(){}[0]
+    }
+}
+
+final class com.davils.kheck.core.format.plain/PlainTheme { // com.davils.kheck.core.format.plain/PlainTheme|null[0]
+    constructor <init>(com.davils.kheck.core.style/SegmentStyle = ..., com.davils.kheck.core.style/SegmentStyle = ..., com.davils.kheck.core.style/SegmentStyle = ..., com.davils.kheck.core.style/SegmentStyle = ..., com.davils.kheck.core.style/SegmentStyle = ..., com.davils.kheck.core.style/SegmentStyle = ..., com.davils.kheck.core.style/SegmentStyle = ..., com.davils.kheck.core.format.plain/EntryStyles = ..., com.davils.kheck.core.format.plain/CauseStyles = ...) // com.davils.kheck.core.format.plain/PlainTheme.<init>|<init>(com.davils.kheck.core.style.SegmentStyle;com.davils.kheck.core.style.SegmentStyle;com.davils.kheck.core.style.SegmentStyle;com.davils.kheck.core.style.SegmentStyle;com.davils.kheck.core.style.SegmentStyle;com.davils.kheck.core.style.SegmentStyle;com.davils.kheck.core.style.SegmentStyle;com.davils.kheck.core.format.plain.EntryStyles;com.davils.kheck.core.format.plain.CauseStyles){}[0]
+
+    final val caller // com.davils.kheck.core.format.plain/PlainTheme.caller|{}caller[0]
+        final fun <get-caller>(): com.davils.kheck.core.style/SegmentStyle // com.davils.kheck.core.format.plain/PlainTheme.caller.<get-caller>|<get-caller>(){}[0]
+    final val cause // com.davils.kheck.core.format.plain/PlainTheme.cause|{}cause[0]
+        final fun <get-cause>(): com.davils.kheck.core.format.plain/CauseStyles // com.davils.kheck.core.format.plain/PlainTheme.cause.<get-cause>|<get-cause>(){}[0]
+    final val entries // com.davils.kheck.core.format.plain/PlainTheme.entries|{}entries[0]
+        final fun <get-entries>(): com.davils.kheck.core.format.plain/EntryStyles // com.davils.kheck.core.format.plain/PlainTheme.entries.<get-entries>|<get-entries>(){}[0]
+    final val level // com.davils.kheck.core.format.plain/PlainTheme.level|{}level[0]
+        final fun <get-level>(): com.davils.kheck.core.style/SegmentStyle // com.davils.kheck.core.format.plain/PlainTheme.level.<get-level>|<get-level>(){}[0]
+    final val logger // com.davils.kheck.core.format.plain/PlainTheme.logger|{}logger[0]
+        final fun <get-logger>(): com.davils.kheck.core.style/SegmentStyle // com.davils.kheck.core.format.plain/PlainTheme.logger.<get-logger>|<get-logger>(){}[0]
+    final val markers // com.davils.kheck.core.format.plain/PlainTheme.markers|{}markers[0]
+        final fun <get-markers>(): com.davils.kheck.core.style/SegmentStyle // com.davils.kheck.core.format.plain/PlainTheme.markers.<get-markers>|<get-markers>(){}[0]
+    final val message // com.davils.kheck.core.format.plain/PlainTheme.message|{}message[0]
+        final fun <get-message>(): com.davils.kheck.core.style/SegmentStyle // com.davils.kheck.core.format.plain/PlainTheme.message.<get-message>|<get-message>(){}[0]
+    final val thread // com.davils.kheck.core.format.plain/PlainTheme.thread|{}thread[0]
+        final fun <get-thread>(): com.davils.kheck.core.style/SegmentStyle // com.davils.kheck.core.format.plain/PlainTheme.thread.<get-thread>|<get-thread>(){}[0]
+    final val timestamp // com.davils.kheck.core.format.plain/PlainTheme.timestamp|{}timestamp[0]
+        final fun <get-timestamp>(): com.davils.kheck.core.style/SegmentStyle // com.davils.kheck.core.format.plain/PlainTheme.timestamp.<get-timestamp>|<get-timestamp>(){}[0]
+
+    final fun toString(): kotlin/String // com.davils.kheck.core.format.plain/PlainTheme.toString|toString(){}[0]
+
+    final object Companion { // com.davils.kheck.core.format.plain/PlainTheme.Companion|null[0]
+        final val Default // com.davils.kheck.core.format.plain/PlainTheme.Companion.Default|{}Default[0]
+            final fun <get-Default>(): com.davils.kheck.core.format.plain/PlainTheme // com.davils.kheck.core.format.plain/PlainTheme.Companion.Default.<get-Default>|<get-Default>(){}[0]
+        final val HighContrast // com.davils.kheck.core.format.plain/PlainTheme.Companion.HighContrast|{}HighContrast[0]
+            final fun <get-HighContrast>(): com.davils.kheck.core.format.plain/PlainTheme // com.davils.kheck.core.format.plain/PlainTheme.Companion.HighContrast.<get-HighContrast>|<get-HighContrast>(){}[0]
+        final val Monochrome // com.davils.kheck.core.format.plain/PlainTheme.Companion.Monochrome|{}Monochrome[0]
+            final fun <get-Monochrome>(): com.davils.kheck.core.format.plain/PlainTheme // com.davils.kheck.core.format.plain/PlainTheme.Companion.Monochrome.<get-Monochrome>|<get-Monochrome>(){}[0]
+        final val Muted // com.davils.kheck.core.format.plain/PlainTheme.Companion.Muted|{}Muted[0]
+            final fun <get-Muted>(): com.davils.kheck.core.format.plain/PlainTheme // com.davils.kheck.core.format.plain/PlainTheme.Companion.Muted.<get-Muted>|<get-Muted>(){}[0]
+    }
+}
+
+final class com.davils.kheck.core.format.plain/SegmentAffix { // com.davils.kheck.core.format.plain/SegmentAffix|null[0]
+    constructor <init>(kotlin/String = ..., kotlin/String = ...) // com.davils.kheck.core.format.plain/SegmentAffix.<init>|<init>(kotlin.String;kotlin.String){}[0]
+
+    final val prefix // com.davils.kheck.core.format.plain/SegmentAffix.prefix|{}prefix[0]
+        final fun <get-prefix>(): kotlin/String // com.davils.kheck.core.format.plain/SegmentAffix.prefix.<get-prefix>|<get-prefix>(){}[0]
+    final val suffix // com.davils.kheck.core.format.plain/SegmentAffix.suffix|{}suffix[0]
+        final fun <get-suffix>(): kotlin/String // com.davils.kheck.core.format.plain/SegmentAffix.suffix.<get-suffix>|<get-suffix>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.kheck.core.format.plain/SegmentAffix.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.kheck.core.format.plain/SegmentAffix.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.kheck.core.format.plain/SegmentAffix.toString|toString(){}[0]
+
+    final object Companion { // com.davils.kheck.core.format.plain/SegmentAffix.Companion|null[0]
+        final val NONE // com.davils.kheck.core.format.plain/SegmentAffix.Companion.NONE|{}NONE[0]
+            final fun <get-NONE>(): com.davils.kheck.core.format.plain/SegmentAffix // com.davils.kheck.core.format.plain/SegmentAffix.Companion.NONE.<get-NONE>|<get-NONE>(){}[0]
+    }
+}
+
+final class com.davils.kheck.core.format.plain/SegmentFrame { // com.davils.kheck.core.format.plain/SegmentFrame|null[0]
+    constructor <init>(kotlin/Int = ..., kotlin/Int = ..., com.davils.kheck.core.format.plain/Alignment = ...) // com.davils.kheck.core.format.plain/SegmentFrame.<init>|<init>(kotlin.Int;kotlin.Int;com.davils.kheck.core.format.plain.Alignment){}[0]
+
+    final val alignment // com.davils.kheck.core.format.plain/SegmentFrame.alignment|{}alignment[0]
+        final fun <get-alignment>(): com.davils.kheck.core.format.plain/Alignment // com.davils.kheck.core.format.plain/SegmentFrame.alignment.<get-alignment>|<get-alignment>(){}[0]
+    final val maxWidth // com.davils.kheck.core.format.plain/SegmentFrame.maxWidth|{}maxWidth[0]
+        final fun <get-maxWidth>(): kotlin/Int // com.davils.kheck.core.format.plain/SegmentFrame.maxWidth.<get-maxWidth>|<get-maxWidth>(){}[0]
+    final val minWidth // com.davils.kheck.core.format.plain/SegmentFrame.minWidth|{}minWidth[0]
+        final fun <get-minWidth>(): kotlin/Int // com.davils.kheck.core.format.plain/SegmentFrame.minWidth.<get-minWidth>|<get-minWidth>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.kheck.core.format.plain/SegmentFrame.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.kheck.core.format.plain/SegmentFrame.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.kheck.core.format.plain/SegmentFrame.toString|toString(){}[0]
+
+    final object Companion { // com.davils.kheck.core.format.plain/SegmentFrame.Companion|null[0]
+        final val NONE // com.davils.kheck.core.format.plain/SegmentFrame.Companion.NONE|{}NONE[0]
+            final fun <get-NONE>(): com.davils.kheck.core.format.plain/SegmentFrame // com.davils.kheck.core.format.plain/SegmentFrame.Companion.NONE.<get-NONE>|<get-NONE>(){}[0]
+    }
+}
+
+final class com.davils.kheck.core.health/LoggingHealth { // com.davils.kheck.core.health/LoggingHealth|null[0]
+    constructor <init>(com.davils.kheck.core.health/HealthStatus, kotlin.collections/List<kotlin/String> = ...) // com.davils.kheck.core.health/LoggingHealth.<init>|<init>(com.davils.kheck.core.health.HealthStatus;kotlin.collections.List<kotlin.String>){}[0]
+
+    final val reasons // com.davils.kheck.core.health/LoggingHealth.reasons|{}reasons[0]
+        final fun <get-reasons>(): kotlin.collections/List<kotlin/String> // com.davils.kheck.core.health/LoggingHealth.reasons.<get-reasons>|<get-reasons>(){}[0]
+    final val status // com.davils.kheck.core.health/LoggingHealth.status|{}status[0]
+        final fun <get-status>(): com.davils.kheck.core.health/HealthStatus // com.davils.kheck.core.health/LoggingHealth.status.<get-status>|<get-status>(){}[0]
+
+    final fun toString(): kotlin/String // com.davils.kheck.core.health/LoggingHealth.toString|toString(){}[0]
+
+    final object Companion { // com.davils.kheck.core.health/LoggingHealth.Companion|null[0]
+        final val UP // com.davils.kheck.core.health/LoggingHealth.Companion.UP|{}UP[0]
+            final fun <get-UP>(): com.davils.kheck.core.health/LoggingHealth // com.davils.kheck.core.health/LoggingHealth.Companion.UP.<get-UP>|<get-UP>(){}[0]
+
+        final fun worstOf(kotlin.collections/List<com.davils.kheck.core.health/LoggingHealth>): com.davils.kheck.core.health/LoggingHealth // com.davils.kheck.core.health/LoggingHealth.Companion.worstOf|worstOf(kotlin.collections.List<com.davils.kheck.core.health.LoggingHealth>){}[0]
+    }
+}
+
+final class com.davils.kheck.core.intake/IntakeBuilder : com.davils.kore.core.dsl/ValidatingBuilder<com.davils.kheck.core.intake/IntakeConfiguration> { // com.davils.kheck.core.intake/IntakeBuilder|null[0]
+    final var capacity // com.davils.kheck.core.intake/IntakeBuilder.capacity|{}capacity[0]
+        final fun <get-capacity>(): kotlin/Int // com.davils.kheck.core.intake/IntakeBuilder.capacity.<get-capacity>|<get-capacity>(){}[0]
+        final fun <set-capacity>(kotlin/Int) // com.davils.kheck.core.intake/IntakeBuilder.capacity.<set-capacity>|<set-capacity>(kotlin.Int){}[0]
+    final var overflow // com.davils.kheck.core.intake/IntakeBuilder.overflow|{}overflow[0]
+        final fun <get-overflow>(): com.davils.kheck.core.sink/LogOverflow // com.davils.kheck.core.intake/IntakeBuilder.overflow.<get-overflow>|<get-overflow>(){}[0]
+        final fun <set-overflow>(com.davils.kheck.core.sink/LogOverflow) // com.davils.kheck.core.intake/IntakeBuilder.overflow.<set-overflow>|<set-overflow>(com.davils.kheck.core.sink.LogOverflow){}[0]
+
+    final object Companion { // com.davils.kheck.core.intake/IntakeBuilder.Companion|null[0]
+        final const val DEFAULT_CAPACITY // com.davils.kheck.core.intake/IntakeBuilder.Companion.DEFAULT_CAPACITY|{}DEFAULT_CAPACITY[0]
+            final fun <get-DEFAULT_CAPACITY>(): kotlin/Int // com.davils.kheck.core.intake/IntakeBuilder.Companion.DEFAULT_CAPACITY.<get-DEFAULT_CAPACITY>|<get-DEFAULT_CAPACITY>(){}[0]
+    }
+}
+
+final class com.davils.kheck.core.intake/IntakeConfiguration : com.davils.kore.core.validation/Validatable { // com.davils.kheck.core.intake/IntakeConfiguration|null[0]
+    constructor <init>(kotlin/Int, com.davils.kheck.core.sink/LogOverflow) // com.davils.kheck.core.intake/IntakeConfiguration.<init>|<init>(kotlin.Int;com.davils.kheck.core.sink.LogOverflow){}[0]
+
+    final val capacity // com.davils.kheck.core.intake/IntakeConfiguration.capacity|{}capacity[0]
+        final fun <get-capacity>(): kotlin/Int // com.davils.kheck.core.intake/IntakeConfiguration.capacity.<get-capacity>|<get-capacity>(){}[0]
+    final val overflow // com.davils.kheck.core.intake/IntakeConfiguration.overflow|{}overflow[0]
+        final fun <get-overflow>(): com.davils.kheck.core.sink/LogOverflow // com.davils.kheck.core.intake/IntakeConfiguration.overflow.<get-overflow>|<get-overflow>(){}[0]
+
+    final fun (com.davils.kore.core.validation/ValidationScope).validate() // com.davils.kheck.core.intake/IntakeConfiguration.validate|validate@com.davils.kore.core.validation.ValidationScope(){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.kheck.core.intake/IntakeConfiguration.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.kheck.core.intake/IntakeConfiguration.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.kheck.core.intake/IntakeConfiguration.toString|toString(){}[0]
+}
+
+final class com.davils.kheck.core.mask/MaskingBuilder : com.davils.kore.core.dsl/ValidatingBuilder<com.davils.kheck.core.mask/MaskingConfiguration> { // com.davils.kheck.core.mask/MaskingBuilder|null[0]
+    final var default // com.davils.kheck.core.mask/MaskingBuilder.default|{}default[0]
+        final fun <get-default>(): com.davils.kheck.core.mask/Mask // com.davils.kheck.core.mask/MaskingBuilder.default.<get-default>|<get-default>(){}[0]
+        final fun <set-default>(com.davils.kheck.core.mask/Mask) // com.davils.kheck.core.mask/MaskingBuilder.default.<set-default>|<set-default>(com.davils.kheck.core.mask.Mask){}[0]
+    final var hashKey // com.davils.kheck.core.mask/MaskingBuilder.hashKey|{}hashKey[0]
+        final fun <get-hashKey>(): com.davils.kheck.core.mask/MaskingKey? // com.davils.kheck.core.mask/MaskingBuilder.hashKey.<get-hashKey>|<get-hashKey>(){}[0]
+        final fun <set-hashKey>(com.davils.kheck.core.mask/MaskingKey?) // com.davils.kheck.core.mask/MaskingBuilder.hashKey.<set-hashKey>|<set-hashKey>(com.davils.kheck.core.mask.MaskingKey?){}[0]
+    final var isDefaultsIncluded // com.davils.kheck.core.mask/MaskingBuilder.isDefaultsIncluded|{}isDefaultsIncluded[0]
+        final fun <get-isDefaultsIncluded>(): kotlin/Boolean // com.davils.kheck.core.mask/MaskingBuilder.isDefaultsIncluded.<get-isDefaultsIncluded>|<get-isDefaultsIncluded>(){}[0]
+        final fun <set-isDefaultsIncluded>(kotlin/Boolean) // com.davils.kheck.core.mask/MaskingBuilder.isDefaultsIncluded.<set-isDefaultsIncluded>|<set-isDefaultsIncluded>(kotlin.Boolean){}[0]
+    final var maxDepth // com.davils.kheck.core.mask/MaskingBuilder.maxDepth|{}maxDepth[0]
+        final fun <get-maxDepth>(): kotlin/Int // com.davils.kheck.core.mask/MaskingBuilder.maxDepth.<get-maxDepth>|<get-maxDepth>(){}[0]
+        final fun <set-maxDepth>(kotlin/Int) // com.davils.kheck.core.mask/MaskingBuilder.maxDepth.<set-maxDepth>|<set-maxDepth>(kotlin.Int){}[0]
+    final var maxValueLength // com.davils.kheck.core.mask/MaskingBuilder.maxValueLength|{}maxValueLength[0]
+        final fun <get-maxValueLength>(): kotlin/Int // com.davils.kheck.core.mask/MaskingBuilder.maxValueLength.<get-maxValueLength>|<get-maxValueLength>(){}[0]
+        final fun <set-maxValueLength>(kotlin/Int) // com.davils.kheck.core.mask/MaskingBuilder.maxValueLength.<set-maxValueLength>|<set-maxValueLength>(kotlin.Int){}[0]
+
+    final fun keyPattern(kotlin.text/Regex) // com.davils.kheck.core.mask/MaskingBuilder.keyPattern|keyPattern(kotlin.text.Regex){}[0]
+    final fun keys(kotlin.collections/Collection<kotlin/String>) // com.davils.kheck.core.mask/MaskingBuilder.keys|keys(kotlin.collections.Collection<kotlin.String>){}[0]
+    final fun keys(kotlin/Array<out kotlin/String>...) // com.davils.kheck.core.mask/MaskingBuilder.keys|keys(kotlin.Array<out|kotlin.String>...){}[0]
+    final fun rule(com.davils.kheck.core.mask/MaskingRule) // com.davils.kheck.core.mask/MaskingBuilder.rule|rule(com.davils.kheck.core.mask.MaskingRule){}[0]
+    final fun rules(kotlin.collections/Collection<com.davils.kheck.core.mask/MaskingRule>) // com.davils.kheck.core.mask/MaskingBuilder.rules|rules(kotlin.collections.Collection<com.davils.kheck.core.mask.MaskingRule>){}[0]
+
+    final object Companion { // com.davils.kheck.core.mask/MaskingBuilder.Companion|null[0]
+        final const val DEFAULT_MAX_DEPTH // com.davils.kheck.core.mask/MaskingBuilder.Companion.DEFAULT_MAX_DEPTH|{}DEFAULT_MAX_DEPTH[0]
+            final fun <get-DEFAULT_MAX_DEPTH>(): kotlin/Int // com.davils.kheck.core.mask/MaskingBuilder.Companion.DEFAULT_MAX_DEPTH.<get-DEFAULT_MAX_DEPTH>|<get-DEFAULT_MAX_DEPTH>(){}[0]
+        final const val DEFAULT_MAX_VALUE_LENGTH // com.davils.kheck.core.mask/MaskingBuilder.Companion.DEFAULT_MAX_VALUE_LENGTH|{}DEFAULT_MAX_VALUE_LENGTH[0]
+            final fun <get-DEFAULT_MAX_VALUE_LENGTH>(): kotlin/Int // com.davils.kheck.core.mask/MaskingBuilder.Companion.DEFAULT_MAX_VALUE_LENGTH.<get-DEFAULT_MAX_VALUE_LENGTH>|<get-DEFAULT_MAX_VALUE_LENGTH>(){}[0]
+    }
+}
+
+final class com.davils.kheck.core.mask/MaskingConfiguration : com.davils.kore.core.validation/Validatable { // com.davils.kheck.core.mask/MaskingConfiguration|null[0]
+    final val default // com.davils.kheck.core.mask/MaskingConfiguration.default|{}default[0]
+        final fun <get-default>(): com.davils.kheck.core.mask/Mask // com.davils.kheck.core.mask/MaskingConfiguration.default.<get-default>|<get-default>(){}[0]
+    final val hashKey // com.davils.kheck.core.mask/MaskingConfiguration.hashKey|{}hashKey[0]
+        final fun <get-hashKey>(): com.davils.kheck.core.mask/MaskingKey? // com.davils.kheck.core.mask/MaskingConfiguration.hashKey.<get-hashKey>|<get-hashKey>(){}[0]
+    final val keyPatterns // com.davils.kheck.core.mask/MaskingConfiguration.keyPatterns|{}keyPatterns[0]
+        final fun <get-keyPatterns>(): kotlin.collections/List<kotlin.text/Regex> // com.davils.kheck.core.mask/MaskingConfiguration.keyPatterns.<get-keyPatterns>|<get-keyPatterns>(){}[0]
+    final val keys // com.davils.kheck.core.mask/MaskingConfiguration.keys|{}keys[0]
+        final fun <get-keys>(): kotlin.collections/Set<kotlin/String> // com.davils.kheck.core.mask/MaskingConfiguration.keys.<get-keys>|<get-keys>(){}[0]
+    final val maxDepth // com.davils.kheck.core.mask/MaskingConfiguration.maxDepth|{}maxDepth[0]
+        final fun <get-maxDepth>(): kotlin/Int // com.davils.kheck.core.mask/MaskingConfiguration.maxDepth.<get-maxDepth>|<get-maxDepth>(){}[0]
+    final val maxValueLength // com.davils.kheck.core.mask/MaskingConfiguration.maxValueLength|{}maxValueLength[0]
+        final fun <get-maxValueLength>(): kotlin/Int // com.davils.kheck.core.mask/MaskingConfiguration.maxValueLength.<get-maxValueLength>|<get-maxValueLength>(){}[0]
+    final val rules // com.davils.kheck.core.mask/MaskingConfiguration.rules|{}rules[0]
+        final fun <get-rules>(): kotlin.collections/List<com.davils.kheck.core.mask/MaskingRule> // com.davils.kheck.core.mask/MaskingConfiguration.rules.<get-rules>|<get-rules>(){}[0]
+
+    final fun (com.davils.kore.core.validation/ValidationScope).validate() // com.davils.kheck.core.mask/MaskingConfiguration.validate|validate@com.davils.kore.core.validation.ValidationScope(){}[0]
+    final fun toString(): kotlin/String // com.davils.kheck.core.mask/MaskingConfiguration.toString|toString(){}[0]
+}
+
+final class com.davils.kheck.core.mask/MaskingKey { // com.davils.kheck.core.mask/MaskingKey|null[0]
+    constructor <init>(kotlin/ByteArray) // com.davils.kheck.core.mask/MaskingKey.<init>|<init>(kotlin.ByteArray){}[0]
+
+    final val isDestroyed // com.davils.kheck.core.mask/MaskingKey.isDestroyed|{}isDestroyed[0]
+        final fun <get-isDestroyed>(): kotlin/Boolean // com.davils.kheck.core.mask/MaskingKey.isDestroyed.<get-isDestroyed>|<get-isDestroyed>(){}[0]
+
+    final fun destroy() // com.davils.kheck.core.mask/MaskingKey.destroy|destroy(){}[0]
+    final fun toString(): kotlin/String // com.davils.kheck.core.mask/MaskingKey.toString|toString(){}[0]
+
+    final object Companion { // com.davils.kheck.core.mask/MaskingKey.Companion|null[0]
+        final fun of(kotlin/String): com.davils.kheck.core.mask/MaskingKey // com.davils.kheck.core.mask/MaskingKey.Companion.of|of(kotlin.String){}[0]
+    }
+}
+
+final class com.davils.kheck.core.mask/MaskingRule { // com.davils.kheck.core.mask/MaskingRule|null[0]
+    constructor <init>(kotlin/String, kotlin.text/Regex, com.davils.kheck.core.mask/Mask? = ..., kotlin.collections/List<kotlin/String> = ..., com.davils.kheck.core.mask/MaskingValidator? = ...) // com.davils.kheck.core.mask/MaskingRule.<init>|<init>(kotlin.String;kotlin.text.Regex;com.davils.kheck.core.mask.Mask?;kotlin.collections.List<kotlin.String>;com.davils.kheck.core.mask.MaskingValidator?){}[0]
+
+    final val hints // com.davils.kheck.core.mask/MaskingRule.hints|{}hints[0]
+        final fun <get-hints>(): kotlin.collections/List<kotlin/String> // com.davils.kheck.core.mask/MaskingRule.hints.<get-hints>|<get-hints>(){}[0]
+    final val mask // com.davils.kheck.core.mask/MaskingRule.mask|{}mask[0]
+        final fun <get-mask>(): com.davils.kheck.core.mask/Mask? // com.davils.kheck.core.mask/MaskingRule.mask.<get-mask>|<get-mask>(){}[0]
+    final val name // com.davils.kheck.core.mask/MaskingRule.name|{}name[0]
+        final fun <get-name>(): kotlin/String // com.davils.kheck.core.mask/MaskingRule.name.<get-name>|<get-name>(){}[0]
+    final val pattern // com.davils.kheck.core.mask/MaskingRule.pattern|{}pattern[0]
+        final fun <get-pattern>(): kotlin.text/Regex // com.davils.kheck.core.mask/MaskingRule.pattern.<get-pattern>|<get-pattern>(){}[0]
+    final val validator // com.davils.kheck.core.mask/MaskingRule.validator|{}validator[0]
+        final fun <get-validator>(): com.davils.kheck.core.mask/MaskingValidator? // com.davils.kheck.core.mask/MaskingRule.validator.<get-validator>|<get-validator>(){}[0]
+
+    final fun toString(): kotlin/String // com.davils.kheck.core.mask/MaskingRule.toString|toString(){}[0]
+
+    final object Companion { // com.davils.kheck.core.mask/MaskingRule.Companion|null[0]
+        final const val SECRET_GROUP_NAME // com.davils.kheck.core.mask/MaskingRule.Companion.SECRET_GROUP_NAME|{}SECRET_GROUP_NAME[0]
+            final fun <get-SECRET_GROUP_NAME>(): kotlin/String // com.davils.kheck.core.mask/MaskingRule.Companion.SECRET_GROUP_NAME.<get-SECRET_GROUP_NAME>|<get-SECRET_GROUP_NAME>(){}[0]
+    }
+}
+
+final class com.davils.kheck.core.record/LogCause { // com.davils.kheck.core.record/LogCause|null[0]
+    constructor <init>(kotlin/String, kotlin/String?, kotlin.collections/List<com.davils.kheck.core.record/LogFrame> = ..., kotlin/Int = ..., com.davils.kheck.core.record/LogCause? = ..., kotlin.collections/List<com.davils.kheck.core.record/LogCause> = ...) // com.davils.kheck.core.record/LogCause.<init>|<init>(kotlin.String;kotlin.String?;kotlin.collections.List<com.davils.kheck.core.record.LogFrame>;kotlin.Int;com.davils.kheck.core.record.LogCause?;kotlin.collections.List<com.davils.kheck.core.record.LogCause>){}[0]
+
+    final val cause // com.davils.kheck.core.record/LogCause.cause|{}cause[0]
+        final fun <get-cause>(): com.davils.kheck.core.record/LogCause? // com.davils.kheck.core.record/LogCause.cause.<get-cause>|<get-cause>(){}[0]
+    final val frames // com.davils.kheck.core.record/LogCause.frames|{}frames[0]
+        final fun <get-frames>(): kotlin.collections/List<com.davils.kheck.core.record/LogFrame> // com.davils.kheck.core.record/LogCause.frames.<get-frames>|<get-frames>(){}[0]
+    final val message // com.davils.kheck.core.record/LogCause.message|{}message[0]
+        final fun <get-message>(): kotlin/String? // com.davils.kheck.core.record/LogCause.message.<get-message>|<get-message>(){}[0]
+    final val omittedFrames // com.davils.kheck.core.record/LogCause.omittedFrames|{}omittedFrames[0]
+        final fun <get-omittedFrames>(): kotlin/Int // com.davils.kheck.core.record/LogCause.omittedFrames.<get-omittedFrames>|<get-omittedFrames>(){}[0]
+    final val suppressed // com.davils.kheck.core.record/LogCause.suppressed|{}suppressed[0]
+        final fun <get-suppressed>(): kotlin.collections/List<com.davils.kheck.core.record/LogCause> // com.davils.kheck.core.record/LogCause.suppressed.<get-suppressed>|<get-suppressed>(){}[0]
+    final val type // com.davils.kheck.core.record/LogCause.type|{}type[0]
+        final fun <get-type>(): kotlin/String // com.davils.kheck.core.record/LogCause.type.<get-type>|<get-type>(){}[0]
+
+    final fun toString(): kotlin/String // com.davils.kheck.core.record/LogCause.toString|toString(){}[0]
+}
+
+final class com.davils.kheck.core.record/LogFrame { // com.davils.kheck.core.record/LogFrame|null[0]
+    constructor <init>(kotlin/String, kotlin/String, kotlin/String? = ..., kotlin/Int = ...) // com.davils.kheck.core.record/LogFrame.<init>|<init>(kotlin.String;kotlin.String;kotlin.String?;kotlin.Int){}[0]
+
+    final val className // com.davils.kheck.core.record/LogFrame.className|{}className[0]
+        final fun <get-className>(): kotlin/String // com.davils.kheck.core.record/LogFrame.className.<get-className>|<get-className>(){}[0]
+    final val fileName // com.davils.kheck.core.record/LogFrame.fileName|{}fileName[0]
+        final fun <get-fileName>(): kotlin/String? // com.davils.kheck.core.record/LogFrame.fileName.<get-fileName>|<get-fileName>(){}[0]
+    final val lineNumber // com.davils.kheck.core.record/LogFrame.lineNumber|{}lineNumber[0]
+        final fun <get-lineNumber>(): kotlin/Int // com.davils.kheck.core.record/LogFrame.lineNumber.<get-lineNumber>|<get-lineNumber>(){}[0]
+    final val methodName // com.davils.kheck.core.record/LogFrame.methodName|{}methodName[0]
+        final fun <get-methodName>(): kotlin/String // com.davils.kheck.core.record/LogFrame.methodName.<get-methodName>|<get-methodName>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.kheck.core.record/LogFrame.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.kheck.core.record/LogFrame.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.kheck.core.record/LogFrame.toString|toString(){}[0]
+
+    final object Companion { // com.davils.kheck.core.record/LogFrame.Companion|null[0]
+        final const val UNKNOWN_LINE // com.davils.kheck.core.record/LogFrame.Companion.UNKNOWN_LINE|{}UNKNOWN_LINE[0]
+            final fun <get-UNKNOWN_LINE>(): kotlin/Int // com.davils.kheck.core.record/LogFrame.Companion.UNKNOWN_LINE.<get-UNKNOWN_LINE>|<get-UNKNOWN_LINE>(){}[0]
+    }
+}
+
+final class com.davils.kheck.core.record/LogRecord { // com.davils.kheck.core.record/LogRecord|null[0]
+    constructor <init>(kotlin/Long, kotlin.time/Instant, com.davils.kheck.api/LogLevel, com.davils.kheck.core.record/LogSource, kotlin/String, kotlin.collections/Map<kotlin/String, com.davils.kheck.api.record/LogValue> = ..., kotlin.collections/Map<kotlin/String, com.davils.kheck.api.record/LogValue> = ..., kotlin.collections/Set<com.davils.kheck.api.record/LogMarker> = ..., com.davils.kheck.core.record/LogCause? = ..., kotlin/Int = ...) // com.davils.kheck.core.record/LogRecord.<init>|<init>(kotlin.Long;kotlin.time.Instant;com.davils.kheck.api.LogLevel;com.davils.kheck.core.record.LogSource;kotlin.String;kotlin.collections.Map<kotlin.String,com.davils.kheck.api.record.LogValue>;kotlin.collections.Map<kotlin.String,com.davils.kheck.api.record.LogValue>;kotlin.collections.Set<com.davils.kheck.api.record.LogMarker>;com.davils.kheck.core.record.LogCause?;kotlin.Int){}[0]
+
+    final val cause // com.davils.kheck.core.record/LogRecord.cause|{}cause[0]
+        final fun <get-cause>(): com.davils.kheck.core.record/LogCause? // com.davils.kheck.core.record/LogRecord.cause.<get-cause>|<get-cause>(){}[0]
+    final val context // com.davils.kheck.core.record/LogRecord.context|{}context[0]
+        final fun <get-context>(): kotlin.collections/Map<kotlin/String, com.davils.kheck.api.record/LogValue> // com.davils.kheck.core.record/LogRecord.context.<get-context>|<get-context>(){}[0]
+    final val fields // com.davils.kheck.core.record/LogRecord.fields|{}fields[0]
+        final fun <get-fields>(): kotlin.collections/Map<kotlin/String, com.davils.kheck.api.record/LogValue> // com.davils.kheck.core.record/LogRecord.fields.<get-fields>|<get-fields>(){}[0]
+    final val level // com.davils.kheck.core.record/LogRecord.level|{}level[0]
+        final fun <get-level>(): com.davils.kheck.api/LogLevel // com.davils.kheck.core.record/LogRecord.level.<get-level>|<get-level>(){}[0]
+    final val markers // com.davils.kheck.core.record/LogRecord.markers|{}markers[0]
+        final fun <get-markers>(): kotlin.collections/Set<com.davils.kheck.api.record/LogMarker> // com.davils.kheck.core.record/LogRecord.markers.<get-markers>|<get-markers>(){}[0]
+    final val message // com.davils.kheck.core.record/LogRecord.message|{}message[0]
+        final fun <get-message>(): kotlin/String // com.davils.kheck.core.record/LogRecord.message.<get-message>|<get-message>(){}[0]
+    final val omitted // com.davils.kheck.core.record/LogRecord.omitted|{}omitted[0]
+        final fun <get-omitted>(): kotlin/Int // com.davils.kheck.core.record/LogRecord.omitted.<get-omitted>|<get-omitted>(){}[0]
+    final val sequence // com.davils.kheck.core.record/LogRecord.sequence|{}sequence[0]
+        final fun <get-sequence>(): kotlin/Long // com.davils.kheck.core.record/LogRecord.sequence.<get-sequence>|<get-sequence>(){}[0]
+    final val source // com.davils.kheck.core.record/LogRecord.source|{}source[0]
+        final fun <get-source>(): com.davils.kheck.core.record/LogSource // com.davils.kheck.core.record/LogRecord.source.<get-source>|<get-source>(){}[0]
+    final val timestamp // com.davils.kheck.core.record/LogRecord.timestamp|{}timestamp[0]
+        final fun <get-timestamp>(): kotlin.time/Instant // com.davils.kheck.core.record/LogRecord.timestamp.<get-timestamp>|<get-timestamp>(){}[0]
+
+    final fun toString(): kotlin/String // com.davils.kheck.core.record/LogRecord.toString|toString(){}[0]
+}
+
+final class com.davils.kheck.core.record/LogSource { // com.davils.kheck.core.record/LogSource|null[0]
+    constructor <init>(com.davils.kheck.api/LoggerName, kotlin/String, com.davils.kheck.core.record/LogFrame? = ...) // com.davils.kheck.core.record/LogSource.<init>|<init>(com.davils.kheck.api.LoggerName;kotlin.String;com.davils.kheck.core.record.LogFrame?){}[0]
+
+    final val caller // com.davils.kheck.core.record/LogSource.caller|{}caller[0]
+        final fun <get-caller>(): com.davils.kheck.core.record/LogFrame? // com.davils.kheck.core.record/LogSource.caller.<get-caller>|<get-caller>(){}[0]
+    final val logger // com.davils.kheck.core.record/LogSource.logger|{}logger[0]
+        final fun <get-logger>(): com.davils.kheck.api/LoggerName // com.davils.kheck.core.record/LogSource.logger.<get-logger>|<get-logger>(){}[0]
+    final val thread // com.davils.kheck.core.record/LogSource.thread|{}thread[0]
+        final fun <get-thread>(): kotlin/String // com.davils.kheck.core.record/LogSource.thread.<get-thread>|<get-thread>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.kheck.core.record/LogSource.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.kheck.core.record/LogSource.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.kheck.core.record/LogSource.toString|toString(){}[0]
+}
+
+final class com.davils.kheck.core.route/LoggerBuilder : com.davils.kore.core.dsl/ValidatingBuilder<com.davils.kheck.core.route/LoggerConfiguration> { // com.davils.kheck.core.route/LoggerBuilder|null[0]
+    final var isAdditive // com.davils.kheck.core.route/LoggerBuilder.isAdditive|{}isAdditive[0]
+        final fun <get-isAdditive>(): kotlin/Boolean // com.davils.kheck.core.route/LoggerBuilder.isAdditive.<get-isAdditive>|<get-isAdditive>(){}[0]
+        final fun <set-isAdditive>(kotlin/Boolean) // com.davils.kheck.core.route/LoggerBuilder.isAdditive.<set-isAdditive>|<set-isAdditive>(kotlin.Boolean){}[0]
+    final var isCallerIncluded // com.davils.kheck.core.route/LoggerBuilder.isCallerIncluded|{}isCallerIncluded[0]
+        final fun <get-isCallerIncluded>(): kotlin/Boolean? // com.davils.kheck.core.route/LoggerBuilder.isCallerIncluded.<get-isCallerIncluded>|<get-isCallerIncluded>(){}[0]
+        final fun <set-isCallerIncluded>(kotlin/Boolean?) // com.davils.kheck.core.route/LoggerBuilder.isCallerIncluded.<set-isCallerIncluded>|<set-isCallerIncluded>(kotlin.Boolean?){}[0]
+    final var level // com.davils.kheck.core.route/LoggerBuilder.level|{}level[0]
+        final fun <get-level>(): com.davils.kheck.api/LogLevel? // com.davils.kheck.core.route/LoggerBuilder.level.<get-level>|<get-level>(){}[0]
+        final fun <set-level>(com.davils.kheck.api/LogLevel?) // com.davils.kheck.core.route/LoggerBuilder.level.<set-level>|<set-level>(com.davils.kheck.api.LogLevel?){}[0]
+
+    final fun sinks(kotlin/Array<out kotlin/String>...) // com.davils.kheck.core.route/LoggerBuilder.sinks|sinks(kotlin.Array<out|kotlin.String>...){}[0]
+}
+
+final class com.davils.kheck.core.route/LoggerConfiguration : com.davils.kore.core.validation/Validatable { // com.davils.kheck.core.route/LoggerConfiguration|null[0]
+    final val isAdditive // com.davils.kheck.core.route/LoggerConfiguration.isAdditive|{}isAdditive[0]
+        final fun <get-isAdditive>(): kotlin/Boolean // com.davils.kheck.core.route/LoggerConfiguration.isAdditive.<get-isAdditive>|<get-isAdditive>(){}[0]
+    final val isCallerIncluded // com.davils.kheck.core.route/LoggerConfiguration.isCallerIncluded|{}isCallerIncluded[0]
+        final fun <get-isCallerIncluded>(): kotlin/Boolean? // com.davils.kheck.core.route/LoggerConfiguration.isCallerIncluded.<get-isCallerIncluded>|<get-isCallerIncluded>(){}[0]
+    final val level // com.davils.kheck.core.route/LoggerConfiguration.level|{}level[0]
+        final fun <get-level>(): com.davils.kheck.api/LogLevel? // com.davils.kheck.core.route/LoggerConfiguration.level.<get-level>|<get-level>(){}[0]
+    final val sinks // com.davils.kheck.core.route/LoggerConfiguration.sinks|{}sinks[0]
+        final fun <get-sinks>(): kotlin.collections/Set<kotlin/String> // com.davils.kheck.core.route/LoggerConfiguration.sinks.<get-sinks>|<get-sinks>(){}[0]
+
+    final fun (com.davils.kore.core.validation/ValidationScope).validate() // com.davils.kheck.core.route/LoggerConfiguration.validate|validate@com.davils.kore.core.validation.ValidationScope(){}[0]
+    final fun toString(): kotlin/String // com.davils.kheck.core.route/LoggerConfiguration.toString|toString(){}[0]
+}
+
+final class com.davils.kheck.core.sample/Deduplication { // com.davils.kheck.core.sample/Deduplication|null[0]
+    constructor <init>(kotlin.time/Duration, kotlin/Int) // com.davils.kheck.core.sample/Deduplication.<init>|<init>(kotlin.time.Duration;kotlin.Int){}[0]
+
+    final val maxEntries // com.davils.kheck.core.sample/Deduplication.maxEntries|{}maxEntries[0]
+        final fun <get-maxEntries>(): kotlin/Int // com.davils.kheck.core.sample/Deduplication.maxEntries.<get-maxEntries>|<get-maxEntries>(){}[0]
+    final val window // com.davils.kheck.core.sample/Deduplication.window|{}window[0]
+        final fun <get-window>(): kotlin.time/Duration // com.davils.kheck.core.sample/Deduplication.window.<get-window>|<get-window>(){}[0]
+
+    final fun toString(): kotlin/String // com.davils.kheck.core.sample/Deduplication.toString|toString(){}[0]
+}
+
+final class com.davils.kheck.core.sample/RateLimit { // com.davils.kheck.core.sample/RateLimit|null[0]
+    constructor <init>(kotlin/Int, kotlin.time/Duration, com.davils.kheck.core.sample/RateLimitKey) // com.davils.kheck.core.sample/RateLimit.<init>|<init>(kotlin.Int;kotlin.time.Duration;com.davils.kheck.core.sample.RateLimitKey){}[0]
+
+    final val key // com.davils.kheck.core.sample/RateLimit.key|{}key[0]
+        final fun <get-key>(): com.davils.kheck.core.sample/RateLimitKey // com.davils.kheck.core.sample/RateLimit.key.<get-key>|<get-key>(){}[0]
+    final val per // com.davils.kheck.core.sample/RateLimit.per|{}per[0]
+        final fun <get-per>(): kotlin.time/Duration // com.davils.kheck.core.sample/RateLimit.per.<get-per>|<get-per>(){}[0]
+    final val records // com.davils.kheck.core.sample/RateLimit.records|{}records[0]
+        final fun <get-records>(): kotlin/Int // com.davils.kheck.core.sample/RateLimit.records.<get-records>|<get-records>(){}[0]
+
+    final fun toString(): kotlin/String // com.davils.kheck.core.sample/RateLimit.toString|toString(){}[0]
+}
+
+final class com.davils.kheck.core.sample/SamplingBuilder : com.davils.kore.core.dsl/ValidatingBuilder<com.davils.kheck.core.sample/SamplingConfiguration> { // com.davils.kheck.core.sample/SamplingBuilder|null[0]
+    final var alwaysFrom // com.davils.kheck.core.sample/SamplingBuilder.alwaysFrom|{}alwaysFrom[0]
+        final fun <get-alwaysFrom>(): com.davils.kheck.api/LogLevel // com.davils.kheck.core.sample/SamplingBuilder.alwaysFrom.<get-alwaysFrom>|<get-alwaysFrom>(){}[0]
+        final fun <set-alwaysFrom>(com.davils.kheck.api/LogLevel) // com.davils.kheck.core.sample/SamplingBuilder.alwaysFrom.<set-alwaysFrom>|<set-alwaysFrom>(com.davils.kheck.api.LogLevel){}[0]
+    final var rate // com.davils.kheck.core.sample/SamplingBuilder.rate|{}rate[0]
+        final fun <get-rate>(): kotlin/Double // com.davils.kheck.core.sample/SamplingBuilder.rate.<get-rate>|<get-rate>(){}[0]
+        final fun <set-rate>(kotlin/Double) // com.davils.kheck.core.sample/SamplingBuilder.rate.<set-rate>|<set-rate>(kotlin.Double){}[0]
+
+    final fun dedupe(kotlin.time/Duration, kotlin/Int = ...) // com.davils.kheck.core.sample/SamplingBuilder.dedupe|dedupe(kotlin.time.Duration;kotlin.Int){}[0]
+    final fun limit(kotlin/Int, kotlin.time/Duration, com.davils.kheck.core.sample/RateLimitKey = ...) // com.davils.kheck.core.sample/SamplingBuilder.limit|limit(kotlin.Int;kotlin.time.Duration;com.davils.kheck.core.sample.RateLimitKey){}[0]
+
+    final object Companion { // com.davils.kheck.core.sample/SamplingBuilder.Companion|null[0]
+        final const val DEFAULT_MAX_ENTRIES // com.davils.kheck.core.sample/SamplingBuilder.Companion.DEFAULT_MAX_ENTRIES|{}DEFAULT_MAX_ENTRIES[0]
+            final fun <get-DEFAULT_MAX_ENTRIES>(): kotlin/Int // com.davils.kheck.core.sample/SamplingBuilder.Companion.DEFAULT_MAX_ENTRIES.<get-DEFAULT_MAX_ENTRIES>|<get-DEFAULT_MAX_ENTRIES>(){}[0]
+    }
+}
+
+final class com.davils.kheck.core.sample/SamplingConfiguration : com.davils.kore.core.validation/Validatable { // com.davils.kheck.core.sample/SamplingConfiguration|null[0]
+    final val alwaysFrom // com.davils.kheck.core.sample/SamplingConfiguration.alwaysFrom|{}alwaysFrom[0]
+        final fun <get-alwaysFrom>(): com.davils.kheck.api/LogLevel // com.davils.kheck.core.sample/SamplingConfiguration.alwaysFrom.<get-alwaysFrom>|<get-alwaysFrom>(){}[0]
+    final val deduplication // com.davils.kheck.core.sample/SamplingConfiguration.deduplication|{}deduplication[0]
+        final fun <get-deduplication>(): com.davils.kheck.core.sample/Deduplication? // com.davils.kheck.core.sample/SamplingConfiguration.deduplication.<get-deduplication>|<get-deduplication>(){}[0]
+    final val limit // com.davils.kheck.core.sample/SamplingConfiguration.limit|{}limit[0]
+        final fun <get-limit>(): com.davils.kheck.core.sample/RateLimit? // com.davils.kheck.core.sample/SamplingConfiguration.limit.<get-limit>|<get-limit>(){}[0]
+    final val rate // com.davils.kheck.core.sample/SamplingConfiguration.rate|{}rate[0]
+        final fun <get-rate>(): kotlin/Double // com.davils.kheck.core.sample/SamplingConfiguration.rate.<get-rate>|<get-rate>(){}[0]
+
+    final fun (com.davils.kore.core.validation/ValidationScope).validate() // com.davils.kheck.core.sample/SamplingConfiguration.validate|validate@com.davils.kore.core.validation.ValidationScope(){}[0]
+    final fun toString(): kotlin/String // com.davils.kheck.core.sample/SamplingConfiguration.toString|toString(){}[0]
+}
+
+final class com.davils.kheck.core.sink.console/ConsoleSinkBuilder : com.davils.kheck.core.sink/LogSinkBuilder<com.davils.kheck.core.sink.console/ConsoleSinkConfiguration> { // com.davils.kheck.core.sink.console/ConsoleSinkBuilder|null[0]
+    final var environment // com.davils.kheck.core.sink.console/ConsoleSinkBuilder.environment|{}environment[0]
+        final fun <get-environment>(): kotlin.collections/Map<kotlin/String, kotlin/String> // com.davils.kheck.core.sink.console/ConsoleSinkBuilder.environment.<get-environment>|<get-environment>(){}[0]
+        final fun <set-environment>(kotlin.collections/Map<kotlin/String, kotlin/String>) // com.davils.kheck.core.sink.console/ConsoleSinkBuilder.environment.<set-environment>|<set-environment>(kotlin.collections.Map<kotlin.String,kotlin.String>){}[0]
+    final var target // com.davils.kheck.core.sink.console/ConsoleSinkBuilder.target|{}target[0]
+        final fun <get-target>(): com.davils.kheck.core.terminal/ConsoleTarget // com.davils.kheck.core.sink.console/ConsoleSinkBuilder.target.<get-target>|<get-target>(){}[0]
+        final fun <set-target>(com.davils.kheck.core.terminal/ConsoleTarget) // com.davils.kheck.core.sink.console/ConsoleSinkBuilder.target.<set-target>|<set-target>(com.davils.kheck.core.terminal.ConsoleTarget){}[0]
+    final var terminal // com.davils.kheck.core.sink.console/ConsoleSinkBuilder.terminal|{}terminal[0]
+        final fun <get-terminal>(): com.davils.kheck.core.terminal/Terminal // com.davils.kheck.core.sink.console/ConsoleSinkBuilder.terminal.<get-terminal>|<get-terminal>(){}[0]
+        final fun <set-terminal>(com.davils.kheck.core.terminal/Terminal) // com.davils.kheck.core.sink.console/ConsoleSinkBuilder.terminal.<set-terminal>|<set-terminal>(com.davils.kheck.core.terminal.Terminal){}[0]
+}
+
+final class com.davils.kheck.core.sink.console/ConsoleSinkConfiguration : com.davils.kheck.core.sink/LogSinkConfiguration { // com.davils.kheck.core.sink.console/ConsoleSinkConfiguration|null[0]
+    final val environment // com.davils.kheck.core.sink.console/ConsoleSinkConfiguration.environment|{}environment[0]
+        final fun <get-environment>(): kotlin.collections/Map<kotlin/String, kotlin/String> // com.davils.kheck.core.sink.console/ConsoleSinkConfiguration.environment.<get-environment>|<get-environment>(){}[0]
+    final val options // com.davils.kheck.core.sink.console/ConsoleSinkConfiguration.options|{}options[0]
+        final fun <get-options>(): com.davils.kheck.core.sink/LogSinkOptions // com.davils.kheck.core.sink.console/ConsoleSinkConfiguration.options.<get-options>|<get-options>(){}[0]
+    final val target // com.davils.kheck.core.sink.console/ConsoleSinkConfiguration.target|{}target[0]
+        final fun <get-target>(): com.davils.kheck.core.terminal/ConsoleTarget // com.davils.kheck.core.sink.console/ConsoleSinkConfiguration.target.<get-target>|<get-target>(){}[0]
+    final val terminal // com.davils.kheck.core.sink.console/ConsoleSinkConfiguration.terminal|{}terminal[0]
+        final fun <get-terminal>(): com.davils.kheck.core.terminal/Terminal // com.davils.kheck.core.sink.console/ConsoleSinkConfiguration.terminal.<get-terminal>|<get-terminal>(){}[0]
+
+    final fun (com.davils.kore.core.validation/ValidationScope).validate() // com.davils.kheck.core.sink.console/ConsoleSinkConfiguration.validate|validate@com.davils.kore.core.validation.ValidationScope(){}[0]
+    final fun toString(): kotlin/String // com.davils.kheck.core.sink.console/ConsoleSinkConfiguration.toString|toString(){}[0]
+}
+
+final class com.davils.kheck.core.sink.custom/CustomSinkBuilder : com.davils.kheck.core.sink/LogSinkBuilder<com.davils.kheck.core.sink.custom/CustomSinkConfiguration> // com.davils.kheck.core.sink.custom/CustomSinkBuilder|null[0]
+
+final class com.davils.kheck.core.sink.custom/CustomSinkConfiguration : com.davils.kheck.core.sink/LogSinkConfiguration { // com.davils.kheck.core.sink.custom/CustomSinkConfiguration|null[0]
+    final val options // com.davils.kheck.core.sink.custom/CustomSinkConfiguration.options|{}options[0]
+        final fun <get-options>(): com.davils.kheck.core.sink/LogSinkOptions // com.davils.kheck.core.sink.custom/CustomSinkConfiguration.options.<get-options>|<get-options>(){}[0]
+    final val sink // com.davils.kheck.core.sink.custom/CustomSinkConfiguration.sink|{}sink[0]
+        final fun <get-sink>(): com.davils.kheck.core.sink/LogSink // com.davils.kheck.core.sink.custom/CustomSinkConfiguration.sink.<get-sink>|<get-sink>(){}[0]
+
+    final fun (com.davils.kore.core.validation/ValidationScope).validate() // com.davils.kheck.core.sink.custom/CustomSinkConfiguration.validate|validate@com.davils.kore.core.validation.ValidationScope(){}[0]
+    final fun toString(): kotlin/String // com.davils.kheck.core.sink.custom/CustomSinkConfiguration.toString|toString(){}[0]
+}
+
+final class com.davils.kheck.core.sink/LogLine { // com.davils.kheck.core.sink/LogLine|null[0]
+    constructor <init>(com.davils.kheck.core.record/LogRecord, kotlin/String) // com.davils.kheck.core.sink/LogLine.<init>|<init>(com.davils.kheck.core.record.LogRecord;kotlin.String){}[0]
+
+    final val record // com.davils.kheck.core.sink/LogLine.record|{}record[0]
+        final fun <get-record>(): com.davils.kheck.core.record/LogRecord // com.davils.kheck.core.sink/LogLine.record.<get-record>|<get-record>(){}[0]
+    final val text // com.davils.kheck.core.sink/LogLine.text|{}text[0]
+        final fun <get-text>(): kotlin/String // com.davils.kheck.core.sink/LogLine.text.<get-text>|<get-text>(){}[0]
+
+    final fun toString(): kotlin/String // com.davils.kheck.core.sink/LogLine.toString|toString(){}[0]
+}
+
+final class com.davils.kheck.core.sink/LogSinkDefinition { // com.davils.kheck.core.sink/LogSinkDefinition|null[0]
+    final val name // com.davils.kheck.core.sink/LogSinkDefinition.name|{}name[0]
+        final fun <get-name>(): kotlin/String // com.davils.kheck.core.sink/LogSinkDefinition.name.<get-name>|<get-name>(){}[0]
+    final val options // com.davils.kheck.core.sink/LogSinkDefinition.options|{}options[0]
+        final fun <get-options>(): com.davils.kheck.core.sink/LogSinkOptions // com.davils.kheck.core.sink/LogSinkDefinition.options.<get-options>|<get-options>(){}[0]
+
+    final fun toString(): kotlin/String // com.davils.kheck.core.sink/LogSinkDefinition.toString|toString(){}[0]
+}
+
+final class com.davils.kheck.core.sink/LogSinkOptions : com.davils.kore.core.validation/Validatable { // com.davils.kheck.core.sink/LogSinkOptions|null[0]
+    final val capacity // com.davils.kheck.core.sink/LogSinkOptions.capacity|{}capacity[0]
+        final fun <get-capacity>(): kotlin/Int // com.davils.kheck.core.sink/LogSinkOptions.capacity.<get-capacity>|<get-capacity>(){}[0]
+    final val fallback // com.davils.kheck.core.sink/LogSinkOptions.fallback|{}fallback[0]
+        final fun <get-fallback>(): kotlin/String? // com.davils.kheck.core.sink/LogSinkOptions.fallback.<get-fallback>|<get-fallback>(){}[0]
+    final val filters // com.davils.kheck.core.sink/LogSinkOptions.filters|{}filters[0]
+        final fun <get-filters>(): kotlin.collections/List<com.davils.kheck.core.filter/LogFilter> // com.davils.kheck.core.sink/LogSinkOptions.filters.<get-filters>|<get-filters>(){}[0]
+    final val format // com.davils.kheck.core.sink/LogSinkOptions.format|{}format[0]
+        final fun <get-format>(): com.davils.kheck.core.format/LogFormat // com.davils.kheck.core.sink/LogSinkOptions.format.<get-format>|<get-format>(){}[0]
+    final val isExclusive // com.davils.kheck.core.sink/LogSinkOptions.isExclusive|{}isExclusive[0]
+        final fun <get-isExclusive>(): kotlin/Boolean // com.davils.kheck.core.sink/LogSinkOptions.isExclusive.<get-isExclusive>|<get-isExclusive>(){}[0]
+    final val level // com.davils.kheck.core.sink/LogSinkOptions.level|{}level[0]
+        final fun <get-level>(): com.davils.kheck.api/LogLevel // com.davils.kheck.core.sink/LogSinkOptions.level.<get-level>|<get-level>(){}[0]
+    final val markers // com.davils.kheck.core.sink/LogSinkOptions.markers|{}markers[0]
+        final fun <get-markers>(): kotlin.collections/Set<com.davils.kheck.api.record/LogMarker> // com.davils.kheck.core.sink/LogSinkOptions.markers.<get-markers>|<get-markers>(){}[0]
+    final val maxBatch // com.davils.kheck.core.sink/LogSinkOptions.maxBatch|{}maxBatch[0]
+        final fun <get-maxBatch>(): kotlin/Int // com.davils.kheck.core.sink/LogSinkOptions.maxBatch.<get-maxBatch>|<get-maxBatch>(){}[0]
+    final val overflow // com.davils.kheck.core.sink/LogSinkOptions.overflow|{}overflow[0]
+        final fun <get-overflow>(): com.davils.kheck.core.sink/LogOverflow // com.davils.kheck.core.sink/LogSinkOptions.overflow.<get-overflow>|<get-overflow>(){}[0]
+    final val retry // com.davils.kheck.core.sink/LogSinkOptions.retry|{}retry[0]
+        final fun <get-retry>(): com.davils.kheck.core.sink/SinkRetry // com.davils.kheck.core.sink/LogSinkOptions.retry.<get-retry>|<get-retry>(){}[0]
+
+    final fun (com.davils.kore.core.validation/ValidationScope).validate() // com.davils.kheck.core.sink/LogSinkOptions.validate|validate@com.davils.kore.core.validation.ValidationScope(){}[0]
+    final fun toString(): kotlin/String // com.davils.kheck.core.sink/LogSinkOptions.toString|toString(){}[0]
+}
+
+final class com.davils.kheck.core.sink/SinkRetry { // com.davils.kheck.core.sink/SinkRetry|null[0]
+    constructor <init>(kotlin/Int, kotlin.time/Duration, kotlin.time/Duration) // com.davils.kheck.core.sink/SinkRetry.<init>|<init>(kotlin.Int;kotlin.time.Duration;kotlin.time.Duration){}[0]
+
+    final val attempts // com.davils.kheck.core.sink/SinkRetry.attempts|{}attempts[0]
+        final fun <get-attempts>(): kotlin/Int // com.davils.kheck.core.sink/SinkRetry.attempts.<get-attempts>|<get-attempts>(){}[0]
+    final val backoff // com.davils.kheck.core.sink/SinkRetry.backoff|{}backoff[0]
+        final fun <get-backoff>(): kotlin.time/Duration // com.davils.kheck.core.sink/SinkRetry.backoff.<get-backoff>|<get-backoff>(){}[0]
+    final val maxBackoff // com.davils.kheck.core.sink/SinkRetry.maxBackoff|{}maxBackoff[0]
+        final fun <get-maxBackoff>(): kotlin.time/Duration // com.davils.kheck.core.sink/SinkRetry.maxBackoff.<get-maxBackoff>|<get-maxBackoff>(){}[0]
+
+    final fun toString(): kotlin/String // com.davils.kheck.core.sink/SinkRetry.toString|toString(){}[0]
+
+    final object Companion { // com.davils.kheck.core.sink/SinkRetry.Companion|null[0]
+        final val NONE // com.davils.kheck.core.sink/SinkRetry.Companion.NONE|{}NONE[0]
+            final fun <get-NONE>(): com.davils.kheck.core.sink/SinkRetry // com.davils.kheck.core.sink/SinkRetry.Companion.NONE.<get-NONE>|<get-NONE>(){}[0]
+    }
+}
+
+final class com.davils.kheck.core.statistics/LoggingStatistics { // com.davils.kheck.core.statistics/LoggingStatistics|null[0]
+    final val droppedAfterClose // com.davils.kheck.core.statistics/LoggingStatistics.droppedAfterClose|{}droppedAfterClose[0]
+        final fun <get-droppedAfterClose>(): kotlin/Long // com.davils.kheck.core.statistics/LoggingStatistics.droppedAfterClose.<get-droppedAfterClose>|<get-droppedAfterClose>(){}[0]
+    final val failedListeners // com.davils.kheck.core.statistics/LoggingStatistics.failedListeners|{}failedListeners[0]
+        final fun <get-failedListeners>(): kotlin/Long // com.davils.kheck.core.statistics/LoggingStatistics.failedListeners.<get-failedListeners>|<get-failedListeners>(){}[0]
+    final val intakeCapacity // com.davils.kheck.core.statistics/LoggingStatistics.intakeCapacity|{}intakeCapacity[0]
+        final fun <get-intakeCapacity>(): kotlin/Int // com.davils.kheck.core.statistics/LoggingStatistics.intakeCapacity.<get-intakeCapacity>|<get-intakeCapacity>(){}[0]
+    final val intakeDropped // com.davils.kheck.core.statistics/LoggingStatistics.intakeDropped|{}intakeDropped[0]
+        final fun <get-intakeDropped>(): kotlin/Long // com.davils.kheck.core.statistics/LoggingStatistics.intakeDropped.<get-intakeDropped>|<get-intakeDropped>(){}[0]
+    final val intakeQueued // com.davils.kheck.core.statistics/LoggingStatistics.intakeQueued|{}intakeQueued[0]
+        final fun <get-intakeQueued>(): kotlin/Long // com.davils.kheck.core.statistics/LoggingStatistics.intakeQueued.<get-intakeQueued>|<get-intakeQueued>(){}[0]
+    final val intakeSaturation // com.davils.kheck.core.statistics/LoggingStatistics.intakeSaturation|{}intakeSaturation[0]
+        final fun <get-intakeSaturation>(): kotlin/Double // com.davils.kheck.core.statistics/LoggingStatistics.intakeSaturation.<get-intakeSaturation>|<get-intakeSaturation>(){}[0]
+    final val masked // com.davils.kheck.core.statistics/LoggingStatistics.masked|{}masked[0]
+        final fun <get-masked>(): kotlin.collections/Map<kotlin/String, kotlin/Long> // com.davils.kheck.core.statistics/LoggingStatistics.masked.<get-masked>|<get-masked>(){}[0]
+    final val recorded // com.davils.kheck.core.statistics/LoggingStatistics.recorded|{}recorded[0]
+        final fun <get-recorded>(): kotlin.collections/Map<com.davils.kheck.api/LogLevel, kotlin/Long> // com.davils.kheck.core.statistics/LoggingStatistics.recorded.<get-recorded>|<get-recorded>(){}[0]
+    final val reentrant // com.davils.kheck.core.statistics/LoggingStatistics.reentrant|{}reentrant[0]
+        final fun <get-reentrant>(): kotlin/Long // com.davils.kheck.core.statistics/LoggingStatistics.reentrant.<get-reentrant>|<get-reentrant>(){}[0]
+    final val sinks // com.davils.kheck.core.statistics/LoggingStatistics.sinks|{}sinks[0]
+        final fun <get-sinks>(): kotlin.collections/Map<kotlin/String, com.davils.kheck.core.statistics/SinkStatistics> // com.davils.kheck.core.statistics/LoggingStatistics.sinks.<get-sinks>|<get-sinks>(){}[0]
+    final val sinksFailing // com.davils.kheck.core.statistics/LoggingStatistics.sinksFailing|{}sinksFailing[0]
+        final fun <get-sinksFailing>(): kotlin/Int // com.davils.kheck.core.statistics/LoggingStatistics.sinksFailing.<get-sinksFailing>|<get-sinksFailing>(){}[0]
+    final val suppressed // com.davils.kheck.core.statistics/LoggingStatistics.suppressed|{}suppressed[0]
+        final fun <get-suppressed>(): kotlin.collections/Map<com.davils.kheck.core.statistics/Suppression, kotlin/Long> // com.davils.kheck.core.statistics/LoggingStatistics.suppressed.<get-suppressed>|<get-suppressed>(){}[0]
+
+    final fun toString(): kotlin/String // com.davils.kheck.core.statistics/LoggingStatistics.toString|toString(){}[0]
+}
+
+final class com.davils.kheck.core.statistics/SinkStatistics { // com.davils.kheck.core.statistics/SinkStatistics|null[0]
+    final val batches // com.davils.kheck.core.statistics/SinkStatistics.batches|{}batches[0]
+        final fun <get-batches>(): kotlin/Long // com.davils.kheck.core.statistics/SinkStatistics.batches.<get-batches>|<get-batches>(){}[0]
+    final val dropped // com.davils.kheck.core.statistics/SinkStatistics.dropped|{}dropped[0]
+        final fun <get-dropped>(): kotlin/Long // com.davils.kheck.core.statistics/SinkStatistics.dropped.<get-dropped>|<get-dropped>(){}[0]
+    final val failed // com.davils.kheck.core.statistics/SinkStatistics.failed|{}failed[0]
+        final fun <get-failed>(): kotlin/Long // com.davils.kheck.core.statistics/SinkStatistics.failed.<get-failed>|<get-failed>(){}[0]
+    final val isFailing // com.davils.kheck.core.statistics/SinkStatistics.isFailing|{}isFailing[0]
+        final fun <get-isFailing>(): kotlin/Boolean // com.davils.kheck.core.statistics/SinkStatistics.isFailing.<get-isFailing>|<get-isFailing>(){}[0]
+    final val maxWriteTime // com.davils.kheck.core.statistics/SinkStatistics.maxWriteTime|{}maxWriteTime[0]
+        final fun <get-maxWriteTime>(): kotlin.time/Duration // com.davils.kheck.core.statistics/SinkStatistics.maxWriteTime.<get-maxWriteTime>|<get-maxWriteTime>(){}[0]
+    final val queued // com.davils.kheck.core.statistics/SinkStatistics.queued|{}queued[0]
+        final fun <get-queued>(): kotlin/Long // com.davils.kheck.core.statistics/SinkStatistics.queued.<get-queued>|<get-queued>(){}[0]
+    final val writeTime // com.davils.kheck.core.statistics/SinkStatistics.writeTime|{}writeTime[0]
+        final fun <get-writeTime>(): kotlin.time/Duration // com.davils.kheck.core.statistics/SinkStatistics.writeTime.<get-writeTime>|<get-writeTime>(){}[0]
+    final val written // com.davils.kheck.core.statistics/SinkStatistics.written|{}written[0]
+        final fun <get-written>(): kotlin/Long // com.davils.kheck.core.statistics/SinkStatistics.written.<get-written>|<get-written>(){}[0]
+
+    final fun toString(): kotlin/String // com.davils.kheck.core.statistics/SinkStatistics.toString|toString(){}[0]
+}
+
+final class com.davils.kheck.core.style/LevelStylesBuilder { // com.davils.kheck.core.style/LevelStylesBuilder|null[0]
+    final fun debug(kotlin/Function1<com.davils.kheck.core.style/TextStyleBuilder, kotlin/Unit>) // com.davils.kheck.core.style/LevelStylesBuilder.debug|debug(kotlin.Function1<com.davils.kheck.core.style.TextStyleBuilder,kotlin.Unit>){}[0]
+    final fun error(kotlin/Function1<com.davils.kheck.core.style/TextStyleBuilder, kotlin/Unit>) // com.davils.kheck.core.style/LevelStylesBuilder.error|error(kotlin.Function1<com.davils.kheck.core.style.TextStyleBuilder,kotlin.Unit>){}[0]
+    final fun info(kotlin/Function1<com.davils.kheck.core.style/TextStyleBuilder, kotlin/Unit>) // com.davils.kheck.core.style/LevelStylesBuilder.info|info(kotlin.Function1<com.davils.kheck.core.style.TextStyleBuilder,kotlin.Unit>){}[0]
+    final fun trace(kotlin/Function1<com.davils.kheck.core.style/TextStyleBuilder, kotlin/Unit>) // com.davils.kheck.core.style/LevelStylesBuilder.trace|trace(kotlin.Function1<com.davils.kheck.core.style.TextStyleBuilder,kotlin.Unit>){}[0]
+    final fun warn(kotlin/Function1<com.davils.kheck.core.style/TextStyleBuilder, kotlin/Unit>) // com.davils.kheck.core.style/LevelStylesBuilder.warn|warn(kotlin.Function1<com.davils.kheck.core.style.TextStyleBuilder,kotlin.Unit>){}[0]
+}
+
+final class com.davils.kheck.core.style/SegmentStyle { // com.davils.kheck.core.style/SegmentStyle|null[0]
+    constructor <init>(com.davils.kheck.core.style/TextStyle = ..., kotlin.collections/Map<com.davils.kheck.api/LogLevel, com.davils.kheck.core.style/TextStyle> = ...) // com.davils.kheck.core.style/SegmentStyle.<init>|<init>(com.davils.kheck.core.style.TextStyle;kotlin.collections.Map<com.davils.kheck.api.LogLevel,com.davils.kheck.core.style.TextStyle>){}[0]
+
+    final val base // com.davils.kheck.core.style/SegmentStyle.base|{}base[0]
+        final fun <get-base>(): com.davils.kheck.core.style/TextStyle // com.davils.kheck.core.style/SegmentStyle.base.<get-base>|<get-base>(){}[0]
+    final val levels // com.davils.kheck.core.style/SegmentStyle.levels|{}levels[0]
+        final fun <get-levels>(): kotlin.collections/Map<com.davils.kheck.api/LogLevel, com.davils.kheck.core.style/TextStyle> // com.davils.kheck.core.style/SegmentStyle.levels.<get-levels>|<get-levels>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.kheck.core.style/SegmentStyle.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.kheck.core.style/SegmentStyle.hashCode|hashCode(){}[0]
+    final fun styleFor(com.davils.kheck.api/LogLevel): com.davils.kheck.core.style/TextStyle // com.davils.kheck.core.style/SegmentStyle.styleFor|styleFor(com.davils.kheck.api.LogLevel){}[0]
+    final fun toString(): kotlin/String // com.davils.kheck.core.style/SegmentStyle.toString|toString(){}[0]
+
+    final object Companion { // com.davils.kheck.core.style/SegmentStyle.Companion|null[0]
+        final val NONE // com.davils.kheck.core.style/SegmentStyle.Companion.NONE|{}NONE[0]
+            final fun <get-NONE>(): com.davils.kheck.core.style/SegmentStyle // com.davils.kheck.core.style/SegmentStyle.Companion.NONE.<get-NONE>|<get-NONE>(){}[0]
+    }
+}
+
+final class com.davils.kheck.core.style/SegmentStyleBuilder : com.davils.kheck.core.style/TextStyleBuilder { // com.davils.kheck.core.style/SegmentStyleBuilder|null[0]
+    final fun byLevel(kotlin/Function1<com.davils.kheck.core.style/LevelStylesBuilder, kotlin/Unit>) // com.davils.kheck.core.style/SegmentStyleBuilder.byLevel|byLevel(kotlin.Function1<com.davils.kheck.core.style.LevelStylesBuilder,kotlin.Unit>){}[0]
+}
+
+final class com.davils.kheck.core.style/TextStyle { // com.davils.kheck.core.style/TextStyle|null[0]
+    constructor <init>(com.davils.kheck.core.style/Color? = ..., com.davils.kheck.core.style/Color? = ..., kotlin/Boolean = ..., kotlin/Boolean = ..., kotlin/Boolean = ..., kotlin/Boolean = ..., kotlin/Boolean = ...) // com.davils.kheck.core.style/TextStyle.<init>|<init>(com.davils.kheck.core.style.Color?;com.davils.kheck.core.style.Color?;kotlin.Boolean;kotlin.Boolean;kotlin.Boolean;kotlin.Boolean;kotlin.Boolean){}[0]
+
+    final val background // com.davils.kheck.core.style/TextStyle.background|{}background[0]
+        final fun <get-background>(): com.davils.kheck.core.style/Color? // com.davils.kheck.core.style/TextStyle.background.<get-background>|<get-background>(){}[0]
+    final val foreground // com.davils.kheck.core.style/TextStyle.foreground|{}foreground[0]
+        final fun <get-foreground>(): com.davils.kheck.core.style/Color? // com.davils.kheck.core.style/TextStyle.foreground.<get-foreground>|<get-foreground>(){}[0]
+    final val isBold // com.davils.kheck.core.style/TextStyle.isBold|{}isBold[0]
+        final fun <get-isBold>(): kotlin/Boolean // com.davils.kheck.core.style/TextStyle.isBold.<get-isBold>|<get-isBold>(){}[0]
+    final val isDim // com.davils.kheck.core.style/TextStyle.isDim|{}isDim[0]
+        final fun <get-isDim>(): kotlin/Boolean // com.davils.kheck.core.style/TextStyle.isDim.<get-isDim>|<get-isDim>(){}[0]
+    final val isItalic // com.davils.kheck.core.style/TextStyle.isItalic|{}isItalic[0]
+        final fun <get-isItalic>(): kotlin/Boolean // com.davils.kheck.core.style/TextStyle.isItalic.<get-isItalic>|<get-isItalic>(){}[0]
+    final val isStrikethrough // com.davils.kheck.core.style/TextStyle.isStrikethrough|{}isStrikethrough[0]
+        final fun <get-isStrikethrough>(): kotlin/Boolean // com.davils.kheck.core.style/TextStyle.isStrikethrough.<get-isStrikethrough>|<get-isStrikethrough>(){}[0]
+    final val isUnderline // com.davils.kheck.core.style/TextStyle.isUnderline|{}isUnderline[0]
+        final fun <get-isUnderline>(): kotlin/Boolean // com.davils.kheck.core.style/TextStyle.isUnderline.<get-isUnderline>|<get-isUnderline>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.kheck.core.style/TextStyle.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.kheck.core.style/TextStyle.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.kheck.core.style/TextStyle.toString|toString(){}[0]
+
+    final object Companion { // com.davils.kheck.core.style/TextStyle.Companion|null[0]
+        final val NONE // com.davils.kheck.core.style/TextStyle.Companion.NONE|{}NONE[0]
+            final fun <get-NONE>(): com.davils.kheck.core.style/TextStyle // com.davils.kheck.core.style/TextStyle.Companion.NONE.<get-NONE>|<get-NONE>(){}[0]
+    }
+}
+
+final class com.davils.kheck.core/EnrichmentBuilder : com.davils.kheck.api.record/LogFieldsBuilder { // com.davils.kheck.core/EnrichmentBuilder|null[0]
+    final fun hostname(kotlin/String = ...) // com.davils.kheck.core/EnrichmentBuilder.hostname|hostname(kotlin.String){}[0]
+    final fun processId(kotlin/String = ...) // com.davils.kheck.core/EnrichmentBuilder.processId|processId(kotlin.String){}[0]
+    final fun user(kotlin/String = ...) // com.davils.kheck.core/EnrichmentBuilder.user|user(kotlin.String){}[0]
+}
+
+final class com.davils.kheck.core/LogLevels { // com.davils.kheck.core/LogLevels|null[0]
+    final val overrides // com.davils.kheck.core/LogLevels.overrides|{}overrides[0]
+        final fun <get-overrides>(): kotlinx.coroutines.flow/StateFlow<kotlin.collections/Map<com.davils.kheck.api/LoggerName, com.davils.kheck.api/LogLevel>> // com.davils.kheck.core/LogLevels.overrides.<get-overrides>|<get-overrides>(){}[0]
+
+    final fun clear(kotlin/String) // com.davils.kheck.core/LogLevels.clear|clear(kotlin.String){}[0]
+    final fun reset() // com.davils.kheck.core/LogLevels.reset|reset(){}[0]
+    final fun set(kotlin/String, com.davils.kheck.api/LogLevel) // com.davils.kheck.core/LogLevels.set|set(kotlin.String;com.davils.kheck.api.LogLevel){}[0]
+}
+
+final class com.davils.kheck.core/Logging { // com.davils.kheck.core/Logging|null[0]
+    final val configuration // com.davils.kheck.core/Logging.configuration|{}configuration[0]
+        final fun <get-configuration>(): com.davils.kheck.core/LoggingConfiguration // com.davils.kheck.core/Logging.configuration.<get-configuration>|<get-configuration>(){}[0]
+    final val isClosed // com.davils.kheck.core/Logging.isClosed|{}isClosed[0]
+        final fun <get-isClosed>(): kotlin/Boolean // com.davils.kheck.core/Logging.isClosed.<get-isClosed>|<get-isClosed>(){}[0]
+    final val levels // com.davils.kheck.core/Logging.levels|{}levels[0]
+        final fun <get-levels>(): com.davils.kheck.core/LogLevels // com.davils.kheck.core/Logging.levels.<get-levels>|<get-levels>(){}[0]
+
+    final fun health(): com.davils.kheck.core.health/LoggingHealth // com.davils.kheck.core/Logging.health|health(){}[0]
+    final fun logger(kotlin.reflect/KClass<*>): com.davils.kheck.api/Logger // com.davils.kheck.core/Logging.logger|logger(kotlin.reflect.KClass<*>){}[0]
+    final fun logger(kotlin/String): com.davils.kheck.api/Logger // com.davils.kheck.core/Logging.logger|logger(kotlin.String){}[0]
+    final fun statistics(): com.davils.kheck.core.statistics/LoggingStatistics // com.davils.kheck.core/Logging.statistics|statistics(){}[0]
+    final fun toString(): kotlin/String // com.davils.kheck.core/Logging.toString|toString(){}[0]
+    final suspend fun close() // com.davils.kheck.core/Logging.close|close(){}[0]
+    final suspend fun flush() // com.davils.kheck.core/Logging.flush|flush(){}[0]
+    final suspend fun reconfigure(kotlin/Function1<com.davils.kheck.core/LoggingBuilder, kotlin/Unit>): com.davils.kheck.core/Reconfiguration // com.davils.kheck.core/Logging.reconfigure|reconfigure(kotlin.Function1<com.davils.kheck.core.LoggingBuilder,kotlin.Unit>){}[0]
+}
+
+final class com.davils.kheck.core/LoggingBuilder : com.davils.kore.core.dsl/ValidatingBuilder<com.davils.kheck.core/LoggingConfiguration> { // com.davils.kheck.core/LoggingBuilder|null[0]
+    final var clock // com.davils.kheck.core/LoggingBuilder.clock|{}clock[0]
+        final fun <get-clock>(): kotlin.time/Clock // com.davils.kheck.core/LoggingBuilder.clock.<get-clock>|<get-clock>(){}[0]
+        final fun <set-clock>(kotlin.time/Clock) // com.davils.kheck.core/LoggingBuilder.clock.<set-clock>|<set-clock>(kotlin.time.Clock){}[0]
+    final var diagnostics // com.davils.kheck.core/LoggingBuilder.diagnostics|{}diagnostics[0]
+        final fun <get-diagnostics>(): com.davils.kheck.core.diagnostics/LogDiagnostics // com.davils.kheck.core/LoggingBuilder.diagnostics.<get-diagnostics>|<get-diagnostics>(){}[0]
+        final fun <set-diagnostics>(com.davils.kheck.core.diagnostics/LogDiagnostics) // com.davils.kheck.core/LoggingBuilder.diagnostics.<set-diagnostics>|<set-diagnostics>(com.davils.kheck.core.diagnostics.LogDiagnostics){}[0]
+    final var environment // com.davils.kheck.core/LoggingBuilder.environment|{}environment[0]
+        final fun <get-environment>(): kotlin.collections/Map<kotlin/String, kotlin/String> // com.davils.kheck.core/LoggingBuilder.environment.<get-environment>|<get-environment>(){}[0]
+        final fun <set-environment>(kotlin.collections/Map<kotlin/String, kotlin/String>) // com.davils.kheck.core/LoggingBuilder.environment.<set-environment>|<set-environment>(kotlin.collections.Map<kotlin.String,kotlin.String>){}[0]
+    final var healthRules // com.davils.kheck.core/LoggingBuilder.healthRules|{}healthRules[0]
+        final fun <get-healthRules>(): kotlin.collections/List<com.davils.kheck.core.health/HealthRule> // com.davils.kheck.core/LoggingBuilder.healthRules.<get-healthRules>|<get-healthRules>(){}[0]
+        final fun <set-healthRules>(kotlin.collections/List<com.davils.kheck.core.health/HealthRule>) // com.davils.kheck.core/LoggingBuilder.healthRules.<set-healthRules>|<set-healthRules>(kotlin.collections.List<com.davils.kheck.core.health.HealthRule>){}[0]
+    final var level // com.davils.kheck.core/LoggingBuilder.level|{}level[0]
+        final fun <get-level>(): com.davils.kheck.api/LogLevel // com.davils.kheck.core/LoggingBuilder.level.<get-level>|<get-level>(){}[0]
+        final fun <set-level>(com.davils.kheck.api/LogLevel) // com.davils.kheck.core/LoggingBuilder.level.<set-level>|<set-level>(com.davils.kheck.api.LogLevel){}[0]
+    final var timeSource // com.davils.kheck.core/LoggingBuilder.timeSource|{}timeSource[0]
+        final fun <get-timeSource>(): kotlin.time/TimeSource.WithComparableMarks // com.davils.kheck.core/LoggingBuilder.timeSource.<get-timeSource>|<get-timeSource>(){}[0]
+        final fun <set-timeSource>(kotlin.time/TimeSource.WithComparableMarks) // com.davils.kheck.core/LoggingBuilder.timeSource.<set-timeSource>|<set-timeSource>(kotlin.time.TimeSource.WithComparableMarks){}[0]
+
+    final fun <#A1: com.davils.kheck.core.sink/LogSinkConfiguration, #B1: com.davils.kheck.core.sink/LogSinkBuilder<#A1>> register(kotlin/String, #B1, kotlin/Function1<#B1, kotlin/Unit>, kotlin/Function1<#A1, com.davils.kheck.core.sink/LogSink>) // com.davils.kheck.core/LoggingBuilder.register|register(kotlin.String;0:1;kotlin.Function1<0:1,kotlin.Unit>;kotlin.Function1<0:0,com.davils.kheck.core.sink.LogSink>){0§<com.davils.kheck.core.sink.LogSinkConfiguration>;1§<com.davils.kheck.core.sink.LogSinkBuilder<0:0>>}[0]
+    final fun enrich(kotlin/Function1<com.davils.kheck.core/EnrichmentBuilder, kotlin/Unit>) // com.davils.kheck.core/LoggingBuilder.enrich|enrich(kotlin.Function1<com.davils.kheck.core.EnrichmentBuilder,kotlin.Unit>){}[0]
+    final fun filter(com.davils.kheck.core.filter/LogFilter) // com.davils.kheck.core/LoggingBuilder.filter|filter(com.davils.kheck.core.filter.LogFilter){}[0]
+    final fun intake(kotlin/Function1<com.davils.kheck.core.intake/IntakeBuilder, kotlin/Unit>) // com.davils.kheck.core/LoggingBuilder.intake|intake(kotlin.Function1<com.davils.kheck.core.intake.IntakeBuilder,kotlin.Unit>){}[0]
+    final fun logger(kotlin/String, kotlin/Function1<com.davils.kheck.core.route/LoggerBuilder, kotlin/Unit>) // com.davils.kheck.core/LoggingBuilder.logger|logger(kotlin.String;kotlin.Function1<com.davils.kheck.core.route.LoggerBuilder,kotlin.Unit>){}[0]
+    final fun mask(kotlin/Function1<com.davils.kheck.core.mask/MaskingBuilder, kotlin/Unit>) // com.davils.kheck.core/LoggingBuilder.mask|mask(kotlin.Function1<com.davils.kheck.core.mask.MaskingBuilder,kotlin.Unit>){}[0]
+    final fun onEvent(com.davils.kheck.core/LoggingEventListener) // com.davils.kheck.core/LoggingBuilder.onEvent|onEvent(com.davils.kheck.core.LoggingEventListener){}[0]
+    final fun sample(kotlin/Function1<com.davils.kheck.core.sample/SamplingBuilder, kotlin/Unit>) // com.davils.kheck.core/LoggingBuilder.sample|sample(kotlin.Function1<com.davils.kheck.core.sample.SamplingBuilder,kotlin.Unit>){}[0]
+}
+
+final class com.davils.kheck.core/LoggingConfiguration : com.davils.kore.core.validation/Validatable { // com.davils.kheck.core/LoggingConfiguration|null[0]
+    final val clock // com.davils.kheck.core/LoggingConfiguration.clock|{}clock[0]
+        final fun <get-clock>(): kotlin.time/Clock // com.davils.kheck.core/LoggingConfiguration.clock.<get-clock>|<get-clock>(){}[0]
+    final val diagnostics // com.davils.kheck.core/LoggingConfiguration.diagnostics|{}diagnostics[0]
+        final fun <get-diagnostics>(): com.davils.kheck.core.diagnostics/LogDiagnostics // com.davils.kheck.core/LoggingConfiguration.diagnostics.<get-diagnostics>|<get-diagnostics>(){}[0]
+    final val enrichment // com.davils.kheck.core/LoggingConfiguration.enrichment|{}enrichment[0]
+        final fun <get-enrichment>(): kotlin.collections/Map<kotlin/String, com.davils.kheck.api.record/LogValue> // com.davils.kheck.core/LoggingConfiguration.enrichment.<get-enrichment>|<get-enrichment>(){}[0]
+    final val filters // com.davils.kheck.core/LoggingConfiguration.filters|{}filters[0]
+        final fun <get-filters>(): kotlin.collections/List<com.davils.kheck.core.filter/LogFilter> // com.davils.kheck.core/LoggingConfiguration.filters.<get-filters>|<get-filters>(){}[0]
+    final val healthRules // com.davils.kheck.core/LoggingConfiguration.healthRules|{}healthRules[0]
+        final fun <get-healthRules>(): kotlin.collections/List<com.davils.kheck.core.health/HealthRule> // com.davils.kheck.core/LoggingConfiguration.healthRules.<get-healthRules>|<get-healthRules>(){}[0]
+    final val intake // com.davils.kheck.core/LoggingConfiguration.intake|{}intake[0]
+        final fun <get-intake>(): com.davils.kheck.core.intake/IntakeConfiguration // com.davils.kheck.core/LoggingConfiguration.intake.<get-intake>|<get-intake>(){}[0]
+    final val level // com.davils.kheck.core/LoggingConfiguration.level|{}level[0]
+        final fun <get-level>(): com.davils.kheck.api/LogLevel // com.davils.kheck.core/LoggingConfiguration.level.<get-level>|<get-level>(){}[0]
+    final val listeners // com.davils.kheck.core/LoggingConfiguration.listeners|{}listeners[0]
+        final fun <get-listeners>(): kotlin.collections/List<com.davils.kheck.core/LoggingEventListener> // com.davils.kheck.core/LoggingConfiguration.listeners.<get-listeners>|<get-listeners>(){}[0]
+    final val loggers // com.davils.kheck.core/LoggingConfiguration.loggers|{}loggers[0]
+        final fun <get-loggers>(): kotlin.collections/Map<kotlin/String, com.davils.kheck.core.route/LoggerConfiguration> // com.davils.kheck.core/LoggingConfiguration.loggers.<get-loggers>|<get-loggers>(){}[0]
+    final val masking // com.davils.kheck.core/LoggingConfiguration.masking|{}masking[0]
+        final fun <get-masking>(): com.davils.kheck.core.mask/MaskingConfiguration // com.davils.kheck.core/LoggingConfiguration.masking.<get-masking>|<get-masking>(){}[0]
+    final val sampling // com.davils.kheck.core/LoggingConfiguration.sampling|{}sampling[0]
+        final fun <get-sampling>(): com.davils.kheck.core.sample/SamplingConfiguration // com.davils.kheck.core/LoggingConfiguration.sampling.<get-sampling>|<get-sampling>(){}[0]
+    final val sinks // com.davils.kheck.core/LoggingConfiguration.sinks|{}sinks[0]
+        final fun <get-sinks>(): kotlin.collections/Map<kotlin/String, com.davils.kheck.core.sink/LogSinkDefinition> // com.davils.kheck.core/LoggingConfiguration.sinks.<get-sinks>|<get-sinks>(){}[0]
+    final val timeSource // com.davils.kheck.core/LoggingConfiguration.timeSource|{}timeSource[0]
+        final fun <get-timeSource>(): kotlin.time/TimeSource.WithComparableMarks // com.davils.kheck.core/LoggingConfiguration.timeSource.<get-timeSource>|<get-timeSource>(){}[0]
+
+    final fun (com.davils.kore.core.validation/ValidationScope).validate() // com.davils.kheck.core/LoggingConfiguration.validate|validate@com.davils.kore.core.validation.ValidationScope(){}[0]
+    final fun toString(): kotlin/String // com.davils.kheck.core/LoggingConfiguration.toString|toString(){}[0]
+}
+
+open class com.davils.kheck.core.format.plain.builder/SegmentBuilder { // com.davils.kheck.core.format.plain.builder/SegmentBuilder|null[0]
+    final var alignment // com.davils.kheck.core.format.plain.builder/SegmentBuilder.alignment|{}alignment[0]
+        final fun <get-alignment>(): com.davils.kheck.core.format.plain/Alignment // com.davils.kheck.core.format.plain.builder/SegmentBuilder.alignment.<get-alignment>|<get-alignment>(){}[0]
+        final fun <set-alignment>(com.davils.kheck.core.format.plain/Alignment) // com.davils.kheck.core.format.plain.builder/SegmentBuilder.alignment.<set-alignment>|<set-alignment>(com.davils.kheck.core.format.plain.Alignment){}[0]
+    final var maxWidth // com.davils.kheck.core.format.plain.builder/SegmentBuilder.maxWidth|{}maxWidth[0]
+        final fun <get-maxWidth>(): kotlin/Int // com.davils.kheck.core.format.plain.builder/SegmentBuilder.maxWidth.<get-maxWidth>|<get-maxWidth>(){}[0]
+        final fun <set-maxWidth>(kotlin/Int) // com.davils.kheck.core.format.plain.builder/SegmentBuilder.maxWidth.<set-maxWidth>|<set-maxWidth>(kotlin.Int){}[0]
+    final var minWidth // com.davils.kheck.core.format.plain.builder/SegmentBuilder.minWidth|{}minWidth[0]
+        final fun <get-minWidth>(): kotlin/Int // com.davils.kheck.core.format.plain.builder/SegmentBuilder.minWidth.<get-minWidth>|<get-minWidth>(){}[0]
+        final fun <set-minWidth>(kotlin/Int) // com.davils.kheck.core.format.plain.builder/SegmentBuilder.minWidth.<set-minWidth>|<set-minWidth>(kotlin.Int){}[0]
+
+    final fun style(kotlin/Function1<com.davils.kheck.core.style/SegmentStyleBuilder, kotlin/Unit>) // com.davils.kheck.core.format.plain.builder/SegmentBuilder.style|style(kotlin.Function1<com.davils.kheck.core.style.SegmentStyleBuilder,kotlin.Unit>){}[0]
+}
+
+open class com.davils.kheck.core.style/TextStyleBuilder { // com.davils.kheck.core.style/TextStyleBuilder|null[0]
+    final var background // com.davils.kheck.core.style/TextStyleBuilder.background|{}background[0]
+        final fun <get-background>(): com.davils.kheck.core.style/Color? // com.davils.kheck.core.style/TextStyleBuilder.background.<get-background>|<get-background>(){}[0]
+        final fun <set-background>(com.davils.kheck.core.style/Color?) // com.davils.kheck.core.style/TextStyleBuilder.background.<set-background>|<set-background>(com.davils.kheck.core.style.Color?){}[0]
+    final var foreground // com.davils.kheck.core.style/TextStyleBuilder.foreground|{}foreground[0]
+        final fun <get-foreground>(): com.davils.kheck.core.style/Color? // com.davils.kheck.core.style/TextStyleBuilder.foreground.<get-foreground>|<get-foreground>(){}[0]
+        final fun <set-foreground>(com.davils.kheck.core.style/Color?) // com.davils.kheck.core.style/TextStyleBuilder.foreground.<set-foreground>|<set-foreground>(com.davils.kheck.core.style.Color?){}[0]
+    final var isBold // com.davils.kheck.core.style/TextStyleBuilder.isBold|{}isBold[0]
+        final fun <get-isBold>(): kotlin/Boolean // com.davils.kheck.core.style/TextStyleBuilder.isBold.<get-isBold>|<get-isBold>(){}[0]
+        final fun <set-isBold>(kotlin/Boolean) // com.davils.kheck.core.style/TextStyleBuilder.isBold.<set-isBold>|<set-isBold>(kotlin.Boolean){}[0]
+    final var isDim // com.davils.kheck.core.style/TextStyleBuilder.isDim|{}isDim[0]
+        final fun <get-isDim>(): kotlin/Boolean // com.davils.kheck.core.style/TextStyleBuilder.isDim.<get-isDim>|<get-isDim>(){}[0]
+        final fun <set-isDim>(kotlin/Boolean) // com.davils.kheck.core.style/TextStyleBuilder.isDim.<set-isDim>|<set-isDim>(kotlin.Boolean){}[0]
+    final var isItalic // com.davils.kheck.core.style/TextStyleBuilder.isItalic|{}isItalic[0]
+        final fun <get-isItalic>(): kotlin/Boolean // com.davils.kheck.core.style/TextStyleBuilder.isItalic.<get-isItalic>|<get-isItalic>(){}[0]
+        final fun <set-isItalic>(kotlin/Boolean) // com.davils.kheck.core.style/TextStyleBuilder.isItalic.<set-isItalic>|<set-isItalic>(kotlin.Boolean){}[0]
+    final var isStrikethrough // com.davils.kheck.core.style/TextStyleBuilder.isStrikethrough|{}isStrikethrough[0]
+        final fun <get-isStrikethrough>(): kotlin/Boolean // com.davils.kheck.core.style/TextStyleBuilder.isStrikethrough.<get-isStrikethrough>|<get-isStrikethrough>(){}[0]
+        final fun <set-isStrikethrough>(kotlin/Boolean) // com.davils.kheck.core.style/TextStyleBuilder.isStrikethrough.<set-isStrikethrough>|<set-isStrikethrough>(kotlin.Boolean){}[0]
+    final var isUnderline // com.davils.kheck.core.style/TextStyleBuilder.isUnderline|{}isUnderline[0]
+        final fun <get-isUnderline>(): kotlin/Boolean // com.davils.kheck.core.style/TextStyleBuilder.isUnderline.<get-isUnderline>|<get-isUnderline>(){}[0]
+        final fun <set-isUnderline>(kotlin/Boolean) // com.davils.kheck.core.style/TextStyleBuilder.isUnderline.<set-isUnderline>|<set-isUnderline>(kotlin.Boolean){}[0]
+}
+
+final object com.davils.kheck.core.context/ContextAccess { // com.davils.kheck.core.context/ContextAccess|null[0]
+    final fun current(): kotlin.collections/Map<kotlin/String, com.davils.kheck.api.record/LogValue> // com.davils.kheck.core.context/ContextAccess.current|current(){}[0]
+    final fun replace(kotlin.collections/Map<kotlin/String, com.davils.kheck.api.record/LogValue>): kotlin.collections/Map<kotlin/String, com.davils.kheck.api.record/LogValue> // com.davils.kheck.core.context/ContextAccess.replace|replace(kotlin.collections.Map<kotlin.String,com.davils.kheck.api.record.LogValue>){}[0]
+}
+
+final object com.davils.kheck.core.filter/LogFilters { // com.davils.kheck.core.filter/LogFilters|null[0]
+    final fun atLeast(com.davils.kheck.api/LogLevel): com.davils.kheck.core.filter/LogFilter // com.davils.kheck.core.filter/LogFilters.atLeast|atLeast(com.davils.kheck.api.LogLevel){}[0]
+    final fun marked(kotlin.collections/Set<com.davils.kheck.api.record/LogMarker>): com.davils.kheck.core.filter/LogFilter // com.davils.kheck.core.filter/LogFilters.marked|marked(kotlin.collections.Set<com.davils.kheck.api.record.LogMarker>){}[0]
+    final fun outside(kotlin/String): com.davils.kheck.core.filter/LogFilter // com.davils.kheck.core.filter/LogFilters.outside|outside(kotlin.String){}[0]
+    final fun unmarked(kotlin.collections/Set<com.davils.kheck.api.record/LogMarker>): com.davils.kheck.core.filter/LogFilter // com.davils.kheck.core.filter/LogFilters.unmarked|unmarked(kotlin.collections.Set<com.davils.kheck.api.record.LogMarker>){}[0]
+    final fun within(kotlin/String): com.davils.kheck.core.filter/LogFilter // com.davils.kheck.core.filter/LogFilters.within|within(kotlin.String){}[0]
+}
+
+final object com.davils.kheck.core.health/HealthRules { // com.davils.kheck.core.health/HealthRules|null[0]
+    final val DEFAULT // com.davils.kheck.core.health/HealthRules.DEFAULT|{}DEFAULT[0]
+        final fun <get-DEFAULT>(): kotlin.collections/List<com.davils.kheck.core.health/HealthRule> // com.davils.kheck.core.health/HealthRules.DEFAULT.<get-DEFAULT>|<get-DEFAULT>(){}[0]
+    final val INTAKE_SATURATION // com.davils.kheck.core.health/HealthRules.INTAKE_SATURATION|{}INTAKE_SATURATION[0]
+        final fun <get-INTAKE_SATURATION>(): com.davils.kheck.core.health/HealthRule // com.davils.kheck.core.health/HealthRules.INTAKE_SATURATION.<get-INTAKE_SATURATION>|<get-INTAKE_SATURATION>(){}[0]
+    final val SINKS_FAILING // com.davils.kheck.core.health/HealthRules.SINKS_FAILING|{}SINKS_FAILING[0]
+        final fun <get-SINKS_FAILING>(): com.davils.kheck.core.health/HealthRule // com.davils.kheck.core.health/HealthRules.SINKS_FAILING.<get-SINKS_FAILING>|<get-SINKS_FAILING>(){}[0]
+
+    final fun threshold(kotlin/String, kotlin/Double? = ..., kotlin/Double? = ..., kotlin/Function1<com.davils.kheck.core.statistics/LoggingStatistics, kotlin/Double>): com.davils.kheck.core.health/HealthRule // com.davils.kheck.core.health/HealthRules.threshold|threshold(kotlin.String;kotlin.Double?;kotlin.Double?;kotlin.Function1<com.davils.kheck.core.statistics.LoggingStatistics,kotlin.Double>){}[0]
+}
+
+final object com.davils.kheck.core.mask/MaskingRules { // com.davils.kheck.core.mask/MaskingRules|null[0]
+    final val AWS_ACCESS_KEY // com.davils.kheck.core.mask/MaskingRules.AWS_ACCESS_KEY|{}AWS_ACCESS_KEY[0]
+        final fun <get-AWS_ACCESS_KEY>(): com.davils.kheck.core.mask/MaskingRule // com.davils.kheck.core.mask/MaskingRules.AWS_ACCESS_KEY.<get-AWS_ACCESS_KEY>|<get-AWS_ACCESS_KEY>(){}[0]
+    final val BASIC_AUTHENTICATION // com.davils.kheck.core.mask/MaskingRules.BASIC_AUTHENTICATION|{}BASIC_AUTHENTICATION[0]
+        final fun <get-BASIC_AUTHENTICATION>(): com.davils.kheck.core.mask/MaskingRule // com.davils.kheck.core.mask/MaskingRules.BASIC_AUTHENTICATION.<get-BASIC_AUTHENTICATION>|<get-BASIC_AUTHENTICATION>(){}[0]
+    final val BEARER_TOKEN // com.davils.kheck.core.mask/MaskingRules.BEARER_TOKEN|{}BEARER_TOKEN[0]
+        final fun <get-BEARER_TOKEN>(): com.davils.kheck.core.mask/MaskingRule // com.davils.kheck.core.mask/MaskingRules.BEARER_TOKEN.<get-BEARER_TOKEN>|<get-BEARER_TOKEN>(){}[0]
+    final val CARD_NUMBER // com.davils.kheck.core.mask/MaskingRules.CARD_NUMBER|{}CARD_NUMBER[0]
+        final fun <get-CARD_NUMBER>(): com.davils.kheck.core.mask/MaskingRule // com.davils.kheck.core.mask/MaskingRules.CARD_NUMBER.<get-CARD_NUMBER>|<get-CARD_NUMBER>(){}[0]
+    final val EMAIL // com.davils.kheck.core.mask/MaskingRules.EMAIL|{}EMAIL[0]
+        final fun <get-EMAIL>(): com.davils.kheck.core.mask/MaskingRule // com.davils.kheck.core.mask/MaskingRules.EMAIL.<get-EMAIL>|<get-EMAIL>(){}[0]
+    final val GITHUB_TOKEN // com.davils.kheck.core.mask/MaskingRules.GITHUB_TOKEN|{}GITHUB_TOKEN[0]
+        final fun <get-GITHUB_TOKEN>(): com.davils.kheck.core.mask/MaskingRule // com.davils.kheck.core.mask/MaskingRules.GITHUB_TOKEN.<get-GITHUB_TOKEN>|<get-GITHUB_TOKEN>(){}[0]
+    final val GITLAB_TOKEN // com.davils.kheck.core.mask/MaskingRules.GITLAB_TOKEN|{}GITLAB_TOKEN[0]
+        final fun <get-GITLAB_TOKEN>(): com.davils.kheck.core.mask/MaskingRule // com.davils.kheck.core.mask/MaskingRules.GITLAB_TOKEN.<get-GITLAB_TOKEN>|<get-GITLAB_TOKEN>(){}[0]
+    final val IBAN // com.davils.kheck.core.mask/MaskingRules.IBAN|{}IBAN[0]
+        final fun <get-IBAN>(): com.davils.kheck.core.mask/MaskingRule // com.davils.kheck.core.mask/MaskingRules.IBAN.<get-IBAN>|<get-IBAN>(){}[0]
+    final val JWT // com.davils.kheck.core.mask/MaskingRules.JWT|{}JWT[0]
+        final fun <get-JWT>(): com.davils.kheck.core.mask/MaskingRule // com.davils.kheck.core.mask/MaskingRules.JWT.<get-JWT>|<get-JWT>(){}[0]
+    final val PERSONAL_DATA // com.davils.kheck.core.mask/MaskingRules.PERSONAL_DATA|{}PERSONAL_DATA[0]
+        final fun <get-PERSONAL_DATA>(): kotlin.collections/List<com.davils.kheck.core.mask/MaskingRule> // com.davils.kheck.core.mask/MaskingRules.PERSONAL_DATA.<get-PERSONAL_DATA>|<get-PERSONAL_DATA>(){}[0]
+    final val PRIVATE_KEY // com.davils.kheck.core.mask/MaskingRules.PRIVATE_KEY|{}PRIVATE_KEY[0]
+        final fun <get-PRIVATE_KEY>(): com.davils.kheck.core.mask/MaskingRule // com.davils.kheck.core.mask/MaskingRules.PRIVATE_KEY.<get-PRIVATE_KEY>|<get-PRIVATE_KEY>(){}[0]
+    final val SECRETS // com.davils.kheck.core.mask/MaskingRules.SECRETS|{}SECRETS[0]
+        final fun <get-SECRETS>(): kotlin.collections/List<com.davils.kheck.core.mask/MaskingRule> // com.davils.kheck.core.mask/MaskingRules.SECRETS.<get-SECRETS>|<get-SECRETS>(){}[0]
+    final val SECRET_ASSIGNMENT // com.davils.kheck.core.mask/MaskingRules.SECRET_ASSIGNMENT|{}SECRET_ASSIGNMENT[0]
+        final fun <get-SECRET_ASSIGNMENT>(): com.davils.kheck.core.mask/MaskingRule // com.davils.kheck.core.mask/MaskingRules.SECRET_ASSIGNMENT.<get-SECRET_ASSIGNMENT>|<get-SECRET_ASSIGNMENT>(){}[0]
+    final val SECRET_KEYS // com.davils.kheck.core.mask/MaskingRules.SECRET_KEYS|{}SECRET_KEYS[0]
+        final fun <get-SECRET_KEYS>(): kotlin.collections/Set<kotlin/String> // com.davils.kheck.core.mask/MaskingRules.SECRET_KEYS.<get-SECRET_KEYS>|<get-SECRET_KEYS>(){}[0]
+    final val SECRET_KEY_PATTERN // com.davils.kheck.core.mask/MaskingRules.SECRET_KEY_PATTERN|{}SECRET_KEY_PATTERN[0]
+        final fun <get-SECRET_KEY_PATTERN>(): kotlin.text/Regex // com.davils.kheck.core.mask/MaskingRules.SECRET_KEY_PATTERN.<get-SECRET_KEY_PATTERN>|<get-SECRET_KEY_PATTERN>(){}[0]
+    final val URL_CREDENTIALS // com.davils.kheck.core.mask/MaskingRules.URL_CREDENTIALS|{}URL_CREDENTIALS[0]
+        final fun <get-URL_CREDENTIALS>(): com.davils.kheck.core.mask/MaskingRule // com.davils.kheck.core.mask/MaskingRules.URL_CREDENTIALS.<get-URL_CREDENTIALS>|<get-URL_CREDENTIALS>(){}[0]
+}
+
+final object com.davils.kheck.core/Limits { // com.davils.kheck.core/Limits|null[0]
+    final const val MAX_CAPACITY // com.davils.kheck.core/Limits.MAX_CAPACITY|{}MAX_CAPACITY[0]
+        final fun <get-MAX_CAPACITY>(): kotlin/Int // com.davils.kheck.core/Limits.MAX_CAPACITY.<get-MAX_CAPACITY>|<get-MAX_CAPACITY>(){}[0]
+    final const val MAX_CAPTURED_FRAMES // com.davils.kheck.core/Limits.MAX_CAPTURED_FRAMES|{}MAX_CAPTURED_FRAMES[0]
+        final fun <get-MAX_CAPTURED_FRAMES>(): kotlin/Int // com.davils.kheck.core/Limits.MAX_CAPTURED_FRAMES.<get-MAX_CAPTURED_FRAMES>|<get-MAX_CAPTURED_FRAMES>(){}[0]
+    final const val MAX_CAUSE_DEPTH // com.davils.kheck.core/Limits.MAX_CAUSE_DEPTH|{}MAX_CAUSE_DEPTH[0]
+        final fun <get-MAX_CAUSE_DEPTH>(): kotlin/Int // com.davils.kheck.core/Limits.MAX_CAUSE_DEPTH.<get-MAX_CAUSE_DEPTH>|<get-MAX_CAUSE_DEPTH>(){}[0]
+    final const val MAX_COUNTED_RULES // com.davils.kheck.core/Limits.MAX_COUNTED_RULES|{}MAX_COUNTED_RULES[0]
+        final fun <get-MAX_COUNTED_RULES>(): kotlin/Int // com.davils.kheck.core/Limits.MAX_COUNTED_RULES.<get-MAX_COUNTED_RULES>|<get-MAX_COUNTED_RULES>(){}[0]
+    final const val MAX_DECLARATIONS // com.davils.kheck.core/Limits.MAX_DECLARATIONS|{}MAX_DECLARATIONS[0]
+        final fun <get-MAX_DECLARATIONS>(): kotlin/Int // com.davils.kheck.core/Limits.MAX_DECLARATIONS.<get-MAX_DECLARATIONS>|<get-MAX_DECLARATIONS>(){}[0]
+    final const val MAX_LOGGERS // com.davils.kheck.core/Limits.MAX_LOGGERS|{}MAX_LOGGERS[0]
+        final fun <get-MAX_LOGGERS>(): kotlin/Int // com.davils.kheck.core/Limits.MAX_LOGGERS.<get-MAX_LOGGERS>|<get-MAX_LOGGERS>(){}[0]
+    final const val MAX_SUPPRESSED // com.davils.kheck.core/Limits.MAX_SUPPRESSED|{}MAX_SUPPRESSED[0]
+        final fun <get-MAX_SUPPRESSED>(): kotlin/Int // com.davils.kheck.core/Limits.MAX_SUPPRESSED.<get-MAX_SUPPRESSED>|<get-MAX_SUPPRESSED>(){}[0]
+    final const val MAX_TEXT_LENGTH // com.davils.kheck.core/Limits.MAX_TEXT_LENGTH|{}MAX_TEXT_LENGTH[0]
+        final fun <get-MAX_TEXT_LENGTH>(): kotlin/Int // com.davils.kheck.core/Limits.MAX_TEXT_LENGTH.<get-MAX_TEXT_LENGTH>|<get-MAX_TEXT_LENGTH>(){}[0]
+}
+
+final object com.davils.kheck.core/LoggingViolationCodes { // com.davils.kheck.core/LoggingViolationCodes|null[0]
+    final val BLANK_NAME // com.davils.kheck.core/LoggingViolationCodes.BLANK_NAME|{}BLANK_NAME[0]
+        final fun <get-BLANK_NAME>(): com.davils.kore.core.validation.violation/ViolationCode // com.davils.kheck.core/LoggingViolationCodes.BLANK_NAME.<get-BLANK_NAME>|<get-BLANK_NAME>(){}[0]
+    final val EMPTY_LAYOUT // com.davils.kheck.core/LoggingViolationCodes.EMPTY_LAYOUT|{}EMPTY_LAYOUT[0]
+        final fun <get-EMPTY_LAYOUT>(): com.davils.kore.core.validation.violation/ViolationCode // com.davils.kheck.core/LoggingViolationCodes.EMPTY_LAYOUT.<get-EMPTY_LAYOUT>|<get-EMPTY_LAYOUT>(){}[0]
+    final val INTAKE_CHANGED // com.davils.kheck.core/LoggingViolationCodes.INTAKE_CHANGED|{}INTAKE_CHANGED[0]
+        final fun <get-INTAKE_CHANGED>(): com.davils.kore.core.validation.violation/ViolationCode // com.davils.kheck.core/LoggingViolationCodes.INTAKE_CHANGED.<get-INTAKE_CHANGED>|<get-INTAKE_CHANGED>(){}[0]
+    final val INVALID_ABBREVIATION // com.davils.kheck.core/LoggingViolationCodes.INVALID_ABBREVIATION|{}INVALID_ABBREVIATION[0]
+        final fun <get-INVALID_ABBREVIATION>(): com.davils.kore.core.validation.violation/ViolationCode // com.davils.kheck.core/LoggingViolationCodes.INVALID_ABBREVIATION.<get-INVALID_ABBREVIATION>|<get-INVALID_ABBREVIATION>(){}[0]
+    final val INVALID_BATCH // com.davils.kheck.core/LoggingViolationCodes.INVALID_BATCH|{}INVALID_BATCH[0]
+        final fun <get-INVALID_BATCH>(): com.davils.kore.core.validation.violation/ViolationCode // com.davils.kheck.core/LoggingViolationCodes.INVALID_BATCH.<get-INVALID_BATCH>|<get-INVALID_BATCH>(){}[0]
+    final val INVALID_CAPACITY // com.davils.kheck.core/LoggingViolationCodes.INVALID_CAPACITY|{}INVALID_CAPACITY[0]
+        final fun <get-INVALID_CAPACITY>(): com.davils.kore.core.validation.violation/ViolationCode // com.davils.kheck.core/LoggingViolationCodes.INVALID_CAPACITY.<get-INVALID_CAPACITY>|<get-INVALID_CAPACITY>(){}[0]
+    final val INVALID_DEPTH // com.davils.kheck.core/LoggingViolationCodes.INVALID_DEPTH|{}INVALID_DEPTH[0]
+        final fun <get-INVALID_DEPTH>(): com.davils.kore.core.validation.violation/ViolationCode // com.davils.kheck.core/LoggingViolationCodes.INVALID_DEPTH.<get-INVALID_DEPTH>|<get-INVALID_DEPTH>(){}[0]
+    final val INVALID_FRAMES // com.davils.kheck.core/LoggingViolationCodes.INVALID_FRAMES|{}INVALID_FRAMES[0]
+        final fun <get-INVALID_FRAMES>(): com.davils.kore.core.validation.violation/ViolationCode // com.davils.kheck.core/LoggingViolationCodes.INVALID_FRAMES.<get-INVALID_FRAMES>|<get-INVALID_FRAMES>(){}[0]
+    final val INVALID_LIMIT // com.davils.kheck.core/LoggingViolationCodes.INVALID_LIMIT|{}INVALID_LIMIT[0]
+        final fun <get-INVALID_LIMIT>(): com.davils.kore.core.validation.violation/ViolationCode // com.davils.kheck.core/LoggingViolationCodes.INVALID_LIMIT.<get-INVALID_LIMIT>|<get-INVALID_LIMIT>(){}[0]
+    final val INVALID_PARTIAL // com.davils.kheck.core/LoggingViolationCodes.INVALID_PARTIAL|{}INVALID_PARTIAL[0]
+        final fun <get-INVALID_PARTIAL>(): com.davils.kore.core.validation.violation/ViolationCode // com.davils.kheck.core/LoggingViolationCodes.INVALID_PARTIAL.<get-INVALID_PARTIAL>|<get-INVALID_PARTIAL>(){}[0]
+    final val INVALID_RATE // com.davils.kheck.core/LoggingViolationCodes.INVALID_RATE|{}INVALID_RATE[0]
+        final fun <get-INVALID_RATE>(): com.davils.kore.core.validation.violation/ViolationCode // com.davils.kheck.core/LoggingViolationCodes.INVALID_RATE.<get-INVALID_RATE>|<get-INVALID_RATE>(){}[0]
+    final val INVALID_SCAN_LENGTH // com.davils.kheck.core/LoggingViolationCodes.INVALID_SCAN_LENGTH|{}INVALID_SCAN_LENGTH[0]
+        final fun <get-INVALID_SCAN_LENGTH>(): com.davils.kore.core.validation.violation/ViolationCode // com.davils.kheck.core/LoggingViolationCodes.INVALID_SCAN_LENGTH.<get-INVALID_SCAN_LENGTH>|<get-INVALID_SCAN_LENGTH>(){}[0]
+    final val INVALID_WAIT // com.davils.kheck.core/LoggingViolationCodes.INVALID_WAIT|{}INVALID_WAIT[0]
+        final fun <get-INVALID_WAIT>(): com.davils.kore.core.validation.violation/ViolationCode // com.davils.kheck.core/LoggingViolationCodes.INVALID_WAIT.<get-INVALID_WAIT>|<get-INVALID_WAIT>(){}[0]
+    final val INVALID_WIDTH // com.davils.kheck.core/LoggingViolationCodes.INVALID_WIDTH|{}INVALID_WIDTH[0]
+        final fun <get-INVALID_WIDTH>(): com.davils.kore.core.validation.violation/ViolationCode // com.davils.kheck.core/LoggingViolationCodes.INVALID_WIDTH.<get-INVALID_WIDTH>|<get-INVALID_WIDTH>(){}[0]
+    final val INVALID_WINDOW // com.davils.kheck.core/LoggingViolationCodes.INVALID_WINDOW|{}INVALID_WINDOW[0]
+        final fun <get-INVALID_WINDOW>(): com.davils.kore.core.validation.violation/ViolationCode // com.davils.kheck.core/LoggingViolationCodes.INVALID_WINDOW.<get-INVALID_WINDOW>|<get-INVALID_WINDOW>(){}[0]
+    final val MISSING_HASH_KEY // com.davils.kheck.core/LoggingViolationCodes.MISSING_HASH_KEY|{}MISSING_HASH_KEY[0]
+        final fun <get-MISSING_HASH_KEY>(): com.davils.kore.core.validation.violation/ViolationCode // com.davils.kheck.core/LoggingViolationCodes.MISSING_HASH_KEY.<get-MISSING_HASH_KEY>|<get-MISSING_HASH_KEY>(){}[0]
+    final val MISSING_MESSAGE // com.davils.kheck.core/LoggingViolationCodes.MISSING_MESSAGE|{}MISSING_MESSAGE[0]
+        final fun <get-MISSING_MESSAGE>(): com.davils.kore.core.validation.violation/ViolationCode // com.davils.kheck.core/LoggingViolationCodes.MISSING_MESSAGE.<get-MISSING_MESSAGE>|<get-MISSING_MESSAGE>(){}[0]
+    final val NO_SINKS // com.davils.kheck.core/LoggingViolationCodes.NO_SINKS|{}NO_SINKS[0]
+        final fun <get-NO_SINKS>(): com.davils.kore.core.validation.violation/ViolationCode // com.davils.kheck.core/LoggingViolationCodes.NO_SINKS.<get-NO_SINKS>|<get-NO_SINKS>(){}[0]
+    final val SELF_FALLBACK // com.davils.kheck.core/LoggingViolationCodes.SELF_FALLBACK|{}SELF_FALLBACK[0]
+        final fun <get-SELF_FALLBACK>(): com.davils.kore.core.validation.violation/ViolationCode // com.davils.kheck.core/LoggingViolationCodes.SELF_FALLBACK.<get-SELF_FALLBACK>|<get-SELF_FALLBACK>(){}[0]
+    final val TOO_MANY // com.davils.kheck.core/LoggingViolationCodes.TOO_MANY|{}TOO_MANY[0]
+        final fun <get-TOO_MANY>(): com.davils.kore.core.validation.violation/ViolationCode // com.davils.kheck.core/LoggingViolationCodes.TOO_MANY.<get-TOO_MANY>|<get-TOO_MANY>(){}[0]
+    final val UNKNOWN_SINK // com.davils.kheck.core/LoggingViolationCodes.UNKNOWN_SINK|{}UNKNOWN_SINK[0]
+        final fun <get-UNKNOWN_SINK>(): com.davils.kore.core.validation.violation/ViolationCode // com.davils.kheck.core/LoggingViolationCodes.UNKNOWN_SINK.<get-UNKNOWN_SINK>|<get-UNKNOWN_SINK>(){}[0]
+    final val UNROUTED_SINK // com.davils.kheck.core/LoggingViolationCodes.UNROUTED_SINK|{}UNROUTED_SINK[0]
+        final fun <get-UNROUTED_SINK>(): com.davils.kore.core.validation.violation/ViolationCode // com.davils.kheck.core/LoggingViolationCodes.UNROUTED_SINK.<get-UNROUTED_SINK>|<get-UNROUTED_SINK>(){}[0]
+}
+
+final fun (com.davils.kheck.core/LoggingBuilder).com.davils.kheck.core.sink.console/console(kotlin/String = ..., kotlin/Function1<com.davils.kheck.core.sink.console/ConsoleSinkBuilder, kotlin/Unit> = ...) // com.davils.kheck.core.sink.console/console|console@com.davils.kheck.core.LoggingBuilder(kotlin.String;kotlin.Function1<com.davils.kheck.core.sink.console.ConsoleSinkBuilder,kotlin.Unit>){}[0]
+final fun (com.davils.kheck.core/LoggingBuilder).com.davils.kheck.core.sink.custom/sink(kotlin/String, com.davils.kheck.core.sink/LogSink, kotlin/Function1<com.davils.kheck.core.sink.custom/CustomSinkBuilder, kotlin/Unit> = ...) // com.davils.kheck.core.sink.custom/sink|sink@com.davils.kheck.core.LoggingBuilder(kotlin.String;com.davils.kheck.core.sink.LogSink;kotlin.Function1<com.davils.kheck.core.sink.custom.CustomSinkBuilder,kotlin.Unit>){}[0]
+final fun (kotlin/Throwable).com.davils.kheck.core.record/toLogCause(): com.davils.kheck.core.record/LogCause // com.davils.kheck.core.record/toLogCause|toLogCause@kotlin.Throwable(){}[0]
+final fun com.davils.kheck.core.format.json/json(kotlin/Function1<com.davils.kheck.core.format.json/JsonFormatBuilder, kotlin/Unit> = ...): com.davils.kheck.core.format.json/JsonFormat // com.davils.kheck.core.format.json/json|json(kotlin.Function1<com.davils.kheck.core.format.json.JsonFormatBuilder,kotlin.Unit>){}[0]
+final fun com.davils.kheck.core.format.plain/plain(kotlin/Function1<com.davils.kheck.core.format.plain/PlainFormatBuilder, kotlin/Unit> = ...): com.davils.kheck.core.format.plain/PlainFormat // com.davils.kheck.core.format.plain/plain|plain(kotlin.Function1<com.davils.kheck.core.format.plain.PlainFormatBuilder,kotlin.Unit>){}[0]
+final fun com.davils.kheck.core.style/segmentStyle(kotlin/Function1<com.davils.kheck.core.style/SegmentStyleBuilder, kotlin/Unit>): com.davils.kheck.core.style/SegmentStyle // com.davils.kheck.core.style/segmentStyle|segmentStyle(kotlin.Function1<com.davils.kheck.core.style.SegmentStyleBuilder,kotlin.Unit>){}[0]
+final fun com.davils.kheck.core.style/textStyle(kotlin/Function1<com.davils.kheck.core.style/TextStyleBuilder, kotlin/Unit>): com.davils.kheck.core.style/TextStyle // com.davils.kheck.core.style/textStyle|textStyle(kotlin.Function1<com.davils.kheck.core.style.TextStyleBuilder,kotlin.Unit>){}[0]
+final fun com.davils.kheck.core/logging(kotlinx.coroutines/CoroutineScope, kotlinx.coroutines/CoroutineDispatcher, kotlin/Function1<com.davils.kheck.core/LoggingBuilder, kotlin/Unit> = ...): com.davils.kheck.core/Logging // com.davils.kheck.core/logging|logging(kotlinx.coroutines.CoroutineScope;kotlinx.coroutines.CoroutineDispatcher;kotlin.Function1<com.davils.kheck.core.LoggingBuilder,kotlin.Unit>){}[0]
+final inline fun <#A: reified kotlin/Any> (com.davils.kheck.core/Logging).com.davils.kheck.core/logger(): com.davils.kheck.api/Logger // com.davils.kheck.core/logger|logger@com.davils.kheck.core.Logging(){0§<kotlin.Any>}[0]
+final suspend fun <#A: kotlin/Any?> com.davils.kheck.core.context/withLogContext(kotlin/Function1<com.davils.kheck.api.record/LogFieldsBuilder, kotlin/Unit>, kotlin.coroutines/SuspendFunction1<kotlinx.coroutines/CoroutineScope, #A>): #A // com.davils.kheck.core.context/withLogContext|withLogContext(kotlin.Function1<com.davils.kheck.api.record.LogFieldsBuilder,kotlin.Unit>;kotlin.coroutines.SuspendFunction1<kotlinx.coroutines.CoroutineScope,0:0>){0§<kotlin.Any?>}[0]

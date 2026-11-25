@@ -1,0 +1,1238 @@
+public final class com/davils/kheck/core/EnrichmentBuilder : com/davils/kheck/api/record/LogFieldsBuilder {
+	public final fun hostname (Ljava/lang/String;)V
+	public static synthetic fun hostname$default (Lcom/davils/kheck/core/EnrichmentBuilder;Ljava/lang/String;ILjava/lang/Object;)V
+	public final fun processId (Ljava/lang/String;)V
+	public static synthetic fun processId$default (Lcom/davils/kheck/core/EnrichmentBuilder;Ljava/lang/String;ILjava/lang/Object;)V
+	public final fun user (Ljava/lang/String;)V
+	public static synthetic fun user$default (Lcom/davils/kheck/core/EnrichmentBuilder;Ljava/lang/String;ILjava/lang/Object;)V
+}
+
+public final class com/davils/kheck/core/Limits {
+	public static final field INSTANCE Lcom/davils/kheck/core/Limits;
+	public static final field MAX_CAPACITY I
+	public static final field MAX_CAPTURED_FRAMES I
+	public static final field MAX_CAUSE_DEPTH I
+	public static final field MAX_COUNTED_RULES I
+	public static final field MAX_DECLARATIONS I
+	public static final field MAX_LOGGERS I
+	public static final field MAX_SUPPRESSED I
+	public static final field MAX_TEXT_LENGTH I
+}
+
+public final class com/davils/kheck/core/LogLevels {
+	public final fun clear (Ljava/lang/String;)V
+	public final fun getOverrides ()Lkotlinx/coroutines/flow/StateFlow;
+	public final fun reset ()V
+	public final fun set (Ljava/lang/String;Lcom/davils/kheck/api/LogLevel;)V
+}
+
+public final class com/davils/kheck/core/Logging {
+	public final fun close (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun flush (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun getConfiguration ()Lcom/davils/kheck/core/LoggingConfiguration;
+	public final fun getLevels ()Lcom/davils/kheck/core/LogLevels;
+	public final fun health ()Lcom/davils/kheck/core/health/LoggingHealth;
+	public final fun isClosed ()Z
+	public final fun logger (Ljava/lang/String;)Lcom/davils/kheck/api/Logger;
+	public final fun logger (Lkotlin/reflect/KClass;)Lcom/davils/kheck/api/Logger;
+	public final fun reconfigure (Lkotlin/jvm/functions/Function1;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun statistics ()Lcom/davils/kheck/core/statistics/LoggingStatistics;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/kheck/core/LoggingBuilder : com/davils/kore/core/dsl/ValidatingBuilder {
+	public synthetic fun assemble ()Lcom/davils/kore/core/validation/Validatable;
+	public final fun enrich (Lkotlin/jvm/functions/Function1;)V
+	public final fun filter (Lcom/davils/kheck/core/filter/LogFilter;)V
+	public final fun getClock ()Lkotlin/time/Clock;
+	public final fun getDiagnostics ()Lcom/davils/kheck/core/diagnostics/LogDiagnostics;
+	public final fun getEnvironment ()Ljava/util/Map;
+	public final fun getHealthRules ()Ljava/util/List;
+	public final fun getLevel ()Lcom/davils/kheck/api/LogLevel;
+	public final fun getTimeSource ()Lkotlin/time/TimeSource$WithComparableMarks;
+	public final fun intake (Lkotlin/jvm/functions/Function1;)V
+	public final fun logger (Ljava/lang/String;Lkotlin/jvm/functions/Function1;)V
+	public final fun mask (Lkotlin/jvm/functions/Function1;)V
+	public final fun onEvent (Lcom/davils/kheck/core/LoggingEventListener;)V
+	public final fun register (Ljava/lang/String;Lcom/davils/kheck/core/sink/LogSinkBuilder;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;)V
+	public final fun sample (Lkotlin/jvm/functions/Function1;)V
+	public final fun setClock (Lkotlin/time/Clock;)V
+	public final fun setDiagnostics (Lcom/davils/kheck/core/diagnostics/LogDiagnostics;)V
+	public final fun setEnvironment (Ljava/util/Map;)V
+	public final fun setHealthRules (Ljava/util/List;)V
+	public final fun setLevel (Lcom/davils/kheck/api/LogLevel;)V
+	public final fun setTimeSource (Lkotlin/time/TimeSource$WithComparableMarks;)V
+}
+
+public final class com/davils/kheck/core/LoggingConfiguration : com/davils/kore/core/validation/Validatable {
+	public final fun getClock ()Lkotlin/time/Clock;
+	public final fun getDiagnostics ()Lcom/davils/kheck/core/diagnostics/LogDiagnostics;
+	public final fun getEnrichment ()Ljava/util/Map;
+	public final fun getFilters ()Ljava/util/List;
+	public final fun getHealthRules ()Ljava/util/List;
+	public final fun getIntake ()Lcom/davils/kheck/core/intake/IntakeConfiguration;
+	public final fun getLevel ()Lcom/davils/kheck/api/LogLevel;
+	public final fun getListeners ()Ljava/util/List;
+	public final fun getLoggers ()Ljava/util/Map;
+	public final fun getMasking ()Lcom/davils/kheck/core/mask/MaskingConfiguration;
+	public final fun getSampling ()Lcom/davils/kheck/core/sample/SamplingConfiguration;
+	public final fun getSinks ()Ljava/util/Map;
+	public final fun getTimeSource ()Lkotlin/time/TimeSource$WithComparableMarks;
+	public fun toString ()Ljava/lang/String;
+	public fun validate (Lcom/davils/kore/core/validation/ValidationScope;)V
+}
+
+public abstract interface class com/davils/kheck/core/LoggingEvent {
+}
+
+public final class com/davils/kheck/core/LoggingEvent$ConfigurationApplied : com/davils/kheck/core/LoggingEvent {
+	public static final field INSTANCE Lcom/davils/kheck/core/LoggingEvent$ConfigurationApplied;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/kheck/core/LoggingEvent$ConfigurationRejected : com/davils/kheck/core/LoggingEvent {
+	public final fun getReport ()Lcom/davils/kore/core/validation/report/ValidationReport;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/kheck/core/LoggingEvent$RecordsDropped : com/davils/kheck/core/LoggingEvent {
+	public final fun getCount ()J
+	public final fun getSink ()Ljava/lang/String;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/kheck/core/LoggingEvent$SinkFailed : com/davils/kheck/core/LoggingEvent {
+	public final fun getCause ()Ljava/lang/Throwable;
+	public final fun getSink ()Ljava/lang/String;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/kheck/core/LoggingEvent$SinkRecovered : com/davils/kheck/core/LoggingEvent {
+	public final fun getSink ()Ljava/lang/String;
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class com/davils/kheck/core/LoggingEventListener {
+	public abstract fun onEvent (Lcom/davils/kheck/core/LoggingEvent;)V
+}
+
+public final class com/davils/kheck/core/LoggingViolationCodes {
+	public static final field INSTANCE Lcom/davils/kheck/core/LoggingViolationCodes;
+	public final fun getBLANK_NAME-J_S2PC0 ()Ljava/lang/String;
+	public final fun getEMPTY_LAYOUT-J_S2PC0 ()Ljava/lang/String;
+	public final fun getINTAKE_CHANGED-J_S2PC0 ()Ljava/lang/String;
+	public final fun getINVALID_ABBREVIATION-J_S2PC0 ()Ljava/lang/String;
+	public final fun getINVALID_BATCH-J_S2PC0 ()Ljava/lang/String;
+	public final fun getINVALID_CAPACITY-J_S2PC0 ()Ljava/lang/String;
+	public final fun getINVALID_DEPTH-J_S2PC0 ()Ljava/lang/String;
+	public final fun getINVALID_FRAMES-J_S2PC0 ()Ljava/lang/String;
+	public final fun getINVALID_LIMIT-J_S2PC0 ()Ljava/lang/String;
+	public final fun getINVALID_PARTIAL-J_S2PC0 ()Ljava/lang/String;
+	public final fun getINVALID_RATE-J_S2PC0 ()Ljava/lang/String;
+	public final fun getINVALID_SCAN_LENGTH-J_S2PC0 ()Ljava/lang/String;
+	public final fun getINVALID_WAIT-J_S2PC0 ()Ljava/lang/String;
+	public final fun getINVALID_WIDTH-J_S2PC0 ()Ljava/lang/String;
+	public final fun getINVALID_WINDOW-J_S2PC0 ()Ljava/lang/String;
+	public final fun getMISSING_HASH_KEY-J_S2PC0 ()Ljava/lang/String;
+	public final fun getMISSING_MESSAGE-J_S2PC0 ()Ljava/lang/String;
+	public final fun getNO_SINKS-J_S2PC0 ()Ljava/lang/String;
+	public final fun getSELF_FALLBACK-J_S2PC0 ()Ljava/lang/String;
+	public final fun getTOO_MANY-J_S2PC0 ()Ljava/lang/String;
+	public final fun getUNKNOWN_SINK-J_S2PC0 ()Ljava/lang/String;
+	public final fun getUNROUTED_SINK-J_S2PC0 ()Ljava/lang/String;
+}
+
+public final class com/davils/kheck/core/LoggingsKt {
+	public static final fun logging (Lkotlinx/coroutines/CoroutineScope;Lkotlinx/coroutines/CoroutineDispatcher;Lkotlin/jvm/functions/Function1;)Lcom/davils/kheck/core/Logging;
+	public static synthetic fun logging$default (Lkotlinx/coroutines/CoroutineScope;Lkotlinx/coroutines/CoroutineDispatcher;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/davils/kheck/core/Logging;
+}
+
+public abstract interface class com/davils/kheck/core/Reconfiguration {
+}
+
+public final class com/davils/kheck/core/Reconfiguration$Applied : com/davils/kheck/core/Reconfiguration {
+	public static final field INSTANCE Lcom/davils/kheck/core/Reconfiguration$Applied;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/kheck/core/Reconfiguration$Closed : com/davils/kheck/core/Reconfiguration {
+	public static final field INSTANCE Lcom/davils/kheck/core/Reconfiguration$Closed;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/kheck/core/Reconfiguration$Rejected : com/davils/kheck/core/Reconfiguration {
+	public final fun getReport ()Lcom/davils/kore/core/validation/report/ValidationReport;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/kheck/core/context/ContextAccess {
+	public static final field INSTANCE Lcom/davils/kheck/core/context/ContextAccess;
+	public final fun current ()Ljava/util/Map;
+	public final fun replace (Ljava/util/Map;)Ljava/util/Map;
+}
+
+public final class com/davils/kheck/core/context/LogContext : kotlin/coroutines/AbstractCoroutineContextElement {
+	public static final field Key Lcom/davils/kheck/core/context/LogContext$Key;
+	public fun <init> (Ljava/util/Map;)V
+	public final fun getFields ()Ljava/util/Map;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/kheck/core/context/LogContext$Key : kotlin/coroutines/CoroutineContext$Key {
+}
+
+public final class com/davils/kheck/core/context/LogContextsKt {
+	public static final fun withLogContext (Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public abstract interface class com/davils/kheck/core/diagnostics/LogDiagnostics {
+	public static final field Companion Lcom/davils/kheck/core/diagnostics/LogDiagnostics$Companion;
+	public abstract fun report (Ljava/lang/String;)V
+}
+
+public final class com/davils/kheck/core/diagnostics/LogDiagnostics$Companion {
+	public final fun getSilent ()Lcom/davils/kheck/core/diagnostics/LogDiagnostics;
+	public final fun getStandardError ()Lcom/davils/kheck/core/diagnostics/LogDiagnostics;
+}
+
+public abstract interface class com/davils/kheck/core/filter/LogFilter {
+	public abstract fun accept (Lcom/davils/kheck/core/record/LogRecord;)Z
+}
+
+public final class com/davils/kheck/core/filter/LogFilters {
+	public static final field INSTANCE Lcom/davils/kheck/core/filter/LogFilters;
+	public final fun atLeast (Lcom/davils/kheck/api/LogLevel;)Lcom/davils/kheck/core/filter/LogFilter;
+	public final fun marked (Ljava/util/Set;)Lcom/davils/kheck/core/filter/LogFilter;
+	public final fun outside (Ljava/lang/String;)Lcom/davils/kheck/core/filter/LogFilter;
+	public final fun unmarked (Ljava/util/Set;)Lcom/davils/kheck/core/filter/LogFilter;
+	public final fun within (Ljava/lang/String;)Lcom/davils/kheck/core/filter/LogFilter;
+}
+
+public abstract interface class com/davils/kheck/core/format/LogEncoder {
+	public abstract fun encode (Lcom/davils/kheck/core/record/LogRecord;Ljava/lang/StringBuilder;)V
+}
+
+public abstract interface class com/davils/kheck/core/format/LogFormat {
+	public abstract fun encoder (Lcom/davils/kheck/core/style/ColorDepth;)Lcom/davils/kheck/core/format/LogEncoder;
+	public abstract fun getColorMode ()Lcom/davils/kheck/core/style/ColorMode;
+}
+
+public final class com/davils/kheck/core/format/TimestampFormat : java/lang/Enum {
+	public static final field DateTime Lcom/davils/kheck/core/format/TimestampFormat;
+	public static final field EpochMillis Lcom/davils/kheck/core/format/TimestampFormat;
+	public static final field Iso Lcom/davils/kheck/core/format/TimestampFormat;
+	public static final field IsoUtc Lcom/davils/kheck/core/format/TimestampFormat;
+	public static final field Time Lcom/davils/kheck/core/format/TimestampFormat;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/kheck/core/format/TimestampFormat;
+	public static fun values ()[Lcom/davils/kheck/core/format/TimestampFormat;
+}
+
+public final class com/davils/kheck/core/format/json/JsonFormat : com/davils/kheck/core/format/LogFormat, com/davils/kore/core/validation/Validatable {
+	public fun encoder (Lcom/davils/kheck/core/style/ColorDepth;)Lcom/davils/kheck/core/format/LogEncoder;
+	public fun getColorMode ()Lcom/davils/kheck/core/style/ColorMode;
+	public final fun getExcludedPackages ()Ljava/util/List;
+	public final fun getLayout ()Lcom/davils/kheck/core/format/json/JsonLayout;
+	public final fun getMaxCauses ()I
+	public final fun getMaxFrames ()I
+	public final fun getPrecision ()Lcom/davils/kheck/core/format/json/TimestampPrecision;
+	public final fun isSequenceIncluded ()Z
+	public fun toString ()Ljava/lang/String;
+	public fun validate (Lcom/davils/kore/core/validation/ValidationScope;)V
+}
+
+public final class com/davils/kheck/core/format/json/JsonFormatBuilder : com/davils/kore/core/dsl/ValidatingBuilder {
+	public static final field Companion Lcom/davils/kheck/core/format/json/JsonFormatBuilder$Companion;
+	public static final field DEFAULT_MAX_CAUSES I
+	public static final field DEFAULT_MAX_FRAMES I
+	public synthetic fun assemble ()Lcom/davils/kore/core/validation/Validatable;
+	public final fun exclude ([Ljava/lang/String;)V
+	public final fun getLayout ()Lcom/davils/kheck/core/format/json/JsonLayout;
+	public final fun getMaxCauses ()I
+	public final fun getMaxFrames ()I
+	public final fun getPrecision ()Lcom/davils/kheck/core/format/json/TimestampPrecision;
+	public final fun isSequenceIncluded ()Z
+	public final fun setLayout (Lcom/davils/kheck/core/format/json/JsonLayout;)V
+	public final fun setMaxCauses (I)V
+	public final fun setMaxFrames (I)V
+	public final fun setPrecision (Lcom/davils/kheck/core/format/json/TimestampPrecision;)V
+	public final fun setSequenceIncluded (Z)V
+}
+
+public final class com/davils/kheck/core/format/json/JsonFormatBuilder$Companion {
+}
+
+public final class com/davils/kheck/core/format/json/JsonLayout : java/lang/Enum {
+	public static final field Ecs Lcom/davils/kheck/core/format/json/JsonLayout;
+	public static final field Logstash Lcom/davils/kheck/core/format/json/JsonLayout;
+	public static final field OpenTelemetry Lcom/davils/kheck/core/format/json/JsonLayout;
+	public static final field Standard Lcom/davils/kheck/core/format/json/JsonLayout;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/kheck/core/format/json/JsonLayout;
+	public static fun values ()[Lcom/davils/kheck/core/format/json/JsonLayout;
+}
+
+public final class com/davils/kheck/core/format/json/JsonsKt {
+	public static final fun json (Lkotlin/jvm/functions/Function1;)Lcom/davils/kheck/core/format/json/JsonFormat;
+	public static synthetic fun json$default (Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/davils/kheck/core/format/json/JsonFormat;
+}
+
+public final class com/davils/kheck/core/format/json/TimestampPrecision : java/lang/Enum {
+	public static final field Microseconds Lcom/davils/kheck/core/format/json/TimestampPrecision;
+	public static final field Milliseconds Lcom/davils/kheck/core/format/json/TimestampPrecision;
+	public static final field Nanoseconds Lcom/davils/kheck/core/format/json/TimestampPrecision;
+	public final fun getDigits ()I
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/kheck/core/format/json/TimestampPrecision;
+	public static fun values ()[Lcom/davils/kheck/core/format/json/TimestampPrecision;
+}
+
+public final class com/davils/kheck/core/format/plain/Alignment : java/lang/Enum {
+	public static final field End Lcom/davils/kheck/core/format/plain/Alignment;
+	public static final field Start Lcom/davils/kheck/core/format/plain/Alignment;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/kheck/core/format/plain/Alignment;
+	public static fun values ()[Lcom/davils/kheck/core/format/plain/Alignment;
+}
+
+public final class com/davils/kheck/core/format/plain/CauseLayout {
+	public fun <init> (IIZLjava/util/List;Ljava/lang/String;Lcom/davils/kheck/core/format/plain/CauseStyles;)V
+	public final fun getExcludedPackages ()Ljava/util/List;
+	public final fun getIndent ()Ljava/lang/String;
+	public final fun getMaxCauses ()I
+	public final fun getMaxFrames ()I
+	public final fun getStyles ()Lcom/davils/kheck/core/format/plain/CauseStyles;
+	public final fun isSuppressedIncluded ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/kheck/core/format/plain/CauseStyles {
+	public fun <init> ()V
+	public fun <init> (Lcom/davils/kheck/core/style/TextStyle;Lcom/davils/kheck/core/style/TextStyle;Lcom/davils/kheck/core/style/TextStyle;Lcom/davils/kheck/core/style/TextStyle;Lcom/davils/kheck/core/style/TextStyle;)V
+	public synthetic fun <init> (Lcom/davils/kheck/core/style/TextStyle;Lcom/davils/kheck/core/style/TextStyle;Lcom/davils/kheck/core/style/TextStyle;Lcom/davils/kheck/core/style/TextStyle;Lcom/davils/kheck/core/style/TextStyle;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getFrame ()Lcom/davils/kheck/core/style/TextStyle;
+	public final fun getLabel ()Lcom/davils/kheck/core/style/TextStyle;
+	public final fun getLocation ()Lcom/davils/kheck/core/style/TextStyle;
+	public final fun getMessage ()Lcom/davils/kheck/core/style/TextStyle;
+	public final fun getType ()Lcom/davils/kheck/core/style/TextStyle;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/kheck/core/format/plain/EntriesLayout {
+	public fun <init> (Lcom/davils/kheck/core/format/plain/SegmentAffix;Ljava/lang/String;Lcom/davils/kheck/core/format/plain/EntryStyles;)V
+	public final fun getAffix ()Lcom/davils/kheck/core/format/plain/SegmentAffix;
+	public final fun getSeparator ()Ljava/lang/String;
+	public final fun getStyles ()Lcom/davils/kheck/core/format/plain/EntryStyles;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/kheck/core/format/plain/EntryStyles {
+	public fun <init> ()V
+	public fun <init> (Lcom/davils/kheck/core/style/SegmentStyle;Lcom/davils/kheck/core/style/SegmentStyle;Lcom/davils/kheck/core/style/SegmentStyle;)V
+	public synthetic fun <init> (Lcom/davils/kheck/core/style/SegmentStyle;Lcom/davils/kheck/core/style/SegmentStyle;Lcom/davils/kheck/core/style/SegmentStyle;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getKey ()Lcom/davils/kheck/core/style/SegmentStyle;
+	public final fun getPunctuation ()Lcom/davils/kheck/core/style/SegmentStyle;
+	public final fun getValue ()Lcom/davils/kheck/core/style/SegmentStyle;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/kheck/core/format/plain/PlainFormat : com/davils/kheck/core/format/LogFormat, com/davils/kore/core/validation/Validatable {
+	public fun encoder (Lcom/davils/kheck/core/style/ColorDepth;)Lcom/davils/kheck/core/format/LogEncoder;
+	public fun getColorMode ()Lcom/davils/kheck/core/style/ColorMode;
+	public final fun getSegments ()Ljava/util/List;
+	public final fun getTheme ()Lcom/davils/kheck/core/format/plain/PlainTheme;
+	public final fun getZone ()Lkotlinx/datetime/TimeZone;
+	public fun toString ()Ljava/lang/String;
+	public fun validate (Lcom/davils/kore/core/validation/ValidationScope;)V
+}
+
+public final class com/davils/kheck/core/format/plain/PlainFormatBuilder : com/davils/kore/core/dsl/ValidatingBuilder {
+	public static final field Companion Lcom/davils/kheck/core/format/plain/PlainFormatBuilder$Companion;
+	public synthetic fun assemble ()Lcom/davils/kore/core/validation/Validatable;
+	public final fun getColorMode ()Lcom/davils/kheck/core/style/ColorMode;
+	public final fun getTheme ()Lcom/davils/kheck/core/format/plain/PlainTheme;
+	public final fun getZone ()Lkotlinx/datetime/TimeZone;
+	public final fun layout (Lkotlin/jvm/functions/Function1;)V
+	public final fun setColorMode (Lcom/davils/kheck/core/style/ColorMode;)V
+	public final fun setTheme (Lcom/davils/kheck/core/format/plain/PlainTheme;)V
+	public final fun setZone (Lkotlinx/datetime/TimeZone;)V
+}
+
+public final class com/davils/kheck/core/format/plain/PlainFormatBuilder$Companion {
+	public final fun getDEFAULT_LAYOUT ()Lkotlin/jvm/functions/Function1;
+}
+
+public abstract interface class com/davils/kheck/core/format/plain/PlainSegment {
+}
+
+public final class com/davils/kheck/core/format/plain/PlainSegment$Caller : com/davils/kheck/core/format/plain/PlainSegment {
+	public fun <init> (Lcom/davils/kheck/core/format/plain/SegmentAffix;Lcom/davils/kheck/core/format/plain/SegmentFrame;Lcom/davils/kheck/core/style/SegmentStyle;)V
+	public final fun getAffix ()Lcom/davils/kheck/core/format/plain/SegmentAffix;
+	public final fun getFrame ()Lcom/davils/kheck/core/format/plain/SegmentFrame;
+	public final fun getStyle ()Lcom/davils/kheck/core/style/SegmentStyle;
+}
+
+public final class com/davils/kheck/core/format/plain/PlainSegment$Cause : com/davils/kheck/core/format/plain/PlainSegment {
+	public fun <init> (Lcom/davils/kheck/core/format/plain/CauseLayout;)V
+	public final fun getLayout ()Lcom/davils/kheck/core/format/plain/CauseLayout;
+}
+
+public final class com/davils/kheck/core/format/plain/PlainSegment$Context : com/davils/kheck/core/format/plain/PlainSegment {
+	public fun <init> (Lcom/davils/kheck/core/format/plain/EntriesLayout;)V
+	public final fun getLayout ()Lcom/davils/kheck/core/format/plain/EntriesLayout;
+}
+
+public final class com/davils/kheck/core/format/plain/PlainSegment$Fields : com/davils/kheck/core/format/plain/PlainSegment {
+	public fun <init> (Lcom/davils/kheck/core/format/plain/EntriesLayout;)V
+	public final fun getLayout ()Lcom/davils/kheck/core/format/plain/EntriesLayout;
+}
+
+public final class com/davils/kheck/core/format/plain/PlainSegment$Level : com/davils/kheck/core/format/plain/PlainSegment {
+	public fun <init> (Lcom/davils/kheck/core/format/plain/SegmentFrame;Lcom/davils/kheck/core/style/SegmentStyle;)V
+	public final fun getFrame ()Lcom/davils/kheck/core/format/plain/SegmentFrame;
+	public final fun getStyle ()Lcom/davils/kheck/core/style/SegmentStyle;
+}
+
+public final class com/davils/kheck/core/format/plain/PlainSegment$Logger : com/davils/kheck/core/format/plain/PlainSegment {
+	public fun <init> (ILcom/davils/kheck/core/format/plain/SegmentFrame;Lcom/davils/kheck/core/style/SegmentStyle;)V
+	public final fun getAbbreviation ()I
+	public final fun getFrame ()Lcom/davils/kheck/core/format/plain/SegmentFrame;
+	public final fun getStyle ()Lcom/davils/kheck/core/style/SegmentStyle;
+}
+
+public final class com/davils/kheck/core/format/plain/PlainSegment$Markers : com/davils/kheck/core/format/plain/PlainSegment {
+	public fun <init> (Lcom/davils/kheck/core/format/plain/SegmentAffix;Lcom/davils/kheck/core/format/plain/SegmentFrame;Lcom/davils/kheck/core/style/SegmentStyle;)V
+	public final fun getAffix ()Lcom/davils/kheck/core/format/plain/SegmentAffix;
+	public final fun getFrame ()Lcom/davils/kheck/core/format/plain/SegmentFrame;
+	public final fun getStyle ()Lcom/davils/kheck/core/style/SegmentStyle;
+}
+
+public final class com/davils/kheck/core/format/plain/PlainSegment$Message : com/davils/kheck/core/format/plain/PlainSegment {
+	public fun <init> (Lcom/davils/kheck/core/format/plain/SegmentFrame;Lcom/davils/kheck/core/style/SegmentStyle;)V
+	public final fun getFrame ()Lcom/davils/kheck/core/format/plain/SegmentFrame;
+	public final fun getStyle ()Lcom/davils/kheck/core/style/SegmentStyle;
+}
+
+public final class com/davils/kheck/core/format/plain/PlainSegment$Sequence : com/davils/kheck/core/format/plain/PlainSegment {
+	public fun <init> (Lcom/davils/kheck/core/format/plain/SegmentFrame;Lcom/davils/kheck/core/style/SegmentStyle;)V
+	public final fun getFrame ()Lcom/davils/kheck/core/format/plain/SegmentFrame;
+	public final fun getStyle ()Lcom/davils/kheck/core/style/SegmentStyle;
+}
+
+public final class com/davils/kheck/core/format/plain/PlainSegment$Text : com/davils/kheck/core/format/plain/PlainSegment {
+	public fun <init> (Ljava/lang/String;Lcom/davils/kheck/core/style/SegmentStyle;)V
+	public final fun getStyle ()Lcom/davils/kheck/core/style/SegmentStyle;
+	public final fun getValue ()Ljava/lang/String;
+}
+
+public final class com/davils/kheck/core/format/plain/PlainSegment$Thread : com/davils/kheck/core/format/plain/PlainSegment {
+	public fun <init> (Lcom/davils/kheck/core/format/plain/SegmentFrame;Lcom/davils/kheck/core/style/SegmentStyle;)V
+	public final fun getFrame ()Lcom/davils/kheck/core/format/plain/SegmentFrame;
+	public final fun getStyle ()Lcom/davils/kheck/core/style/SegmentStyle;
+}
+
+public final class com/davils/kheck/core/format/plain/PlainSegment$Timestamp : com/davils/kheck/core/format/plain/PlainSegment {
+	public fun <init> (Lcom/davils/kheck/core/format/TimestampFormat;Lcom/davils/kheck/core/format/plain/SegmentFrame;Lcom/davils/kheck/core/style/SegmentStyle;)V
+	public final fun getFormat ()Lcom/davils/kheck/core/format/TimestampFormat;
+	public final fun getFrame ()Lcom/davils/kheck/core/format/plain/SegmentFrame;
+	public final fun getStyle ()Lcom/davils/kheck/core/style/SegmentStyle;
+}
+
+public final class com/davils/kheck/core/format/plain/PlainTheme {
+	public static final field Companion Lcom/davils/kheck/core/format/plain/PlainTheme$Companion;
+	public fun <init> ()V
+	public fun <init> (Lcom/davils/kheck/core/style/SegmentStyle;Lcom/davils/kheck/core/style/SegmentStyle;Lcom/davils/kheck/core/style/SegmentStyle;Lcom/davils/kheck/core/style/SegmentStyle;Lcom/davils/kheck/core/style/SegmentStyle;Lcom/davils/kheck/core/style/SegmentStyle;Lcom/davils/kheck/core/style/SegmentStyle;Lcom/davils/kheck/core/format/plain/EntryStyles;Lcom/davils/kheck/core/format/plain/CauseStyles;)V
+	public synthetic fun <init> (Lcom/davils/kheck/core/style/SegmentStyle;Lcom/davils/kheck/core/style/SegmentStyle;Lcom/davils/kheck/core/style/SegmentStyle;Lcom/davils/kheck/core/style/SegmentStyle;Lcom/davils/kheck/core/style/SegmentStyle;Lcom/davils/kheck/core/style/SegmentStyle;Lcom/davils/kheck/core/style/SegmentStyle;Lcom/davils/kheck/core/format/plain/EntryStyles;Lcom/davils/kheck/core/format/plain/CauseStyles;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getCaller ()Lcom/davils/kheck/core/style/SegmentStyle;
+	public final fun getCause ()Lcom/davils/kheck/core/format/plain/CauseStyles;
+	public final fun getEntries ()Lcom/davils/kheck/core/format/plain/EntryStyles;
+	public final fun getLevel ()Lcom/davils/kheck/core/style/SegmentStyle;
+	public final fun getLogger ()Lcom/davils/kheck/core/style/SegmentStyle;
+	public final fun getMarkers ()Lcom/davils/kheck/core/style/SegmentStyle;
+	public final fun getMessage ()Lcom/davils/kheck/core/style/SegmentStyle;
+	public final fun getThread ()Lcom/davils/kheck/core/style/SegmentStyle;
+	public final fun getTimestamp ()Lcom/davils/kheck/core/style/SegmentStyle;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/kheck/core/format/plain/PlainTheme$Companion {
+	public final fun getDefault ()Lcom/davils/kheck/core/format/plain/PlainTheme;
+	public final fun getHighContrast ()Lcom/davils/kheck/core/format/plain/PlainTheme;
+	public final fun getMonochrome ()Lcom/davils/kheck/core/format/plain/PlainTheme;
+	public final fun getMuted ()Lcom/davils/kheck/core/format/plain/PlainTheme;
+}
+
+public final class com/davils/kheck/core/format/plain/PlainsKt {
+	public static final fun plain (Lkotlin/jvm/functions/Function1;)Lcom/davils/kheck/core/format/plain/PlainFormat;
+	public static synthetic fun plain$default (Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/davils/kheck/core/format/plain/PlainFormat;
+}
+
+public final class com/davils/kheck/core/format/plain/SegmentAffix {
+	public static final field Companion Lcom/davils/kheck/core/format/plain/SegmentAffix$Companion;
+	public fun <init> ()V
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getPrefix ()Ljava/lang/String;
+	public final fun getSuffix ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/kheck/core/format/plain/SegmentAffix$Companion {
+	public final fun getNONE ()Lcom/davils/kheck/core/format/plain/SegmentAffix;
+}
+
+public final class com/davils/kheck/core/format/plain/SegmentFrame {
+	public static final field Companion Lcom/davils/kheck/core/format/plain/SegmentFrame$Companion;
+	public fun <init> ()V
+	public fun <init> (IILcom/davils/kheck/core/format/plain/Alignment;)V
+	public synthetic fun <init> (IILcom/davils/kheck/core/format/plain/Alignment;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAlignment ()Lcom/davils/kheck/core/format/plain/Alignment;
+	public final fun getMaxWidth ()I
+	public final fun getMinWidth ()I
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/kheck/core/format/plain/SegmentFrame$Companion {
+	public final fun getNONE ()Lcom/davils/kheck/core/format/plain/SegmentFrame;
+}
+
+public final class com/davils/kheck/core/format/plain/builder/CauseSegmentBuilder {
+	public final fun exclude ([Ljava/lang/String;)V
+	public final fun frame (Lkotlin/jvm/functions/Function1;)V
+	public final fun getIndent ()Ljava/lang/String;
+	public final fun getMaxCauses ()I
+	public final fun getMaxFrames ()I
+	public final fun isSuppressedIncluded ()Z
+	public final fun label (Lkotlin/jvm/functions/Function1;)V
+	public final fun location (Lkotlin/jvm/functions/Function1;)V
+	public final fun message (Lkotlin/jvm/functions/Function1;)V
+	public final fun setIndent (Ljava/lang/String;)V
+	public final fun setMaxCauses (I)V
+	public final fun setMaxFrames (I)V
+	public final fun setSuppressedIncluded (Z)V
+	public final fun type (Lkotlin/jvm/functions/Function1;)V
+}
+
+public final class com/davils/kheck/core/format/plain/builder/EntriesSegmentBuilder {
+	public final fun getPrefix ()Ljava/lang/String;
+	public final fun getSeparator ()Ljava/lang/String;
+	public final fun getSuffix ()Ljava/lang/String;
+	public final fun key (Lkotlin/jvm/functions/Function1;)V
+	public final fun punctuation (Lkotlin/jvm/functions/Function1;)V
+	public final fun setPrefix (Ljava/lang/String;)V
+	public final fun setSeparator (Ljava/lang/String;)V
+	public final fun setSuffix (Ljava/lang/String;)V
+	public final fun value (Lkotlin/jvm/functions/Function1;)V
+}
+
+public final class com/davils/kheck/core/format/plain/builder/OptionalSegmentBuilder : com/davils/kheck/core/format/plain/builder/SegmentBuilder {
+	public final fun getPrefix ()Ljava/lang/String;
+	public final fun getSuffix ()Ljava/lang/String;
+	public final fun setPrefix (Ljava/lang/String;)V
+	public final fun setSuffix (Ljava/lang/String;)V
+}
+
+public final class com/davils/kheck/core/format/plain/builder/PlainLayoutBuilder {
+	public final fun caller (Lkotlin/jvm/functions/Function1;)V
+	public static synthetic fun caller$default (Lcom/davils/kheck/core/format/plain/builder/PlainLayoutBuilder;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)V
+	public final fun cause (Lkotlin/jvm/functions/Function1;)V
+	public static synthetic fun cause$default (Lcom/davils/kheck/core/format/plain/builder/PlainLayoutBuilder;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)V
+	public final fun context (Lkotlin/jvm/functions/Function1;)V
+	public static synthetic fun context$default (Lcom/davils/kheck/core/format/plain/builder/PlainLayoutBuilder;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)V
+	public final fun fields (Lkotlin/jvm/functions/Function1;)V
+	public static synthetic fun fields$default (Lcom/davils/kheck/core/format/plain/builder/PlainLayoutBuilder;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)V
+	public final fun level (Lkotlin/jvm/functions/Function1;)V
+	public static synthetic fun level$default (Lcom/davils/kheck/core/format/plain/builder/PlainLayoutBuilder;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)V
+	public final fun logger (ILkotlin/jvm/functions/Function1;)V
+	public static synthetic fun logger$default (Lcom/davils/kheck/core/format/plain/builder/PlainLayoutBuilder;ILkotlin/jvm/functions/Function1;ILjava/lang/Object;)V
+	public final fun markers (Lkotlin/jvm/functions/Function1;)V
+	public static synthetic fun markers$default (Lcom/davils/kheck/core/format/plain/builder/PlainLayoutBuilder;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)V
+	public final fun message (Lkotlin/jvm/functions/Function1;)V
+	public static synthetic fun message$default (Lcom/davils/kheck/core/format/plain/builder/PlainLayoutBuilder;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)V
+	public final fun sequence (Lkotlin/jvm/functions/Function1;)V
+	public static synthetic fun sequence$default (Lcom/davils/kheck/core/format/plain/builder/PlainLayoutBuilder;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)V
+	public final fun text (Ljava/lang/String;Lkotlin/jvm/functions/Function1;)V
+	public static synthetic fun text$default (Lcom/davils/kheck/core/format/plain/builder/PlainLayoutBuilder;Ljava/lang/String;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)V
+	public final fun thread (Lkotlin/jvm/functions/Function1;)V
+	public static synthetic fun thread$default (Lcom/davils/kheck/core/format/plain/builder/PlainLayoutBuilder;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)V
+	public final fun timestamp (Lcom/davils/kheck/core/format/TimestampFormat;Lkotlin/jvm/functions/Function1;)V
+	public static synthetic fun timestamp$default (Lcom/davils/kheck/core/format/plain/builder/PlainLayoutBuilder;Lcom/davils/kheck/core/format/TimestampFormat;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)V
+}
+
+public class com/davils/kheck/core/format/plain/builder/SegmentBuilder {
+	public final fun getAlignment ()Lcom/davils/kheck/core/format/plain/Alignment;
+	public final fun getMaxWidth ()I
+	public final fun getMinWidth ()I
+	public final fun setAlignment (Lcom/davils/kheck/core/format/plain/Alignment;)V
+	public final fun setMaxWidth (I)V
+	public final fun setMinWidth (I)V
+	public final fun style (Lkotlin/jvm/functions/Function1;)V
+}
+
+public abstract interface class com/davils/kheck/core/health/HealthRule {
+	public abstract fun evaluate (Lcom/davils/kheck/core/statistics/LoggingStatistics;)Lcom/davils/kheck/core/health/LoggingHealth;
+}
+
+public final class com/davils/kheck/core/health/HealthRules {
+	public static final field INSTANCE Lcom/davils/kheck/core/health/HealthRules;
+	public final fun getDEFAULT ()Ljava/util/List;
+	public final fun getINTAKE_SATURATION ()Lcom/davils/kheck/core/health/HealthRule;
+	public final fun getSINKS_FAILING ()Lcom/davils/kheck/core/health/HealthRule;
+	public final fun threshold (Ljava/lang/String;Ljava/lang/Double;Ljava/lang/Double;Lkotlin/jvm/functions/Function1;)Lcom/davils/kheck/core/health/HealthRule;
+	public static synthetic fun threshold$default (Lcom/davils/kheck/core/health/HealthRules;Ljava/lang/String;Ljava/lang/Double;Ljava/lang/Double;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/davils/kheck/core/health/HealthRule;
+}
+
+public final class com/davils/kheck/core/health/HealthStatus : java/lang/Enum {
+	public static final field Degraded Lcom/davils/kheck/core/health/HealthStatus;
+	public static final field Down Lcom/davils/kheck/core/health/HealthStatus;
+	public static final field Up Lcom/davils/kheck/core/health/HealthStatus;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/kheck/core/health/HealthStatus;
+	public static fun values ()[Lcom/davils/kheck/core/health/HealthStatus;
+}
+
+public final class com/davils/kheck/core/health/LoggingHealth {
+	public static final field Companion Lcom/davils/kheck/core/health/LoggingHealth$Companion;
+	public fun <init> (Lcom/davils/kheck/core/health/HealthStatus;Ljava/util/List;)V
+	public synthetic fun <init> (Lcom/davils/kheck/core/health/HealthStatus;Ljava/util/List;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getReasons ()Ljava/util/List;
+	public final fun getStatus ()Lcom/davils/kheck/core/health/HealthStatus;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/kheck/core/health/LoggingHealth$Companion {
+	public final fun getUP ()Lcom/davils/kheck/core/health/LoggingHealth;
+	public final fun worstOf (Ljava/util/List;)Lcom/davils/kheck/core/health/LoggingHealth;
+}
+
+public final class com/davils/kheck/core/intake/IntakeBuilder : com/davils/kore/core/dsl/ValidatingBuilder {
+	public static final field Companion Lcom/davils/kheck/core/intake/IntakeBuilder$Companion;
+	public static final field DEFAULT_CAPACITY I
+	public synthetic fun assemble ()Lcom/davils/kore/core/validation/Validatable;
+	public final fun getCapacity ()I
+	public final fun getOverflow ()Lcom/davils/kheck/core/sink/LogOverflow;
+	public final fun setCapacity (I)V
+	public final fun setOverflow (Lcom/davils/kheck/core/sink/LogOverflow;)V
+}
+
+public final class com/davils/kheck/core/intake/IntakeBuilder$Companion {
+}
+
+public final class com/davils/kheck/core/intake/IntakeConfiguration : com/davils/kore/core/validation/Validatable {
+	public fun <init> (ILcom/davils/kheck/core/sink/LogOverflow;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCapacity ()I
+	public final fun getOverflow ()Lcom/davils/kheck/core/sink/LogOverflow;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+	public fun validate (Lcom/davils/kore/core/validation/ValidationScope;)V
+}
+
+public abstract interface class com/davils/kheck/core/mask/Mask {
+}
+
+public final class com/davils/kheck/core/mask/Mask$Fixed : com/davils/kheck/core/mask/Mask {
+	public fun <init> (Ljava/lang/String;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getReplacement ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/kheck/core/mask/Mask$Full : com/davils/kheck/core/mask/Mask {
+	public static final field INSTANCE Lcom/davils/kheck/core/mask/Mask$Full;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/kheck/core/mask/Mask$Hash : com/davils/kheck/core/mask/Mask {
+	public static final field INSTANCE Lcom/davils/kheck/core/mask/Mask$Hash;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/kheck/core/mask/Mask$Partial : com/davils/kheck/core/mask/Mask {
+	public fun <init> (II)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getKeepEnd ()I
+	public final fun getKeepStart ()I
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/kheck/core/mask/Mask$Remove : com/davils/kheck/core/mask/Mask {
+	public static final field INSTANCE Lcom/davils/kheck/core/mask/Mask$Remove;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/kheck/core/mask/MaskingBuilder : com/davils/kore/core/dsl/ValidatingBuilder {
+	public static final field Companion Lcom/davils/kheck/core/mask/MaskingBuilder$Companion;
+	public static final field DEFAULT_MAX_DEPTH I
+	public static final field DEFAULT_MAX_VALUE_LENGTH I
+	public synthetic fun assemble ()Lcom/davils/kore/core/validation/Validatable;
+	public final fun getDefault ()Lcom/davils/kheck/core/mask/Mask;
+	public final fun getHashKey ()Lcom/davils/kheck/core/mask/MaskingKey;
+	public final fun getMaxDepth ()I
+	public final fun getMaxValueLength ()I
+	public final fun isDefaultsIncluded ()Z
+	public final fun keyPattern (Lkotlin/text/Regex;)V
+	public final fun keys (Ljava/util/Collection;)V
+	public final fun keys ([Ljava/lang/String;)V
+	public final fun rule (Lcom/davils/kheck/core/mask/MaskingRule;)V
+	public final fun rules (Ljava/util/Collection;)V
+	public final fun setDefault (Lcom/davils/kheck/core/mask/Mask;)V
+	public final fun setDefaultsIncluded (Z)V
+	public final fun setHashKey (Lcom/davils/kheck/core/mask/MaskingKey;)V
+	public final fun setMaxDepth (I)V
+	public final fun setMaxValueLength (I)V
+}
+
+public final class com/davils/kheck/core/mask/MaskingBuilder$Companion {
+}
+
+public final class com/davils/kheck/core/mask/MaskingConfiguration : com/davils/kore/core/validation/Validatable {
+	public final fun getDefault ()Lcom/davils/kheck/core/mask/Mask;
+	public final fun getHashKey ()Lcom/davils/kheck/core/mask/MaskingKey;
+	public final fun getKeyPatterns ()Ljava/util/List;
+	public final fun getKeys ()Ljava/util/Set;
+	public final fun getMaxDepth ()I
+	public final fun getMaxValueLength ()I
+	public final fun getRules ()Ljava/util/List;
+	public fun toString ()Ljava/lang/String;
+	public fun validate (Lcom/davils/kore/core/validation/ValidationScope;)V
+}
+
+public final class com/davils/kheck/core/mask/MaskingKey {
+	public static final field Companion Lcom/davils/kheck/core/mask/MaskingKey$Companion;
+	public fun <init> ([B)V
+	public final fun destroy ()V
+	public final fun isDestroyed ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/kheck/core/mask/MaskingKey$Companion {
+	public final fun of (Ljava/lang/String;)Lcom/davils/kheck/core/mask/MaskingKey;
+}
+
+public final class com/davils/kheck/core/mask/MaskingRule {
+	public static final field Companion Lcom/davils/kheck/core/mask/MaskingRule$Companion;
+	public static final field SECRET_GROUP_NAME Ljava/lang/String;
+	public fun <init> (Ljava/lang/String;Lkotlin/text/Regex;Lcom/davils/kheck/core/mask/Mask;Ljava/util/List;Lcom/davils/kheck/core/mask/MaskingValidator;)V
+	public synthetic fun <init> (Ljava/lang/String;Lkotlin/text/Regex;Lcom/davils/kheck/core/mask/Mask;Ljava/util/List;Lcom/davils/kheck/core/mask/MaskingValidator;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getHints ()Ljava/util/List;
+	public final fun getMask ()Lcom/davils/kheck/core/mask/Mask;
+	public final fun getName ()Ljava/lang/String;
+	public final fun getPattern ()Lkotlin/text/Regex;
+	public final fun getValidator ()Lcom/davils/kheck/core/mask/MaskingValidator;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/kheck/core/mask/MaskingRule$Companion {
+}
+
+public final class com/davils/kheck/core/mask/MaskingRules {
+	public static final field INSTANCE Lcom/davils/kheck/core/mask/MaskingRules;
+	public final fun getAWS_ACCESS_KEY ()Lcom/davils/kheck/core/mask/MaskingRule;
+	public final fun getBASIC_AUTHENTICATION ()Lcom/davils/kheck/core/mask/MaskingRule;
+	public final fun getBEARER_TOKEN ()Lcom/davils/kheck/core/mask/MaskingRule;
+	public final fun getCARD_NUMBER ()Lcom/davils/kheck/core/mask/MaskingRule;
+	public final fun getEMAIL ()Lcom/davils/kheck/core/mask/MaskingRule;
+	public final fun getGITHUB_TOKEN ()Lcom/davils/kheck/core/mask/MaskingRule;
+	public final fun getGITLAB_TOKEN ()Lcom/davils/kheck/core/mask/MaskingRule;
+	public final fun getIBAN ()Lcom/davils/kheck/core/mask/MaskingRule;
+	public final fun getJWT ()Lcom/davils/kheck/core/mask/MaskingRule;
+	public final fun getPERSONAL_DATA ()Ljava/util/List;
+	public final fun getPRIVATE_KEY ()Lcom/davils/kheck/core/mask/MaskingRule;
+	public final fun getSECRETS ()Ljava/util/List;
+	public final fun getSECRET_ASSIGNMENT ()Lcom/davils/kheck/core/mask/MaskingRule;
+	public final fun getSECRET_KEYS ()Ljava/util/Set;
+	public final fun getSECRET_KEY_PATTERN ()Lkotlin/text/Regex;
+	public final fun getURL_CREDENTIALS ()Lcom/davils/kheck/core/mask/MaskingRule;
+}
+
+public abstract interface class com/davils/kheck/core/mask/MaskingValidator {
+	public abstract fun isMatch (Ljava/lang/String;)Z
+}
+
+public final class com/davils/kheck/core/record/LogCause {
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/util/List;ILcom/davils/kheck/core/record/LogCause;Ljava/util/List;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/util/List;ILcom/davils/kheck/core/record/LogCause;Ljava/util/List;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getCause ()Lcom/davils/kheck/core/record/LogCause;
+	public final fun getFrames ()Ljava/util/List;
+	public final fun getMessage ()Ljava/lang/String;
+	public final fun getOmittedFrames ()I
+	public final fun getSuppressed ()Ljava/util/List;
+	public final fun getType ()Ljava/lang/String;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/kheck/core/record/LogCausesKt {
+	public static final fun toLogCause (Ljava/lang/Throwable;)Lcom/davils/kheck/core/record/LogCause;
+}
+
+public final class com/davils/kheck/core/record/LogFrame {
+	public static final field Companion Lcom/davils/kheck/core/record/LogFrame$Companion;
+	public static final field UNKNOWN_LINE I
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;I)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;IILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getClassName ()Ljava/lang/String;
+	public final fun getFileName ()Ljava/lang/String;
+	public final fun getLineNumber ()I
+	public final fun getMethodName ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/kheck/core/record/LogFrame$Companion {
+}
+
+public final class com/davils/kheck/core/record/LogRecord {
+	public fun <init> (JLkotlin/time/Instant;Lcom/davils/kheck/api/LogLevel;Lcom/davils/kheck/core/record/LogSource;Ljava/lang/String;Ljava/util/Map;Ljava/util/Map;Ljava/util/Set;Lcom/davils/kheck/core/record/LogCause;I)V
+	public synthetic fun <init> (JLkotlin/time/Instant;Lcom/davils/kheck/api/LogLevel;Lcom/davils/kheck/core/record/LogSource;Ljava/lang/String;Ljava/util/Map;Ljava/util/Map;Ljava/util/Set;Lcom/davils/kheck/core/record/LogCause;IILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getCause ()Lcom/davils/kheck/core/record/LogCause;
+	public final fun getContext ()Ljava/util/Map;
+	public final fun getFields ()Ljava/util/Map;
+	public final fun getLevel ()Lcom/davils/kheck/api/LogLevel;
+	public final fun getMarkers ()Ljava/util/Set;
+	public final fun getMessage ()Ljava/lang/String;
+	public final fun getOmitted ()I
+	public final fun getSequence ()J
+	public final fun getSource ()Lcom/davils/kheck/core/record/LogSource;
+	public final fun getTimestamp ()Lkotlin/time/Instant;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/kheck/core/record/LogSource {
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Lcom/davils/kheck/core/record/LogFrame;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Lcom/davils/kheck/core/record/LogFrame;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCaller ()Lcom/davils/kheck/core/record/LogFrame;
+	public final fun getLogger-1ZE8LlY ()Ljava/lang/String;
+	public final fun getThread ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/kheck/core/route/LoggerBuilder : com/davils/kore/core/dsl/ValidatingBuilder {
+	public synthetic fun assemble ()Lcom/davils/kore/core/validation/Validatable;
+	public final fun getLevel ()Lcom/davils/kheck/api/LogLevel;
+	public final fun isAdditive ()Z
+	public final fun isCallerIncluded ()Ljava/lang/Boolean;
+	public final fun setAdditive (Z)V
+	public final fun setCallerIncluded (Ljava/lang/Boolean;)V
+	public final fun setLevel (Lcom/davils/kheck/api/LogLevel;)V
+	public final fun sinks ([Ljava/lang/String;)V
+}
+
+public final class com/davils/kheck/core/route/LoggerConfiguration : com/davils/kore/core/validation/Validatable {
+	public final fun getLevel ()Lcom/davils/kheck/api/LogLevel;
+	public final fun getSinks ()Ljava/util/Set;
+	public final fun isAdditive ()Z
+	public final fun isCallerIncluded ()Ljava/lang/Boolean;
+	public fun toString ()Ljava/lang/String;
+	public fun validate (Lcom/davils/kore/core/validation/ValidationScope;)V
+}
+
+public final class com/davils/kheck/core/sample/Deduplication {
+	public synthetic fun <init> (JILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getMaxEntries ()I
+	public final fun getWindow-UwyO8pc ()J
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/kheck/core/sample/RateLimit {
+	public synthetic fun <init> (IJLcom/davils/kheck/core/sample/RateLimitKey;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getKey ()Lcom/davils/kheck/core/sample/RateLimitKey;
+	public final fun getPer-UwyO8pc ()J
+	public final fun getRecords ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class com/davils/kheck/core/sample/RateLimitKey {
+}
+
+public final class com/davils/kheck/core/sample/RateLimitKey$Global : com/davils/kheck/core/sample/RateLimitKey {
+	public static final field INSTANCE Lcom/davils/kheck/core/sample/RateLimitKey$Global;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/kheck/core/sample/RateLimitKey$PerField : com/davils/kheck/core/sample/RateLimitKey {
+	public fun <init> (Ljava/lang/String;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getName ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/kheck/core/sample/RateLimitKey$PerLevel : com/davils/kheck/core/sample/RateLimitKey {
+	public static final field INSTANCE Lcom/davils/kheck/core/sample/RateLimitKey$PerLevel;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/kheck/core/sample/RateLimitKey$PerLogger : com/davils/kheck/core/sample/RateLimitKey {
+	public static final field INSTANCE Lcom/davils/kheck/core/sample/RateLimitKey$PerLogger;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/kheck/core/sample/SamplingBuilder : com/davils/kore/core/dsl/ValidatingBuilder {
+	public static final field Companion Lcom/davils/kheck/core/sample/SamplingBuilder$Companion;
+	public static final field DEFAULT_MAX_ENTRIES I
+	public synthetic fun assemble ()Lcom/davils/kore/core/validation/Validatable;
+	public final fun dedupe-VtjQ1oo (JI)V
+	public static synthetic fun dedupe-VtjQ1oo$default (Lcom/davils/kheck/core/sample/SamplingBuilder;JIILjava/lang/Object;)V
+	public final fun getAlwaysFrom ()Lcom/davils/kheck/api/LogLevel;
+	public final fun getRate ()D
+	public final fun limit-8Mi8wO0 (IJLcom/davils/kheck/core/sample/RateLimitKey;)V
+	public static synthetic fun limit-8Mi8wO0$default (Lcom/davils/kheck/core/sample/SamplingBuilder;IJLcom/davils/kheck/core/sample/RateLimitKey;ILjava/lang/Object;)V
+	public final fun setAlwaysFrom (Lcom/davils/kheck/api/LogLevel;)V
+	public final fun setRate (D)V
+}
+
+public final class com/davils/kheck/core/sample/SamplingBuilder$Companion {
+}
+
+public final class com/davils/kheck/core/sample/SamplingConfiguration : com/davils/kore/core/validation/Validatable {
+	public final fun getAlwaysFrom ()Lcom/davils/kheck/api/LogLevel;
+	public final fun getDeduplication ()Lcom/davils/kheck/core/sample/Deduplication;
+	public final fun getLimit ()Lcom/davils/kheck/core/sample/RateLimit;
+	public final fun getRate ()D
+	public fun toString ()Ljava/lang/String;
+	public fun validate (Lcom/davils/kore/core/validation/ValidationScope;)V
+}
+
+public final class com/davils/kheck/core/sink/LogLine {
+	public fun <init> (Lcom/davils/kheck/core/record/LogRecord;Ljava/lang/String;)V
+	public final fun getRecord ()Lcom/davils/kheck/core/record/LogRecord;
+	public final fun getText ()Ljava/lang/String;
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class com/davils/kheck/core/sink/LogOverflow {
+}
+
+public final class com/davils/kheck/core/sink/LogOverflow$Block : com/davils/kheck/core/sink/LogOverflow {
+	public synthetic fun <init> (JLkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getMaxWait-UwyO8pc ()J
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/kheck/core/sink/LogOverflow$DropNewest : com/davils/kheck/core/sink/LogOverflow {
+	public static final field INSTANCE Lcom/davils/kheck/core/sink/LogOverflow$DropNewest;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/kheck/core/sink/LogOverflow$DropOldest : com/davils/kheck/core/sink/LogOverflow {
+	public static final field INSTANCE Lcom/davils/kheck/core/sink/LogOverflow$DropOldest;
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class com/davils/kheck/core/sink/LogSink {
+	public fun close (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun colorDepth (Lcom/davils/kheck/core/style/ColorMode;)Lcom/davils/kheck/core/style/ColorDepth;
+	public fun flush (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun open (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun write (Ljava/util/List;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public abstract class com/davils/kheck/core/sink/LogSinkBuilder : com/davils/kore/core/dsl/ValidatingBuilder {
+	public static final field Companion Lcom/davils/kheck/core/sink/LogSinkBuilder$Companion;
+	public static final field DEFAULT_CAPACITY I
+	public static final field DEFAULT_MAX_BATCH I
+	public fun <init> ()V
+	public final fun filter (Lcom/davils/kheck/core/filter/LogFilter;)V
+	public final fun getCapacity ()I
+	public final fun getFallback ()Ljava/lang/String;
+	public final fun getFormat ()Lcom/davils/kheck/core/format/LogFormat;
+	public final fun getLevel ()Lcom/davils/kheck/api/LogLevel;
+	public final fun getMarkers ()Ljava/util/Set;
+	public final fun getMaxBatch ()I
+	public final fun getOverflow ()Lcom/davils/kheck/core/sink/LogOverflow;
+	public final fun isExclusive ()Z
+	protected final fun options ()Lcom/davils/kheck/core/sink/LogSinkOptions;
+	public final fun retry-5qebJ5I (IJJ)V
+	public static synthetic fun retry-5qebJ5I$default (Lcom/davils/kheck/core/sink/LogSinkBuilder;IJJILjava/lang/Object;)V
+	public final fun setCapacity (I)V
+	public final fun setExclusive (Z)V
+	public final fun setFallback (Ljava/lang/String;)V
+	public final fun setFormat (Lcom/davils/kheck/core/format/LogFormat;)V
+	public final fun setLevel (Lcom/davils/kheck/api/LogLevel;)V
+	public final fun setMarkers (Ljava/util/Set;)V
+	public final fun setMaxBatch (I)V
+	public final fun setOverflow (Lcom/davils/kheck/core/sink/LogOverflow;)V
+}
+
+public final class com/davils/kheck/core/sink/LogSinkBuilder$Companion {
+}
+
+public abstract interface class com/davils/kheck/core/sink/LogSinkConfiguration : com/davils/kore/core/validation/Validatable {
+	public abstract fun getOptions ()Lcom/davils/kheck/core/sink/LogSinkOptions;
+}
+
+public final class com/davils/kheck/core/sink/LogSinkDefinition {
+	public final fun getName ()Ljava/lang/String;
+	public final fun getOptions ()Lcom/davils/kheck/core/sink/LogSinkOptions;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/kheck/core/sink/LogSinkOptions : com/davils/kore/core/validation/Validatable {
+	public final fun getCapacity ()I
+	public final fun getFallback ()Ljava/lang/String;
+	public final fun getFilters ()Ljava/util/List;
+	public final fun getFormat ()Lcom/davils/kheck/core/format/LogFormat;
+	public final fun getLevel ()Lcom/davils/kheck/api/LogLevel;
+	public final fun getMarkers ()Ljava/util/Set;
+	public final fun getMaxBatch ()I
+	public final fun getOverflow ()Lcom/davils/kheck/core/sink/LogOverflow;
+	public final fun getRetry ()Lcom/davils/kheck/core/sink/SinkRetry;
+	public final fun isExclusive ()Z
+	public fun toString ()Ljava/lang/String;
+	public fun validate (Lcom/davils/kore/core/validation/ValidationScope;)V
+}
+
+public final class com/davils/kheck/core/sink/SinkRetry {
+	public static final field Companion Lcom/davils/kheck/core/sink/SinkRetry$Companion;
+	public synthetic fun <init> (IJJLkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getAttempts ()I
+	public final fun getBackoff-UwyO8pc ()J
+	public final fun getMaxBackoff-UwyO8pc ()J
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/kheck/core/sink/SinkRetry$Companion {
+	public final fun getNONE ()Lcom/davils/kheck/core/sink/SinkRetry;
+}
+
+public final class com/davils/kheck/core/sink/console/ConsoleSinkBuilder : com/davils/kheck/core/sink/LogSinkBuilder {
+	public synthetic fun assemble ()Lcom/davils/kore/core/validation/Validatable;
+	public final fun getEnvironment ()Ljava/util/Map;
+	public final fun getTarget ()Lcom/davils/kheck/core/terminal/ConsoleTarget;
+	public final fun getTerminal ()Lcom/davils/kheck/core/terminal/Terminal;
+	public final fun setEnvironment (Ljava/util/Map;)V
+	public final fun setTarget (Lcom/davils/kheck/core/terminal/ConsoleTarget;)V
+	public final fun setTerminal (Lcom/davils/kheck/core/terminal/Terminal;)V
+}
+
+public final class com/davils/kheck/core/sink/console/ConsoleSinkConfiguration : com/davils/kheck/core/sink/LogSinkConfiguration {
+	public final fun getEnvironment ()Ljava/util/Map;
+	public fun getOptions ()Lcom/davils/kheck/core/sink/LogSinkOptions;
+	public final fun getTarget ()Lcom/davils/kheck/core/terminal/ConsoleTarget;
+	public final fun getTerminal ()Lcom/davils/kheck/core/terminal/Terminal;
+	public fun toString ()Ljava/lang/String;
+	public fun validate (Lcom/davils/kore/core/validation/ValidationScope;)V
+}
+
+public final class com/davils/kheck/core/sink/console/ConsolesKt {
+	public static final fun console (Lcom/davils/kheck/core/LoggingBuilder;Ljava/lang/String;Lkotlin/jvm/functions/Function1;)V
+	public static synthetic fun console$default (Lcom/davils/kheck/core/LoggingBuilder;Ljava/lang/String;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)V
+}
+
+public final class com/davils/kheck/core/sink/custom/CustomSinkBuilder : com/davils/kheck/core/sink/LogSinkBuilder {
+	public synthetic fun assemble ()Lcom/davils/kore/core/validation/Validatable;
+}
+
+public final class com/davils/kheck/core/sink/custom/CustomSinkConfiguration : com/davils/kheck/core/sink/LogSinkConfiguration {
+	public fun getOptions ()Lcom/davils/kheck/core/sink/LogSinkOptions;
+	public final fun getSink ()Lcom/davils/kheck/core/sink/LogSink;
+	public fun toString ()Ljava/lang/String;
+	public fun validate (Lcom/davils/kore/core/validation/ValidationScope;)V
+}
+
+public final class com/davils/kheck/core/sink/custom/CustomSinksKt {
+	public static final fun sink (Lcom/davils/kheck/core/LoggingBuilder;Ljava/lang/String;Lcom/davils/kheck/core/sink/LogSink;Lkotlin/jvm/functions/Function1;)V
+	public static synthetic fun sink$default (Lcom/davils/kheck/core/LoggingBuilder;Ljava/lang/String;Lcom/davils/kheck/core/sink/LogSink;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)V
+}
+
+public final class com/davils/kheck/core/statistics/LoggingStatistics {
+	public final fun getDroppedAfterClose ()J
+	public final fun getFailedListeners ()J
+	public final fun getIntakeCapacity ()I
+	public final fun getIntakeDropped ()J
+	public final fun getIntakeQueued ()J
+	public final fun getIntakeSaturation ()D
+	public final fun getMasked ()Ljava/util/Map;
+	public final fun getRecorded ()Ljava/util/Map;
+	public final fun getReentrant ()J
+	public final fun getSinks ()Ljava/util/Map;
+	public final fun getSinksFailing ()I
+	public final fun getSuppressed ()Ljava/util/Map;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/kheck/core/statistics/SinkStatistics {
+	public final fun getBatches ()J
+	public final fun getDropped ()J
+	public final fun getFailed ()J
+	public final fun getMaxWriteTime-UwyO8pc ()J
+	public final fun getQueued ()J
+	public final fun getWriteTime-UwyO8pc ()J
+	public final fun getWritten ()J
+	public final fun isFailing ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/kheck/core/statistics/Suppression : java/lang/Enum {
+	public static final field Deduplicated Lcom/davils/kheck/core/statistics/Suppression;
+	public static final field Filtered Lcom/davils/kheck/core/statistics/Suppression;
+	public static final field RateLimited Lcom/davils/kheck/core/statistics/Suppression;
+	public static final field Sampled Lcom/davils/kheck/core/statistics/Suppression;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/kheck/core/statistics/Suppression;
+	public static fun values ()[Lcom/davils/kheck/core/statistics/Suppression;
+}
+
+public abstract interface class com/davils/kheck/core/style/Color {
+	public static final field Companion Lcom/davils/kheck/core/style/Color$Companion;
+}
+
+public final class com/davils/kheck/core/style/Color$Companion {
+	public final fun getBlack ()Lcom/davils/kheck/core/style/Color;
+	public final fun getBlue ()Lcom/davils/kheck/core/style/Color;
+	public final fun getBrightBlack ()Lcom/davils/kheck/core/style/Color;
+	public final fun getBrightBlue ()Lcom/davils/kheck/core/style/Color;
+	public final fun getBrightCyan ()Lcom/davils/kheck/core/style/Color;
+	public final fun getBrightGreen ()Lcom/davils/kheck/core/style/Color;
+	public final fun getBrightMagenta ()Lcom/davils/kheck/core/style/Color;
+	public final fun getBrightRed ()Lcom/davils/kheck/core/style/Color;
+	public final fun getBrightWhite ()Lcom/davils/kheck/core/style/Color;
+	public final fun getBrightYellow ()Lcom/davils/kheck/core/style/Color;
+	public final fun getCyan ()Lcom/davils/kheck/core/style/Color;
+	public final fun getGreen ()Lcom/davils/kheck/core/style/Color;
+	public final fun getMagenta ()Lcom/davils/kheck/core/style/Color;
+	public final fun getRed ()Lcom/davils/kheck/core/style/Color;
+	public final fun getWhite ()Lcom/davils/kheck/core/style/Color;
+	public final fun getYellow ()Lcom/davils/kheck/core/style/Color;
+	public final fun hex (Ljava/lang/String;)Lcom/davils/kheck/core/style/Color;
+}
+
+public final class com/davils/kheck/core/style/Color$Indexed : com/davils/kheck/core/style/Color {
+	public fun <init> (I)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getIndex ()I
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/kheck/core/style/Color$Rgb : com/davils/kheck/core/style/Color {
+	public fun <init> (III)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getBlue ()I
+	public final fun getGreen ()I
+	public final fun getRed ()I
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/kheck/core/style/ColorDepth : java/lang/Enum {
+	public static final field Ansi16 Lcom/davils/kheck/core/style/ColorDepth;
+	public static final field Ansi256 Lcom/davils/kheck/core/style/ColorDepth;
+	public static final field None Lcom/davils/kheck/core/style/ColorDepth;
+	public static final field TrueColor Lcom/davils/kheck/core/style/ColorDepth;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/kheck/core/style/ColorDepth;
+	public static fun values ()[Lcom/davils/kheck/core/style/ColorDepth;
+}
+
+public final class com/davils/kheck/core/style/ColorMode : java/lang/Enum {
+	public static final field Always Lcom/davils/kheck/core/style/ColorMode;
+	public static final field Auto Lcom/davils/kheck/core/style/ColorMode;
+	public static final field Never Lcom/davils/kheck/core/style/ColorMode;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/kheck/core/style/ColorMode;
+	public static fun values ()[Lcom/davils/kheck/core/style/ColorMode;
+}
+
+public final class com/davils/kheck/core/style/LevelStylesBuilder {
+	public final fun debug (Lkotlin/jvm/functions/Function1;)V
+	public final fun error (Lkotlin/jvm/functions/Function1;)V
+	public final fun info (Lkotlin/jvm/functions/Function1;)V
+	public final fun trace (Lkotlin/jvm/functions/Function1;)V
+	public final fun warn (Lkotlin/jvm/functions/Function1;)V
+}
+
+public final class com/davils/kheck/core/style/SegmentStyle {
+	public static final field Companion Lcom/davils/kheck/core/style/SegmentStyle$Companion;
+	public fun <init> ()V
+	public fun <init> (Lcom/davils/kheck/core/style/TextStyle;Ljava/util/Map;)V
+	public synthetic fun <init> (Lcom/davils/kheck/core/style/TextStyle;Ljava/util/Map;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getBase ()Lcom/davils/kheck/core/style/TextStyle;
+	public final fun getLevels ()Ljava/util/Map;
+	public fun hashCode ()I
+	public final fun styleFor (Lcom/davils/kheck/api/LogLevel;)Lcom/davils/kheck/core/style/TextStyle;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/kheck/core/style/SegmentStyle$Companion {
+	public final fun getNONE ()Lcom/davils/kheck/core/style/SegmentStyle;
+}
+
+public final class com/davils/kheck/core/style/SegmentStyleBuilder : com/davils/kheck/core/style/TextStyleBuilder {
+	public final fun byLevel (Lkotlin/jvm/functions/Function1;)V
+}
+
+public final class com/davils/kheck/core/style/StylesKt {
+	public static final fun segmentStyle (Lkotlin/jvm/functions/Function1;)Lcom/davils/kheck/core/style/SegmentStyle;
+	public static final fun textStyle (Lkotlin/jvm/functions/Function1;)Lcom/davils/kheck/core/style/TextStyle;
+}
+
+public final class com/davils/kheck/core/style/TextStyle {
+	public static final field Companion Lcom/davils/kheck/core/style/TextStyle$Companion;
+	public fun <init> ()V
+	public fun <init> (Lcom/davils/kheck/core/style/Color;Lcom/davils/kheck/core/style/Color;ZZZZZ)V
+	public synthetic fun <init> (Lcom/davils/kheck/core/style/Color;Lcom/davils/kheck/core/style/Color;ZZZZZILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getBackground ()Lcom/davils/kheck/core/style/Color;
+	public final fun getForeground ()Lcom/davils/kheck/core/style/Color;
+	public fun hashCode ()I
+	public final fun isBold ()Z
+	public final fun isDim ()Z
+	public final fun isItalic ()Z
+	public final fun isStrikethrough ()Z
+	public final fun isUnderline ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/kheck/core/style/TextStyle$Companion {
+	public final fun getNONE ()Lcom/davils/kheck/core/style/TextStyle;
+}
+
+public class com/davils/kheck/core/style/TextStyleBuilder {
+	public final fun getBackground ()Lcom/davils/kheck/core/style/Color;
+	public final fun getForeground ()Lcom/davils/kheck/core/style/Color;
+	public final fun isBold ()Z
+	public final fun isDim ()Z
+	public final fun isItalic ()Z
+	public final fun isStrikethrough ()Z
+	public final fun isUnderline ()Z
+	public final fun setBackground (Lcom/davils/kheck/core/style/Color;)V
+	public final fun setBold (Z)V
+	public final fun setDim (Z)V
+	public final fun setForeground (Lcom/davils/kheck/core/style/Color;)V
+	public final fun setItalic (Z)V
+	public final fun setStrikethrough (Z)V
+	public final fun setUnderline (Z)V
+}
+
+public final class com/davils/kheck/core/terminal/ConsoleTarget : java/lang/Enum {
+	public static final field StandardError Lcom/davils/kheck/core/terminal/ConsoleTarget;
+	public static final field StandardOutput Lcom/davils/kheck/core/terminal/ConsoleTarget;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/kheck/core/terminal/ConsoleTarget;
+	public static fun values ()[Lcom/davils/kheck/core/terminal/ConsoleTarget;
+}
+
+public abstract interface class com/davils/kheck/core/terminal/Terminal {
+	public static final field Companion Lcom/davils/kheck/core/terminal/Terminal$Companion;
+	public abstract fun isInteractive (Lcom/davils/kheck/core/terminal/ConsoleTarget;)Z
+	public abstract fun write (Lcom/davils/kheck/core/terminal/ConsoleTarget;Ljava/lang/String;)V
+}
+
+public final class com/davils/kheck/core/terminal/Terminal$Companion {
+	public final fun getSYSTEM ()Lcom/davils/kheck/core/terminal/Terminal;
+}
+
