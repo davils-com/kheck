@@ -1,0 +1,126 @@
+public final class com/davils/kheck/testing/CapturingSink : com/davils/kheck/core/sink/LogSink {
+	public fun <init> ()V
+	public fun <init> (Lcom/davils/kheck/core/style/ColorDepth;)V
+	public synthetic fun <init> (Lcom/davils/kheck/core/style/ColorDepth;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun clear ()V
+	public fun close (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun colorDepth (Lcom/davils/kheck/core/style/ColorMode;)Lcom/davils/kheck/core/style/ColorDepth;
+	public final fun fail (Ljava/lang/Throwable;)V
+	public fun flush (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun getHistory ()Ljava/util/List;
+	public final fun getLines ()Ljava/util/List;
+	public final fun getMessages ()Ljava/util/List;
+	public final fun getRecords ()Ljava/util/List;
+	public final fun getTexts ()Ljava/util/List;
+	public fun open (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun recover ()V
+	public fun write (Ljava/util/List;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class com/davils/kheck/testing/FakeTerminal : com/davils/kheck/core/terminal/Terminal {
+	public fun <init> ()V
+	public fun <init> (Ljava/util/Set;)V
+	public synthetic fun <init> (Ljava/util/Set;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun isInteractive (Lcom/davils/kheck/core/terminal/ConsoleTarget;)Z
+	public final fun lines (Lcom/davils/kheck/core/terminal/ConsoleTarget;)Ljava/util/List;
+	public static synthetic fun lines$default (Lcom/davils/kheck/testing/FakeTerminal;Lcom/davils/kheck/core/terminal/ConsoleTarget;ILjava/lang/Object;)Ljava/util/List;
+	public final fun text (Lcom/davils/kheck/core/terminal/ConsoleTarget;)Ljava/lang/String;
+	public static synthetic fun text$default (Lcom/davils/kheck/testing/FakeTerminal;Lcom/davils/kheck/core/terminal/ConsoleTarget;ILjava/lang/Object;)Ljava/lang/String;
+	public fun write (Lcom/davils/kheck/core/terminal/ConsoleTarget;Ljava/lang/String;)V
+}
+
+public final class com/davils/kheck/testing/LogRecordBuilder {
+	public static final field Companion Lcom/davils/kheck/testing/LogRecordBuilder$Companion;
+	public static final field LOGGER Ljava/lang/String;
+	public static final field MESSAGE Ljava/lang/String;
+	public static final field THREAD Ljava/lang/String;
+	public final fun context (Lkotlin/jvm/functions/Function1;)V
+	public final fun fields (Lkotlin/jvm/functions/Function1;)V
+	public final fun getCaller ()Lcom/davils/kheck/core/record/LogFrame;
+	public final fun getCause ()Ljava/lang/Throwable;
+	public final fun getLevel ()Lcom/davils/kheck/api/LogLevel;
+	public final fun getLogger ()Ljava/lang/String;
+	public final fun getMarkers ()Ljava/util/Set;
+	public final fun getMessage ()Ljava/lang/String;
+	public final fun getOmitted ()I
+	public final fun getSequence ()J
+	public final fun getThread ()Ljava/lang/String;
+	public final fun getTimestamp ()Lkotlin/time/Instant;
+	public final fun setCaller (Lcom/davils/kheck/core/record/LogFrame;)V
+	public final fun setCause (Ljava/lang/Throwable;)V
+	public final fun setLevel (Lcom/davils/kheck/api/LogLevel;)V
+	public final fun setLogger (Ljava/lang/String;)V
+	public final fun setMarkers (Ljava/util/Set;)V
+	public final fun setMessage (Ljava/lang/String;)V
+	public final fun setOmitted (I)V
+	public final fun setSequence (J)V
+	public final fun setThread (Ljava/lang/String;)V
+	public final fun setTimestamp (Lkotlin/time/Instant;)V
+}
+
+public final class com/davils/kheck/testing/LogRecordBuilder$Companion {
+	public final fun getTIMESTAMP ()Lkotlin/time/Instant;
+}
+
+public final class com/davils/kheck/testing/LogRecordsKt {
+	public static final fun logRecord (Lkotlin/jvm/functions/Function1;)Lcom/davils/kheck/core/record/LogRecord;
+	public static synthetic fun logRecord$default (Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/davils/kheck/core/record/LogRecord;
+}
+
+public final class com/davils/kheck/testing/LoggedEvent {
+	public synthetic fun <init> (Lcom/davils/kheck/api/LogLevel;Lcom/davils/kheck/api/record/LogEvent;Ljava/lang/String;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getEvent ()Lcom/davils/kheck/api/record/LogEvent;
+	public final fun getLevel ()Lcom/davils/kheck/api/LogLevel;
+	public final fun getLogger-1ZE8LlY ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/kheck/testing/RecordingDiagnostics : com/davils/kheck/core/diagnostics/LogDiagnostics {
+	public fun <init> ()V
+	public final fun getMessages ()Ljava/util/List;
+	public fun report (Ljava/lang/String;)V
+}
+
+public final class com/davils/kheck/testing/RecordingLogger : com/davils/kheck/api/Logger {
+	public synthetic fun <init> (Ljava/lang/String;Lcom/davils/kheck/api/LogLevel;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (Ljava/lang/String;Lcom/davils/kheck/api/LogLevel;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun child (Ljava/lang/String;)Lcom/davils/kheck/api/Logger;
+	public final fun clear ()V
+	public fun emit (Lcom/davils/kheck/api/LogLevel;Lcom/davils/kheck/api/record/LogEvent;)V
+	public final fun getEntries ()Ljava/util/List;
+	public final fun getEvents ()Ljava/util/List;
+	public final fun getLevels ()Ljava/util/List;
+	public final fun getMessages ()Ljava/util/List;
+	public fun getName-1ZE8LlY ()Ljava/lang/String;
+	public fun isEnabled (Lcom/davils/kheck/api/LogLevel;)Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class com/davils/kheck/testing/SinkCall {
+}
+
+public final class com/davils/kheck/testing/SinkCall$Close : com/davils/kheck/testing/SinkCall {
+	public static final field INSTANCE Lcom/davils/kheck/testing/SinkCall$Close;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/kheck/testing/SinkCall$Flush : com/davils/kheck/testing/SinkCall {
+	public static final field INSTANCE Lcom/davils/kheck/testing/SinkCall$Flush;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/kheck/testing/SinkCall$Open : com/davils/kheck/testing/SinkCall {
+	public static final field INSTANCE Lcom/davils/kheck/testing/SinkCall$Open;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/kheck/testing/SinkCall$Write : com/davils/kheck/testing/SinkCall {
+	public fun <init> (I)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getLines ()I
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
