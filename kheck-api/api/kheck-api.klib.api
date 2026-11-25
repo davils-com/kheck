@@ -1,0 +1,249 @@
+// Klib ABI Dump
+// Targets: [wasmJs]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <com.davils:kheck-api>
+final enum class com.davils.kheck.api/LogLevel : kotlin/Enum<com.davils.kheck.api/LogLevel> { // com.davils.kheck.api/LogLevel|null[0]
+    enum entry Debug // com.davils.kheck.api/LogLevel.Debug|null[0]
+    enum entry Error // com.davils.kheck.api/LogLevel.Error|null[0]
+    enum entry Info // com.davils.kheck.api/LogLevel.Info|null[0]
+    enum entry Off // com.davils.kheck.api/LogLevel.Off|null[0]
+    enum entry Trace // com.davils.kheck.api/LogLevel.Trace|null[0]
+    enum entry Warn // com.davils.kheck.api/LogLevel.Warn|null[0]
+
+    final val entries // com.davils.kheck.api/LogLevel.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.kheck.api/LogLevel> // com.davils.kheck.api/LogLevel.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun isAtLeast(com.davils.kheck.api/LogLevel): kotlin/Boolean // com.davils.kheck.api/LogLevel.isAtLeast|isAtLeast(com.davils.kheck.api.LogLevel){}[0]
+    final fun valueOf(kotlin/String): com.davils.kheck.api/LogLevel // com.davils.kheck.api/LogLevel.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.kheck.api/LogLevel> // com.davils.kheck.api/LogLevel.values|values#static(){}[0]
+}
+
+abstract interface com.davils.kheck.api/Logger { // com.davils.kheck.api/Logger|null[0]
+    abstract val name // com.davils.kheck.api/Logger.name|{}name[0]
+        abstract fun <get-name>(): com.davils.kheck.api/LoggerName // com.davils.kheck.api/Logger.name.<get-name>|<get-name>(){}[0]
+
+    abstract fun child(kotlin/String): com.davils.kheck.api/Logger // com.davils.kheck.api/Logger.child|child(kotlin.String){}[0]
+    abstract fun emit(com.davils.kheck.api/LogLevel, com.davils.kheck.api.record/LogEvent) // com.davils.kheck.api/Logger.emit|emit(com.davils.kheck.api.LogLevel;com.davils.kheck.api.record.LogEvent){}[0]
+    abstract fun isEnabled(com.davils.kheck.api/LogLevel): kotlin/Boolean // com.davils.kheck.api/Logger.isEnabled|isEnabled(com.davils.kheck.api.LogLevel){}[0]
+
+    final object None : com.davils.kheck.api/Logger { // com.davils.kheck.api/Logger.None|null[0]
+        final val name // com.davils.kheck.api/Logger.None.name|{}name[0]
+            final fun <get-name>(): com.davils.kheck.api/LoggerName // com.davils.kheck.api/Logger.None.name.<get-name>|<get-name>(){}[0]
+
+        final fun child(kotlin/String): com.davils.kheck.api/Logger // com.davils.kheck.api/Logger.None.child|child(kotlin.String){}[0]
+        final fun emit(com.davils.kheck.api/LogLevel, com.davils.kheck.api.record/LogEvent) // com.davils.kheck.api/Logger.None.emit|emit(com.davils.kheck.api.LogLevel;com.davils.kheck.api.record.LogEvent){}[0]
+        final fun isEnabled(com.davils.kheck.api/LogLevel): kotlin/Boolean // com.davils.kheck.api/Logger.None.isEnabled|isEnabled(com.davils.kheck.api.LogLevel){}[0]
+    }
+}
+
+sealed interface com.davils.kheck.api.record/LogValue { // com.davils.kheck.api.record/LogValue|null[0]
+    final class Bool : com.davils.kheck.api.record/LogValue { // com.davils.kheck.api.record/LogValue.Bool|null[0]
+        constructor <init>(kotlin/Boolean) // com.davils.kheck.api.record/LogValue.Bool.<init>|<init>(kotlin.Boolean){}[0]
+
+        final val isTrue // com.davils.kheck.api.record/LogValue.Bool.isTrue|{}isTrue[0]
+            final fun <get-isTrue>(): kotlin/Boolean // com.davils.kheck.api.record/LogValue.Bool.isTrue.<get-isTrue>|<get-isTrue>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.kheck.api.record/LogValue.Bool.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.kheck.api.record/LogValue.Bool.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.davils.kheck.api.record/LogValue.Bool.toString|toString(){}[0]
+    }
+
+    final class Decimal : com.davils.kheck.api.record/LogValue { // com.davils.kheck.api.record/LogValue.Decimal|null[0]
+        constructor <init>(kotlin/Double) // com.davils.kheck.api.record/LogValue.Decimal.<init>|<init>(kotlin.Double){}[0]
+
+        final val value // com.davils.kheck.api.record/LogValue.Decimal.value|{}value[0]
+            final fun <get-value>(): kotlin/Double // com.davils.kheck.api.record/LogValue.Decimal.value.<get-value>|<get-value>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.kheck.api.record/LogValue.Decimal.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.kheck.api.record/LogValue.Decimal.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.davils.kheck.api.record/LogValue.Decimal.toString|toString(){}[0]
+    }
+
+    final class Elapsed : com.davils.kheck.api.record/LogValue { // com.davils.kheck.api.record/LogValue.Elapsed|null[0]
+        constructor <init>(kotlin.time/Duration) // com.davils.kheck.api.record/LogValue.Elapsed.<init>|<init>(kotlin.time.Duration){}[0]
+
+        final val duration // com.davils.kheck.api.record/LogValue.Elapsed.duration|{}duration[0]
+            final fun <get-duration>(): kotlin.time/Duration // com.davils.kheck.api.record/LogValue.Elapsed.duration.<get-duration>|<get-duration>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.kheck.api.record/LogValue.Elapsed.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.kheck.api.record/LogValue.Elapsed.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.davils.kheck.api.record/LogValue.Elapsed.toString|toString(){}[0]
+    }
+
+    final class Entries : com.davils.kheck.api.record/LogValue { // com.davils.kheck.api.record/LogValue.Entries|null[0]
+        constructor <init>(kotlin.collections/Map<kotlin/String, com.davils.kheck.api.record/LogValue>) // com.davils.kheck.api.record/LogValue.Entries.<init>|<init>(kotlin.collections.Map<kotlin.String,com.davils.kheck.api.record.LogValue>){}[0]
+
+        final val values // com.davils.kheck.api.record/LogValue.Entries.values|{}values[0]
+            final fun <get-values>(): kotlin.collections/Map<kotlin/String, com.davils.kheck.api.record/LogValue> // com.davils.kheck.api.record/LogValue.Entries.values.<get-values>|<get-values>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.kheck.api.record/LogValue.Entries.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.kheck.api.record/LogValue.Entries.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.davils.kheck.api.record/LogValue.Entries.toString|toString(){}[0]
+    }
+
+    final class Integer : com.davils.kheck.api.record/LogValue { // com.davils.kheck.api.record/LogValue.Integer|null[0]
+        constructor <init>(kotlin/Long) // com.davils.kheck.api.record/LogValue.Integer.<init>|<init>(kotlin.Long){}[0]
+
+        final val value // com.davils.kheck.api.record/LogValue.Integer.value|{}value[0]
+            final fun <get-value>(): kotlin/Long // com.davils.kheck.api.record/LogValue.Integer.value.<get-value>|<get-value>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.kheck.api.record/LogValue.Integer.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.kheck.api.record/LogValue.Integer.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.davils.kheck.api.record/LogValue.Integer.toString|toString(){}[0]
+    }
+
+    final class Items : com.davils.kheck.api.record/LogValue { // com.davils.kheck.api.record/LogValue.Items|null[0]
+        constructor <init>(kotlin.collections/List<com.davils.kheck.api.record/LogValue>) // com.davils.kheck.api.record/LogValue.Items.<init>|<init>(kotlin.collections.List<com.davils.kheck.api.record.LogValue>){}[0]
+
+        final val values // com.davils.kheck.api.record/LogValue.Items.values|{}values[0]
+            final fun <get-values>(): kotlin.collections/List<com.davils.kheck.api.record/LogValue> // com.davils.kheck.api.record/LogValue.Items.values.<get-values>|<get-values>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.kheck.api.record/LogValue.Items.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.kheck.api.record/LogValue.Items.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.davils.kheck.api.record/LogValue.Items.toString|toString(){}[0]
+    }
+
+    final class Text : com.davils.kheck.api.record/LogValue { // com.davils.kheck.api.record/LogValue.Text|null[0]
+        constructor <init>(kotlin/String) // com.davils.kheck.api.record/LogValue.Text.<init>|<init>(kotlin.String){}[0]
+
+        final val value // com.davils.kheck.api.record/LogValue.Text.value|{}value[0]
+            final fun <get-value>(): kotlin/String // com.davils.kheck.api.record/LogValue.Text.value.<get-value>|<get-value>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.kheck.api.record/LogValue.Text.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.kheck.api.record/LogValue.Text.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.davils.kheck.api.record/LogValue.Text.toString|toString(){}[0]
+    }
+
+    final class Timestamp : com.davils.kheck.api.record/LogValue { // com.davils.kheck.api.record/LogValue.Timestamp|null[0]
+        constructor <init>(kotlin.time/Instant) // com.davils.kheck.api.record/LogValue.Timestamp.<init>|<init>(kotlin.time.Instant){}[0]
+
+        final val instant // com.davils.kheck.api.record/LogValue.Timestamp.instant|{}instant[0]
+            final fun <get-instant>(): kotlin.time/Instant // com.davils.kheck.api.record/LogValue.Timestamp.instant.<get-instant>|<get-instant>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.kheck.api.record/LogValue.Timestamp.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.kheck.api.record/LogValue.Timestamp.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.davils.kheck.api.record/LogValue.Timestamp.toString|toString(){}[0]
+    }
+
+    final object Null : com.davils.kheck.api.record/LogValue { // com.davils.kheck.api.record/LogValue.Null|null[0]
+        final fun toString(): kotlin/String // com.davils.kheck.api.record/LogValue.Null.toString|toString(){}[0]
+    }
+
+    final object Secret : com.davils.kheck.api.record/LogValue { // com.davils.kheck.api.record/LogValue.Secret|null[0]
+        final fun toString(): kotlin/String // com.davils.kheck.api.record/LogValue.Secret.toString|toString(){}[0]
+    }
+}
+
+final class com.davils.kheck.api.record/LogEvent { // com.davils.kheck.api.record/LogEvent|null[0]
+    constructor <init>(kotlin/String, kotlin.collections/Map<kotlin/String, com.davils.kheck.api.record/LogValue> = ..., kotlin/Throwable? = ..., kotlin.collections/Set<com.davils.kheck.api.record/LogMarker> = ..., kotlin/Int = ...) // com.davils.kheck.api.record/LogEvent.<init>|<init>(kotlin.String;kotlin.collections.Map<kotlin.String,com.davils.kheck.api.record.LogValue>;kotlin.Throwable?;kotlin.collections.Set<com.davils.kheck.api.record.LogMarker>;kotlin.Int){}[0]
+
+    final val cause // com.davils.kheck.api.record/LogEvent.cause|{}cause[0]
+        final fun <get-cause>(): kotlin/Throwable? // com.davils.kheck.api.record/LogEvent.cause.<get-cause>|<get-cause>(){}[0]
+    final val fields // com.davils.kheck.api.record/LogEvent.fields|{}fields[0]
+        final fun <get-fields>(): kotlin.collections/Map<kotlin/String, com.davils.kheck.api.record/LogValue> // com.davils.kheck.api.record/LogEvent.fields.<get-fields>|<get-fields>(){}[0]
+    final val markers // com.davils.kheck.api.record/LogEvent.markers|{}markers[0]
+        final fun <get-markers>(): kotlin.collections/Set<com.davils.kheck.api.record/LogMarker> // com.davils.kheck.api.record/LogEvent.markers.<get-markers>|<get-markers>(){}[0]
+    final val message // com.davils.kheck.api.record/LogEvent.message|{}message[0]
+        final fun <get-message>(): kotlin/String // com.davils.kheck.api.record/LogEvent.message.<get-message>|<get-message>(){}[0]
+    final val omitted // com.davils.kheck.api.record/LogEvent.omitted|{}omitted[0]
+        final fun <get-omitted>(): kotlin/Int // com.davils.kheck.api.record/LogEvent.omitted.<get-omitted>|<get-omitted>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.kheck.api.record/LogEvent.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.kheck.api.record/LogEvent.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.kheck.api.record/LogEvent.toString|toString(){}[0]
+}
+
+final class com.davils.kheck.api.record/LogEventBuilder : com.davils.kheck.api.record/LogFieldsBuilder { // com.davils.kheck.api.record/LogEventBuilder|null[0]
+    constructor <init>() // com.davils.kheck.api.record/LogEventBuilder.<init>|<init>(){}[0]
+
+    final fun build(kotlin/String): com.davils.kheck.api.record/LogEvent // com.davils.kheck.api.record/LogEventBuilder.build|build(kotlin.String){}[0]
+    final fun cause(kotlin/Throwable) // com.davils.kheck.api.record/LogEventBuilder.cause|cause(kotlin.Throwable){}[0]
+    final fun marker(com.davils.kheck.api.record/LogMarker) // com.davils.kheck.api.record/LogEventBuilder.marker|marker(com.davils.kheck.api.record.LogMarker){}[0]
+}
+
+final value class com.davils.kheck.api.record/LogMarker { // com.davils.kheck.api.record/LogMarker|null[0]
+    constructor <init>(kotlin/String) // com.davils.kheck.api.record/LogMarker.<init>|<init>(kotlin.String){}[0]
+
+    final val name // com.davils.kheck.api.record/LogMarker.name|{}name[0]
+        final fun <get-name>(): kotlin/String // com.davils.kheck.api.record/LogMarker.name.<get-name>|<get-name>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.kheck.api.record/LogMarker.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.kheck.api.record/LogMarker.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.kheck.api.record/LogMarker.toString|toString(){}[0]
+
+    final object Companion { // com.davils.kheck.api.record/LogMarker.Companion|null[0]
+        final val AUDIT // com.davils.kheck.api.record/LogMarker.Companion.AUDIT|{}AUDIT[0]
+            final fun <get-AUDIT>(): com.davils.kheck.api.record/LogMarker // com.davils.kheck.api.record/LogMarker.Companion.AUDIT.<get-AUDIT>|<get-AUDIT>(){}[0]
+        final val SECURITY // com.davils.kheck.api.record/LogMarker.Companion.SECURITY|{}SECURITY[0]
+            final fun <get-SECURITY>(): com.davils.kheck.api.record/LogMarker // com.davils.kheck.api.record/LogMarker.Companion.SECURITY.<get-SECURITY>|<get-SECURITY>(){}[0]
+    }
+}
+
+final value class com.davils.kheck.api/LoggerName { // com.davils.kheck.api/LoggerName|null[0]
+    constructor <init>(kotlin/String) // com.davils.kheck.api/LoggerName.<init>|<init>(kotlin.String){}[0]
+
+    final val isRoot // com.davils.kheck.api/LoggerName.isRoot|{}isRoot[0]
+        final fun <get-isRoot>(): kotlin/Boolean // com.davils.kheck.api/LoggerName.isRoot.<get-isRoot>|<get-isRoot>(){}[0]
+    final val parent // com.davils.kheck.api/LoggerName.parent|{}parent[0]
+        final fun <get-parent>(): com.davils.kheck.api/LoggerName? // com.davils.kheck.api/LoggerName.parent.<get-parent>|<get-parent>(){}[0]
+    final val value // com.davils.kheck.api/LoggerName.value|{}value[0]
+        final fun <get-value>(): kotlin/String // com.davils.kheck.api/LoggerName.value.<get-value>|<get-value>(){}[0]
+
+    final fun child(kotlin/String): com.davils.kheck.api/LoggerName // com.davils.kheck.api/LoggerName.child|child(kotlin.String){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.kheck.api/LoggerName.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.kheck.api/LoggerName.hashCode|hashCode(){}[0]
+    final fun isWithin(com.davils.kheck.api/LoggerName): kotlin/Boolean // com.davils.kheck.api/LoggerName.isWithin|isWithin(com.davils.kheck.api.LoggerName){}[0]
+    final fun toString(): kotlin/String // com.davils.kheck.api/LoggerName.toString|toString(){}[0]
+
+    final object Companion { // com.davils.kheck.api/LoggerName.Companion|null[0]
+        final val ROOT // com.davils.kheck.api/LoggerName.Companion.ROOT|{}ROOT[0]
+            final fun <get-ROOT>(): com.davils.kheck.api/LoggerName // com.davils.kheck.api/LoggerName.Companion.ROOT.<get-ROOT>|<get-ROOT>(){}[0]
+
+        final fun of(kotlin.reflect/KClass<*>): com.davils.kheck.api/LoggerName // com.davils.kheck.api/LoggerName.Companion.of|of(kotlin.reflect.KClass<*>){}[0]
+    }
+}
+
+open class com.davils.kheck.api.record/LogFieldsBuilder { // com.davils.kheck.api.record/LogFieldsBuilder|null[0]
+    constructor <init>() // com.davils.kheck.api.record/LogFieldsBuilder.<init>|<init>(){}[0]
+
+    final val omitted // com.davils.kheck.api.record/LogFieldsBuilder.omitted|{}omitted[0]
+        final fun <get-omitted>(): kotlin/Int // com.davils.kheck.api.record/LogFieldsBuilder.omitted.<get-omitted>|<get-omitted>(){}[0]
+
+    final fun collected(): kotlin.collections/Map<kotlin/String, com.davils.kheck.api.record/LogValue> // com.davils.kheck.api.record/LogFieldsBuilder.collected|collected(){}[0]
+    final fun duration(kotlin/String, kotlin.time/Duration) // com.davils.kheck.api.record/LogFieldsBuilder.duration|duration(kotlin.String;kotlin.time.Duration){}[0]
+    final fun field(kotlin/String, com.davils.kheck.api.record/LogValue) // com.davils.kheck.api.record/LogFieldsBuilder.field|field(kotlin.String;com.davils.kheck.api.record.LogValue){}[0]
+    final fun field(kotlin/String, kotlin/Boolean) // com.davils.kheck.api.record/LogFieldsBuilder.field|field(kotlin.String;kotlin.Boolean){}[0]
+    final fun field(kotlin/String, kotlin/Double) // com.davils.kheck.api.record/LogFieldsBuilder.field|field(kotlin.String;kotlin.Double){}[0]
+    final fun field(kotlin/String, kotlin/Int) // com.davils.kheck.api.record/LogFieldsBuilder.field|field(kotlin.String;kotlin.Int){}[0]
+    final fun field(kotlin/String, kotlin/Long) // com.davils.kheck.api.record/LogFieldsBuilder.field|field(kotlin.String;kotlin.Long){}[0]
+    final fun field(kotlin/String, kotlin/String?) // com.davils.kheck.api.record/LogFieldsBuilder.field|field(kotlin.String;kotlin.String?){}[0]
+    final fun group(kotlin/String, kotlin/Function1<com.davils.kheck.api.record/LogFieldsBuilder, kotlin/Unit>) // com.davils.kheck.api.record/LogFieldsBuilder.group|group(kotlin.String;kotlin.Function1<com.davils.kheck.api.record.LogFieldsBuilder,kotlin.Unit>){}[0]
+    final fun secret(kotlin/String) // com.davils.kheck.api.record/LogFieldsBuilder.secret|secret(kotlin.String){}[0]
+    final fun timestamp(kotlin/String, kotlin.time/Instant) // com.davils.kheck.api.record/LogFieldsBuilder.timestamp|timestamp(kotlin.String;kotlin.time.Instant){}[0]
+}
+
+final object com.davils.kheck.api/Limits { // com.davils.kheck.api/Limits|null[0]
+    final const val MAX_DEPTH // com.davils.kheck.api/Limits.MAX_DEPTH|{}MAX_DEPTH[0]
+        final fun <get-MAX_DEPTH>(): kotlin/Int // com.davils.kheck.api/Limits.MAX_DEPTH.<get-MAX_DEPTH>|<get-MAX_DEPTH>(){}[0]
+    final const val MAX_FIELDS // com.davils.kheck.api/Limits.MAX_FIELDS|{}MAX_FIELDS[0]
+        final fun <get-MAX_FIELDS>(): kotlin/Int // com.davils.kheck.api/Limits.MAX_FIELDS.<get-MAX_FIELDS>|<get-MAX_FIELDS>(){}[0]
+    final const val MAX_ITEMS // com.davils.kheck.api/Limits.MAX_ITEMS|{}MAX_ITEMS[0]
+        final fun <get-MAX_ITEMS>(): kotlin/Int // com.davils.kheck.api/Limits.MAX_ITEMS.<get-MAX_ITEMS>|<get-MAX_ITEMS>(){}[0]
+    final const val MAX_MARKERS // com.davils.kheck.api/Limits.MAX_MARKERS|{}MAX_MARKERS[0]
+        final fun <get-MAX_MARKERS>(): kotlin/Int // com.davils.kheck.api/Limits.MAX_MARKERS.<get-MAX_MARKERS>|<get-MAX_MARKERS>(){}[0]
+    final const val MAX_NAME_LENGTH // com.davils.kheck.api/Limits.MAX_NAME_LENGTH|{}MAX_NAME_LENGTH[0]
+        final fun <get-MAX_NAME_LENGTH>(): kotlin/Int // com.davils.kheck.api/Limits.MAX_NAME_LENGTH.<get-MAX_NAME_LENGTH>|<get-MAX_NAME_LENGTH>(){}[0]
+}
+
+final fun <#A: kotlin/Any, #B: kotlin/Any> (kotlin.collections/Map<#A, #B>).com.davils.kheck.api.internal/orderedCopy(): kotlin.collections/Map<#A, #B> // com.davils.kheck.api.internal/orderedCopy|orderedCopy@kotlin.collections.Map<0:0,0:1>(){0§<kotlin.Any>;1§<kotlin.Any>}[0]
+final fun <#A: kotlin/Any> (kotlin.collections/Set<#A>).com.davils.kheck.api.internal/orderedCopy(): kotlin.collections/Set<#A> // com.davils.kheck.api.internal/orderedCopy|orderedCopy@kotlin.collections.Set<0:0>(){0§<kotlin.Any>}[0]
+final inline fun (com.davils.kheck.api/Logger).com.davils.kheck.api/debug(kotlin/Function1<com.davils.kheck.api.record/LogEventBuilder, kotlin/String>) // com.davils.kheck.api/debug|debug@com.davils.kheck.api.Logger(kotlin.Function1<com.davils.kheck.api.record.LogEventBuilder,kotlin.String>){}[0]
+final inline fun (com.davils.kheck.api/Logger).com.davils.kheck.api/error(kotlin/Function1<com.davils.kheck.api.record/LogEventBuilder, kotlin/String>) // com.davils.kheck.api/error|error@com.davils.kheck.api.Logger(kotlin.Function1<com.davils.kheck.api.record.LogEventBuilder,kotlin.String>){}[0]
+final inline fun (com.davils.kheck.api/Logger).com.davils.kheck.api/info(kotlin/Function1<com.davils.kheck.api.record/LogEventBuilder, kotlin/String>) // com.davils.kheck.api/info|info@com.davils.kheck.api.Logger(kotlin.Function1<com.davils.kheck.api.record.LogEventBuilder,kotlin.String>){}[0]
+final inline fun (com.davils.kheck.api/Logger).com.davils.kheck.api/log(com.davils.kheck.api/LogLevel, kotlin/Function1<com.davils.kheck.api.record/LogEventBuilder, kotlin/String>) // com.davils.kheck.api/log|log@com.davils.kheck.api.Logger(com.davils.kheck.api.LogLevel;kotlin.Function1<com.davils.kheck.api.record.LogEventBuilder,kotlin.String>){}[0]
+final inline fun (com.davils.kheck.api/Logger).com.davils.kheck.api/trace(kotlin/Function1<com.davils.kheck.api.record/LogEventBuilder, kotlin/String>) // com.davils.kheck.api/trace|trace@com.davils.kheck.api.Logger(kotlin.Function1<com.davils.kheck.api.record.LogEventBuilder,kotlin.String>){}[0]
+final inline fun (com.davils.kheck.api/Logger).com.davils.kheck.api/warn(kotlin/Function1<com.davils.kheck.api.record/LogEventBuilder, kotlin/String>) // com.davils.kheck.api/warn|warn@com.davils.kheck.api.Logger(kotlin.Function1<com.davils.kheck.api.record.LogEventBuilder,kotlin.String>){}[0]

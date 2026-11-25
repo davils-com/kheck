@@ -1,0 +1,208 @@
+public final class com/davils/kheck/api/Limits {
+	public static final field INSTANCE Lcom/davils/kheck/api/Limits;
+	public static final field MAX_DEPTH I
+	public static final field MAX_FIELDS I
+	public static final field MAX_ITEMS I
+	public static final field MAX_MARKERS I
+	public static final field MAX_NAME_LENGTH I
+}
+
+public final class com/davils/kheck/api/LogLevel : java/lang/Enum {
+	public static final field Debug Lcom/davils/kheck/api/LogLevel;
+	public static final field Error Lcom/davils/kheck/api/LogLevel;
+	public static final field Info Lcom/davils/kheck/api/LogLevel;
+	public static final field Off Lcom/davils/kheck/api/LogLevel;
+	public static final field Trace Lcom/davils/kheck/api/LogLevel;
+	public static final field Warn Lcom/davils/kheck/api/LogLevel;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public final fun isAtLeast (Lcom/davils/kheck/api/LogLevel;)Z
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/kheck/api/LogLevel;
+	public static fun values ()[Lcom/davils/kheck/api/LogLevel;
+}
+
+public abstract interface class com/davils/kheck/api/Logger {
+	public static final field None Lcom/davils/kheck/api/Logger$None;
+	public abstract fun child (Ljava/lang/String;)Lcom/davils/kheck/api/Logger;
+	public abstract fun emit (Lcom/davils/kheck/api/LogLevel;Lcom/davils/kheck/api/record/LogEvent;)V
+	public abstract fun getName-1ZE8LlY ()Ljava/lang/String;
+	public abstract fun isEnabled (Lcom/davils/kheck/api/LogLevel;)Z
+}
+
+public final class com/davils/kheck/api/Logger$None : com/davils/kheck/api/Logger {
+	public fun child (Ljava/lang/String;)Lcom/davils/kheck/api/Logger;
+	public fun emit (Lcom/davils/kheck/api/LogLevel;Lcom/davils/kheck/api/record/LogEvent;)V
+	public fun getName-1ZE8LlY ()Ljava/lang/String;
+	public fun isEnabled (Lcom/davils/kheck/api/LogLevel;)Z
+}
+
+public final class com/davils/kheck/api/LoggerName {
+	public static final field Companion Lcom/davils/kheck/api/LoggerName$Companion;
+	public static final synthetic fun box-impl (Ljava/lang/String;)Lcom/davils/kheck/api/LoggerName;
+	public static final fun child-c8UPuFk (Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+	public static fun constructor-impl (Ljava/lang/String;)Ljava/lang/String;
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (Ljava/lang/String;Ljava/lang/Object;)Z
+	public static final fun equals-impl0 (Ljava/lang/String;Ljava/lang/String;)Z
+	public static final fun getParent-rooWk7w (Ljava/lang/String;)Ljava/lang/String;
+	public final fun getValue ()Ljava/lang/String;
+	public fun hashCode ()I
+	public static fun hashCode-impl (Ljava/lang/String;)I
+	public static final fun isRoot-impl (Ljava/lang/String;)Z
+	public static final fun isWithin-H2F9LFU (Ljava/lang/String;Ljava/lang/String;)Z
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (Ljava/lang/String;)Ljava/lang/String;
+	public final synthetic fun unbox-impl ()Ljava/lang/String;
+}
+
+public final class com/davils/kheck/api/LoggerName$Companion {
+	public final fun getROOT-1ZE8LlY ()Ljava/lang/String;
+	public final fun of-c8UPuFk (Lkotlin/reflect/KClass;)Ljava/lang/String;
+}
+
+public final class com/davils/kheck/api/LoggersKt {
+	public static final fun debug (Lcom/davils/kheck/api/Logger;Lkotlin/jvm/functions/Function1;)V
+	public static final fun error (Lcom/davils/kheck/api/Logger;Lkotlin/jvm/functions/Function1;)V
+	public static final fun info (Lcom/davils/kheck/api/Logger;Lkotlin/jvm/functions/Function1;)V
+	public static final fun log (Lcom/davils/kheck/api/Logger;Lcom/davils/kheck/api/LogLevel;Lkotlin/jvm/functions/Function1;)V
+	public static final fun trace (Lcom/davils/kheck/api/Logger;Lkotlin/jvm/functions/Function1;)V
+	public static final fun warn (Lcom/davils/kheck/api/Logger;Lkotlin/jvm/functions/Function1;)V
+}
+
+public final class com/davils/kheck/api/internal/OrderedCopiesKt {
+	public static final fun orderedCopy (Ljava/util/Map;)Ljava/util/Map;
+	public static final fun orderedCopy (Ljava/util/Set;)Ljava/util/Set;
+}
+
+public final class com/davils/kheck/api/record/LogEvent {
+	public fun <init> (Ljava/lang/String;Ljava/util/Map;Ljava/lang/Throwable;Ljava/util/Set;I)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/util/Map;Ljava/lang/Throwable;Ljava/util/Set;IILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCause ()Ljava/lang/Throwable;
+	public final fun getFields ()Ljava/util/Map;
+	public final fun getMarkers ()Ljava/util/Set;
+	public final fun getMessage ()Ljava/lang/String;
+	public final fun getOmitted ()I
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/kheck/api/record/LogEventBuilder : com/davils/kheck/api/record/LogFieldsBuilder {
+	public fun <init> ()V
+	public final fun build (Ljava/lang/String;)Lcom/davils/kheck/api/record/LogEvent;
+	public final fun cause (Ljava/lang/Throwable;)V
+	public final fun marker-3uOCNiw (Ljava/lang/String;)V
+}
+
+public class com/davils/kheck/api/record/LogFieldsBuilder {
+	public fun <init> ()V
+	public final fun collected ()Ljava/util/Map;
+	public final fun duration-HG0u8IE (Ljava/lang/String;J)V
+	public final fun field (Ljava/lang/String;D)V
+	public final fun field (Ljava/lang/String;I)V
+	public final fun field (Ljava/lang/String;J)V
+	public final fun field (Ljava/lang/String;Lcom/davils/kheck/api/record/LogValue;)V
+	public final fun field (Ljava/lang/String;Ljava/lang/String;)V
+	public final fun field (Ljava/lang/String;Z)V
+	public final fun getOmitted ()I
+	public final fun group (Ljava/lang/String;Lkotlin/jvm/functions/Function1;)V
+	public final fun secret (Ljava/lang/String;)V
+	public final fun timestamp (Ljava/lang/String;Lkotlin/time/Instant;)V
+}
+
+public final class com/davils/kheck/api/record/LogMarker {
+	public static final field Companion Lcom/davils/kheck/api/record/LogMarker$Companion;
+	public static final synthetic fun box-impl (Ljava/lang/String;)Lcom/davils/kheck/api/record/LogMarker;
+	public static fun constructor-impl (Ljava/lang/String;)Ljava/lang/String;
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (Ljava/lang/String;Ljava/lang/Object;)Z
+	public static final fun equals-impl0 (Ljava/lang/String;Ljava/lang/String;)Z
+	public final fun getName ()Ljava/lang/String;
+	public fun hashCode ()I
+	public static fun hashCode-impl (Ljava/lang/String;)I
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (Ljava/lang/String;)Ljava/lang/String;
+	public final synthetic fun unbox-impl ()Ljava/lang/String;
+}
+
+public final class com/davils/kheck/api/record/LogMarker$Companion {
+	public final fun getAUDIT-FmJ1dkI ()Ljava/lang/String;
+	public final fun getSECURITY-FmJ1dkI ()Ljava/lang/String;
+}
+
+public abstract interface class com/davils/kheck/api/record/LogValue {
+}
+
+public final class com/davils/kheck/api/record/LogValue$Bool : com/davils/kheck/api/record/LogValue {
+	public fun <init> (Z)V
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public final fun isTrue ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/kheck/api/record/LogValue$Decimal : com/davils/kheck/api/record/LogValue {
+	public fun <init> (D)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getValue ()D
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/kheck/api/record/LogValue$Elapsed : com/davils/kheck/api/record/LogValue {
+	public synthetic fun <init> (JLkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getDuration-UwyO8pc ()J
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/kheck/api/record/LogValue$Entries : com/davils/kheck/api/record/LogValue {
+	public fun <init> (Ljava/util/Map;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getValues ()Ljava/util/Map;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/kheck/api/record/LogValue$Integer : com/davils/kheck/api/record/LogValue {
+	public fun <init> (J)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getValue ()J
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/kheck/api/record/LogValue$Items : com/davils/kheck/api/record/LogValue {
+	public fun <init> (Ljava/util/List;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getValues ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/kheck/api/record/LogValue$Null : com/davils/kheck/api/record/LogValue {
+	public static final field INSTANCE Lcom/davils/kheck/api/record/LogValue$Null;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/kheck/api/record/LogValue$Secret : com/davils/kheck/api/record/LogValue {
+	public static final field INSTANCE Lcom/davils/kheck/api/record/LogValue$Secret;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/kheck/api/record/LogValue$Text : com/davils/kheck/api/record/LogValue {
+	public fun <init> (Ljava/lang/String;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getValue ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/kheck/api/record/LogValue$Timestamp : com/davils/kheck/api/record/LogValue {
+	public fun <init> (Lkotlin/time/Instant;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getInstant ()Lkotlin/time/Instant;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
