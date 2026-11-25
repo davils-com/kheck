@@ -1,0 +1,8 @@
+public final class com/davils/kheck/jul/JulBridge : java/lang/AutoCloseable {
+	public fun close ()V
+}
+
+public final class com/davils/kheck/jul/JulBridgesKt {
+	public static final fun bridgeJul (Lcom/davils/kheck/core/Logging;Lkotlinx/coroutines/CoroutineScope;)Lcom/davils/kheck/jul/JulBridge;
+}
+
