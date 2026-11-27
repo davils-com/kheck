@@ -5,14 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 1.0.0 - 2026-11-26
+## 1.0.0 - 2026-11-27
 
-The first version of kheck: the logging library of Davils as an open source library under the Apache License 2.0,
-for Kotlin on the JVM and on `wasmJs`, built with Kreate 5.4.1 on Kore 2.3.2 and published to
-`https://repo.davils.com`. The code comes from the logging of an internal Davils project and builds on the Davils
-libraries that replace its common modules: kontinuity for the resilience of sinks, krypt for keys and MACs, knot for
-the environment, the platform and the shutdown, konfetti for events and kollect for meters and health. kheck writes no
-file: a sink of the application decides where records go.
+The first version of kheck: the logging library of Davils as an open source library under the Apache License 2.0, for
+Kotlin on the JVM and on `wasmJs`, built with Kreate 5.5.2 and Gradle 9.9.2 on Kore 2.5.0, konfetti 1.1.0, kollect
+1.1.0, kontinuity 1.2.0, krypt 1.2.0 and Knot 1.2.0 and published to `https://repo.davils.com`. The code comes from the
+logging of an internal Davils project and builds on the Davils libraries that replace its common modules: kontinuity for
+the resilience of sinks, krypt for keys and MACs, knot for the environment, the platform and the shutdown, konfetti for
+events and kollect for meters and health. kheck writes no file: a sink of the application decides where records go.
 
 ### Added
 
@@ -23,7 +23,10 @@ file: a sink of the application decides where records go.
 - **The engine** in `kheck-core`: a bounded intake, routing through a hierarchy of loggers with additive sinks,
   overrides of levels at runtime, reconfiguration, filters, enrichment, the log context of coroutines through
   `withLogContext` and `logContext`, masking of sensitive names and patterns with full, partial, fixed, removing and
-  hashing masks, deterministic sampling, deduplication and rate limits, and callers located on the JVM.
+  hashing masks, deterministic sampling, deduplication and rate limits, and callers located on the JVM. A rate limit
+  per key is a keyed rate limiter of kontinuity with a token bucket per key, which refuses the records of a new key
+  while every counted key is in use, so a flood of keys cannot lift it; the routes of loggers are kept in a cache of
+  kontinuity.
 - **Layouts**: the plain layout with segments, frames, affixes, stack traces and the themes `Default`, `Monochrome`,
   `Muted` and `HighContrast` in ANSI colors from 16 colors to true color, changed through `PlainTheme.derived { }`,
   and JSON layouts for kheck, the Elastic Common Schema, Logstash and OpenTelemetry; every foreign text escaped where
