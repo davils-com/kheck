@@ -67,6 +67,11 @@ public final class com/davils/kheck/testing/LogRecordsKt {
 	public static synthetic fun logRecord$default (Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/davils/kheck/core/record/LogRecord;
 }
 
+public final class com/davils/kheck/testing/LogSinkContract {
+	public static final field INSTANCE Lcom/davils/kheck/testing/LogSinkContract;
+	public final fun verify (Lkotlin/jvm/functions/Function0;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
 public final class com/davils/kheck/testing/LoggedEvent {
 	public synthetic fun <init> (Lcom/davils/kheck/api/LogLevel;Lcom/davils/kheck/api/record/LogEvent;Ljava/lang/String;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public fun equals (Ljava/lang/Object;)Z

@@ -157,4 +157,8 @@ final class com.davils.kheck.testing/RecordingLogger : com.davils.kheck.api/Logg
     final fun toString(): kotlin/String // com.davils.kheck.testing/RecordingLogger.toString|toString(){}[0]
 }
 
+final object com.davils.kheck.testing/LogSinkContract { // com.davils.kheck.testing/LogSinkContract|null[0]
+    final suspend fun verify(kotlin/Function0<com.davils.kheck.core.sink/LogSink>): kotlin.collections/List<kotlin/String> // com.davils.kheck.testing/LogSinkContract.verify|verify(kotlin.Function0<com.davils.kheck.core.sink.LogSink>){}[0]
+}
+
 final fun com.davils.kheck.testing/logRecord(kotlin/Function1<com.davils.kheck.testing/LogRecordBuilder, kotlin/Unit> = ...): com.davils.kheck.core.record/LogRecord // com.davils.kheck.testing/logRecord|logRecord(kotlin.Function1<com.davils.kheck.testing.LogRecordBuilder,kotlin.Unit>){}[0]
