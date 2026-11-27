@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 1.0.3 - 2026-11-27
+
+### Fixed
+
+- **The release is complete.** The repository timed out while 1.0.2 was published and then refused to take its
+  artifacts again, so 1.0.2 exists only in part; use 1.0.3, which carries everything listed under 1.0.2.
+
 ## 1.0.2 - 2026-11-27
 
 ### Changed
