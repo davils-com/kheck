@@ -19,6 +19,9 @@ package com.davils.kheck.core.engine.route
 import com.davils.kheck.api.LoggerName
 import com.davils.kheck.core.LoggingConfiguration
 import com.davils.kheck.core.route.LoggerConfiguration
+import com.davils.kontinuity.cache.Cache
+import com.davils.kontinuity.cache.Eviction
+import com.davils.kontinuity.cache.cache
 
 internal class Router(configuration: LoggingConfiguration) {
     private val configured: Map<LoggerName, LoggerConfiguration> =
@@ -29,14 +32,16 @@ internal class Router(configuration: LoggingConfiguration) {
             .filterNot { definition -> definition.options.isExclusive }
             .map { definition -> definition.name }
 
-    private val cache = HashMap<LoggerName, List<String>>()
+    private val cache: Cache<LoggerName, List<String>> = cache(name = CACHE_NAME) {
+        maximumSize = MAX_CACHED
+        eviction = Eviction.Lru
+    }
 
     fun sinks(name: LoggerName): List<String> {
         val cached = cache[name]
         if (cached != null) return cached
-        if (cache.size >= MAX_CACHED) cache.clear()
         val resolved = resolved(name)
-        cache[name] = resolved
+        cache.put(name, resolved)
         return resolved
     }
 
@@ -53,5 +58,6 @@ internal class Router(configuration: LoggingConfiguration) {
 
     private companion object {
         private const val MAX_CACHED: Int = 8_192
+        private const val CACHE_NAME: String = "kheck-routes"
     }
 }
