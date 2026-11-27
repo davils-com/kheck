@@ -16,6 +16,7 @@
 
 package com.davils.kheck.api
 
+import com.davils.kore.core.annotation.DavilsInternal
 import com.davils.kore.testing.HostileFragments
 import com.davils.kore.testing.isSafeToShow
 import io.kotest.assertions.throwables.shouldThrow
@@ -72,6 +73,14 @@ class LoggerNameTest : FunSpec({
         test("refuse a name longer than the limit") {
             shouldThrow<IllegalArgumentException> { LoggerName("a".repeat(Limits.MAX_NAME_LENGTH + 1)) }
             LoggerName("a".repeat(Limits.MAX_NAME_LENGTH)).value.length shouldBe Limits.MAX_NAME_LENGTH
+        }
+
+        @OptIn(DavilsInternal::class)
+        test("shorten a bounded name instead of refusing it") {
+            val long = "b".repeat(Limits.MAX_NAME_LENGTH + 7)
+
+            LoggerName.bounded(long).value shouldBe "b".repeat(Limits.MAX_NAME_LENGTH)
+            LoggerName.bounded(SERVICE).value shouldBe SERVICE
         }
     }
 

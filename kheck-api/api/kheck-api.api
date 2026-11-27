@@ -55,6 +55,7 @@ public final class com/davils/kheck/api/LoggerName {
 }
 
 public final class com/davils/kheck/api/LoggerName$Companion {
+	public final fun bounded-c8UPuFk (Ljava/lang/String;)Ljava/lang/String;
 	public final fun getROOT-1ZE8LlY ()Ljava/lang/String;
 	public final fun of-c8UPuFk (Lkotlin/reflect/KClass;)Ljava/lang/String;
 }

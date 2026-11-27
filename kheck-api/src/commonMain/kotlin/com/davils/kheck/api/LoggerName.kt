@@ -16,6 +16,7 @@
 
 package com.davils.kheck.api
 
+import com.davils.kheck.api.internal.platform.platformNameOf
 import com.davils.kore.core.annotation.DavilsInternal
 import com.davils.kore.core.text.SafeText
 import kotlin.jvm.JvmInline
@@ -116,16 +117,30 @@ public value class LoggerName(public val value: String) {
         /**
          * Returns the name of a logger for [type]: its qualified name, without the `.Companion` of a companion object.
          *
-         * A type without a qualified name, such as a local or anonymous class, falls back to its simple name and, when
-         * it has none either, to the [ROOT].
+         * A type without a qualified name, such as a local or anonymous class, falls back to its name on the JVM,
+         * such as `com.example.Service$1`, then to its simple name and, when it has none either, to the [ROOT]. A
+         * name longer than [Limits.MAX_NAME_LENGTH] is shortened.
          *
          * @param type the class that logs.
          * @return the name for [type].
          * @since 1.0.0
          */
+        @OptIn(DavilsInternal::class)
         public fun of(type: KClass<*>): LoggerName {
-            val qualified = type.qualifiedName ?: type.simpleName ?: return ROOT
-            return LoggerName(qualified.removeSuffix(COMPANION))
+            val qualified = type.qualifiedName ?: platformNameOf(type)
+            return bounded(qualified.removeSuffix(COMPANION))
         }
+
+        /**
+         * Names a logger after [text], shortened to [Limits.MAX_NAME_LENGTH] characters instead of refused.
+         *
+         * For the bridges of other logging frameworks, whose names have no limit and whose callers must not fail.
+         *
+         * @param text the name, of any length.
+         * @return the name, at most [Limits.MAX_NAME_LENGTH] characters long.
+         * @since 1.0.0
+         */
+        @DavilsInternal
+        public fun bounded(text: String): LoggerName = LoggerName(text.take(Limits.MAX_NAME_LENGTH))
     }
 }

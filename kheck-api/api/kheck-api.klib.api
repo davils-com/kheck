@@ -203,6 +203,7 @@ final value class com.davils.kheck.api/LoggerName { // com.davils.kheck.api/Logg
         final val ROOT // com.davils.kheck.api/LoggerName.Companion.ROOT|{}ROOT[0]
             final fun <get-ROOT>(): com.davils.kheck.api/LoggerName // com.davils.kheck.api/LoggerName.Companion.ROOT.<get-ROOT>|<get-ROOT>(){}[0]
 
+        final fun bounded(kotlin/String): com.davils.kheck.api/LoggerName // com.davils.kheck.api/LoggerName.Companion.bounded|bounded(kotlin.String){}[0]
         final fun of(kotlin.reflect/KClass<*>): com.davils.kheck.api/LoggerName // com.davils.kheck.api/LoggerName.Companion.of|of(kotlin.reflect.KClass<*>){}[0]
     }
 }
