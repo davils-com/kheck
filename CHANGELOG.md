@@ -5,7 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 1.0.1 - 2026-11-27
+
+### Changed
+
+- **The review of ECMA-48 is current.** The page of the standard changed its markup; it still names the 5th edition of
+  June 1991, so nothing changes for kheck.
+
 ## 1.0.0 - 2026-11-27
+
+The pipeline of 1.0.0 stopped at the standards audit and published nothing; 1.0.1 is the first release of kheck.
 
 The first version of kheck: the logging library of Davils as an open source library under the Apache License 2.0, for
 Kotlin on the JVM and on `wasmJs`, built with Kreate 5.5.2 and Gradle 9.9.2 on Kore 2.5.0, konfetti 1.1.0, kollect
