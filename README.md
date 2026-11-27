@@ -43,7 +43,7 @@ dependencyResolutionManagement {
 ```kotlin
 // build.gradle.kts
 dependencies {
-    implementation(platform("com.davils:kheck-bom:1.0.1"))
+    implementation(platform("com.davils:kheck-bom:1.0.2"))
     implementation("com.davils:kheck-core")
     runtimeOnly("com.davils:kheck-slf4j")
     testImplementation("com.davils:kheck-testing")
