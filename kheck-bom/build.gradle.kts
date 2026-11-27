@@ -31,5 +31,6 @@ dependencies {
         api(project(":kheck-testing"))
         api(project(":kheck-slf4j"))
         api(project(":kheck-jul"))
+        api(project(":kheck-knot"))
     }
 }

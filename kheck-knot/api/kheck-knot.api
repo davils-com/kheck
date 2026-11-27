@@ -1,0 +1,12 @@
+public final class com/davils/kheck/knot/LoggingFailuresKt {
+	public static final fun failureSink (Lcom/davils/kheck/core/Logging;Ljava/lang/String;)Lcom/davils/knot/failure/sink/FailureSink;
+	public static synthetic fun failureSink$default (Lcom/davils/kheck/core/Logging;Ljava/lang/String;ILjava/lang/Object;)Lcom/davils/knot/failure/sink/FailureSink;
+}
+
+public final class com/davils/kheck/knot/LoggingShutdownsKt {
+	public static final fun adopt-exY8QGI (Lcom/davils/knot/shutdown/Shutdown;Lcom/davils/kheck/core/Logging;JLjava/lang/String;)Lcom/davils/knot/shutdown/ShutdownRegistration;
+	public static synthetic fun adopt-exY8QGI$default (Lcom/davils/knot/shutdown/Shutdown;Lcom/davils/kheck/core/Logging;JLjava/lang/String;ILjava/lang/Object;)Lcom/davils/knot/shutdown/ShutdownRegistration;
+	public static final fun logging-exY8QGI (Lcom/davils/knot/shutdown/ShutdownPlanBuilder;Lcom/davils/kheck/core/Logging;JLjava/lang/String;)V
+	public static synthetic fun logging-exY8QGI$default (Lcom/davils/knot/shutdown/ShutdownPlanBuilder;Lcom/davils/kheck/core/Logging;JLjava/lang/String;ILjava/lang/Object;)V
+}
+

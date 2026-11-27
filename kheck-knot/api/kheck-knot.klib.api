@@ -1,0 +1,11 @@
+// Klib ABI Dump
+// Targets: [wasmJs]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <com.davils:kheck-knot>
+final fun (com.davils.kheck.core/Logging).com.davils.kheck.knot/failureSink(kotlin/String = ...): com.davils.knot.failure.sink/FailureSink // com.davils.kheck.knot/failureSink|failureSink@com.davils.kheck.core.Logging(kotlin.String){}[0]
+final fun (com.davils.knot.shutdown/Shutdown).com.davils.kheck.knot/adopt(com.davils.kheck.core/Logging, kotlin.time/Duration = ..., kotlin/String = ...): com.davils.knot.shutdown/ShutdownRegistration // com.davils.kheck.knot/adopt|adopt@com.davils.knot.shutdown.Shutdown(com.davils.kheck.core.Logging;kotlin.time.Duration;kotlin.String){}[0]
+final fun (com.davils.knot.shutdown/ShutdownPlanBuilder<*>).com.davils.kheck.knot/logging(com.davils.kheck.core/Logging, kotlin.time/Duration = ..., kotlin/String = ...) // com.davils.kheck.knot/logging|logging@com.davils.knot.shutdown.ShutdownPlanBuilder<*>(com.davils.kheck.core.Logging;kotlin.time.Duration;kotlin.String){}[0]

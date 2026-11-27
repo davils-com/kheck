@@ -93,6 +93,7 @@ kreate {
                 ":kheck-testing",
                 ":kheck-slf4j",
                 ":kheck-jul",
+                ":kheck-knot",
             )
         }
 
