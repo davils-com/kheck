@@ -30,6 +30,12 @@ dependencies {
     commonMainApi(project(":kheck-api"))
     commonMainApi(libs.kotlinx.coroutines.core)
     commonMainApi(libs.kotlinx.datetime)
+    commonMainApi(libs.kontinuity.policy)
+    commonMainApi(libs.krypt.primitive)
+    commonMainApi(libs.knot.environment)
+    commonMainApi(libs.konfetti.core)
+    commonMainApi(libs.kollect.core)
+    commonMainImplementation(libs.knot.platform)
 }
 
 val testConfigurations: Set<String> = setOf("commonUnitTestImplementation", "wasmJsTestImplementation")
@@ -41,4 +47,7 @@ configurations.matching { configuration -> configuration.name in testConfigurati
 
 configurations.matching { configuration -> configuration.name in testConfigurations }.configureEach {
     dependencies.add(project.dependencies.create(libs.kotlinx.serialization.json.get()))
+    dependencies.add(project.dependencies.create(libs.kontinuity.testing.get()))
+    dependencies.add(project.dependencies.create(libs.knot.testing.get()))
+    dependencies.add(project.dependencies.create(libs.konfetti.testing.get()))
 }

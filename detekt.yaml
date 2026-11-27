@@ -94,6 +94,8 @@ libraries:
     active: true
     excludes:
       - '**/*Event.kt'
+      - '**/Closure.kt'
+      - '**/integrity/*.kt'
       - '**/*Limits.kt'
       - '**/record/LogValue.kt'
       - '**/engine/*.kt'
@@ -154,6 +156,8 @@ style:
     active: true
     excludes:
       - '**/*Event.kt'
+      - '**/Closure.kt'
+      - '**/integrity/*.kt'
       - '**/*Limits.kt'
       - '**/record/LogValue.kt'
       - '**/engine/*.kt'

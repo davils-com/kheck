@@ -3,10 +3,17 @@ kotlin = "2.4.21"
 kreate = "5.4.1"
 kore = "2.3.2"
 kollect = "1.0.0"
+konfetti = "1.0.0"
+kontinuity = "1.0.0"
+krypt = "1.0.0"
+knot = "1.0.0"
 coroutines = "1.11.0"
 serialization = "1.13.0"
 datetime = "0.8.0"
 slf4j = "2.0.20"
+# The benchmark runtime is released together with the kotlinx-benchmark plugin that Kreate brings along.
+kotlinx-benchmark = "0.5.0"
+jmh = "1.37"
 # Floors for the classpaths of build tools, raised past known vulnerabilities.
 tooling-jackson = "2.22.3"
 tooling-bouncycastle = "1.85"
@@ -17,6 +24,16 @@ kreate-gradle-plugin = { module = "com.davils.kreate:com.davils.kreate.gradle.pl
 kore-core = { module = "com.davils:kore-core", version.ref = "kore" }
 kore-testing = { module = "com.davils:kore-testing", version.ref = "kore" }
 kollect-core = { module = "com.davils:kollect-core", version.ref = "kollect" }
+konfetti-core = { module = "com.davils:konfetti-core", version.ref = "konfetti" }
+konfetti-testing = { module = "com.davils:konfetti-testing", version.ref = "konfetti" }
+kontinuity-policy = { module = "com.davils:kontinuity-policy", version.ref = "kontinuity" }
+kontinuity-testing = { module = "com.davils:kontinuity-testing", version.ref = "kontinuity" }
+krypt-primitive = { module = "com.davils:krypt-primitive", version.ref = "krypt" }
+knot-environment = { module = "com.davils:knot-environment", version.ref = "knot" }
+knot-platform = { module = "com.davils:knot-platform", version.ref = "knot" }
+knot-shutdown = { module = "com.davils:knot-shutdown", version.ref = "knot" }
+knot-failure = { module = "com.davils:knot-failure", version.ref = "knot" }
+knot-testing = { module = "com.davils:knot-testing", version.ref = "knot" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "serialization" }
