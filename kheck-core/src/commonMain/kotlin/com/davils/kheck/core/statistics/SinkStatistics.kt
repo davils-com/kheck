@@ -16,6 +16,7 @@
 
 package com.davils.kheck.core.statistics
 
+import com.davils.kontinuity.circuitbreaker.CircuitState
 import kotlin.time.Duration
 
 /**
@@ -29,6 +30,9 @@ import kotlin.time.Duration
  * @property writeTime the time the sink took for all batches.
  * @property maxWriteTime the longest time the sink took for one batch.
  * @property isFailing whether the last attempt of the sink failed.
+ * @property rejected the lines a stage of the sink refused, such as an open circuit breaker, and handed to the
+ *   fallback.
+ * @property circuit the state of the circuit breaker among the stages of the sink, or `null` without one.
  * @since 1.0.0
  */
 public class SinkStatistics internal constructor(
@@ -40,7 +44,29 @@ public class SinkStatistics internal constructor(
     public val writeTime: Duration,
     public val maxWriteTime: Duration,
     public val isFailing: Boolean,
+    public val rejected: Long = 0L,
+    public val circuit: CircuitState? = null,
 ) {
+    private val values: List<Any?>
+        get() = listOf(written, failed, dropped, queued, batches, writeTime, maxWriteTime, isFailing, rejected, circuit)
+
+    /**
+     * Compares by value: two [SinkStatistics] values are equal when every property is equal.
+     *
+     * @param other the object to compare with.
+     * @return whether [other] is an equal [SinkStatistics].
+     * @since 1.0.0
+     */
+    override fun equals(other: Any?): Boolean = other is SinkStatistics && values == other.values
+
+    /**
+     * Returns a hash code consistent with [equals].
+     *
+     * @return the hash code.
+     * @since 1.0.0
+     */
+    override fun hashCode(): Int = values.hashCode()
+
     /**
      * Shows the counters.
      *
@@ -48,5 +74,10 @@ public class SinkStatistics internal constructor(
      * @since 1.0.0
      */
     override fun toString(): String = "SinkStatistics(written=$written, failed=$failed, dropped=$dropped, " +
-        "queued=$queued, batches=$batches, writeTime=$writeTime, maxWriteTime=$maxWriteTime, isFailing=$isFailing)"
+        "queued=$queued, batches=$batches, writeTime=$writeTime, maxWriteTime=$maxWriteTime, isFailing=$isFailing, " +
+        "rejected=$rejected, circuit=${circuit ?: NONE})"
+
+    private companion object {
+        private const val NONE: String = "none"
+    }
 }

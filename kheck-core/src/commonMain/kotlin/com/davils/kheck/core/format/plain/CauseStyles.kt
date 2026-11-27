@@ -35,6 +35,25 @@ public class CauseStyles(
     public val frame: TextStyle = TextStyle.NONE,
     public val location: TextStyle = TextStyle.NONE,
 ) {
+    private val values: List<Any?> get() = listOf(type, message, label, frame, location)
+
+    /**
+     * Compares by value: two [CauseStyles] values are equal when every property is equal.
+     *
+     * @param other the object to compare with.
+     * @return whether [other] is an equal [CauseStyles].
+     * @since 1.0.0
+     */
+    override fun equals(other: Any?): Boolean = other is CauseStyles && values == other.values
+
+    /**
+     * Returns a hash code consistent with [equals].
+     *
+     * @return the hash code.
+     * @since 1.0.0
+     */
+    override fun hashCode(): Int = values.hashCode()
+
     /**
      * Shows the five styles.
      *

@@ -34,7 +34,34 @@ public sealed interface PlainSegment {
      * @property style the style of the text.
      * @since 1.0.0
      */
-    public class Text(public val value: String, public val style: SegmentStyle) : PlainSegment
+    public class Text(public val value: String, public val style: SegmentStyle) : PlainSegment {
+        private val values: List<Any?> get() = listOf(value, style)
+
+        /**
+         * Compares by value: two [Text] segments are equal when every property is equal.
+         *
+         * @param other the object to compare with.
+         * @return whether [other] is an equal [Text].
+         * @since 1.0.0
+         */
+        override fun equals(other: Any?): Boolean = other is Text && values == other.values
+
+        /**
+         * Returns a hash code consistent with [equals].
+         *
+         * @return the hash code.
+         * @since 1.0.0
+         */
+        override fun hashCode(): Int = values.hashCode()
+
+        /**
+         * Shows the properties of the segment.
+         *
+         * @return the segment as text.
+         * @since 1.0.0
+         */
+        override fun toString(): String = "Text(value=\"$value\", style=$style)"
+    }
 
     /**
      * The time of the record.
@@ -48,7 +75,34 @@ public sealed interface PlainSegment {
         public val format: TimestampFormat,
         public val frame: SegmentFrame,
         public val style: SegmentStyle,
-    ) : PlainSegment
+    ) : PlainSegment {
+        private val values: List<Any?> get() = listOf(format, frame, style)
+
+        /**
+         * Compares by value: two [Timestamp] segments are equal when every property is equal.
+         *
+         * @param other the object to compare with.
+         * @return whether [other] is an equal [Timestamp].
+         * @since 1.0.0
+         */
+        override fun equals(other: Any?): Boolean = other is Timestamp && values == other.values
+
+        /**
+         * Returns a hash code consistent with [equals].
+         *
+         * @return the hash code.
+         * @since 1.0.0
+         */
+        override fun hashCode(): Int = values.hashCode()
+
+        /**
+         * Shows the properties of the segment.
+         *
+         * @return the segment as text.
+         * @since 1.0.0
+         */
+        override fun toString(): String = "Timestamp(format=$format, frame=$frame, style=$style)"
+    }
 
     /**
      * The level of the record, in capitals.
@@ -57,7 +111,34 @@ public sealed interface PlainSegment {
      * @property style the style of the segment.
      * @since 1.0.0
      */
-    public class Level(public val frame: SegmentFrame, public val style: SegmentStyle) : PlainSegment
+    public class Level(public val frame: SegmentFrame, public val style: SegmentStyle) : PlainSegment {
+        private val values: List<Any?> get() = listOf(frame, style)
+
+        /**
+         * Compares by value: two [Level] segments are equal when every property is equal.
+         *
+         * @param other the object to compare with.
+         * @return whether [other] is an equal [Level].
+         * @since 1.0.0
+         */
+        override fun equals(other: Any?): Boolean = other is Level && values == other.values
+
+        /**
+         * Returns a hash code consistent with [equals].
+         *
+         * @return the hash code.
+         * @since 1.0.0
+         */
+        override fun hashCode(): Int = values.hashCode()
+
+        /**
+         * Shows the properties of the segment.
+         *
+         * @return the segment as text.
+         * @since 1.0.0
+         */
+        override fun toString(): String = "Level(frame=$frame, style=$style)"
+    }
 
     /**
      * The name of the thread that logged the record.
@@ -66,7 +147,34 @@ public sealed interface PlainSegment {
      * @property style the style of the segment.
      * @since 1.0.0
      */
-    public class Thread(public val frame: SegmentFrame, public val style: SegmentStyle) : PlainSegment
+    public class Thread(public val frame: SegmentFrame, public val style: SegmentStyle) : PlainSegment {
+        private val values: List<Any?> get() = listOf(frame, style)
+
+        /**
+         * Compares by value: two [Thread] segments are equal when every property is equal.
+         *
+         * @param other the object to compare with.
+         * @return whether [other] is an equal [Thread].
+         * @since 1.0.0
+         */
+        override fun equals(other: Any?): Boolean = other is Thread && values == other.values
+
+        /**
+         * Returns a hash code consistent with [equals].
+         *
+         * @return the hash code.
+         * @since 1.0.0
+         */
+        override fun hashCode(): Int = values.hashCode()
+
+        /**
+         * Shows the properties of the segment.
+         *
+         * @return the segment as text.
+         * @since 1.0.0
+         */
+        override fun toString(): String = "Thread(frame=$frame, style=$style)"
+    }
 
     /**
      * The name of the logger, shortened by abbreviating its leading packages to their first letter.
@@ -80,7 +188,34 @@ public sealed interface PlainSegment {
         public val abbreviation: Int,
         public val frame: SegmentFrame,
         public val style: SegmentStyle,
-    ) : PlainSegment
+    ) : PlainSegment {
+        private val values: List<Any?> get() = listOf(abbreviation, frame, style)
+
+        /**
+         * Compares by value: two [Logger] segments are equal when every property is equal.
+         *
+         * @param other the object to compare with.
+         * @return whether [other] is an equal [Logger].
+         * @since 1.0.0
+         */
+        override fun equals(other: Any?): Boolean = other is Logger && values == other.values
+
+        /**
+         * Returns a hash code consistent with [equals].
+         *
+         * @return the hash code.
+         * @since 1.0.0
+         */
+        override fun hashCode(): Int = values.hashCode()
+
+        /**
+         * Shows the properties of the segment.
+         *
+         * @return the segment as text.
+         * @since 1.0.0
+         */
+        override fun toString(): String = "Logger(abbreviation=$abbreviation, frame=$frame, style=$style)"
+    }
 
     /**
      * The frame that logged the record, written only when the logger locates its callers.
@@ -94,7 +229,34 @@ public sealed interface PlainSegment {
         public val affix: SegmentAffix,
         public val frame: SegmentFrame,
         public val style: SegmentStyle,
-    ) : PlainSegment
+    ) : PlainSegment {
+        private val values: List<Any?> get() = listOf(affix, frame, style)
+
+        /**
+         * Compares by value: two [Caller] segments are equal when every property is equal.
+         *
+         * @param other the object to compare with.
+         * @return whether [other] is an equal [Caller].
+         * @since 1.0.0
+         */
+        override fun equals(other: Any?): Boolean = other is Caller && values == other.values
+
+        /**
+         * Returns a hash code consistent with [equals].
+         *
+         * @return the hash code.
+         * @since 1.0.0
+         */
+        override fun hashCode(): Int = values.hashCode()
+
+        /**
+         * Shows the properties of the segment.
+         *
+         * @return the segment as text.
+         * @since 1.0.0
+         */
+        override fun toString(): String = "Caller(affix=$affix, frame=$frame, style=$style)"
+    }
 
     /**
      * The markers of the record in brackets, written only when it has markers.
@@ -108,7 +270,34 @@ public sealed interface PlainSegment {
         public val affix: SegmentAffix,
         public val frame: SegmentFrame,
         public val style: SegmentStyle,
-    ) : PlainSegment
+    ) : PlainSegment {
+        private val values: List<Any?> get() = listOf(affix, frame, style)
+
+        /**
+         * Compares by value: two [Markers] segments are equal when every property is equal.
+         *
+         * @param other the object to compare with.
+         * @return whether [other] is an equal [Markers].
+         * @since 1.0.0
+         */
+        override fun equals(other: Any?): Boolean = other is Markers && values == other.values
+
+        /**
+         * Returns a hash code consistent with [equals].
+         *
+         * @return the hash code.
+         * @since 1.0.0
+         */
+        override fun hashCode(): Int = values.hashCode()
+
+        /**
+         * Shows the properties of the segment.
+         *
+         * @return the segment as text.
+         * @since 1.0.0
+         */
+        override fun toString(): String = "Markers(affix=$affix, frame=$frame, style=$style)"
+    }
 
     /**
      * The message of the record.
@@ -117,7 +306,34 @@ public sealed interface PlainSegment {
      * @property style the style of the segment.
      * @since 1.0.0
      */
-    public class Message(public val frame: SegmentFrame, public val style: SegmentStyle) : PlainSegment
+    public class Message(public val frame: SegmentFrame, public val style: SegmentStyle) : PlainSegment {
+        private val values: List<Any?> get() = listOf(frame, style)
+
+        /**
+         * Compares by value: two [Message] segments are equal when every property is equal.
+         *
+         * @param other the object to compare with.
+         * @return whether [other] is an equal [Message].
+         * @since 1.0.0
+         */
+        override fun equals(other: Any?): Boolean = other is Message && values == other.values
+
+        /**
+         * Returns a hash code consistent with [equals].
+         *
+         * @return the hash code.
+         * @since 1.0.0
+         */
+        override fun hashCode(): Int = values.hashCode()
+
+        /**
+         * Shows the properties of the segment.
+         *
+         * @return the segment as text.
+         * @since 1.0.0
+         */
+        override fun toString(): String = "Message(frame=$frame, style=$style)"
+    }
 
     /**
      * The sequence number of the record.
@@ -126,7 +342,34 @@ public sealed interface PlainSegment {
      * @property style the style of the segment.
      * @since 1.0.0
      */
-    public class Sequence(public val frame: SegmentFrame, public val style: SegmentStyle) : PlainSegment
+    public class Sequence(public val frame: SegmentFrame, public val style: SegmentStyle) : PlainSegment {
+        private val values: List<Any?> get() = listOf(frame, style)
+
+        /**
+         * Compares by value: two [Sequence] segments are equal when every property is equal.
+         *
+         * @param other the object to compare with.
+         * @return whether [other] is an equal [Sequence].
+         * @since 1.0.0
+         */
+        override fun equals(other: Any?): Boolean = other is Sequence && values == other.values
+
+        /**
+         * Returns a hash code consistent with [equals].
+         *
+         * @return the hash code.
+         * @since 1.0.0
+         */
+        override fun hashCode(): Int = values.hashCode()
+
+        /**
+         * Shows the properties of the segment.
+         *
+         * @return the segment as text.
+         * @since 1.0.0
+         */
+        override fun toString(): String = "Sequence(frame=$frame, style=$style)"
+    }
 
     /**
      * The fields of the event, and the count of omitted parts when the record lost any.
@@ -134,7 +377,34 @@ public sealed interface PlainSegment {
      * @property layout how the fields are written.
      * @since 1.0.0
      */
-    public class Fields(public val layout: EntriesLayout) : PlainSegment
+    public class Fields(public val layout: EntriesLayout) : PlainSegment {
+        private val values: List<Any?> get() = listOf(layout)
+
+        /**
+         * Compares by value: two [Fields] segments are equal when every property is equal.
+         *
+         * @param other the object to compare with.
+         * @return whether [other] is an equal [Fields].
+         * @since 1.0.0
+         */
+        override fun equals(other: Any?): Boolean = other is Fields && values == other.values
+
+        /**
+         * Returns a hash code consistent with [equals].
+         *
+         * @return the hash code.
+         * @since 1.0.0
+         */
+        override fun hashCode(): Int = values.hashCode()
+
+        /**
+         * Shows the properties of the segment.
+         *
+         * @return the segment as text.
+         * @since 1.0.0
+         */
+        override fun toString(): String = "Fields(layout=$layout)"
+    }
 
     /**
      * The fields of the log context and of the enrichment.
@@ -142,7 +412,34 @@ public sealed interface PlainSegment {
      * @property layout how the fields are written.
      * @since 1.0.0
      */
-    public class Context(public val layout: EntriesLayout) : PlainSegment
+    public class Context(public val layout: EntriesLayout) : PlainSegment {
+        private val values: List<Any?> get() = listOf(layout)
+
+        /**
+         * Compares by value: two [Context] segments are equal when every property is equal.
+         *
+         * @param other the object to compare with.
+         * @return whether [other] is an equal [Context].
+         * @since 1.0.0
+         */
+        override fun equals(other: Any?): Boolean = other is Context && values == other.values
+
+        /**
+         * Returns a hash code consistent with [equals].
+         *
+         * @return the hash code.
+         * @since 1.0.0
+         */
+        override fun hashCode(): Int = values.hashCode()
+
+        /**
+         * Shows the properties of the segment.
+         *
+         * @return the segment as text.
+         * @since 1.0.0
+         */
+        override fun toString(): String = "Context(layout=$layout)"
+    }
 
     /**
      * The stack trace of the record, on the lines below it.
@@ -150,5 +447,32 @@ public sealed interface PlainSegment {
      * @property layout how the stack trace is written.
      * @since 1.0.0
      */
-    public class Cause(public val layout: CauseLayout) : PlainSegment
+    public class Cause(public val layout: CauseLayout) : PlainSegment {
+        private val values: List<Any?> get() = listOf(layout)
+
+        /**
+         * Compares by value: two [Cause] segments are equal when every property is equal.
+         *
+         * @param other the object to compare with.
+         * @return whether [other] is an equal [Cause].
+         * @since 1.0.0
+         */
+        override fun equals(other: Any?): Boolean = other is Cause && values == other.values
+
+        /**
+         * Returns a hash code consistent with [equals].
+         *
+         * @return the hash code.
+         * @since 1.0.0
+         */
+        override fun hashCode(): Int = values.hashCode()
+
+        /**
+         * Shows the properties of the segment.
+         *
+         * @return the segment as text.
+         * @since 1.0.0
+         */
+        override fun toString(): String = "Cause(layout=$layout)"
+    }
 }

@@ -19,15 +19,16 @@ package com.davils.kheck.core.mask.engine
 import com.davils.kheck.core.mask.Mask
 import com.davils.kheck.core.mask.MaskingBuilder
 import com.davils.kheck.core.mask.MaskingConfiguration
-import com.davils.kheck.core.mask.MaskingKey
 import com.davils.kheck.core.mask.MaskingRule
+import com.davils.kheck.core.mask.fixture.secretKey
+import com.davils.krypt.primitive.Crypto
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
 
 private fun masker(block: MaskingBuilder.() -> Unit): Masker {
     val builder = MaskingBuilder()
     builder.block()
-    return Masker(MaskingConfiguration(builder)) { }
+    return Masker(MaskingConfiguration(builder), Crypto()) { }
 }
 
 class MaskerEdgesTest : FunSpec({
@@ -45,8 +46,8 @@ class MaskerEdgesTest : FunSpec({
     }
 
     context("hashes") {
-        test("fall back to the mask once the key is destroyed") {
-            val key = MaskingKey.of("a-key-of-16-bytes")
+        test("fall back to the mask once the secret key is destroyed") {
+            val key = secretKey("a-key-of-16-bytes")
             val masker = masker {
                 isDefaultsIncluded = false
                 default = Mask.Hash

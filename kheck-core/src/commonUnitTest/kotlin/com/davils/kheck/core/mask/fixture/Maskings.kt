@@ -32,4 +32,7 @@ internal fun maskingReport(block: MaskingBuilder.() -> Unit): ValidationReport {
     return builder.validate()
 }
 
-internal fun masked(text: String, block: MaskingBuilder.() -> Unit = {}): String = CountingMasker(block).text(text)
+internal suspend fun masked(text: String, block: MaskingBuilder.() -> Unit = {}): String {
+    val masker = CountingMasker(block)
+    return masker.text(text)
+}

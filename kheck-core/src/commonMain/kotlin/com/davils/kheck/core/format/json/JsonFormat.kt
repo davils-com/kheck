@@ -90,6 +90,9 @@ public class JsonFormat internal constructor(builder: JsonFormatBuilder) : LogFo
      */
     public val excludedPackages: List<String> = builder.excluded.immutableList()
 
+    private val values: List<Any?>
+        get() = listOf(layout, precision, isSequenceIncluded, maxFrames, maxCauses, excludedPackages)
+
     /**
      * Creates the encoder of one sink.
      *
@@ -109,6 +112,23 @@ public class JsonFormat internal constructor(builder: JsonFormatBuilder) : LogFo
         if (maxCauses >= 0) return
         fail(::maxCauses, "must not be negative", LoggingViolationCodes.INVALID_FRAMES)
     }
+
+    /**
+     * Compares by value: two [JsonFormat] values are equal when every property is equal.
+     *
+     * @param other the object to compare with.
+     * @return whether [other] is an equal [JsonFormat].
+     * @since 1.0.0
+     */
+    override fun equals(other: Any?): Boolean = other is JsonFormat && values == other.values
+
+    /**
+     * Returns a hash code consistent with [equals].
+     *
+     * @return the hash code.
+     * @since 1.0.0
+     */
+    override fun hashCode(): Int = values.hashCode()
 
     /**
      * Shows the layout and the precision.

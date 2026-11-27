@@ -19,6 +19,7 @@ package com.davils.kheck.core.sink.console
 import com.davils.kheck.core.sink.LogSinkBuilder
 import com.davils.kheck.core.terminal.ConsoleTarget
 import com.davils.kheck.core.terminal.Terminal
+import com.davils.knot.environment.Environment
 import com.davils.kore.core.annotation.DavilsDsl
 
 /**
@@ -28,7 +29,7 @@ import com.davils.kore.core.annotation.DavilsDsl
  * @since 1.0.0
  */
 @DavilsDsl
-public class ConsoleSinkBuilder internal constructor(environment: Map<String, String>) :
+public class ConsoleSinkBuilder internal constructor(environment: Environment) :
     LogSinkBuilder<ConsoleSinkConfiguration>() {
     /**
      * Names the sink in a report.
@@ -52,12 +53,11 @@ public class ConsoleSinkBuilder internal constructor(environment: Map<String, St
     public var terminal: Terminal = Terminal.SYSTEM
 
     /**
-     * The environment the colors are detected from: `NO_COLOR`, `FORCE_COLOR`, `TERM`, `COLORTERM`, `TERM_PROGRAM`
-     * and `WT_SESSION`.
+     * The environment the colors are detected from, an environment of knot; the one of the logging by default.
      *
      * @since 1.0.0
      */
-    public var environment: Map<String, String> = environment
+    public var environment: Environment = environment
 
     /**
      * Creates the configuration.

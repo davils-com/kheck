@@ -75,6 +75,9 @@ public class LogRecord(
      */
     public val markers: Set<LogMarker> = markers.orderedCopy()
 
+    private val values: List<Any?>
+        get() = listOf(sequence, timestamp, level, source, message, cause, omitted, fields, context, markers)
+
     internal fun copied(
         message: String = this.message,
         fields: Map<String, LogValue> = this.fields,
@@ -92,6 +95,23 @@ public class LogRecord(
         cause = cause,
         omitted = omitted,
     )
+
+    /**
+     * Compares by value: two [LogRecord] values are equal when every property is equal.
+     *
+     * @param other the object to compare with.
+     * @return whether [other] is an equal [LogRecord].
+     * @since 1.0.0
+     */
+    override fun equals(other: Any?): Boolean = other is LogRecord && values == other.values
+
+    /**
+     * Returns a hash code consistent with [equals].
+     *
+     * @return the hash code.
+     * @since 1.0.0
+     */
+    override fun hashCode(): Int = values.hashCode()
 
     /**
      * Shows the sequence, level, logger and escaped message of the record.

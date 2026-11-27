@@ -21,8 +21,10 @@ import com.davils.kheck.core.sample.fixture.samplingCodes
 import com.davils.kheck.core.sample.fixture.samplingConfiguration
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
+import io.kotest.matchers.shouldNotBe
 import io.kotest.matchers.string.shouldContain
 import kotlin.time.Duration
+import kotlin.time.Duration.Companion.seconds
 
 private const val TOO_HIGH: Double = 1.5
 
@@ -54,6 +56,22 @@ class SamplingConfigurationTest : FunSpec({
 
             configuration.toString() shouldContain "deduplication=none, limit=RateLimit"
             samplingConfiguration { dedupe(Duration.parse("1s")) }.toString() shouldContain "limit=none"
+        }
+    }
+
+    context("equality") {
+        test("compares deduplications and rate limits by value") {
+            val dedupe = Deduplication(window = 1.seconds, maxEntries = 8)
+            val limit = RateLimit(records = 2, per = 1.seconds, key = RateLimitKey.Global)
+
+            dedupe shouldBe Deduplication(window = 1.seconds, maxEntries = 8)
+            dedupe.hashCode() shouldBe Deduplication(window = 1.seconds, maxEntries = 8).hashCode()
+            dedupe shouldNotBe Deduplication(window = 2.seconds, maxEntries = 8)
+            dedupe.equals(limit) shouldBe false
+            limit shouldBe RateLimit(records = 2, per = 1.seconds, key = RateLimitKey.Global)
+            limit.hashCode() shouldBe RateLimit(records = 2, per = 1.seconds, key = RateLimitKey.Global).hashCode()
+            limit shouldNotBe RateLimit(records = 3, per = 1.seconds, key = RateLimitKey.Global)
+            limit.equals(dedupe) shouldBe false
         }
     }
 })

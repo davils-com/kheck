@@ -22,6 +22,7 @@ import com.davils.kheck.api.LogLevel
 import com.davils.kheck.api.Logger
 import com.davils.kheck.api.LoggerName
 import com.davils.kheck.api.record.LogEvent
+import com.davils.kheck.core.Closure
 import com.davils.kheck.core.Limits
 import com.davils.kheck.core.LogLevels
 import com.davils.kheck.core.LoggingConfiguration
@@ -37,27 +38,33 @@ import com.davils.kheck.core.record.LogFrame
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.cancelAndJoin
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.selects.select
+import kotlinx.coroutines.withTimeoutOrNull
 import kotlin.concurrent.atomics.AtomicBoolean
 import kotlin.concurrent.atomics.AtomicLong
 import kotlin.concurrent.atomics.AtomicReference
 import kotlin.concurrent.atomics.ExperimentalAtomicApi
+import kotlin.time.Duration
 
 internal class LoggingEngine(
     scope: CoroutineScope,
     dispatcher: CoroutineDispatcher,
     initial: LoggingConfiguration,
+    private val maxLoggers: Int = Limits.MAX_LOGGERS,
 ) {
     private val current = AtomicReference(initial)
     private val sequence = AtomicLong(0L)
     private val closed = AtomicBoolean(false)
     private val loggers = AtomicReference<Map<LoggerName, EngineLogger>>(emptyMap())
+    private val generations = AtomicLong(0L)
 
     val telemetry: LoggingTelemetry = LoggingTelemetry(
         intakeCapacity = initial.intake.capacity,
         listeners = { current.load().listeners },
         diagnostics = { current.load().diagnostics },
+        events = { current.load().events },
     )
 
     private val intake = Intake(initial.intake, telemetry)
@@ -85,13 +92,15 @@ internal class LoggingEngine(
 
     val isClosed: Boolean get() = closed.load()
 
+    val generation: Long get() = generations.load()
+
     fun logger(name: LoggerName): Logger {
         val known = loggers.load()[name]
         if (known != null) return known
-        val created = EngineLogger(name, this)
-        refresh(created, resolver())
-        return remembered(name, created)
+        return remembered(name, EngineLogger(name, this))
     }
+
+    fun resolver(): LevelResolver = LevelResolver(current.load(), levels.overrides.value)
 
     fun submit(logger: EngineLogger, level: LogLevel, event: LogEvent) {
         if (closed.load()) {
@@ -131,15 +140,35 @@ internal class LoggingEngine(
     }
 
     suspend fun close() {
-        if (closed.compareAndSet(expectedValue = false, newValue = true)) intake.command(IntakeControl.Close())
+        closing()
         job.join()
+    }
+
+    suspend fun close(timeout: Duration): Closure {
+        closing()
+        val isJoined = withTimeoutOrNull(timeout) { job.join() } != null
+        if (isJoined) return Closure.Completed
+        val statistics = telemetry.statistics()
+        val pending = statistics.intakeQueued + statistics.sinks.values.sumOf { sink -> sink.queued }
+        job.cancelAndJoin()
+        telemetry.closedDropped(pending)
+        return Closure.TimedOut(pending)
+    }
+
+    suspend fun flush(timeout: Duration): Boolean {
+        if (closed.load()) return true
+        return withTimeoutOrNull(timeout) { awaited(IntakeControl.Flush()) } != null
+    }
+
+    private fun closing() {
+        if (closed.compareAndSet(expectedValue = false, newValue = true)) intake.command(IntakeControl.Close())
     }
 
     private fun remembered(name: LoggerName, created: EngineLogger): EngineLogger {
         while (true) {
             val known = loggers.load()
             val kept = known[name] ?: created
-            val isStored = name in known || known.size >= Limits.MAX_LOGGERS
+            val isStored = name in known || known.size >= maxLoggers
             if (isStored || loggers.compareAndSet(expectedValue = known, newValue = known + (name to created))) {
                 return kept
             }
@@ -155,15 +184,8 @@ internal class LoggingEngine(
     }
 
     private fun refreshed() {
-        val resolver = resolver()
-        loggers.load().values.forEach { logger -> refresh(logger, resolver) }
+        generations.addAndFetch(1L)
     }
-
-    private fun refresh(logger: EngineLogger, resolver: LevelResolver) {
-        logger.update(resolver.threshold(logger.name), resolver.isCallerIncluded(logger.name))
-    }
-
-    private fun resolver(): LevelResolver = LevelResolver(current.load(), levels.overrides.value)
 
     private fun callerOf(logger: EngineLogger): LogFrame? {
         if (!logger.isCallerIncluded) return null

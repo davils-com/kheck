@@ -19,6 +19,7 @@ package com.davils.kheck.core.engine.worker
 import com.davils.kheck.core.diagnostics.LogDiagnostics
 import com.davils.kheck.core.engine.Notices
 import com.davils.kheck.core.engine.telemetry.LoggingTelemetry
+import com.davils.krypt.primitive.Crypto
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlin.time.TimeSource
@@ -30,4 +31,5 @@ internal class WorkerContext(
     val diagnostics: LogDiagnostics,
     val timeSource: TimeSource.WithComparableMarks,
     val notices: Notices,
+    val crypto: Crypto,
 )

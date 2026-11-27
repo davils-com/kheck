@@ -20,6 +20,7 @@ import com.davils.kheck.core.sink.LogSinkConfiguration
 import com.davils.kheck.core.sink.LogSinkOptions
 import com.davils.kheck.core.terminal.ConsoleTarget
 import com.davils.kheck.core.terminal.Terminal
+import com.davils.knot.environment.Environment
 import com.davils.kore.core.validation.ValidationScope
 
 /**
@@ -35,7 +36,7 @@ public class ConsoleSinkConfiguration internal constructor(
     override val options: LogSinkOptions,
     public val target: ConsoleTarget,
     public val terminal: Terminal,
-    public val environment: Map<String, String>,
+    public val environment: Environment,
 ) : LogSinkConfiguration {
     /**
      * Checks the options.

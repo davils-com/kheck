@@ -18,6 +18,7 @@ package com.davils.kheck.core.sink
 
 import com.davils.kheck.core.Limits
 import com.davils.kheck.core.LoggingViolationCodes
+import com.davils.kheck.core.integrity.IntegrityOptions
 import com.davils.kore.core.validation.ValidationScope
 import kotlin.reflect.KProperty
 
@@ -41,15 +42,9 @@ internal fun ValidationScope.checkCapacity(property: KProperty<*>, capacity: Int
     )
 }
 
-internal fun ValidationScope.checkRetry(property: KProperty<*>, retry: SinkRetry) {
-    val isAttemptsValid = retry.attempts in 1..MAX_ATTEMPTS
-    val isBackoffValid = !retry.backoff.isNegative() && retry.backoff <= retry.maxBackoff && retry.maxBackoff.isFinite()
-    if (isAttemptsValid && isBackoffValid) return
-    fail(
-        property,
-        "must try between 1 and $MAX_ATTEMPTS times and wait no negative time up to a finite most",
-        LoggingViolationCodes.INVALID_LIMIT,
-    )
+internal fun ValidationScope.checkIntegrity(property: KProperty<*>, integrity: IntegrityOptions?) {
+    val options = integrity ?: return
+    val key = options.key
+    if (key != null && !key.isDestroyed) return
+    fail(property, "seals lines only with a key that is not destroyed", LoggingViolationCodes.MISSING_INTEGRITY_KEY)
 }
-
-private const val MAX_ATTEMPTS: Int = 100

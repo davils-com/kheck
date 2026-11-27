@@ -18,9 +18,10 @@ package com.davils.kheck.core.terminal
 
 import com.davils.kheck.core.style.ColorDepth
 import com.davils.kheck.core.style.ColorMode
+import com.davils.knot.environment.Environment
 
 internal class ColorDepthDetection(
-    private val environment: Map<String, String>,
+    private val environment: Environment,
     private val terminal: Terminal,
     private val isWindows: Boolean,
 ) {
@@ -31,28 +32,28 @@ internal class ColorDepthDetection(
     }
 
     fun detected(target: ConsoleTarget): ColorDepth {
-        val isDisabled = !environment[NO_COLOR].isNullOrEmpty()
+        val isDisabled = !environment.variable(NO_COLOR).isNullOrEmpty()
         if (isDisabled) return ColorDepth.None
         return forced() ?: interactive(target)
     }
 
     private fun forced(): ColorDepth? {
-        val value = environment[FORCE_COLOR] ?: return null
+        val value = environment.variable(FORCE_COLOR) ?: return null
         return FORCED_LEVELS[value.lowercase()] ?: ColorDepth.Ansi16
     }
 
     private fun interactive(target: ConsoleTarget): ColorDepth {
-        val term = environment[TERM]
+        val term = environment.variable(TERM)
         val isPlain = !terminal.isInteractive(target) || term == DUMB
         if (isPlain) return ColorDepth.None
         return trueColor() ?: palette(term)
     }
 
     private fun trueColor(): ColorDepth? {
-        val colorTerm = environment[COLOR_TERM]?.lowercase()
+        val colorTerm = environment.variable(COLOR_TERM)?.lowercase()
         val isTrueColorTerm = colorTerm in TRUE_COLOR_TERMS
-        val isTrueColorProgram = environment[TERM_PROGRAM] in TRUE_COLOR_PROGRAMS
-        val isWindowsTerminal = environment[WINDOWS_TERMINAL] != null
+        val isTrueColorProgram = environment.variable(TERM_PROGRAM) in TRUE_COLOR_PROGRAMS
+        val isWindowsTerminal = environment.variable(WINDOWS_TERMINAL) != null
         val isTrueColor = isTrueColorTerm || isTrueColorProgram || isWindowsTerminal
         if (!isTrueColor) return null
         return ColorDepth.TrueColor

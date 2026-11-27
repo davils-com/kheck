@@ -160,7 +160,7 @@ public object LoggingViolationCodes {
     public val INVALID_WINDOW: ViolationCode = code("invalid-window")
 
     /**
-     * A count of a limit or a retry is below its least value or above the limit.
+     * A count of a limit is below its least value or above the limit.
      *
      * @since 1.0.0
      */
@@ -179,6 +179,29 @@ public object LoggingViolationCodes {
      * @since 1.0.0
      */
     public val TOO_MANY: ViolationCode = code("too-many")
+
+    /**
+     * A resilience stage, which keeps state such as the one of a circuit breaker, is given to more than one sink or
+     * twice to one sink.
+     *
+     * @since 1.0.0
+     */
+    public val SHARED_STAGE: ViolationCode = code("shared-stage")
+
+    /**
+     * The cryptography of the logging refuses an algorithm the configuration uses, such as the algorithm of the hash
+     * mask or of an integrity chain, because its policy forbids it.
+     *
+     * @since 1.0.0
+     */
+    public val CRYPTO_REFUSED: ViolationCode = code("crypto-refused")
+
+    /**
+     * The integrity chain of a sink has no key, or its key is destroyed.
+     *
+     * @since 1.0.0
+     */
+    public val MISSING_INTEGRITY_KEY: ViolationCode = code("missing-integrity-key")
 
     private fun code(name: String): ViolationCode = ViolationCode("kheck.logging.$name")
 }

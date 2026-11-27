@@ -18,6 +18,7 @@ package com.davils.kheck.core.record
 
 import com.davils.kheck.api.LogLevel
 import com.davils.kheck.api.LoggerName
+import com.davils.kheck.testing.logRecord
 import com.davils.kore.testing.HostileFragments
 import com.davils.kore.testing.isSafeToShow
 import io.kotest.core.spec.style.FunSpec
@@ -94,6 +95,34 @@ class RecordValuesTest : FunSpec({
             cause.toString() shouldBe "LogCause(type=a.Failure, frames=1, omittedFrames=2)"
             cause.toString() shouldNotContain "secret"
             record.toString() shouldContain """message="hello\n""""
+        }
+    }
+
+    context("equality") {
+        test("compares records and causes by value") {
+            val failure = IllegalStateException("broken")
+            val first = logRecord {
+                message = "hello"
+                cause = failure
+            }
+            val second = logRecord {
+                message = "hello"
+                cause = failure
+            }
+
+            first shouldBe second
+            first.hashCode() shouldBe second.hashCode()
+            first.cause shouldBe second.cause
+            first shouldNotBe logRecord { message = "other" }
+        }
+    }
+
+    context("foreign values") {
+        test("are never equal to a value of another type") {
+            val record = logRecord { cause = IllegalStateException("broken") }
+
+            record.equals("record") shouldBe false
+            record.cause?.equals("cause") shouldBe false
         }
     }
 })

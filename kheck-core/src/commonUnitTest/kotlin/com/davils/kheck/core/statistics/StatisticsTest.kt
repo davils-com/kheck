@@ -19,6 +19,7 @@ package com.davils.kheck.core.statistics
 import com.davils.kheck.api.LogLevel
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
+import io.kotest.matchers.shouldNotBe
 import io.kotest.matchers.string.shouldContain
 import kotlin.time.Duration.Companion.seconds
 
@@ -57,4 +58,51 @@ class StatisticsTest : FunSpec({
             failing.toString() shouldContain "isFailing=true"
         }
     }
+
+    context("equality") {
+        test("compares snapshots by value") {
+            val sink = SinkStatistics(
+                written = 1L,
+                failed = 0L,
+                dropped = 0L,
+                queued = 0L,
+                batches = 1L,
+                writeTime = 1.seconds,
+                maxWriteTime = 1.seconds,
+                isFailing = false,
+            )
+            val same = SinkStatistics(
+                written = 1L,
+                failed = 0L,
+                dropped = 0L,
+                queued = 0L,
+                batches = 1L,
+                writeTime = 1.seconds,
+                maxWriteTime = 1.seconds,
+                isFailing = false,
+            )
+            val first = snapshot(sink)
+
+            sink shouldBe same
+            sink.hashCode() shouldBe same.hashCode()
+            sink.equals(first) shouldBe false
+            first shouldBe snapshot(same)
+            first.hashCode() shouldBe snapshot(same).hashCode()
+            first shouldNotBe snapshot(sink, queued = 1L)
+            first.equals(sink) shouldBe false
+        }
+    }
 })
+
+private fun snapshot(sink: SinkStatistics, queued: Long = 0L): LoggingStatistics = LoggingStatistics(
+    recorded = mapOf(LogLevel.Info to 1L),
+    suppressed = emptyMap(),
+    intakeQueued = queued,
+    intakeCapacity = 1,
+    intakeDropped = 0L,
+    droppedAfterClose = 0L,
+    reentrant = 0L,
+    masked = emptyMap(),
+    failedListeners = 0L,
+    sinks = mapOf("disk" to sink),
+)

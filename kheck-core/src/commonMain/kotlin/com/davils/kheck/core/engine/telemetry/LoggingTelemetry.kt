@@ -29,15 +29,21 @@ import com.davils.kheck.core.health.HealthStatus
 import com.davils.kheck.core.health.LoggingHealth
 import com.davils.kheck.core.statistics.LoggingStatistics
 import com.davils.kheck.core.statistics.Suppression
+import com.davils.kollect.core.health.ReasonCode
+import com.davils.konfetti.core.EventBus
+import com.davils.konfetti.core.Topic
+import com.davils.konfetti.core.publish.PublishResult
 import com.davils.kore.core.failure.contained
 import kotlin.concurrent.atomics.AtomicLong
 import kotlin.concurrent.atomics.AtomicReference
 import kotlin.concurrent.atomics.ExperimentalAtomicApi
+import kotlin.time.Duration
 
 internal class LoggingTelemetry(
     private val intakeCapacity: Int,
     private val listeners: () -> List<LoggingEventListener>,
     private val diagnostics: () -> LogDiagnostics,
+    private val events: () -> EventBus? = { null },
 ) {
     private val recorded: Map<LogLevel, AtomicLong> = RECORDED_LEVELS.associateWith { AtomicLong(0L) }
     private val suppressed: Map<Suppression, AtomicLong> = Suppression.entries.associateWith { AtomicLong(0L) }
@@ -46,6 +52,8 @@ internal class LoggingTelemetry(
     private val closedDropped = AtomicLong(0L)
     private val reentrant = AtomicLong(0L)
     private val failedListeners = AtomicLong(0L)
+    private val eventsRejected = AtomicLong(0L)
+    private val writeObservers = AtomicReference<List<WriteObserver>>(emptyList())
     private val masked = AtomicReference<Map<String, AtomicLong>>(emptyMap())
     private val sinks = AtomicReference<Map<String, SinkTally>>(emptyMap())
 
@@ -80,6 +88,10 @@ internal class LoggingTelemetry(
         closedDropped.addAndFetch(1L)
     }
 
+    fun closedDropped(count: Long) {
+        closedDropped.addAndFetch(count)
+    }
+
     fun reentrant() {
         reentrant.addAndFetch(1L)
     }
@@ -104,6 +116,18 @@ internal class LoggingTelemetry(
         return OTHER_RULE
     }
 
+    fun written(sink: String, elapsed: Duration) {
+        writeObservers.load().forEach { observer -> contained { observer.written(sink, elapsed) } }
+    }
+
+    fun observe(observer: WriteObserver) {
+        writeObservers.update { observers -> observers + observer }
+    }
+
+    fun forget(observer: WriteObserver) {
+        writeObservers.update { observers -> observers - observer }
+    }
+
     fun publish(event: LoggingEvent) {
         listeners().forEach { listener ->
             val result = contained { listener.onEvent(event) }
@@ -112,6 +136,19 @@ internal class LoggingTelemetry(
                 diagnostics().report("a listener of events failed: ${typeOf(failure)}")
             }
         }
+        offered(event)
+    }
+
+    private fun offered(event: LoggingEvent) {
+        val bus = events() ?: return
+        val result = contained { bus.topic()?.offer(event) }
+        val isRejected = result.isFailure || result.getOrNull() is PublishResult.Rejected
+        if (isRejected) eventsRejected.addAndFetch(1L)
+    }
+
+    private fun EventBus.topic(): Topic<LoggingEvent>? {
+        if (LoggingEvent.TOPIC !in this) declare(LoggingEvent.TOPIC)
+        return get(LoggingEvent.TOPIC).takeIf { topic -> topic.hasConsumers }
     }
 
     fun statistics(): LoggingStatistics = LoggingStatistics(
@@ -124,6 +161,7 @@ internal class LoggingTelemetry(
         reentrant = reentrant.load(),
         masked = masked.load().mapValues { (_, count) -> count.load() },
         failedListeners = failedListeners.load(),
+        eventsRejected = eventsRejected.load(),
         sinks = sinks.load().mapValues { (_, tally) -> tally.snapshot() },
     )
 
@@ -135,7 +173,13 @@ internal class LoggingTelemetry(
 
     private fun judged(rule: HealthRule, snapshot: LoggingStatistics): LoggingHealth {
         val result = contained { rule.evaluate(snapshot) }
-        return result.getOrElse { LoggingHealth(HealthStatus.Degraded, listOf(FAILED_RULE)) }
+        return result.getOrElse {
+            LoggingHealth(
+                status = HealthStatus.Degraded,
+                reasons = listOf(FAILED_RULE),
+                codes = listOf(ReasonCode.CheckFailed),
+            )
+        }
     }
 
     private fun <T> registered(target: AtomicReference<Map<String, T>>, name: String, create: () -> T): T {
@@ -152,5 +196,12 @@ internal class LoggingTelemetry(
         private const val OTHER_RULE: String = "other"
         private const val FAILED_RULE: String = "a health rule could not be evaluated"
         private val RECORDED_LEVELS: List<LogLevel> = LogLevel.entries - LogLevel.Off
+    }
+}
+
+private inline fun <T> AtomicReference<T>.update(transform: (T) -> T) {
+    while (true) {
+        val current = load()
+        if (compareAndSet(expectedValue = current, newValue = transform(current))) return
     }
 }

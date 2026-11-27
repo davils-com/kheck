@@ -18,7 +18,6 @@ package com.davils.kheck.core.sink.custom
 
 import com.davils.kheck.core.LoggingBuilder
 import com.davils.kheck.core.sink.LogSink
-import com.davils.kore.core.annotation.DavilsInternal
 
 /**
  * Declares a sink of the application, such as a shipper to a collector.
@@ -31,7 +30,6 @@ import com.davils.kore.core.annotation.DavilsInternal
  * @param block configures the options of the sink.
  * @since 1.0.0
  */
-@OptIn(DavilsInternal::class)
 public fun LoggingBuilder.sink(name: String, sink: LogSink, block: CustomSinkBuilder.() -> Unit = {}) {
     register(name = name, builder = CustomSinkBuilder(sink), block = block) { configuration -> configuration.sink }
 }

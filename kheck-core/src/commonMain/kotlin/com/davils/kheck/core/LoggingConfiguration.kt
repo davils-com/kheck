@@ -24,16 +24,21 @@ import com.davils.kheck.core.filter.LogFilter
 import com.davils.kheck.core.health.HealthRule
 import com.davils.kheck.core.intake.IntakeBuilder
 import com.davils.kheck.core.intake.IntakeConfiguration
+import com.davils.kheck.core.internal.permits
 import com.davils.kheck.core.mask.MaskingBuilder
 import com.davils.kheck.core.mask.MaskingConfiguration
 import com.davils.kheck.core.route.LoggerConfiguration
 import com.davils.kheck.core.sample.SamplingBuilder
 import com.davils.kheck.core.sample.SamplingConfiguration
 import com.davils.kheck.core.sink.LogSinkDefinition
+import com.davils.knot.environment.Environment
+import com.davils.konfetti.core.EventBus
 import com.davils.kore.core.annotation.DavilsInternal
 import com.davils.kore.core.collection.immutableList
+import com.davils.kore.core.text.SafeText
 import com.davils.kore.core.validation.Validatable
 import com.davils.kore.core.validation.ValidationScope
+import com.davils.krypt.primitive.Crypto
 import kotlin.reflect.KProperty
 import kotlin.time.Clock
 import kotlin.time.TimeSource
@@ -69,6 +74,20 @@ public class LoggingConfiguration internal constructor(builder: LoggingBuilder) 
      * @since 1.0.0
      */
     public val timeSource: TimeSource.WithComparableMarks = builder.timeSource
+
+    /**
+     * The cryptography of the hash mask and the integrity chains of sinks.
+     *
+     * @since 1.0.0
+     */
+    public val crypto: Crypto = builder.crypto
+
+    /**
+     * The environment the console sinks and the enrichment read.
+     *
+     * @since 1.0.0
+     */
+    public val environment: Environment = builder.environment
 
     /**
      * Where the logging reports its own trouble.
@@ -113,6 +132,13 @@ public class LoggingConfiguration internal constructor(builder: LoggingBuilder) 
     public val listeners: List<LoggingEventListener> = builder.listeners.immutableList()
 
     /**
+     * The bus the events are published to, if any.
+     *
+     * @since 1.0.0
+     */
+    public val events: EventBus? = builder.events
+
+    /**
      * The intake.
      *
      * @since 1.0.0
@@ -153,6 +179,34 @@ public class LoggingConfiguration internal constructor(builder: LoggingBuilder) 
         if (isSilent) warn(::sinks, "declares no sink, so no record is written", LoggingViolationCodes.NO_SINKS)
         each(::sinks, sinks) { definition -> checkSink(definition) }
         each(::loggers, loggers) { logger -> checkRoutes(logger) }
+        checkStages()
+        checkCrypto()
+    }
+
+    private fun ValidationScope.checkCrypto() {
+        val hashing = listOfNotNull(masking.algorithm.takeIf { masking.isKeyed })
+        val sealing = sinks.values.mapNotNull { definition -> definition.options.integrity?.algorithm }
+        val refused = (hashing + sealing).distinct().filterNot { algorithm -> crypto.permits(algorithm) }
+        if (refused.isEmpty()) return
+        fail(
+            ::crypto,
+            "refuses $refused, used by the hash mask or an integrity chain",
+            LoggingViolationCodes.CRYPTO_REFUSED,
+        )
+    }
+
+    private fun ValidationScope.checkStages() {
+        val stages = sinks.values.flatMap { definition -> definition.options.stages }
+        val isShared = stages.withIndex().any { (index, stage) ->
+            val earlier = stages.subList(fromIndex = 0, toIndex = index)
+            earlier.any { other -> other === stage }
+        }
+        if (!isShared) return
+        fail(
+            ::sinks,
+            "give a resilience stage to more than one sink or twice to one sink",
+            LoggingViolationCodes.SHARED_STAGE,
+        )
     }
 
     /**
@@ -189,7 +243,7 @@ public class LoggingConfiguration internal constructor(builder: LoggingBuilder) 
         if (fallback in sinks) return
         fail(
             LogSinkDefinition::options,
-            "falls back to a sink that is not declared",
+            "falls back to ${SafeText.quoted(fallback)}, a sink that is not declared",
             LoggingViolationCodes.UNKNOWN_SINK,
         )
     }
@@ -199,8 +253,15 @@ public class LoggingConfiguration internal constructor(builder: LoggingBuilder) 
         if (unknown.isEmpty()) return
         fail(
             LoggerConfiguration::sinks,
-            "routes to ${unknown.size} sinks that are not declared",
+            "routes to sinks that are not declared: ${named(unknown)}",
             LoggingViolationCodes.UNKNOWN_SINK,
         )
+    }
+
+    private fun named(names: List<String>): String {
+        val shown = names.take(Limits.MAX_DECLARATIONS).joinToString { name -> SafeText.quoted(name) }
+        val hidden = names.size - Limits.MAX_DECLARATIONS
+        if (hidden <= 0) return shown
+        return "$shown and $hidden more"
     }
 }

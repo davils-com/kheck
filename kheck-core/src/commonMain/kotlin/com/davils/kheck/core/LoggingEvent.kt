@@ -17,6 +17,8 @@
 package com.davils.kheck.core
 
 import com.davils.kheck.core.diagnostics.typeOf
+import com.davils.konfetti.core.Event
+import com.davils.konfetti.core.TopicKey
 import com.davils.kore.core.validation.report.ValidationReport
 
 /**
@@ -25,7 +27,7 @@ import com.davils.kore.core.validation.report.ValidationReport
  *
  * @since 1.0.0
  */
-public sealed interface LoggingEvent {
+public sealed interface LoggingEvent : Event {
     /**
      * A sink failed after it had worked, or at its first attempt.
      *
@@ -57,6 +59,23 @@ public sealed interface LoggingEvent {
          * @since 1.0.0
          */
         override fun toString(): String = "SinkRecovered(sink=$sink)"
+    }
+
+    /**
+     * A stage of a sink, such as an open circuit breaker, refused a batch, which went to the fallback of the sink.
+     *
+     * @property sink the name of the sink.
+     * @property count the lines of the refused batch.
+     * @since 1.0.0
+     */
+    public class SinkRejected internal constructor(public val sink: String, public val count: Int) : LoggingEvent {
+        /**
+         * Shows the sink and the count.
+         *
+         * @return the event as text.
+         * @since 1.0.0
+         */
+        override fun toString(): String = "SinkRejected(sink=$sink, count=$count)"
     }
 
     /**
@@ -105,5 +124,19 @@ public sealed interface LoggingEvent {
          * @since 1.0.0
          */
         override fun toString(): String = "ConfigurationRejected(errors=${report.errors.size})"
+    }
+
+    /**
+     * The topic of a konfetti bus that `events(bus)` publishes the events to.
+     *
+     * @since 1.0.0
+     */
+    public companion object {
+        /**
+         * The key of the topic, `kheck.logging`.
+         *
+         * @since 1.0.0
+         */
+        public val TOPIC: TopicKey<LoggingEvent> = TopicKey("kheck.logging")
     }
 }

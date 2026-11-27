@@ -23,6 +23,9 @@ import com.davils.kheck.core.format.plain.plain
 import com.davils.kheck.core.style.Color
 import com.davils.kheck.core.terminal.ConsoleTarget
 import com.davils.kheck.testing.FakeTerminal
+import com.davils.kheck.testing.LogSinkContract
+import com.davils.knot.environment.Environment
+import com.davils.knot.environment.environment
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.string.shouldContain
@@ -57,7 +60,7 @@ class ConsoleSinkTest : FunSpec({
                     console("errors") {
                         this.terminal = terminal
                         target = ConsoleTarget.StandardError
-                        environment = mapOf("COLORTERM" to "truecolor")
+                        environment = environment { variables(mapOf("COLORTERM" to "truecolor")) }
                         format = plain { layout { message { style { foreground = Color.hex("#00FF00") } } } }
                     }
                 }
@@ -69,8 +72,14 @@ class ConsoleSinkTest : FunSpec({
             }
         }
 
+        test("keeps the contract of a sink") {
+            val configuration = ConsoleSinkBuilder(Environment.EMPTY).build()
+
+            LogSinkContract.verify { ConsoleSink(configuration) } shouldBe emptyList()
+        }
+
         test("describes its target") {
-            val configuration = ConsoleSinkBuilder(emptyMap()).build()
+            val configuration = ConsoleSinkBuilder(Environment.EMPTY).build()
 
             configuration.toString() shouldContain "target=StandardOutput"
         }

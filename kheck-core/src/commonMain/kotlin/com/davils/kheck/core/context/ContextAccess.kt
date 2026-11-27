@@ -45,5 +45,8 @@ public object ContextAccess {
      * @return the fields bound before.
      * @since 1.0.0
      */
-    public fun replace(fields: Map<String, LogValue>): Map<String, LogValue> = replaceBoundContextFields(fields)
+    public fun replace(fields: Map<String, LogValue>): Map<String, LogValue> {
+        val bounded = fields.bounded()
+        return replaceBoundContextFields(bounded)
+    }
 }

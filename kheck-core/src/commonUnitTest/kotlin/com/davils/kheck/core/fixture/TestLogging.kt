@@ -26,6 +26,7 @@ import com.davils.kheck.core.statistics.SinkStatistics
 import com.davils.kheck.core.statistics.Suppression
 import com.davils.kheck.testing.CapturingSink
 import com.davils.kheck.testing.RecordingDiagnostics
+import com.davils.knot.environment.environment
 import com.davils.kore.testing.TestClock
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.TestScope
@@ -42,7 +43,7 @@ internal fun TestScope.testLogging(block: LoggingBuilder.() -> Unit = {}): Loggi
     logging(backgroundScope, StandardTestDispatcher(testScheduler)) {
         clock = TestClock(TIMESTAMP)
         timeSource = testScheduler.timeSource
-        environment = mapOf("HOSTNAME" to "rack-01", "USER" to "alice")
+        environment = environment { variables(mapOf("HOSTNAME" to "rack-01", "USER" to "alice")) }
         diagnostics = RecordingDiagnostics()
         block()
     }

@@ -19,6 +19,7 @@ package com.davils.kheck.core
 import com.davils.kheck.api.record.LogFieldsBuilder
 import com.davils.kheck.api.record.LogValue
 import com.davils.kheck.core.internal.platform.processIdOrNull
+import com.davils.knot.environment.Environment
 import com.davils.kore.core.annotation.DavilsDsl
 import com.davils.kore.core.annotation.DavilsInternal
 
@@ -31,7 +32,7 @@ import com.davils.kore.core.annotation.DavilsInternal
  */
 @DavilsDsl
 @OptIn(DavilsInternal::class)
-public class EnrichmentBuilder internal constructor(private val environment: Map<String, String>) : LogFieldsBuilder() {
+public class EnrichmentBuilder internal constructor(private val environment: Environment) : LogFieldsBuilder() {
     /**
      * Adds the name of the host from `HOSTNAME` or `COMPUTERNAME`, or `unknown`.
      *
@@ -39,7 +40,7 @@ public class EnrichmentBuilder internal constructor(private val environment: Map
      * @since 1.0.0
      */
     public fun hostname(name: String = HOSTNAME) {
-        val host = environment[HOSTNAME_VARIABLE] ?: environment[COMPUTER_NAME_VARIABLE] ?: UNKNOWN
+        val host = environment.variable(HOSTNAME_VARIABLE) ?: environment.variable(COMPUTER_NAME_VARIABLE) ?: UNKNOWN
         field(name = name, value = host)
     }
 
@@ -61,7 +62,7 @@ public class EnrichmentBuilder internal constructor(private val environment: Map
      * @since 1.0.0
      */
     public fun user(name: String = USER) {
-        val user = environment[USER_VARIABLE] ?: environment[USER_NAME_VARIABLE] ?: UNKNOWN
+        val user = environment.variable(USER_VARIABLE) ?: environment.variable(USER_NAME_VARIABLE) ?: UNKNOWN
         field(name = name, value = user)
     }
 

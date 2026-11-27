@@ -24,32 +24,43 @@ import com.davils.kheck.core.mask.MaskingRule
 import com.davils.kheck.core.record.LogRecord
 import com.davils.kore.core.annotation.DavilsInternal
 import com.davils.kore.core.text.SafeText
+import com.davils.krypt.primitive.Crypto
 
 @OptIn(DavilsInternal::class)
 internal class Masker(
     private val configuration: MaskingConfiguration,
+    crypto: Crypto,
     private val counted: (String) -> Unit,
 ) {
     private val keys: Set<String> = configuration.keys.map(::normalized).toSet()
-    private val hasher: Hasher? = configuration.hashKey?.let(::Hasher)
+    private val hasher: Hasher? = Hasher.of(configuration, crypto)
     private val decisions = HashMap<String, Boolean>()
 
-    fun record(record: LogRecord): LogRecord = record.copied(
+    suspend fun record(record: LogRecord): LogRecord = record.copied(
         message = text(record.message),
         fields = entries(record.fields, depth = 0),
         context = entries(record.context, depth = 0),
         cause = record.cause?.withMessages(::text),
     )
 
-    fun text(text: String): String = configuration.rules.fold(bounded(text)) { current, rule -> applied(rule, current) }
+    suspend fun text(text: String): String =
+        configuration.rules.fold(bounded(text)) { current, rule -> applied(rule, current) }
 
-    private fun applied(rule: MaskingRule, text: String): String {
+    private suspend fun applied(rule: MaskingRule, text: String): String {
         val isHinted = rule.hints.isEmpty() || rule.hints.any { hint -> text.contains(hint, ignoreCase = true) }
         if (!isHinted) return text
-        return rule.pattern.replace(text) { match -> replacement(rule, match) }
+        val replaced = StringBuilder(text.length)
+        var copied = 0
+        for (match in rule.pattern.findAll(text)) {
+            replaced.append(text, copied, match.range.first)
+            replaced.append(replacement(rule, match))
+            copied = match.range.last + 1
+        }
+        replaced.append(text, copied, text.length)
+        return replaced.toString()
     }
 
-    private fun replacement(rule: MaskingRule, match: MatchResult): String {
+    private suspend fun replacement(rule: MaskingRule, match: MatchResult): String {
         if (!isConfirmed(rule, match.value)) return match.value
         counted(rule.name)
         val mask = rule.mask ?: configuration.default
@@ -61,7 +72,7 @@ internal class Masker(
         return validator.isMatch(candidate)
     }
 
-    private fun maskedMatch(match: MatchResult, mask: Mask, hasSecretGroup: Boolean): String {
+    private suspend fun maskedMatch(match: MatchResult, mask: Mask, hasSecretGroup: Boolean): String {
         val secret = secretGroup(match, hasSecretGroup) ?: return masked(match.value, mask)
         val start = match.value.lastIndexOf(secret)
         val end = start + secret.length
@@ -75,7 +86,7 @@ internal class Masker(
         return value?.takeIf { text -> text.isNotEmpty() }
     }
 
-    private fun entries(values: Map<String, LogValue>, depth: Int): Map<String, LogValue> {
+    private suspend fun entries(values: Map<String, LogValue>, depth: Int): Map<String, LogValue> {
         if (values.isEmpty()) return values
         val result = LinkedHashMap<String, LogValue>(values.size)
         values.forEach { (key, value) ->
@@ -85,18 +96,18 @@ internal class Masker(
         return result
     }
 
-    private fun entry(key: String, value: LogValue, depth: Int): LogValue? {
+    private suspend fun entry(key: String, value: LogValue, depth: Int): LogValue? {
         if (!isSecretKey(key)) return value(value, depth)
         counted(KEY_RULE)
         return keyed(value)
     }
 
-    private fun keyed(value: LogValue): LogValue? {
+    private suspend fun keyed(value: LogValue): LogValue? {
         if (configuration.default == Mask.Remove) return null
         return LogValue.Text(masked(value.rendered(), configuration.default))
     }
 
-    private fun value(value: LogValue, depth: Int): LogValue = when (value) {
+    private suspend fun value(value: LogValue, depth: Int): LogValue = when (value) {
         is LogValue.Text -> LogValue.Text(text(value.value))
 
         LogValue.Secret -> secret()
@@ -115,12 +126,12 @@ internal class Masker(
         return LogValue.Secret
     }
 
-    private fun items(value: LogValue.Items, depth: Int): LogValue {
+    private suspend fun items(value: LogValue.Items, depth: Int): LogValue {
         if (depth >= configuration.maxDepth) return tooDeep()
         return LogValue.Items(value.values.map { item -> value(item, depth + 1) })
     }
 
-    private fun nested(value: LogValue.Entries, depth: Int): LogValue {
+    private suspend fun nested(value: LogValue.Entries, depth: Int): LogValue {
         if (depth >= configuration.maxDepth) return tooDeep()
         return LogValue.Entries(entries(value.values, depth + 1))
     }
@@ -130,7 +141,7 @@ internal class Masker(
         return LogValue.Text(SafeText.REDACTED)
     }
 
-    private fun masked(value: String, mask: Mask): String = when (mask) {
+    private suspend fun masked(value: String, mask: Mask): String = when (mask) {
         Mask.Full -> SafeText.REDACTED
         is Mask.Partial -> partial(value, mask)
         Mask.Hash -> hasher?.hash(value) ?: SafeText.REDACTED

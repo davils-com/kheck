@@ -24,6 +24,7 @@ import com.davils.kheck.api.info
 import com.davils.kheck.api.record.LogValue
 import com.davils.kheck.api.warn
 import com.davils.kheck.core.context.LogContext
+import com.davils.kheck.core.context.logContext
 import com.davils.kheck.core.context.withLogContext
 import com.davils.kheck.core.fixture.BrokenTrace
 import com.davils.kheck.core.fixture.SERVICE
@@ -37,14 +38,19 @@ import com.davils.kheck.core.mask.MaskingRule
 import com.davils.kheck.core.sample.engine.Deduplicator
 import com.davils.kheck.core.statistics.Suppression
 import com.davils.kheck.testing.CapturingSink
+import com.davils.knot.environment.Environment
+import com.davils.knot.environment.environment
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.nulls.shouldNotBeNull
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.string.shouldContain
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.asCoroutineDispatcher
 import kotlinx.coroutines.test.advanceTimeBy
 import kotlinx.coroutines.test.runTest
+import kotlinx.coroutines.withContext
+import java.util.concurrent.Executors
 import kotlin.time.Duration.Companion.seconds
 
 private const val MASKED: Long = 3L
@@ -144,7 +150,7 @@ class LoggingPipelineTest : FunSpec({
             runTest {
                 val sink = CapturingSink()
                 val logging = testLogging {
-                    environment = mapOf("COMPUTERNAME" to "WS-01")
+                    environment = environment { variables(mapOf("COMPUTERNAME" to "WS-01")) }
                     capture(sink)
                     enrich { hostname() }
                 }
@@ -160,7 +166,7 @@ class LoggingPipelineTest : FunSpec({
             runTest {
                 val sink = CapturingSink()
                 val logging = testLogging {
-                    environment = emptyMap()
+                    environment = Environment.EMPTY
                     capture(sink)
                     enrich { hostname() }
                 }
@@ -173,9 +179,28 @@ class LoggingPipelineTest : FunSpec({
         }
 
         test("describes the context element by its keys") {
-            LogContext(
-                mapOf(TENANT to LogValue.Text(ACME)),
-            ).toString() shouldBe "LogContext(fields=[tenant])"
+            val element = logContext(mapOf(TENANT to LogValue.Text(ACME)))[LogContext].shouldNotBeNull()
+
+            element.toString() shouldBe "LogContext(fields=[tenant])"
+        }
+
+        test("binds the fields of a log context to every thread of the coroutine") {
+            runTest {
+                val sink = CapturingSink()
+                val logging = testLogging { capture(sink) }
+
+                val executor = Executors.newSingleThreadExecutor()
+                executor.asCoroutineDispatcher().use { other ->
+                    withContext(logContext { field(name = TENANT, value = ACME) }) {
+                        withContext(other) {
+                            logging.logger(SERVICE).info { "elsewhere" }
+                        }
+                    }
+                }
+                logging.flush()
+
+                sink.records.single().context[TENANT] shouldBe LogValue.Text(ACME)
+            }
         }
     }
 

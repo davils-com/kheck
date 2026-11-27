@@ -19,8 +19,10 @@
 package com.davils.kheck.core.engine.telemetry
 
 import com.davils.kheck.core.statistics.SinkStatistics
+import com.davils.kontinuity.circuitbreaker.CircuitState
 import kotlin.concurrent.atomics.AtomicBoolean
 import kotlin.concurrent.atomics.AtomicLong
+import kotlin.concurrent.atomics.AtomicReference
 import kotlin.concurrent.atomics.ExperimentalAtomicApi
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.nanoseconds
@@ -34,6 +36,8 @@ internal class SinkTally {
     private val writeNanos = AtomicLong(0L)
     private val maxWriteNanos = AtomicLong(0L)
     private val failing = AtomicBoolean(false)
+    private val rejected = AtomicLong(0L)
+    private val circuits = AtomicReference<() -> CircuitState?> { null }
 
     val droppedCount: Long get() = dropped.load()
 
@@ -66,6 +70,14 @@ internal class SinkTally {
         failed.addAndFetch(lines.toLong())
     }
 
+    fun rejected(lines: Int) {
+        rejected.addAndFetch(lines.toLong())
+    }
+
+    fun observe(circuit: () -> CircuitState?) {
+        circuits.store(circuit)
+    }
+
     fun failing(isFailing: Boolean): Boolean = failing.exchange(isFailing) != isFailing
 
     fun snapshot(): SinkStatistics = SinkStatistics(
@@ -77,6 +89,8 @@ internal class SinkTally {
         writeTime = writeNanos.load().nanoseconds,
         maxWriteTime = maxWriteNanos.load().nanoseconds,
         isFailing = failing.load(),
+        rejected = rejected.load(),
+        circuit = circuits.load().invoke(),
     )
 
     private fun raiseMax(nanos: Long) {

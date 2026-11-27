@@ -27,6 +27,7 @@ import com.davils.kheck.core.record.LogSource
 import com.davils.kheck.core.sample.engine.Sampler
 import com.davils.kheck.core.sample.engine.SamplingDecision
 import com.davils.kheck.core.statistics.Suppression
+import com.davils.kore.core.failure.attempted
 import com.davils.kore.core.failure.contained
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -35,7 +36,7 @@ import kotlinx.coroutines.launch
 internal class Pipeline(private val configuration: LoggingConfiguration, private val context: PipelineContext) {
     private val telemetry = context.telemetry
     private val sampler = Sampler(configuration.sampling, configuration.timeSource)
-    private val masker = Masker(configuration.masking, telemetry::masked)
+    private val masker = Masker(configuration.masking, configuration.crypto, telemetry::masked)
     private val router = Router(configuration)
     private val workerContext = WorkerContext(
         scope = context.scope,
@@ -44,6 +45,7 @@ internal class Pipeline(private val configuration: LoggingConfiguration, private
         diagnostics = configuration.diagnostics,
         timeSource = configuration.timeSource,
         notices = context.notices,
+        crypto = configuration.crypto,
     )
     private val fallbacks = HashMap<String, SinkWorker>()
     private val workers: Map<String, SinkWorker> = configuration.sinks.mapValues { (_, definition) ->
@@ -104,8 +106,8 @@ internal class Pipeline(private val configuration: LoggingConfiguration, private
         router.sinks(record.source.logger).forEach { name -> workers.getValue(name).offer(masked) }
     }
 
-    private fun masked(record: LogRecord): LogRecord? {
-        val result = contained { masker.record(record) }
+    private suspend fun masked(record: LogRecord): LogRecord? {
+        val result = attempted { masker.record(record) }
         result.onFailure { failure ->
             val type = typeOf(failure)
             configuration.diagnostics.report("a record was dropped because masking failed: $type")

@@ -58,14 +58,33 @@ public class LogCause(
      */
     public val suppressed: List<LogCause> = suppressed.immutableList()
 
-    internal fun withMessages(transform: (String) -> String): LogCause = LogCause(
+    private val values: List<Any?> get() = listOf(type, message, omittedFrames, cause, frames, suppressed)
+
+    internal suspend fun withMessages(transform: suspend (String) -> String): LogCause = LogCause(
         type = type,
-        message = message?.let(transform),
+        message = message?.let { text -> transform(text) },
         frames = frames,
         omittedFrames = omittedFrames,
         cause = cause?.withMessages(transform),
         suppressed = suppressed.map { nested -> nested.withMessages(transform) },
     )
+
+    /**
+     * Compares by value: two [LogCause] values are equal when every property is equal.
+     *
+     * @param other the object to compare with.
+     * @return whether [other] is an equal [LogCause].
+     * @since 1.0.0
+     */
+    override fun equals(other: Any?): Boolean = other is LogCause && values == other.values
+
+    /**
+     * Returns a hash code consistent with [equals].
+     *
+     * @return the hash code.
+     * @since 1.0.0
+     */
+    override fun hashCode(): Int = values.hashCode()
 
     /**
      * Shows the type of the throwable and the count of its frames, but not its message, which is foreign text.

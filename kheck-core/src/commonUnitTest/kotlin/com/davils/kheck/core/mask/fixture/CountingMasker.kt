@@ -18,13 +18,14 @@ package com.davils.kheck.core.mask.fixture
 
 import com.davils.kheck.core.mask.MaskingBuilder
 import com.davils.kheck.core.mask.engine.Masker
+import com.davils.krypt.primitive.Crypto
 
 internal class CountingMasker(block: MaskingBuilder.() -> Unit) {
     private val counts = mutableListOf<String>()
 
     val rules: List<String> get() = counts.toList()
 
-    val masker: Masker = Masker(maskingConfiguration(block)) { rule -> counts += rule }
+    val masker: Masker = Masker(maskingConfiguration(block), Crypto()) { rule -> counts += rule }
 
-    fun text(text: String): String = masker.text(text)
+    suspend fun text(text: String): String = masker.text(text)
 }

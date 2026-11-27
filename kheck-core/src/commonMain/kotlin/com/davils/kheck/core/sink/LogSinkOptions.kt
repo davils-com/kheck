@@ -22,6 +22,8 @@ import com.davils.kheck.api.record.LogMarker
 import com.davils.kheck.core.LoggingViolationCodes
 import com.davils.kheck.core.filter.LogFilter
 import com.davils.kheck.core.format.LogFormat
+import com.davils.kheck.core.integrity.IntegrityOptions
+import com.davils.kontinuity.core.Stage
 import com.davils.kore.core.annotation.DavilsInternal
 import com.davils.kore.core.collection.immutableList
 import com.davils.kore.core.validation.Validatable
@@ -98,14 +100,36 @@ public class LogSinkOptions internal constructor(builder: LogSinkBuilder<*>) : V
     public val filters: List<LogFilter> = builder.filters.immutableList()
 
     /**
-     * How often a failed batch is tried.
+     * The resilience stages every write passes, the first outermost; the list cannot be changed.
      *
      * @since 1.0.0
      */
-    public val retry: SinkRetry = builder.retry
+    public val stages: List<Stage> = builder.stages.immutableList()
 
     /**
-     * Checks the capacity, the batch, the overflow and the retry.
+     * The integrity chain of the sink, if any.
+     *
+     * @since 1.0.0
+     */
+    public val integrity: IntegrityOptions? = builder.integrity
+
+    private val values: List<Any?>
+        get() = listOf(
+            level,
+            format,
+            overflow,
+            capacity,
+            maxBatch,
+            markers,
+            isExclusive,
+            fallback,
+            filters,
+            stages,
+            integrity,
+        )
+
+    /**
+     * Checks the capacity, the batch, the overflow and the integrity.
      *
      * @since 1.0.0
      */
@@ -120,8 +144,25 @@ public class LogSinkOptions internal constructor(builder: LogSinkBuilder<*>) : V
             )
         }
         checkOverflow(::overflow, overflow)
-        checkRetry(::retry, retry)
+        checkIntegrity(::integrity, integrity)
     }
+
+    /**
+     * Compares by value: two [LogSinkOptions] values are equal when every property is equal.
+     *
+     * @param other the object to compare with.
+     * @return whether [other] is an equal [LogSinkOptions].
+     * @since 1.0.0
+     */
+    override fun equals(other: Any?): Boolean = other is LogSinkOptions && values == other.values
+
+    /**
+     * Returns a hash code consistent with [equals].
+     *
+     * @return the hash code.
+     * @since 1.0.0
+     */
+    override fun hashCode(): Int = values.hashCode()
 
     /**
      * Shows the options.
@@ -131,7 +172,8 @@ public class LogSinkOptions internal constructor(builder: LogSinkBuilder<*>) : V
      */
     override fun toString(): String =
         "LogSinkOptions(level=$level, format=$format, overflow=$overflow, capacity=$capacity, maxBatch=$maxBatch, " +
-            "markers=$markers, isExclusive=$isExclusive, fallback=${fallback ?: NONE}, retry=$retry)"
+            "markers=$markers, isExclusive=$isExclusive, fallback=${fallback ?: NONE}, " +
+            "stages=${stages.size}, integrity=${integrity ?: NONE})"
 
     private companion object {
         private const val NONE: String = "none"

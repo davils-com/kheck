@@ -16,12 +16,19 @@
 
 package com.davils.kheck.core.sink
 
+import com.davils.kheck.core.integrity.LogSeal
+import com.davils.kheck.core.mask.fixture.secretKey
+import com.davils.kheck.core.sink.custom.CustomSinkBuilder
+import com.davils.kheck.testing.CapturingSink
 import com.davils.kheck.testing.logRecord
+import com.davils.krypt.core.algorithm.MacAlgorithm
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
 import io.kotest.matchers.string.shouldContain
 import kotlin.time.Duration.Companion.seconds
+
+private const val TEXT: String = "text\n"
 
 class SinkValuesTest : FunSpec({
     context("overflows") {
@@ -35,10 +42,42 @@ class SinkValuesTest : FunSpec({
         }
     }
 
-    context("lines and retries") {
-        test("show the record and the length, and the retry") {
-            LogLine(logRecord(), "text\n").toString() shouldContain "length=5"
-            SinkRetry.NONE.toString() shouldBe "SinkRetry(attempts=1, backoff=0s, maxBackoff=0s)"
+    context("lines") {
+        test("show the record and the length") {
+            LogLine(logRecord(), TEXT).toString() shouldContain "length=5"
+        }
+    }
+
+    context("equality") {
+        test("compares lines by value") {
+            val record = logRecord()
+
+            LogLine(record, TEXT) shouldBe LogLine(record, TEXT)
+            LogLine(record, TEXT).hashCode() shouldBe LogLine(record, TEXT).hashCode()
+            LogLine(record, TEXT) shouldNotBe LogLine(record, "other\n")
+        }
+    }
+
+    context("foreign values and options") {
+        test("compare options by value and show the stages and the chain") {
+            val sink = CapturingSink()
+            val first = CustomSinkBuilder(sink).build().options
+            val second = CustomSinkBuilder(sink).build().options
+            val sealed = LogLine(
+                record = logRecord(),
+                text = TEXT,
+                seal = LogSeal.origin(MacAlgorithm.HmacSha256),
+            )
+
+            first shouldBe second
+            first.hashCode() shouldBe second.hashCode()
+            first.equals(sink) shouldBe false
+            first.toString() shouldContain "stages=0, integrity=none"
+            val sealing = CustomSinkBuilder(sink)
+            sealing.integrity { key = secretKey("sink-key-0123456789") }
+            sealing.build().options.toString() shouldContain "integrity=IntegrityOptions(algorithm=HmacSha256"
+            sealed.toString() shouldContain "seal=0"
+            sealed.equals(TEXT) shouldBe false
         }
     }
 })

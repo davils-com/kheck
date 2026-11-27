@@ -20,11 +20,12 @@ import com.davils.kheck.api.record.LogValue
 import com.davils.kheck.core.mask.Mask
 import com.davils.kheck.core.mask.MaskingBuilder
 import com.davils.kheck.core.mask.MaskingConfiguration
-import com.davils.kheck.core.mask.MaskingKey
 import com.davils.kheck.core.mask.fixture.CountingMasker
+import com.davils.kheck.core.mask.fixture.secretKey
 import com.davils.kheck.core.record.LogCause
 import com.davils.kheck.core.record.LogRecord
 import com.davils.kheck.testing.logRecord
+import com.davils.krypt.primitive.Crypto
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.maps.shouldContainKey
 import io.kotest.matchers.maps.shouldNotContainKey
@@ -137,7 +138,7 @@ class MaskerTest : FunSpec({
         }
 
         test("falls back to a full mask when a hash has no key") {
-            val masker = Masker(MaskingConfiguration(MaskingBuilder().apply { default = Mask.Hash })) { }
+            val masker = Masker(MaskingConfiguration(MaskingBuilder().apply { default = Mask.Hash }), Crypto()) { }
             val record = logRecord { fields { field(name = PASSWORD, value = HUNTER) } }
 
             masker.record(record).fields[PASSWORD] shouldBe LogValue.Text(MASK)
@@ -215,15 +216,15 @@ class MaskerTest : FunSpec({
 
 private fun MaskingBuilder.hashKeyed() {
     default = Mask.Hash
-    hashKey = MaskingKey.of("audit-key-0123456789")
+    hashKey = secretKey("audit-key-0123456789")
 }
 
-private fun maskedFields(record: LogRecord, block: MaskingBuilder.() -> Unit): Map<String, LogValue> {
+private suspend fun maskedFields(record: LogRecord, block: MaskingBuilder.() -> Unit): Map<String, LogValue> {
     val masked = CountingMasker(block).masker.record(record)
     return masked.fields
 }
 
-private fun maskedKey(value: String, block: MaskingBuilder.() -> Unit): LogValue? {
+private suspend fun maskedKey(value: String, block: MaskingBuilder.() -> Unit): LogValue? {
     val record = logRecord { fields { field(PASSWORD, value) } }
     return maskedFields(record, block)[PASSWORD]
 }

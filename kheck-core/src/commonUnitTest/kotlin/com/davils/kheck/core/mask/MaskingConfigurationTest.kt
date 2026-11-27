@@ -19,7 +19,7 @@ package com.davils.kheck.core.mask
 import com.davils.kheck.core.LoggingViolationCodes
 import com.davils.kheck.core.mask.fixture.maskingConfiguration
 import com.davils.kheck.core.mask.fixture.maskingReport
-import io.kotest.assertions.throwables.shouldThrow
+import com.davils.kheck.core.mask.fixture.secretKey
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.string.shouldContain
@@ -75,16 +75,15 @@ class MaskingConfigurationTest : FunSpec({
             )
         }
 
-        test("refuses a hash mask without a key and a key shorter than 16 bytes") {
+        test("refuses a hash mask without a key") {
             maskingReport { default = Mask.Hash }.isValid shouldBe false
-            shouldThrow<IllegalArgumentException> { MaskingKey.of("short") }
         }
     }
 
     context("description") {
         test("lists the rules without revealing the hash key") {
             val configuration = maskingConfiguration {
-                hashKey = MaskingKey.of("key-0123456789abcdef")
+                hashKey = secretKey("key-0123456789abcdef")
                 keyPattern(Regex("pin"))
                 keys(listOf("iban"))
                 rules(MaskingRules.PERSONAL_DATA)

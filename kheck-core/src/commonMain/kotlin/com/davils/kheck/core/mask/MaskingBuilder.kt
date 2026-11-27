@@ -18,6 +18,8 @@ package com.davils.kheck.core.mask
 
 import com.davils.kore.core.annotation.DavilsDsl
 import com.davils.kore.core.dsl.ValidatingBuilder
+import com.davils.krypt.core.algorithm.MacAlgorithm
+import com.davils.krypt.primitive.key.SecretKey
 
 /**
  * Configures the masking inside `mask { }` of the logging.
@@ -51,11 +53,22 @@ public class MaskingBuilder internal constructor() : ValidatingBuilder<MaskingCo
     public var default: Mask = Mask.Full
 
     /**
-     * The key of [Mask.Hash]; required when any mask hashes.
+     * The key of [Mask.Hash], a secret key of krypt with at least 16 bytes; required when any mask hashes.
+     *
+     * The masking hashes through the cryptography of the logging, whose policy must permit [algorithm]. The key keeps
+     * belonging to the application: after it is destroyed, a hash mask writes the full mask instead.
      *
      * @since 1.0.0
      */
-    public var hashKey: MaskingKey? = null
+    public var hashKey: SecretKey? = null
+
+    /**
+     * The algorithm of [Mask.Hash]; [MacAlgorithm.HmacSha256] by default, [MacAlgorithm.HmacSha384] for a policy such
+     * as CNSA 2.0 that refuses it. The hash shows the first 16 hexadecimal digits of the tag.
+     *
+     * @since 1.0.0
+     */
+    public var algorithm: MacAlgorithm = MacAlgorithm.HmacSha256
 
     /**
      * The longest text the rules scan, in UTF-16 code units; longer text is cut to it and marked; 65 536 by default.

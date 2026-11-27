@@ -22,6 +22,8 @@ import com.davils.kore.core.annotation.DavilsInternal
 import com.davils.kore.core.collection.immutableList
 import com.davils.kore.core.validation.Validatable
 import com.davils.kore.core.validation.ValidationScope
+import com.davils.krypt.core.algorithm.MacAlgorithm
+import com.davils.krypt.primitive.key.SecretKey
 import kotlin.reflect.KProperty
 
 /**
@@ -46,7 +48,16 @@ public class MaskingConfiguration internal constructor(builder: MaskingBuilder) 
      *
      * @since 1.0.0
      */
-    public val hashKey: MaskingKey? = builder.hashKey
+    public val hashKey: SecretKey? = builder.hashKey
+
+    /**
+     * The algorithm of [Mask.Hash].
+     *
+     * @since 1.0.0
+     */
+    public val algorithm: MacAlgorithm = builder.algorithm
+
+    internal val isKeyed: Boolean get() = hashKey != null
 
     /**
      * The longest text the rules scan.
@@ -123,7 +134,7 @@ public class MaskingConfiguration internal constructor(builder: MaskingBuilder) 
 
     private fun ValidationScope.checkMask(property: KProperty<*>, mask: Mask) {
         if (mask is Mask.Partial) checkPartial(property, mask)
-        val isHashUnkeyed = mask == Mask.Hash && hashKey == null
+        val isHashUnkeyed = mask == Mask.Hash && !isKeyed
         if (!isHashUnkeyed) return
         fail(property, "hashes values only with a hash key", LoggingViolationCodes.MISSING_HASH_KEY)
     }

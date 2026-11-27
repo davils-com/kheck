@@ -17,6 +17,7 @@
 package com.davils.kheck.core.health
 
 import com.davils.kheck.core.statistics.LoggingStatistics
+import com.davils.kollect.core.health.ReasonCode
 
 /**
  * The rules of health kheck offers.
@@ -51,11 +52,20 @@ public object HealthRules {
         threshold(name = "intake saturation", degradedAt = SATURATED) { statistics -> statistics.intakeSaturation }
 
     /**
-     * The rules a logging uses unless it sets its own: [SINKS_FAILING] and [INTAKE_SATURATION].
+     * Degraded while the circuit breaker of a sink refuses calls.
      *
      * @since 1.0.0
      */
-    public val DEFAULT: List<HealthRule> = listOf(SINKS_FAILING, INTAKE_SATURATION)
+    public val CIRCUITS_OPEN: HealthRule =
+        threshold(name = "circuits open", degradedAt = FAILING) { statistics -> statistics.circuitsOpen.toDouble() }
+
+    /**
+     * The rules a logging uses unless it sets its own: [SINKS_FAILING], [INTAKE_SATURATION] and
+     * [CIRCUITS_OPEN].
+     *
+     * @since 1.0.0
+     */
+    public val DEFAULT: List<HealthRule> = listOf(SINKS_FAILING, INTAKE_SATURATION, CIRCUITS_OPEN)
 
     /**
      * Returns a rule that is degraded when [reading] reaches [degradedAt] and down when it reaches [downAt].
@@ -81,6 +91,10 @@ public object HealthRules {
         val isDegraded = degradedAt != null && value >= degradedAt
         val status = STATUSES.getValue(isDown to isDegraded)
         if (status == HealthStatus.Up) return LoggingHealth.UP
-        return LoggingHealth(status, listOf("$name is $value"))
+        return LoggingHealth(
+            status = status,
+            reasons = listOf("$name is $value"),
+            codes = listOf(ReasonCode.ThresholdCrossed),
+        )
     }
 }

@@ -16,12 +16,15 @@
 
 package com.davils.kheck.core.internal.platform
 
+import com.davils.knot.platform.Host
+import com.davils.knot.platform.HostSystem
+
 internal expect fun writeOutput(text: String)
 
 internal expect fun writeError(text: String)
 
 internal expect fun isConsoleInteractive(): Boolean
 
-internal expect fun isWindowsHost(): Boolean
+internal fun isWindowsHost(): Boolean = Host.current.system == HostSystem.Windows
 
 internal expect fun processIdOrNull(): Long?

@@ -17,14 +17,14 @@
 package com.davils.kheck.core.mask
 
 import com.davils.kore.testing.isSafeToShow
-import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
-import io.kotest.matchers.string.shouldNotContain
 
-private const val KEY: String = "a-key-of-16-bytes"
 private const val KEPT: Int = 2
+
+private const val DIGITS: String = "digits"
+private const val NUMBERS: String = "[0-9]+"
 
 class MaskValuesTest : FunSpec({
     context("masks") {
@@ -44,23 +44,27 @@ class MaskValuesTest : FunSpec({
         }
     }
 
-    context("keys") {
-        test("never show the key, copy it and refuse short keys") {
-            val bytes = KEY.encodeToByteArray()
-            val key = MaskingKey(bytes)
-            bytes.fill(0)
-
-            key.toString() shouldNotContain KEY
-            key.isDestroyed shouldBe false
-            key.destroy()
-            key.isDestroyed shouldBe true
-            shouldThrow<IllegalArgumentException> { MaskingKey(ByteArray(1)) }
-        }
-    }
-
     context("rules") {
         test("show only their name") {
             MaskingRules.EMAIL.toString() shouldBe "MaskingRule(name=email)"
+        }
+    }
+
+    context("equality") {
+        test("compares rules by name, pattern, mask, hints and validator") {
+            val rule = MaskingRule(name = DIGITS, pattern = Regex(NUMBERS), hints = listOf("1"))
+            val same = MaskingRule(name = DIGITS, pattern = Regex(NUMBERS), hints = listOf("1"))
+
+            rule shouldBe same
+            rule.hashCode() shouldBe same.hashCode()
+            rule shouldNotBe MaskingRule(name = DIGITS, pattern = Regex(NUMBERS, RegexOption.IGNORE_CASE))
+            rule shouldNotBe MaskingRule(name = DIGITS, pattern = Regex("[0-9]*"), hints = listOf("1"))
+        }
+    }
+
+    context("foreign values") {
+        test("are never equal to a value of another type") {
+            MaskingRules.EMAIL.equals(DIGITS) shouldBe false
         }
     }
 })

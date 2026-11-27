@@ -17,7 +17,6 @@
 package com.davils.kheck.core.sink.console
 
 import com.davils.kheck.core.LoggingBuilder
-import com.davils.kore.core.annotation.DavilsInternal
 
 private const val DEFAULT_NAME: String = "console"
 
@@ -31,7 +30,6 @@ private const val DEFAULT_NAME: String = "console"
  * @param block configures the sink.
  * @since 1.0.0
  */
-@OptIn(DavilsInternal::class)
 public fun LoggingBuilder.console(name: String = DEFAULT_NAME, block: ConsoleSinkBuilder.() -> Unit = {}) {
     register(name = name, builder = ConsoleSinkBuilder(environment), block = block, create = ::ConsoleSink)
 }

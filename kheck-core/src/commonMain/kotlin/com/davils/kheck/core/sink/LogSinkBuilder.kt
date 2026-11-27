@@ -21,9 +21,11 @@ import com.davils.kheck.api.record.LogMarker
 import com.davils.kheck.core.filter.LogFilter
 import com.davils.kheck.core.format.LogFormat
 import com.davils.kheck.core.format.plain.plain
+import com.davils.kheck.core.integrity.IntegrityBuilder
+import com.davils.kheck.core.integrity.IntegrityOptions
+import com.davils.kontinuity.core.Stage
 import com.davils.kore.core.annotation.DavilsDsl
 import com.davils.kore.core.dsl.ValidatingBuilder
-import kotlin.time.Duration
 
 /**
  * The options every sink shares, set inside the block of a sink such as `console { }`.
@@ -90,7 +92,8 @@ public abstract class LogSinkBuilder<C : LogSinkConfiguration> : ValidatingBuild
     public var fallback: String? = null
 
     internal val filters = mutableListOf<LogFilter>()
-    internal var retry: SinkRetry = SinkRetry.NONE
+    internal val stages = mutableListOf<Stage>()
+    internal var integrity: IntegrityOptions? = null
 
     /**
      * Adds a filter that a record must pass to be written.
@@ -104,16 +107,42 @@ public abstract class LogSinkBuilder<C : LogSinkConfiguration> : ValidatingBuild
     }
 
     /**
-     * Retries a failed batch, as [SinkRetry] describes.
+     * Adds resilience stages of kontinuity, such as a retry, a circuit breaker, a time limiter or a whole policy, that
+     * every write of a batch passes, the first stage outermost.
      *
-     * @param attempts the attempts in total, from 1 to 100.
-     * @param backoff the wait before the second attempt.
-     * @param maxBackoff the longest wait between two attempts.
+     * A stage that refuses a batch, such as an open circuit breaker, hands it to the [fallback] without retrying it and
+     * counts it as rejected; a write that fails after every stage is a failure of the sink. A time limiter
+     * among the stages also bounds the opening, flushing and closing of the sink.
+     *
+     * A stage keeps state, so it belongs to one sink only; the same stage on two sinks or twice on one sink is refused
+     * with [LoggingViolationCodes.SHARED_STAGE][com.davils.kheck.core.LoggingViolationCodes.SHARED_STAGE]. kheck never
+     * builds a jittered backoff; the stages, their time source, events and meters come from the application.
+     *
+     * @param stages the stages, in order from the outermost.
      * @since 1.0.0
      */
-    public fun retry(attempts: Int, backoff: Duration, maxBackoff: Duration = backoff) {
+    public fun stages(vararg stages: Stage) {
         checkOpen()
-        retry = SinkRetry(attempts = attempts, backoff = backoff, maxBackoff = maxBackoff)
+        this.stages += stages
+    }
+
+    /**
+     * Seals every line of the sink in an integrity chain, so tampering with what the sink stored can be proven with
+     * [IntegrityChain.verify][com.davils.kheck.core.integrity.IntegrityChain.verify]; each line reaches the sink with
+     * its [LogSeal][com.davils.kheck.core.integrity.LogSeal] in [LogLine.seal].
+     *
+     * The chain advances only when a batch is written, so a batch that fails and goes to the fallback leaves no gap;
+     * the fallback keeps its own chain. A configuration without a key, with a destroyed key or with an algorithm the
+     * cryptography of the logging refuses is refused.
+     *
+     * @param block sets the key, the algorithm and the anchor.
+     * @since 1.0.0
+     */
+    public fun integrity(block: IntegrityBuilder.() -> Unit) {
+        checkOpen()
+        val builder = IntegrityBuilder()
+        builder.block()
+        integrity = builder.options()
     }
 
     /**

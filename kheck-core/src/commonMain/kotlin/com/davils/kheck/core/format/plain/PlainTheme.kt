@@ -48,6 +48,39 @@ public class PlainTheme(
     public val entries: EntryStyles = EntryStyles(),
     public val cause: CauseStyles = CauseStyles(),
 ) {
+    private val values: List<Any?>
+        get() = listOf(timestamp, level, thread, logger, caller, markers, message, entries, cause)
+
+    /**
+     * Creates a theme with the styles of this one, changed by [block], as `copy` of a data class would.
+     *
+     * @param block changes single styles; what it leaves alone keeps the style of this theme.
+     * @return the derived theme; this theme stays unchanged.
+     * @since 1.0.0
+     */
+    public fun derived(block: PlainThemeBuilder.() -> Unit): PlainTheme {
+        val builder = PlainThemeBuilder(this)
+        builder.block()
+        return builder.theme()
+    }
+
+    /**
+     * Compares by value: two [PlainTheme] values are equal when every property is equal.
+     *
+     * @param other the object to compare with.
+     * @return whether [other] is an equal [PlainTheme].
+     * @since 1.0.0
+     */
+    override fun equals(other: Any?): Boolean = other is PlainTheme && values == other.values
+
+    /**
+     * Returns a hash code consistent with [equals].
+     *
+     * @return the hash code.
+     * @since 1.0.0
+     */
+    override fun hashCode(): Int = values.hashCode()
+
     /**
      * Shows the style of the level and of the message.
      *

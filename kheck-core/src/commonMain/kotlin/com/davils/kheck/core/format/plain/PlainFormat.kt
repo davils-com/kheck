@@ -68,6 +68,8 @@ public class PlainFormat internal constructor(builder: PlainFormatBuilder) : Log
      */
     public val segments: List<PlainSegment> = builder.segments().immutableList()
 
+    private val values: List<Any?> get() = listOf(colorMode, theme, zone, segments)
+
     /**
      * Creates the encoder of one sink.
      *
@@ -91,6 +93,23 @@ public class PlainFormat internal constructor(builder: PlainFormatBuilder) : Log
         if (!hasMessage) warn(::segments, "has no message segment", LoggingViolationCodes.MISSING_MESSAGE)
         each(::segments, segments) { segment -> checkSegment(segment) }
     }
+
+    /**
+     * Compares by value: two [PlainFormat] values are equal when every property is equal.
+     *
+     * @param other the object to compare with.
+     * @return whether [other] is an equal [PlainFormat].
+     * @since 1.0.0
+     */
+    override fun equals(other: Any?): Boolean = other is PlainFormat && values == other.values
+
+    /**
+     * Returns a hash code consistent with [equals].
+     *
+     * @return the hash code.
+     * @since 1.0.0
+     */
+    override fun hashCode(): Int = values.hashCode()
 
     /**
      * Shows the color mode, the zone and the count of segments.

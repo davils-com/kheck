@@ -24,31 +24,19 @@ import com.davils.kheck.core.fixture.SERVICE
 import com.davils.kheck.core.fixture.capture
 import com.davils.kheck.core.fixture.failedTotal
 import com.davils.kheck.core.fixture.recorded
-import com.davils.kheck.core.fixture.sinkStatistics
 import com.davils.kheck.core.fixture.testLogging
 import com.davils.kheck.core.health.HealthStatus
 import com.davils.kheck.core.sink.custom.sink
 import com.davils.kheck.testing.CapturingSink
-import com.davils.kheck.testing.SinkCall
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.string.shouldContain
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.runCurrent
 import kotlinx.coroutines.test.runTest
-import kotlin.time.Duration
-import kotlin.time.Duration.Companion.seconds
 
-private const val ATTEMPTS: Int = 3
-private const val WAITED_MILLIS: Long = 3_000L
-private const val RETRIED: String = "retried"
-private const val BUSY: String = "busy"
-private val MAX_BACKOFF: Duration = 4.seconds
 private const val FALLBACK: String = "fallback"
 
 private const val LIFECYCLE_REPORTS: Int = 3
 
-@OptIn(ExperimentalCoroutinesApi::class)
 class LoggingFailureTest : FunSpec({
     context("failing sinks") {
         test("hands the records of a failing sink to its fallback and reports the failure once") {
@@ -110,39 +98,6 @@ class LoggingFailureTest : FunSpec({
                 logging.flush()
 
                 logging.recorded.messages.size shouldBe 2
-            }
-        }
-
-        test("retries a failed batch with a growing backoff before it gives up") {
-            runTest {
-                val sink = CapturingSink()
-                val logging = testLogging {
-                    capture(sink) { retry(attempts = ATTEMPTS, backoff = 1.seconds, maxBackoff = MAX_BACKOFF) }
-                }
-                sink.fail(IllegalStateException(BUSY))
-
-                logging.logger(SERVICE).info { RETRIED }
-                logging.flush()
-
-                sink.history.count { call -> call is SinkCall.Write } shouldBe ATTEMPTS
-                logging.sinkStatistics(CAPTURE).failed shouldBe 1L
-                testScheduler.currentTime shouldBe WAITED_MILLIS
-            }
-        }
-
-        test("writes a batch that succeeds on a later attempt") {
-            runTest {
-                val sink = CapturingSink()
-                val logging = testLogging { capture(sink) { retry(attempts = 2, backoff = 1.seconds) } }
-                sink.fail(IllegalStateException(BUSY))
-                logging.logger(SERVICE).info { RETRIED }
-                runCurrent()
-                sink.recover()
-
-                logging.flush()
-
-                sink.messages shouldBe listOf(RETRIED)
-                logging.health().status shouldBe HealthStatus.Up
             }
         }
 

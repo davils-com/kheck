@@ -29,12 +29,12 @@ import com.davils.kheck.core.sink.LogLine
 import com.davils.kheck.core.sink.LogOverflow
 import com.davils.kheck.core.sink.LogSink
 import com.davils.kheck.core.sink.LogSinkDefinition
+import com.davils.kontinuity.core.rejectionOrNull
 import com.davils.kore.core.failure.attempted
 import com.davils.kore.core.failure.contained
 import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.selects.select
 import kotlinx.coroutines.withTimeoutOrNull
@@ -51,12 +51,19 @@ internal class SinkWorker(
     private val control: Channel<WorkerControl> = Channel(Channel.UNLIMITED)
     private val mailbox = Mailbox(records, control)
     private val sink: LogSink = definition.create()
+    private val chain: SealChain? = options.integrity?.let { integrity ->
+        integrity.key?.let { key -> SealChain(crypto = context.crypto, options = integrity, key = key) }
+    }
+    private val sealing: suspend (List<LogLine>) -> List<LogLine> =
+        chain?.let { sealer -> sealer::sealed } ?: { lines -> lines }
+    private val call = SinkCall(options.stages)
     private val buffer = StringBuilder()
     private val encoder: LogEncoder by lazy { options.format.encoder(sink.colorDepth(options.format.colorMode)) }
     private var reported: Long = 0L
     private val job: Job = context.scope.launch(context.dispatcher + sinkBinding(), CoroutineStart.LAZY) { run() }
 
     fun start() {
+        tally.observe { call.circuit }
         job.start()
     }
 
@@ -121,15 +128,22 @@ internal class SinkWorker(
     }
 
     private suspend fun opened() {
-        val failure = attempted { sink.open() }.exceptionOrNull() ?: return
-        failed(failure, emptyList())
+        val failure = attempted { call.bounded { sink.open() } }.exceptionOrNull()
+        if (failure != null) failed(failure, emptyList())
+        anchored()
+    }
+
+    private suspend fun anchored() {
+        val failure = chain?.anchored() ?: return
+        val type = typeOf(failure)
+        context.diagnostics.report("sink '${definition.name}' chains from the origin, its anchor failed: $type")
     }
 
     private suspend fun handled(command: WorkerControl): Boolean {
-        val flushed = attempted { sink.flush() }
+        val flushed = attempted { call.bounded { sink.flush() } }
         flushed.exceptionOrNull()?.let { failure -> failed(failure, emptyList()) }
         if (command is WorkerControl.Close) {
-            val closed = attempted { sink.close() }
+            val closed = attempted { call.bounded { sink.close() } }
             closed.exceptionOrNull()?.let { failure -> failed(failure, emptyList()) }
         }
         command.done.complete(Unit)
@@ -148,29 +162,39 @@ internal class SinkWorker(
     }
 
     private suspend fun write(lines: List<LogLine>, deliveries: List<Delivery>) {
-        val started = context.timeSource.markNow()
-        val failure = attempts(lines)
-        if (failure != null) {
-            tally.failed(lines.size)
-            failed(failure, deliveries)
+        val sealed = attempted { sealing(lines) }
+        val failure = sealed.exceptionOrNull()
+        if (failure == null) {
+            delivered(sealed.getOrThrow(), deliveries)
             return
         }
-        tally.written(lines.size, started.elapsedNow())
-        recovered()
+        tally.failed(lines.size)
+        failed(failure, deliveries)
     }
 
-    private suspend fun attempts(lines: List<LogLine>): Throwable? {
-        val retry = options.retry
-        var wait = retry.backoff
-        var failure: Throwable? = null
-        for (attempt in 1..retry.attempts) {
-            if (attempt > 1) {
-                delay(wait)
-                wait = (wait * 2).coerceAtMost(retry.maxBackoff)
-            }
-            failure = attempted { sink.write(lines) }.exceptionOrNull() ?: return null
+    private suspend fun delivered(lines: List<LogLine>, deliveries: List<Delivery>) {
+        val started = context.timeSource.markNow()
+        val failure = attempted { call.write { sink.write(lines) } }.exceptionOrNull()
+        if (failure == null) {
+            chain?.committed()
+            val elapsed = started.elapsedNow()
+            tally.written(lines.size, elapsed)
+            context.telemetry.written(definition.name, elapsed)
+            recovered()
+            return
         }
-        return failure
+        if (failure.rejectionOrNull() != null) {
+            rejected(lines.size, deliveries)
+            return
+        }
+        tally.failed(lines.size)
+        failed(failure, deliveries)
+    }
+
+    private suspend fun rejected(count: Int, deliveries: List<Delivery>) {
+        tally.rejected(count)
+        context.telemetry.publish(LoggingEvent.SinkRejected(definition.name, count))
+        forwarded(deliveries)
     }
 
     private fun notice(): List<LogLine> {
@@ -198,6 +222,10 @@ internal class SinkWorker(
             context.diagnostics.report("sink '${definition.name}' failed: ${typeOf(failure)}")
             context.telemetry.publish(LoggingEvent.SinkFailed(definition.name, failure))
         }
+        forwarded(deliveries)
+    }
+
+    private suspend fun forwarded(deliveries: List<Delivery>) {
         val name = options.fallback ?: return
         val target = fallbacks(name)
         deliveries.filterNot(Delivery::isForwarded).forEach { delivery -> target.forward(delivery.record) }

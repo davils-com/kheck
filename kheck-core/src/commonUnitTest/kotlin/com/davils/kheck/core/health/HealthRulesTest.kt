@@ -19,6 +19,7 @@ package com.davils.kheck.core.health
 import com.davils.kheck.core.statistics.LoggingStatistics
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
+import io.kotest.matchers.shouldNotBe
 
 private const val LOW: Double = 1.0
 private const val HIGH: Double = 2.0
@@ -57,6 +58,17 @@ class HealthRulesTest : FunSpec({
             combined.reasons shouldBe listOf("a", "b")
             LoggingHealth.worstOf(emptyList()) shouldBe LoggingHealth.UP
             combined.toString() shouldBe "LoggingHealth(status=Down, reasons=[a, b])"
+        }
+    }
+
+    context("equality") {
+        test("compares results by status and reasons") {
+            val degraded = LoggingHealth(HealthStatus.Degraded, listOf("slow"))
+
+            degraded shouldBe LoggingHealth(HealthStatus.Degraded, listOf("slow"))
+            degraded.hashCode() shouldBe LoggingHealth(HealthStatus.Degraded, listOf("slow")).hashCode()
+            degraded shouldNotBe LoggingHealth.UP
+            degraded.equals("slow") shouldBe false
         }
     }
 })

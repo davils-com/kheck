@@ -19,10 +19,8 @@ package com.davils.kheck.core
 import com.davils.kheck.core.fixture.loggingCodes
 import com.davils.kheck.core.mask.Mask
 import com.davils.kheck.core.sink.LogOverflow
-import com.davils.kheck.core.sink.SinkRetry
 import com.davils.kheck.core.sink.custom.sink
 import com.davils.kheck.testing.CapturingSink
-import com.davils.kore.core.validation.violation.ViolationCode
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.collections.shouldContain
 import kotlin.time.Duration
@@ -54,25 +52,10 @@ class ValidationsTest : FunSpec({
     }
 
     context("sinks") {
-        test("refuses retries that cannot work") {
-            loggingCodes {
-                sink("retried", CapturingSink()) { retry(attempts = 0, backoff = 1.seconds) }
-            } shouldContain LoggingViolationCodes.INVALID_LIMIT
-            retried(SinkRetry(attempts = 2, backoff = (-1).seconds, maxBackoff = 1.seconds)) shouldContain
-                LoggingViolationCodes.INVALID_LIMIT
-            retried(SinkRetry(attempts = 2, backoff = 2.seconds, maxBackoff = 1.seconds)) shouldContain
-                LoggingViolationCodes.INVALID_LIMIT
-            retried(SinkRetry(attempts = 2, backoff = 1.seconds, maxBackoff = Duration.INFINITE)) shouldContain
-                LoggingViolationCodes.INVALID_LIMIT
+        test("refuses an overflow that never ends its wait") {
             loggingCodes {
                 sink("blocked", CapturingSink()) { overflow = LogOverflow.Block(Duration.ZERO) }
             } shouldContain LoggingViolationCodes.INVALID_WAIT
         }
     }
 })
-
-private fun retried(retry: SinkRetry): List<ViolationCode> = loggingCodes {
-    sink("retried", CapturingSink()) {
-        retry(attempts = retry.attempts, backoff = retry.backoff, maxBackoff = retry.maxBackoff)
-    }
-}

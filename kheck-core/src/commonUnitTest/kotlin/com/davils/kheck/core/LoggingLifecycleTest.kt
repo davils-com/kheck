@@ -23,11 +23,13 @@ import com.davils.kheck.api.debug
 import com.davils.kheck.api.info
 import com.davils.kheck.api.warn
 import com.davils.kheck.core.fixture.SERVICE
+import com.davils.kheck.core.fixture.SlowSink
 import com.davils.kheck.core.fixture.capture
 import com.davils.kheck.core.fixture.recordedTotal
 import com.davils.kheck.core.fixture.testLogging
 import com.davils.kheck.core.health.HealthRule
 import com.davils.kheck.core.health.HealthStatus
+import com.davils.kheck.core.sink.custom.sink
 import com.davils.kheck.testing.CapturingSink
 import com.davils.kheck.testing.SinkCall
 import io.kotest.core.spec.style.FunSpec
@@ -37,8 +39,11 @@ import io.kotest.matchers.types.shouldBeInstanceOf
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.runTest
+import kotlin.time.Duration.Companion.seconds
 
 private const val CAPACITY: Int = 64
+
+private const val WAITING: Int = 3
 
 class LoggingLifecycleTest : FunSpec({
     context("reconfiguration") {
@@ -170,6 +175,41 @@ class LoggingLifecycleTest : FunSpec({
                 val logging = testLogging { healthRules = listOf(HealthRule { error("broken") }) }
 
                 logging.health().status shouldBe HealthStatus.Degraded
+            }
+        }
+    }
+
+    context("bounded closing") {
+        test("closes in time and reports completion") {
+            runTest {
+                val sink = CapturingSink()
+                val logging = testLogging { capture(sink) }
+                logging.logger(SERVICE).info { "last" }
+
+                logging.flush(1.seconds) shouldBe true
+                logging.close(1.seconds) shouldBe Closure.Completed
+
+                sink.messages shouldBe listOf("last")
+                logging.flush(1.seconds) shouldBe true
+                logging.close(1.seconds) shouldBe Closure.Completed
+                Closure.Completed.toString() shouldBe "Completed"
+            }
+        }
+
+        test("gives up on a sink that hangs and counts what was still waiting") {
+            runTest {
+                val logging = testLogging { sink("slow", SlowSink()) }
+                repeat(WAITING) { index -> logging.logger(SERVICE).info { "waiting $index" } }
+
+                logging.flush(1.seconds) shouldBe false
+                val closure = logging.close(1.seconds)
+
+                closure.shouldBeInstanceOf<Closure.TimedOut>()
+                logging.statistics().droppedAfterClose shouldBe closure.pending
+                closure shouldBe Closure.TimedOut(closure.pending)
+                closure.hashCode() shouldBe Closure.TimedOut(closure.pending).hashCode()
+                closure.toString() shouldBe "TimedOut(pending=${closure.pending})"
+                closure.equals(Closure.Completed) shouldBe false
             }
         }
     }

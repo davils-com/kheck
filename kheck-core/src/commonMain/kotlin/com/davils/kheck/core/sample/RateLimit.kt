@@ -28,6 +28,25 @@ import kotlin.time.Duration
  * @since 1.0.0
  */
 public class RateLimit(public val records: Int, public val per: Duration, public val key: RateLimitKey) {
+    private val values: List<Any?> get() = listOf(records, per, key)
+
+    /**
+     * Compares by value: two [RateLimit] values are equal when every property is equal.
+     *
+     * @param other the object to compare with.
+     * @return whether [other] is an equal [RateLimit].
+     * @since 1.0.0
+     */
+    override fun equals(other: Any?): Boolean = other is RateLimit && values == other.values
+
+    /**
+     * Returns a hash code consistent with [equals].
+     *
+     * @return the hash code.
+     * @since 1.0.0
+     */
+    override fun hashCode(): Int = values.hashCode()
+
     /**
      * Shows the limit.
      *

@@ -20,12 +20,8 @@ package com.davils.kheck.core.internal.platform
 
 import com.davils.kore.core.annotation.DavilsInternal
 import com.davils.kore.core.annotation.DavilsPlatformBinding
-import com.davils.kore.core.platform.HostPlatform
-import com.davils.kore.core.platform.OperatingSystem
 
 @DavilsPlatformBinding
 internal object HostConsole {
     fun isInteractive(): Boolean = System.console()?.isTerminal == true
-
-    fun isWindows(): Boolean = HostPlatform.current()?.operatingSystem == OperatingSystem.Windows
 }

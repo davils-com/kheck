@@ -17,16 +17,23 @@
 package com.davils.kheck.core
 
 import com.davils.kheck.api.record.LogValue
+import com.davils.kheck.core.sink.console.ConsoleSinkBuilder
+import com.davils.knot.environment.Environment
+import com.davils.knot.environment.environment
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
 
 private const val HOST: String = "host"
 private const val USER: String = "user"
 
+private const val TERM_VARIABLE: String = "TERM"
+private const val XTERM: String = "xterm"
+
 class EnrichmentTest : FunSpec({
     context("enrichment") {
         test("reads the host and the user from the variables of every platform") {
-            val windows = EnrichmentBuilder(mapOf("COMPUTERNAME" to "WS-01", "USERNAME" to "bob"))
+            val variables = environment { variables(mapOf("COMPUTERNAME" to "WS-01", "USERNAME" to "bob")) }
+            val windows = EnrichmentBuilder(variables)
             windows.hostname()
             windows.user()
 
@@ -34,11 +41,24 @@ class EnrichmentTest : FunSpec({
         }
 
         test("falls back to unknown") {
-            val empty = EnrichmentBuilder(emptyMap())
+            val empty = EnrichmentBuilder(Environment.EMPTY)
             empty.hostname()
             empty.user()
 
             empty.fields() shouldBe mapOf(HOST to LogValue.Text("unknown"), USER to LogValue.Text("unknown"))
+        }
+    }
+
+    context("environments") {
+        test("pass from the logging to the configuration of a console sink") {
+            val terms = environment { variables(mapOf(TERM_VARIABLE to XTERM)) }
+            val builder = LoggingBuilder()
+            builder.environment = terms
+            val console = ConsoleSinkBuilder(builder.environment)
+
+            console.environment.variable(TERM_VARIABLE) shouldBe XTERM
+            console.build().environment shouldBe terms
+            LoggingBuilder().environment shouldBe Environment.SYSTEM
         }
     }
 })

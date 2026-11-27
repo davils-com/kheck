@@ -81,8 +81,9 @@ public sealed interface Mask {
     }
 
     /**
-     * Replaces the value with `hash:` and the first 16 hex digits of its HMAC-SHA-256 under the
-     * [MaskingKey], so equal values can be correlated across records without being revealed.
+     * Replaces the value with `hash:` and the first 16 hex digits of its MAC under the
+     * [hashKey][MaskingBuilder.hashKey], HMAC-SHA-256 by default, so equal values can be correlated across records
+     * without being revealed.
      *
      * @since 1.0.0
      */

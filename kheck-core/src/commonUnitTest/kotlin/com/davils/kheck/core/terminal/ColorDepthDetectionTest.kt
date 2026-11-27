@@ -19,6 +19,7 @@ package com.davils.kheck.core.terminal
 import com.davils.kheck.core.style.ColorDepth
 import com.davils.kheck.core.style.ColorMode
 import com.davils.kheck.testing.FakeTerminal
+import com.davils.knot.environment.environment
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
 
@@ -80,7 +81,8 @@ private fun detection(
     isWindows: Boolean = false,
 ): ColorDepthDetection {
     val terminal = FakeTerminal(setOfNotNull(OUTPUT.takeIf { isInteractive }))
-    return ColorDepthDetection(environment = variables, terminal = terminal, isWindows = isWindows)
+    val environment = environment { variables(variables) }
+    return ColorDepthDetection(environment = environment, terminal = terminal, isWindows = isWindows)
 }
 
 private fun detected(

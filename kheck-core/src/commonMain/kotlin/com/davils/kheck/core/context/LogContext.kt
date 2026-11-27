@@ -27,21 +27,24 @@ import kotlin.coroutines.CoroutineContext
  * The fields that [withLogContext] adds to every record logged inside its block, as an element of the coroutine
  * context.
  *
- * On the JVM the fields follow the coroutine from thread to thread, so a call of a logger that does not suspend still
- * sees them. On WebAssembly a call of a logger cannot read the context of its coroutine, so the fields reach no record
- * there; pass them as fields of the event instead.
+ * The element is created by [withLogContext] and [logContext]. On the JVM the fields follow the coroutine from thread
+ * to thread, so a call of a logger that does not suspend still sees them. On WebAssembly a call of a logger
+ * cannot read the context of its coroutine, so the fields reach no record there; pass them as fields of the event
+ * instead.
  *
- * @param fields the fields of the context, copied.
+ * At most [Limits.MAX_FIELDS][com.davils.kheck.api.Limits.MAX_FIELDS] fields are kept; blank names and names longer
+ * than [Limits.MAX_NAME_LENGTH][com.davils.kheck.api.Limits.MAX_NAME_LENGTH] are left out.
+ *
  * @since 1.0.0
  */
 @OptIn(DavilsInternal::class)
-public class LogContext(fields: Map<String, LogValue>) : AbstractCoroutineContextElement(Key) {
+public class LogContext internal constructor(fields: Map<String, LogValue>) : AbstractCoroutineContextElement(Key) {
     /**
      * The fields of the context; the map cannot be changed.
      *
      * @since 1.0.0
      */
-    public val fields: Map<String, LogValue> = fields.orderedCopy()
+    public val fields: Map<String, LogValue> = fields.bounded().orderedCopy()
 
     /**
      * Shows the names of the fields, escaped, not their values.

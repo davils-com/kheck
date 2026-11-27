@@ -56,6 +56,26 @@ public class MaskingRule(
 
     internal val hasSecretGroup: Boolean = pattern.pattern.contains(SECRET_GROUP)
 
+    private val values: List<Any?> get() = listOf(name, pattern.pattern, pattern.options, mask, hints, validator)
+
+    /**
+     * Compares by value: two rules are equal when their names, the sources and options of their patterns, their
+     * masks, their hints and their validators are equal; validators are compared as objects.
+     *
+     * @param other the object to compare with.
+     * @return whether [other] is an equal [MaskingRule].
+     * @since 1.0.0
+     */
+    override fun equals(other: Any?): Boolean = other is MaskingRule && values == other.values
+
+    /**
+     * Returns a hash code consistent with [equals].
+     *
+     * @return the hash code.
+     * @since 1.0.0
+     */
+    override fun hashCode(): Int = values.hashCode()
+
     /**
      * Shows the name of the rule.
      *
