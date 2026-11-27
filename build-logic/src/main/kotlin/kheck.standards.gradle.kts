@@ -41,14 +41,10 @@ kreate {
                 note = "Date and time on the Internet: the timestamps of the JSON layouts and of the plain layout."
             }
             rfc(2104) {
-                note = "HMAC: the keyed hash of the masking rule that pseudonymises values."
+                note = "HMAC: the masking hash and the seals of the integrity chains, both computed by krypt."
             }
             rfc(4231) {
-                note = "The HMAC-SHA-256 test vectors that pin the internal implementation of the masking hash."
-            }
-            document("FIPS 180-4") {
-                note = "The Secure Hash Standard: SHA-256, computed in common code for the JVM and WebAssembly."
-                url = "https://csrc.nist.gov/pubs/fips/180-4/upd1/final"
+                note = "The HMAC-SHA-256 test vectors that pin the masking hash computed by krypt to its 1.0 output."
             }
             document("ECMA-48") {
                 note = "Control functions for coded character sets: the SGR sequences of the ANSI console styles."

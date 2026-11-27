@@ -1,0 +1,251 @@
+{
+    "schemaVersion": 1,
+    "standards": [
+        {
+            "id": "document:ecma-48",
+            "reviewedOn": "2026-11-26",
+            "note": "Control functions for coded character sets: the SGR sequences of the ANSI console styles.",
+            "snapshot": {
+                "title": "document:ecma-48",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [],
+                "errata": {},
+                "fingerprint": "sha256:1dc3494cc241d938eb0cbe3ab734f5839e123f13e0720cd95e69c88910c25246"
+            }
+        },
+        {
+            "id": "github:elastic/ecs",
+            "reviewedOn": "2026-11-26",
+            "note": "The Elastic Common Schema: the field names and types of the ECS layout.",
+            "snapshot": {
+                "title": "elastic/ecs",
+                "revision": "v9.5.0",
+                "published": "2026-08-04",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [],
+                "errata": {}
+            }
+        },
+        {
+            "id": "github:logfellow/logstash-logback-encoder",
+            "reviewedOn": "2026-11-26",
+            "note": "The field names of the Logstash JSON event that the Logstash layout writes.",
+            "snapshot": {
+                "title": "logfellow/logstash-logback-encoder",
+                "revision": "logstash-logback-encoder-9.0",
+                "published": "2025-10-26",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [],
+                "errata": {}
+            }
+        },
+        {
+            "id": "github:open-telemetry/opentelemetry-specification",
+            "reviewedOn": "2026-11-26",
+            "note": "The logs data model: severity numbers and texts, attributes and the scope of the OTel layout.",
+            "snapshot": {
+                "title": "open-telemetry/opentelemetry-specification",
+                "revision": "v1.63.0",
+                "published": "2026-11-23",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [],
+                "errata": {}
+            }
+        },
+        {
+            "id": "github:qos-ch/slf4j",
+            "reviewedOn": "2026-11-26",
+            "note": "SLF4J 2: the service provider, MDC, markers and key value pairs that kheck-slf4j implements.",
+            "snapshot": {
+                "title": "qos-ch/slf4j",
+                "revision": "v_2.0.20",
+                "published": "2026-09-22",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [],
+                "errata": {}
+            }
+        },
+        {
+            "id": "iso:13616",
+            "reviewedOn": "2026-11-26",
+            "note": "IBAN: the mod-97 check that the masking validator of account numbers applies.",
+            "snapshot": {
+                "title": "Banking and related financial services — International bank account number (IBAN)",
+                "status": "95.99",
+                "revision": "ISO 13616:2003",
+                "published": "2003-07-24",
+                "withdrawn": true,
+                "replacedBy": [
+                    "ISO deliverable 39852",
+                    "ISO deliverable 41031",
+                    "ISO deliverable 41032"
+                ],
+                "updatedBy": [],
+                "errata": {}
+            }
+        },
+        {
+            "id": "iso:7812",
+            "reviewedOn": "2026-11-26",
+            "note": "Card numbers: the Luhn check that the masking validator of payment cards applies.",
+            "snapshot": {
+                "title": "Identification cards — Numbering system and registration procedure for issuer identifiers",
+                "status": "95.99",
+                "revision": "ISO 7812:1987",
+                "published": "1987-05-21",
+                "withdrawn": true,
+                "replacedBy": [
+                    "ISO deliverable 20193",
+                    "ISO deliverable 20194"
+                ],
+                "updatedBy": [],
+                "errata": {}
+            }
+        },
+        {
+            "id": "iso:8601",
+            "reviewedOn": "2026-11-26",
+            "note": "Date and time: the instants and durations that the layouts write.",
+            "snapshot": {
+                "title": "Data elements and interchange formats — Information interchange — Representation of dates and times",
+                "status": "95.99",
+                "revision": "ISO 8601:2004",
+                "published": "2004-12-03",
+                "withdrawn": true,
+                "replacedBy": [
+                    "ISO deliverable 70907",
+                    "ISO deliverable 70908"
+                ],
+                "updatedBy": [],
+                "errata": {}
+            }
+        },
+        {
+            "id": "rfc:2104",
+            "reviewedOn": "2026-11-26",
+            "note": "HMAC: the masking hash and the seals of the integrity chains, both computed by krypt.",
+            "snapshot": {
+                "title": "HMAC: Keyed-Hashing for Message Authentication",
+                "status": "INFORMATIONAL",
+                "published": "February 1997",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [
+                    "RFC6151"
+                ],
+                "errata": {
+                    "2794": "HELD",
+                    "3694": "HELD",
+                    "4459": "REJECTED",
+                    "4809": "HELD",
+                    "501": "VERIFIED",
+                    "8185": "REJECTED",
+                    "8296": "REJECTED"
+                }
+            }
+        },
+        {
+            "id": "rfc:3339",
+            "reviewedOn": "2026-11-26",
+            "note": "Date and time on the Internet: the timestamps of the JSON layouts and of the plain layout.",
+            "snapshot": {
+                "title": "Date and Time on the Internet: Timestamps",
+                "status": "PROPOSED STANDARD",
+                "published": "July 2002",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [
+                    "RFC9557"
+                ],
+                "errata": {
+                    "1584": "VERIFIED",
+                    "293": "VERIFIED",
+                    "3710": "VERIFIED",
+                    "4110": "VERIFIED",
+                    "5624": "HELD",
+                    "5783": "HELD",
+                    "6533": "HELD"
+                }
+            }
+        },
+        {
+            "id": "rfc:3629",
+            "reviewedOn": "2026-11-26",
+            "note": "UTF-8: the bytes every sink writes and the escaping of lone surrogates.",
+            "snapshot": {
+                "title": "UTF-8, a transformation format of ISO 10646",
+                "status": "INTERNET STANDARD",
+                "published": "November 2003",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [],
+                "errata": {}
+            }
+        },
+        {
+            "id": "rfc:4231",
+            "reviewedOn": "2026-11-26",
+            "note": "The HMAC-SHA-256 test vectors that pin the masking hash computed by krypt to its 1.0 output.",
+            "snapshot": {
+                "title": "Identifiers and Test Vectors for HMAC-SHA-224, HMAC-SHA-256, HMAC-SHA-384, and HMAC-SHA-512",
+                "status": "PROPOSED STANDARD",
+                "published": "December 2005",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [],
+                "errata": {
+                    "3853": "HELD"
+                }
+            }
+        },
+        {
+            "id": "rfc:8259",
+            "reviewedOn": "2026-11-26",
+            "note": "JSON: the bounded writer behind the kheck, ECS, Logstash and OpenTelemetry layouts.",
+            "snapshot": {
+                "title": "The JavaScript Object Notation (JSON) Data Interchange Format",
+                "status": "INTERNET STANDARD",
+                "published": "December 2017",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [],
+                "errata": {
+                    "5210": "VERIFIED",
+                    "5218": "REJECTED",
+                    "5318": "VERIFIED",
+                    "5853": "REJECTED",
+                    "6208": "REJECTED",
+                    "7307": "REJECTED",
+                    "7383": "VERIFIED",
+                    "7600": "VERIFIED",
+                    "7603": "VERIFIED",
+                    "7617": "REJECTED",
+                    "7650": "HELD",
+                    "7673": "REJECTED",
+                    "8438": "HELD",
+                    "8622": "REJECTED",
+                    "8874": "REJECTED",
+                    "9095": "REPORTED"
+                }
+            }
+        },
+        {
+            "id": "unicode:ucd",
+            "reviewedOn": "2026-11-26",
+            "note": "Control, format and bidirectional characters are escaped at every sink, as the platform defines them.",
+            "snapshot": {
+                "title": "Unicode Character Database",
+                "revision": "18.0.0",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [],
+                "errata": {}
+            }
+        }
+    ]
+}

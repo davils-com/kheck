@@ -44,3 +44,6 @@ bin/
 # itself writes "This file is expected to be part of source control" into them.
 # The settings lock file is the exception: the settings declare no locking.
 /settings-gradle.lockfile
+
+# The Node.js runtime of the Wasm tests; it pins no published dependency.
+kotlin-js-store/
