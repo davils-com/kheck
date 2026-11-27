@@ -19,6 +19,7 @@ package com.davils.kheck.core.sample
 import com.davils.kheck.api.LogLevel
 import com.davils.kheck.core.Limits
 import com.davils.kheck.core.LoggingViolationCodes
+import com.davils.kontinuity.ratelimiter.RateLimiterConfig
 import com.davils.kore.core.validation.Validatable
 import com.davils.kore.core.validation.ValidationScope
 
@@ -95,11 +96,19 @@ public class SamplingConfiguration internal constructor(builder: SamplingBuilder
     }
 
     private fun ValidationScope.checkLimit(limit: RateLimit) {
-        if (limit.records < 1) {
-            fail(RateLimit::records, "must allow at least 1 record", LoggingViolationCodes.INVALID_LIMIT)
+        if (limit.records !in 1..RateLimiterConfig.HARD_LIMIT_FOR_PERIOD) {
+            fail(
+                RateLimit::records,
+                "must allow 1 to ${RateLimiterConfig.HARD_LIMIT_FOR_PERIOD} records",
+                LoggingViolationCodes.INVALID_LIMIT,
+            )
         }
-        if (limit.per.isPositive() && limit.per.isFinite()) return
-        fail(RateLimit::per, "must be finite and positive", LoggingViolationCodes.INVALID_WINDOW)
+        if (limit.per.isPositive() && limit.per <= RateLimiterConfig.HARD_REFRESH_PERIOD) return
+        fail(
+            RateLimit::per,
+            "must be positive and at most ${RateLimiterConfig.HARD_REFRESH_PERIOD}",
+            LoggingViolationCodes.INVALID_WINDOW,
+        )
     }
 
     private companion object {

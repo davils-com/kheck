@@ -155,14 +155,15 @@ class SamplerTest : FunSpec({
             sampler.decide(logRecord()) shouldBe SamplingDecision.RateLimited
         }
 
-        test("starts over when too many buckets exist") {
+        test("limits a new key while every counted key is in use, so a flood of keys cannot lift the limit") {
             val sampler = sampler(
                 TestTimeSource(),
             ) { limit(records = 1, per = 1.seconds, key = RateLimitKey.PerLogger) }
 
             val decisions = (0 until BUCKETS).map { index -> sampler.decide(logRecord { logger = "$LOGGER$index" }) }
 
-            decisions.all { decision -> decision == SamplingDecision.Keep } shouldBe true
+            decisions.dropLast(1).all { decision -> decision == SamplingDecision.Keep } shouldBe true
+            decisions.last() shouldBe SamplingDecision.RateLimited
         }
 
         test("keeps a known bucket when the table is full") {

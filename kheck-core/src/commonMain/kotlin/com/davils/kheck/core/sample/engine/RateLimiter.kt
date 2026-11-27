@@ -20,27 +20,38 @@ import com.davils.kheck.core.format.text.rendered
 import com.davils.kheck.core.record.LogRecord
 import com.davils.kheck.core.sample.RateLimit
 import com.davils.kheck.core.sample.RateLimitKey
-import kotlin.time.DurationUnit
+import com.davils.kontinuity.core.environment
+import com.davils.kontinuity.ratelimiter.KeyedRateLimiter
+import com.davils.kontinuity.ratelimiter.keyedRateLimiter
+import com.davils.kontinuity.ratelimiter.tokenBucket
+import kotlin.time.Duration
 import kotlin.time.TimeSource
 
-internal class RateLimiter(private val limit: RateLimit, private val timeSource: TimeSource.WithComparableMarks) {
-    private val buckets = HashMap<String, TokenBucket>()
+private const val LIMITER_NAME: String = "kheck-sampling"
+private const val MAX_KEYS: Int = 4_096
 
-    private val perSecond: Double = limit.records / limit.per.toDouble(DurationUnit.SECONDS)
+internal class RateLimiter(limit: RateLimit, timeSource: TimeSource.WithComparableMarks) {
+    private val key: RateLimitKey = limit.key
 
-    fun isAllowed(record: LogRecord): Boolean {
-        val now = timeSource.markNow()
-        val key = keyOf(record)
-        if (buckets.size >= MAX_BUCKETS && key !in buckets) buckets.clear()
-        val bucket = buckets.getOrPut(key) { TokenBucket(limit.records.toDouble(), perSecond, now) }
-        return bucket.take(now)
+    private val keyed: KeyedRateLimiter<String> = keyedRateLimiter(
+        name = LIMITER_NAME,
+        maxKeys = MAX_KEYS,
+        idleTimeout = idleTimeoutOf(limit.per),
+        environment = environment { this.timeSource = timeSource },
+    ) {
+        limitForPeriod = limit.records
+        limitRefreshPeriod = limit.per
+        timeout = Duration.ZERO
+        algorithm = tokenBucket(burst = limit.records)
     }
 
-    private fun keyOf(record: LogRecord): String = when (val key = limit.key) {
+    fun isAllowed(record: LogRecord): Boolean = keyed.tryAcquire(keyOf(record))
+
+    private fun keyOf(record: LogRecord): String = when (val chosen = key) {
         RateLimitKey.Global -> ""
         RateLimitKey.PerLogger -> record.source.logger.value
         RateLimitKey.PerLevel -> record.level.name
-        is RateLimitKey.PerField -> fieldKey(record, key.name)
+        is RateLimitKey.PerField -> fieldKey(record, chosen.name)
     }
 
     private fun fieldKey(record: LogRecord, name: String): String {
@@ -49,6 +60,9 @@ internal class RateLimiter(private val limit: RateLimit, private val timeSource:
     }
 
     private companion object {
-        private const val MAX_BUCKETS: Int = 4_096
+        fun idleTimeoutOf(period: Duration): Duration {
+            val idle = maxOf(a = period, b = KeyedRateLimiter.DEFAULT_IDLE_TIMEOUT)
+            return idle.coerceAtMost(KeyedRateLimiter.HARD_IDLE_TIMEOUT)
+        }
     }
 }

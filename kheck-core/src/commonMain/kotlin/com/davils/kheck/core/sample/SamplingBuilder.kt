@@ -65,10 +65,15 @@ public class SamplingBuilder internal constructor() : ValidatingBuilder<Sampling
     }
 
     /**
-     * Limits the records below [alwaysFrom] per period, as [RateLimit] describes.
+     * Limits the records below [alwaysFrom] per period, as [RateLimit] describes, through a keyed rate limiter of
+     * kontinuity with a token bucket per key.
      *
-     * @param records the records allowed per period.
-     * @param per the period.
+     * At most 4,096 keys are counted at once; a key unused for the period, and at least ten minutes, may be forgotten
+     * once that many are in use, and the records of a new key are limited while every key is in use, so a flood of
+     * distinct keys cannot lift the limit.
+     *
+     * @param records the records allowed per period, 1 to 1,000,000.
+     * @param per the period, positive and at most one day.
      * @param key what is counted separately.
      * @since 1.0.0
      */

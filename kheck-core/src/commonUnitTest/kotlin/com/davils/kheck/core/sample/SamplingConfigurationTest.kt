@@ -24,9 +24,11 @@ import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
 import io.kotest.matchers.string.shouldContain
 import kotlin.time.Duration
+import kotlin.time.Duration.Companion.days
 import kotlin.time.Duration.Companion.seconds
 
 private const val TOO_HIGH: Double = 1.5
+private const val TOO_MANY_RECORDS: Int = 1_000_001
 
 class SamplingConfigurationTest : FunSpec({
     context("validation") {
@@ -40,6 +42,12 @@ class SamplingConfigurationTest : FunSpec({
                 LoggingViolationCodes.INVALID_WINDOW,
                 LoggingViolationCodes.INVALID_LIMIT,
             )
+        }
+
+        test("refuses a limit beyond the ceilings of the rate limiter of kontinuity") {
+            samplingCodes { limit(records = TOO_MANY_RECORDS, per = 1.seconds) } shouldBe
+                listOf(LoggingViolationCodes.INVALID_LIMIT)
+            samplingCodes { limit(records = 1, per = 2.days) } shouldBe listOf(LoggingViolationCodes.INVALID_WINDOW)
         }
 
         test("refuses a limit without records or period") {
