@@ -3,15 +3,15 @@
     "standards": [
         {
             "id": "document:ecma-48",
-            "reviewedOn": "2026-11-26",
-            "note": "Control functions for coded character sets: the SGR sequences of the ANSI console styles.",
+            "reviewedOn": "2026-11-27",
+            "note": "The control functions of the plain layout and its colors from 16 to true color. Reviewed again on 2026-11-27: the page still names the 5th edition of June 1991; only its markup changed.",
             "snapshot": {
                 "title": "document:ecma-48",
                 "withdrawn": false,
                 "replacedBy": [],
                 "updatedBy": [],
                 "errata": {},
-                "fingerprint": "sha256:1dc3494cc241d938eb0cbe3ab734f5839e123f13e0720cd95e69c88910c25246"
+                "fingerprint": "sha256:a0c3c7dc172891a95eb34863d20f0b9698ca67a1ef88320dd601b23b7a523e52"
             }
         },
         {
