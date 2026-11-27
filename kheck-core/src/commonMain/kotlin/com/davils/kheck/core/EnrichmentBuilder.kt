@@ -18,8 +18,8 @@ package com.davils.kheck.core
 
 import com.davils.kheck.api.record.LogFieldsBuilder
 import com.davils.kheck.api.record.LogValue
-import com.davils.kheck.core.internal.platform.processIdOrNull
 import com.davils.knot.environment.Environment
+import com.davils.knot.platform.Host
 import com.davils.kore.core.annotation.DavilsDsl
 import com.davils.kore.core.annotation.DavilsInternal
 
@@ -45,13 +45,14 @@ public class EnrichmentBuilder internal constructor(private val environment: Env
     }
 
     /**
-     * Adds the id of the process; nothing on WebAssembly, which has none.
+     * Adds the id of the process, as knot reports it in `Host.processId`; nothing in a browser or a web worker, which
+     * have none.
      *
      * @param name the name of the field; `pid` by default.
      * @since 1.0.0
      */
     public fun processId(name: String = PROCESS_ID) {
-        val id = processIdOrNull() ?: return
+        val id = Host.current.processId ?: return
         field(name = name, value = id)
     }
 

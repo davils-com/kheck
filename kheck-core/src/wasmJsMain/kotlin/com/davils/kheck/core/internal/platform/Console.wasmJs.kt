@@ -30,8 +30,6 @@ internal actual fun writeError(text: String) {
 
 internal actual fun isConsoleInteractive(): Boolean = false
 
-internal actual fun processIdOrNull(): Long? = null
-
 @JsFun("(text) => console.log(text)")
 private external fun consoleLog(text: String)
 

@@ -28,8 +28,6 @@ internal actual fun writeError(text: String) {
 
 internal actual fun isConsoleInteractive(): Boolean = HostConsole.isInteractive()
 
-internal actual fun processIdOrNull(): Long? = ProcessHandle.current().pid()
-
 private fun written(stream: PrintStream, text: String) {
     stream.writeBytes(text.encodeToByteArray())
     stream.flush()

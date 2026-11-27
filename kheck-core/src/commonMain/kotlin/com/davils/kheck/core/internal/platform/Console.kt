@@ -26,5 +26,3 @@ internal expect fun writeError(text: String)
 internal expect fun isConsoleInteractive(): Boolean
 
 internal fun isWindowsHost(): Boolean = Host.current.system == HostSystem.Windows
-
-internal expect fun processIdOrNull(): Long?
