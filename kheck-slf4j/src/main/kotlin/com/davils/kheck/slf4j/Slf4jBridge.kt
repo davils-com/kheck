@@ -14,13 +14,16 @@
  * limitations under the License.
  */
 
-@file:OptIn(ExperimentalAtomicApi::class)
+@file:OptIn(ExperimentalAtomicApi::class, DavilsInternal::class)
 
 package com.davils.kheck.slf4j
 
 import com.davils.kheck.api.LogLevel
+import com.davils.kheck.api.Logger
+import com.davils.kheck.api.LoggerName
 import com.davils.kheck.api.record.LogEvent
 import com.davils.kheck.core.Logging
+import com.davils.kore.core.annotation.DavilsInternal
 import java.util.concurrent.locks.ReentrantLock
 import kotlin.concurrent.atomics.AtomicLong
 import kotlin.concurrent.atomics.AtomicReference
@@ -69,7 +72,7 @@ public object Slf4jBridge {
     public fun attach(logging: Logging) {
         lock.withLock {
             attached.store(logging)
-            pending.forEach { event -> logging.logger(event.logger).emit(event.level, event.event) }
+            pending.forEach { event -> logging.bridged(event.logger).emit(event.level, event.event) }
             pending.clear()
         }
     }
@@ -85,12 +88,12 @@ public object Slf4jBridge {
 
     internal fun isEnabled(logger: String, level: LogLevel): Boolean {
         val logging = attached.load() ?: return level.isAtLeast(LogLevel.Info)
-        return logging.logger(logger).isEnabled(level)
+        return logging.bridged(logger).isEnabled(level)
     }
 
     internal fun emit(logger: String, level: LogLevel, event: LogEvent) {
         val logging = attached.load() ?: attachedOrPended(PendingEvent(logger, level, event)) ?: return
-        logging.logger(logger).emit(level, event)
+        logging.bridged(logger).emit(level, event)
     }
 
     private fun attachedOrPended(event: PendingEvent): Logging? = lock.withLock {
@@ -107,3 +110,5 @@ public object Slf4jBridge {
         pending.addLast(event)
     }
 }
+
+private fun Logging.bridged(name: String): Logger = logger(LoggerName.bounded(name).value)

@@ -16,6 +16,7 @@
 
 package com.davils.kheck.slf4j
 
+import com.davils.kheck.api.Limits
 import com.davils.kheck.api.LogLevel
 import com.davils.kheck.api.record.LogMarker
 import com.davils.kheck.api.record.LogValue
@@ -291,6 +292,45 @@ class Slf4jBridgeTest : FunSpec({
             adapter.clearDequeByKey(UNKNOWN)
             MDC.popByKey(UNKNOWN) shouldBe null
             MDC.clear()
+        }
+
+        test("bounds the MDC and its deques") {
+            runTest {
+                val sink = CapturingSink()
+                val logging = bound(sink)
+
+                repeat(Limits.MAX_FIELDS + 1) { index -> MDC.put("key$index", ACME) }
+                MDC.put("x".repeat(Limits.MAX_NAME_LENGTH + 1), ACME)
+                repeat(Limits.MAX_ITEMS + 1) { MDC.pushByKey(TRACE, OUTER) }
+                repeat(Limits.MAX_FIELDS + 1) { index -> MDC.pushByKey("deque$index", OUTER) }
+                LoggerFactory.getLogger(NAME).info("bounded")
+                val depth = MDC.getMDCAdapter().getCopyOfDequeByKey(TRACE).size
+                val unknown = MDC.getMDCAdapter().getCopyOfDequeByKey("deque${Limits.MAX_FIELDS}")
+                MDC.clear()
+                logging.flush()
+
+                val bounded = sink.records.single()
+                bounded.context.size shouldBe Limits.MAX_FIELDS
+                depth shouldBe Limits.MAX_ITEMS
+                unknown shouldBe null
+            }
+        }
+    }
+
+    context("names") {
+        test("shortens a name of SLF4J that is longer than a name of kheck") {
+            runTest {
+                val sink = CapturingSink()
+                val logging = bound(sink)
+                val long = "a".repeat(Limits.MAX_NAME_LENGTH + 1)
+
+                LoggerFactory.getLogger(long).warn("long")
+                logging.flush()
+
+                val written = sink.records.single()
+                val source = written.source
+                source.logger.value shouldBe "a".repeat(Limits.MAX_NAME_LENGTH)
+            }
         }
     }
 })

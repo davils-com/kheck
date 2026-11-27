@@ -18,6 +18,7 @@
 
 package com.davils.kheck.slf4j
 
+import com.davils.kheck.api.Limits
 import com.davils.kheck.api.record.LogValue
 import com.davils.kheck.core.context.ContextAccess
 import com.davils.kore.core.annotation.DavilsInternal
@@ -51,8 +52,11 @@ internal class BridgeMdcAdapter : MDCAdapter {
     }
 
     override fun pushByKey(key: String, value: String) {
-        val deque = deques.get().getOrPut(key) { ArrayDeque() }
-        deque.addLast(value)
+        val deques = deques.get()
+        val isAccepted = key in deques || deques.size < Limits.MAX_FIELDS
+        if (!isAccepted) return
+        val deque = deques.getOrPut(key) { ArrayDeque() }
+        if (deque.size < Limits.MAX_ITEMS) deque.addLast(value)
     }
 
     override fun popByKey(key: String): String? = deques.get()[key]?.removeLastOrNull()
