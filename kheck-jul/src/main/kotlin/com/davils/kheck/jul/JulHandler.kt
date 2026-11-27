@@ -16,15 +16,18 @@
 
 package com.davils.kheck.jul
 
+import com.davils.kheck.api.LoggerName
 import com.davils.kheck.api.record.LogEvent
 import com.davils.kheck.api.record.LogValue
 import com.davils.kheck.core.Logging
+import com.davils.kore.core.annotation.DavilsInternal
 import com.davils.kore.core.failure.contained
 import java.util.logging.ErrorManager
 import java.util.logging.Formatter
 import java.util.logging.Handler
 import java.util.logging.LogRecord
 
+@OptIn(DavilsInternal::class)
 internal class JulHandler(private val logging: Logging) : Handler() {
     private val formatter = object : Formatter() {
         override fun format(record: LogRecord): String = formatMessage(record)
@@ -42,7 +45,7 @@ internal class JulHandler(private val logging: Logging) : Handler() {
 
     private fun forwarded(record: LogRecord) {
         val level = record.level.toLogLevel()
-        val logger = logging.logger(record.loggerName.orEmpty())
+        val logger = logging.logger(LoggerName.bounded(record.loggerName.orEmpty()).value)
         if (!logger.isEnabled(level)) return
         logger.emit(level, event(record))
     }

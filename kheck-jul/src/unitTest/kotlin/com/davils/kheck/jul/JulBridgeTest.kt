@@ -16,6 +16,7 @@
 
 package com.davils.kheck.jul
 
+import com.davils.kheck.api.Limits
 import com.davils.kheck.api.LogLevel
 import com.davils.kheck.api.record.LogValue
 import com.davils.kheck.core.Logging
@@ -103,12 +104,33 @@ class JulBridgeTest : FunSpec({
                             errors += msg.orEmpty()
                         }
                     }
-                    val record = LogRecord(Level.SEVERE, "long")
-                    record.loggerName = "n".repeat(LONG_NAME)
+                    val record = object : LogRecord(Level.SEVERE, "broken") {
+                        override fun getLoggerName(): String = error("broken")
+                    }
                     handler.publish(record)
                 }
 
                 errors.single() shouldContain "could not be handed"
+            }
+        }
+    }
+
+    context("names") {
+        test("shortens a name of JUL that is longer than a name of kheck") {
+            runTest {
+                val sink = CapturingSink()
+                val logging = bridged(sink)
+                val record = LogRecord(Level.SEVERE, "long")
+                record.loggerName = "n".repeat(LONG_NAME)
+
+                logging.bridgeJul(backgroundScope).use {
+                    Logger.getLogger(NAME).log(record)
+                    logging.flush()
+                }
+
+                val written = sink.records.single()
+                val source = written.source
+                source.logger.value shouldBe "n".repeat(Limits.MAX_NAME_LENGTH)
             }
         }
     }
