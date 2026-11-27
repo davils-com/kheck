@@ -50,12 +50,21 @@ The properties that must hold:
 - **The rules of the application.** A masking pattern of the application must not backtrack without bound; the
   masking limits the text it scans, not the work of a pattern.
 - **Sinks of the application** decide where records go and who may read them; kheck neither encrypts nor rotates.
+- **Integrity chains** prove that the lines a sink stored were not changed, removed, added or moved, for anyone who
+  holds the key; they do not prevent it. Whoever holds the key can forge a chain, so the key stays with the
+  application, apart from the stored lines. A chain does not show lines lost before they reached the sink, such as by
+  an overflow; the notice of dropped records is sealed instead. The chain goes on across restarts only from the anchor
+  the application stores.
+- **Cryptography** runs through krypt under the policy of the logging; the application chooses the policy, such as
+  CNSA 2.0 with HMAC-SHA-384, and destroys its keys when they are no longer needed.
 - **Closing.** Records still in the queues are lost when the scope of the logging is cancelled without `close()`.
 
 ## What We Consider a Vulnerability
 
 - a record that forges a line, injects a control sequence or escapes its JSON string in a layout of kheck,
-- a secret or a masking key that reaches a sink, a `toString`, an event or a diagnostic,
+- a secret, a masking key or the key of an integrity chain that reaches a sink, a `toString`, an event or a
+  diagnostic,
+- an integrity chain that verifies as intact although a sealed line was changed, removed, added or moved,
 - input within the limits that makes kheck use unbounded memory or CPU, crash or hang,
 - a call of a logger that throws because of what was logged.
 

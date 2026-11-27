@@ -42,8 +42,9 @@ Every dependency, the classpath of `build-logic` included, is locked and verifie
 ./gradlew kreateResolveAndLockAll :build-logic:dependencies --write-locks --write-verification-metadata pgp,sha256 --export-keys --no-configuration-cache
 ```
 
-A new dependency other than a library of JetBrains, Kore or kollect needs the approval of a maintainer.
-Kore, kollect and Kreate are used in released versions only, never as snapshots.
+A new dependency other than a library of JetBrains or the Davils libraries Kore, kollect, konfetti, kontinuity, krypt
+and knot needs the approval of a maintainer. The Davils libraries and Kreate are used in released versions only, never
+as snapshots.
 
 ## Snapshots and Releases
 

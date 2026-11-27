@@ -14,24 +14,29 @@ it is used for, with security first.
 | `kheck-core` | `com.davils:kheck-core` | The engine: configuration, routing, filters, enrichment, masking, sampling, layouts, console and custom sinks, statistics, health, events |
 | `kheck-slf4j` | `com.davils:kheck-slf4j` | The SLF4J 2 provider; JVM only |
 | `kheck-jul` | `com.davils:kheck-jul` | The bridge of `java.util.logging`; JVM only |
-| `kheck-kollect` | `com.davils:kheck-kollect` | The statistics as kollect meters and the health as a kollect health indicator |
+| `kheck-knot` | `com.davils:kheck-knot` | The logging closed as a task of a knot shutdown and the failures of knot written as records |
 | `kheck-testing` | `com.davils:kheck-testing` | Test support; never on a production class path |
 | `kheck-bom` | `com.davils:kheck-bom` | The bill of materials |
+| `kheck-benchmark` | - | JMH benchmarks of the hot paths; never published |
 | `build-logic` | - | One convention plugin per Kreate concern; they hold nothing but `plugins { }` and `kreate { }` |
 
 The root package of a module is `com.davils.kheck.<module without kheck- and without hyphens>`, such as
 `com.davils.kheck.core`, and its Java module, named as `Automatic-Module-Name`, has the same name. The code is ported
-from the logging of an internal Davils project, without its configuration binding and its file sink, and is
-standalone: it depends on Kore, on JetBrains libraries and, in the bridges, on SLF4J and kollect only.
+from the logging of an internal Davils project, without its configuration binding and its file sink: kheck never
+touches the file system, and a sink of the application decides where records go. It builds on the Davils libraries
+that replace the common modules of that project: kontinuity for the resilience of sinks, krypt for keys and MACs,
+knot for the environment, the platform and the shutdown, konfetti for events and kollect for meters and health.
 
 ## Targets
 
-`kheck-api`, `kheck-core`, `kheck-kollect` and `kheck-testing` are Kotlin Multiplatform libraries for `jvm` and
-`wasmJs`; the Wasm tests run under Node.js. `kheck-slf4j` and `kheck-jul` have the `jvm` target alone.
+`kheck-api`, `kheck-core`, `kheck-knot` and `kheck-testing` are Kotlin Multiplatform libraries for
+`jvm` and `wasmJs`; the Wasm tests run under Node.js. `kheck-slf4j` and `kheck-jul` have the `jvm` target alone.
 
 - Code lives in `src/commonMain/kotlin`. What only the JVM offers, such as thread-locals, `StackWalker`, `System.out`
   and blocking, hides behind an `internal expect fun` in `com.davils.kheck.core.internal.platform`, in `<Role>.kt` with
-  its `actual` in `<Role>.jvm.kt` and `<Role>.wasmJs.kt`. kheck declares no `expect` or `actual` class.
+  its `actual` in `<Role>.jvm.kt` and `<Role>.wasmJs.kt`; `kheck-api` has the same seam in
+  `com.davils.kheck.api.internal.platform`. kheck declares no `expect` or `actual` class. What knot already detects,
+  such as the host system, is read from knot and not detected again.
 - JavaScript interop is written with `@JsFun` externals in `src/wasmJsMain/kotlin` only.
 - The README lists what differs between the targets; a new difference is added there.
 
@@ -62,11 +67,13 @@ The rules of Kore apply unchanged; the most important ones:
 - **Ordered, read-only collections.** Public maps and sets of kheck keep the order of insertion through
   `orderedCopy()` of `kheck-api`; lists use `immutableList()` of Kore. `immutableMap()` and `immutableSet()` of Kore
   lose the order and are not used for fields, markers or declarations.
-- **Atomics** from `kotlin.concurrent.atomics`; **randomness** is not used at all — sampling is deterministic.
+- **Atomics** from `kotlin.concurrent.atomics`; **randomness** is not used at all — sampling is deterministic, and the
+  backoffs kheck builds with kontinuity are never jittered.
 - **Nothing global.** No mutable singletons and no threads or timers of the library's own; the application hands the
   scope and the dispatcher to `logging`. The only process-wide state is `Slf4jBridge` and the thread-locals of the
   log context on the JVM, because SLF4J and thread-bound context are process-wide by nature. kheck never registers a
-  shutdown hook; the application closes its logging.
+  shutdown hook; the application closes its logging, directly or through `kheck-knot`. Resilience instances, buses,
+  registries and cryptography come from the application, built on its own scope, time source and policy.
 
 ## Logging rules
 
@@ -86,7 +93,8 @@ The rules of Kore apply unchanged; the most important ones:
   stack trace through the sanitizer of `format/text`; the JSON layouts escape through `JsonWriter`. Both use
   `SafeText.isSafe` of Kore for the classification of code points and shorten text above `Limits.MAX_TEXT_LENGTH`.
   Every `toString` that shows foreign text goes through `SafeText`.
-- **Secrets never leak.** `LogValue.Secret` holds no value. `MaskingKey` is copied, never shown and can be destroyed.
+- **Secrets never leak.** `LogValue.Secret` holds no value. Keys are `SecretKey`s of krypt, never shown, wiped on
+  `destroy()`. No hand-written cryptography: MACs and digests come from krypt under the policy of the logging.
   A `toString` never shows a field value, the message of a cause or a key.
 - **Masking fails closed.** A validator that throws drops the record.
 - **Every sink has an injection test** with the hostile fragments of `kore-testing`.
@@ -102,10 +110,11 @@ The rules of Kore apply unchanged; the most important ones:
 
 ## Build
 
-- Every module applies exactly one plugin, `kheck.kotlin-library`, `kheck.jvm-library` or `kheck.bom`, and declares
-  nothing but its description and its dependencies.
-- Dependencies are declared in `gradle/libs.versions.toml`. JetBrains libraries, Kore and kollect may be added when
-  needed; every other dependency, such as `slf4j-api`, needs the approval of a maintainer.
+- Every module applies exactly one plugin, `kheck.kotlin-library`, `kheck.jvm-library`, `kheck.bom` or
+  `kheck.benchmark`, and declares nothing but its description and its dependencies.
+- Dependencies are declared in `gradle/libs.versions.toml`. JetBrains libraries and the Davils libraries Kore,
+  kollect, konfetti, kontinuity, krypt and knot may be added when needed; every other dependency, such as
+  `slf4j-api`, needs the approval of a maintainer. None of them may depend on kheck.
 - After a dependency changes, refresh the locks and the verification metadata and review what changed:
 
   ```bash
@@ -121,8 +130,8 @@ The rules of Kore apply unchanged; the most important ones:
 ## Kore internals
 
 kheck opts into these `@DavilsInternal` declarations of Kore: `SafeText.text`, `SafeText.quoted`, `SafeText.isSafe`,
-`SafeText.REDACTED`, `immutableList` and the platform types `HostPlatform` and `OperatingSystem`. A new use is added
-here and to the table of Kore's `AGENTS.md`.
+`SafeText.REDACTED` and `immutableList`. The host system comes from knot, no longer from `HostPlatform` and
+`OperatingSystem` of Kore. A new use is added here and to the table of Kore's `AGENTS.md`.
 
 ## Public API
 

@@ -2,19 +2,23 @@
 
 kheck is the logging library of Davils: typed records, routing through a hierarchy of loggers, masking of secrets and
 personal data, deterministic sampling, deduplication and rate limits, a plain layout with ANSI themes, JSON layouts
-for the Elastic Common Schema, Logstash and OpenTelemetry, bounded queues with overflow policies, retries and
-fallbacks for sinks, statistics, health and events, and bridges for SLF4J 2 and `java.util.logging`, for Kotlin on the
-JVM and on WebAssembly (`wasmJs`). It is built on [Kore](https://github.com/davils-com/kore) and published under the
-[Apache License 2.0](LICENSE).
+for the Elastic Common Schema, Logstash and OpenTelemetry, bounded queues with overflow policies, resilient sinks with
+retries, circuit breakers, time limiters and fallbacks, tamper-evident integrity chains, statistics, meters, health and
+events, and bridges for SLF4J 2 and `java.util.logging`, for Kotlin on the JVM and on WebAssembly (`wasmJs`). It is
+built on [Kore](https://github.com/davils-com/kore) and the Davils libraries
+[kontinuity](https://github.com/davils-com/kontinuity), [krypt](https://github.com/davils-com/krypt),
+[knot](https://github.com/davils-com/knot), [konfetti](https://github.com/davils-com/konfetti) and
+[kollect](https://github.com/davils-com/kollect), and published under the [Apache License 2.0](LICENSE). kheck writes
+no file and opens no connection: a sink of the application decides where records go.
 
 | Module | Artifact | What it holds |
 |---|---|---|
 | `kheck-api` | `com.davils:kheck-api` | What a library needs to log: `Logger`, `LogLevel`, `LoggerName` and the typed events, fields, markers and values |
-| `kheck-core` | `com.davils:kheck-core` | The engine: configuration, routing, filters, enrichment, masking, sampling, the plain and JSON layouts, the console and custom sinks, statistics, health and events |
+| `kheck-core` | `com.davils:kheck-core` | The engine: configuration, routing, filters, enrichment, masking, sampling, the plain and JSON layouts, the console and custom sinks, resilience and integrity chains of sinks, statistics, meters, health and events |
 | `kheck-slf4j` | `com.davils:kheck-slf4j` | The SLF4J 2 provider: loggers, MDC, markers and key value pairs routed into kheck; JVM only |
 | `kheck-jul` | `com.davils:kheck-jul` | The bridge of `java.util.logging` with the levels of kheck mirrored into JUL; JVM only |
-| `kheck-kollect` | `com.davils:kheck-kollect` | The statistics as meters of a [kollect](https://github.com/davils-com/kollect) registry and the health as a kollect health indicator |
-| `kheck-testing` | `com.davils:kheck-testing` | Test support: recording loggers, capturing sinks, a fake terminal, record builders and recorded diagnostics |
+| `kheck-knot` | `com.davils:kheck-knot` | The logging closed as the last task of a [knot](https://github.com/davils-com/knot) shutdown and the unexpected failures of knot written as records |
+| `kheck-testing` | `com.davils:kheck-testing` | Test support: recording loggers, capturing sinks, a fake terminal, record builders, recorded diagnostics and the contract of a sink |
 | `kheck-bom` | `com.davils:kheck-bom` | One version for every module |
 
 kheck requires Kotlin 2.4 or newer and, on the JVM, JDK 25. On Wasm it is tested under Node.js.
@@ -92,12 +96,69 @@ withLogContext({ field(name = "tenant", value = tenant) }) {
 logging.levels.set("com.example.db", LogLevel.Debug)
 logging.statistics()
 logging.health()
-logging.close()
+logging.close(5.seconds)
 ```
 
 A call of a logger returns at once: the record goes into a bounded intake, and the coroutine of the logging filters,
 samples, enriches and masks it before each sink writes it on a coroutine of its own. The block of a disabled level is
 never run.
+
+## Resilience, integrity and operations
+
+```kotlin
+val environment = environment { timeSource = TimeSource.Monotonic }
+val breaker = circuitBreaker("audit.breaker", environment) { waitInOpenState = fixed(30.seconds) }
+val limiter = timeLimiter("audit.limiter", environment) { timeout = 2.seconds }
+
+val logging = logging(applicationScope, Dispatchers.Default) {
+    sink("audit", collector) {
+        stages(breaker, limiter)
+        integrity {
+            key = auditKey
+            anchor { store.lastSeal() }
+        }
+        fallback = "console"
+    }
+    console()
+    events(bus)
+}
+val meters = logging.bindTo(registry, labels = mapOf("service" to "billing"))
+val health = logging.healthIndicator()
+```
+
+- **Resilience** comes from [kontinuity](https://github.com/davils-com/kontinuity): every stage a sink is given, such
+  as a retry, a circuit breaker, a time limiter or a whole `resilience { }` policy, wraps every write. A refusal, such
+  as an open breaker, sends the batch straight to the fallback and counts it as rejected.
+- **Integrity chains** seal every line of a sink with an HMAC over the previous seal and the line. The sink receives
+  the seal in `LogLine.seal` and stores it with the line, inline or as the lines of `ChainLines` next to its log;
+  `IntegrityChain.verify` proves the log intact or names the first line that was changed, removed, added or moved. The
+  chain shows tampering; it prevents neither tampering nor loss.
+- **Cryptography** comes from [krypt](https://github.com/davils-com/krypt) under the policy of `crypto`; a hash mask or
+  a chain whose algorithm the policy refuses is refused with the configuration.
+- **Events** go to the listeners of `onEvent { }` and, with `events(bus)`, to the topic `kheck.logging` of a
+  [konfetti](https://github.com/davils-com/konfetti) bus. **Meters** and the **health indicator** are those of
+  [kollect](https://github.com/davils-com/kollect).
+- **Shutdown**: `close(timeout)` gives up on sinks that hang and counts what was lost. With `kheck-knot`, the logging
+  closes as the last task of a knot shutdown, after every other task has logged:
+
+  ```kotlin
+  val shutdown = shutdown(applicationScope) {
+      logging(logging, timeout = 5.seconds)
+      release { task("slf4j-detach") { action { Slf4jBridge.detach() } } }
+  }
+  ```
+
+- **Own sinks** implement `LogSink` and can check themselves with `LogSinkContract.verify { MySink() }` of
+  kheck-testing; `LoggingBuilder.register` gives them a typed DSL of their own.
+
+## What kheck leaves out
+
+| Left out | Why |
+|---|---|
+| File sinks, rotation, retention, compression | kheck touches no file system; a sink of the application stores records and, with `ChainLines`, their seals |
+| Configuration from files | The configuration is a validated DSL; reading a file is the application's |
+| Secrets with a value in a record | `secret(name)` holds no value, so no sink can leak it |
+| Random sampling | Sampling is deterministic, and kheck never jitters a backoff |
 
 ## Design
 
@@ -124,6 +185,9 @@ never run.
 | `LogOverflow.Block` on the intake | blocks the caller up to the wait | drops the record, a single thread cannot wait |
 | Named time zones of the plain layout | from the JDK | need the time zone database of `kotlinx-datetime` |
 | Guard against a sink that logs while it writes | thread-local | none |
+| Names of anonymous and local classes (`LoggerName.of`) | the binary name, such as `Service$1` | the simple name or the root |
+| Hash mask and integrity chains | JCA through krypt | WebCrypto through krypt, which a browser offers only in a secure context |
+| Windows hosts for the colors of the console | detected by knot | detected by knot, also under Node.js |
 
 ## Building
 
