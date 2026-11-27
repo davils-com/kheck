@@ -29,21 +29,21 @@ check:
       - ":kheck-testing:clean"
       - ":kheck-slf4j:clean"
       - ":kheck-jul:clean"
-      - ":kheck-kollect:clean"
+      - ":kheck-knot:clean"
     tasks:
       - ":kheck-api:jvmJar"
       - ":kheck-core:jvmJar"
       - ":kheck-slf4j:jar"
       - ":kheck-jul:jar"
       - ":kheck-testing:jvmJar"
-      - ":kheck-kollect:jvmJar"
+      - ":kheck-knot:jvmJar"
     artifacts:
       - "kheck-api/build/libs/*.jar"
       - "kheck-core/build/libs/*.jar"
       - "kheck-slf4j/build/libs/*.jar"
       - "kheck-jul/build/libs/*.jar"
       - "kheck-testing/build/libs/*.jar"
-      - "kheck-kollect/build/libs/*.jar"
+      - "kheck-knot/build/libs/*.jar"
 
 policy:
   # Scheduling, timers and line breaks differ on Windows, and kheck's race and stress tests run real threads, so
@@ -77,7 +77,7 @@ publish:
     - ":kheck-slf4j:publishAllPublicationsToDavilsRepository"
     - ":kheck-jul:publishAllPublicationsToDavilsRepository"
     - ":kheck-testing:publishAllPublicationsToDavilsRepository"
-    - ":kheck-kollect:publishAllPublicationsToDavilsRepository"
+    - ":kheck-knot:publishAllPublicationsToDavilsRepository"
     - ":kheck-bom:publishAllPublicationsToDavilsRepository"
 
 snapshot:
@@ -122,15 +122,15 @@ release:
       - path: com/davils/kheck-testing
         artifact: kheck-testing
         task: ":kheck-testing:publishKotlinMultiplatformPublicationToDavilsRepository"
-      - path: com/davils/kheck-kollect-jvm
-        artifact: kheck-kollect-jvm
-        task: ":kheck-kollect:publishJvmPublicationToDavilsRepository"
-      - path: com/davils/kheck-kollect-wasm-js
-        artifact: kheck-kollect-wasm-js
-        task: ":kheck-kollect:publishWasmJsPublicationToDavilsRepository"
-      - path: com/davils/kheck-kollect
-        artifact: kheck-kollect
-        task: ":kheck-kollect:publishKotlinMultiplatformPublicationToDavilsRepository"
+      - path: com/davils/kheck-knot-jvm
+        artifact: kheck-knot-jvm
+        task: ":kheck-knot:publishJvmPublicationToDavilsRepository"
+      - path: com/davils/kheck-knot-wasm-js
+        artifact: kheck-knot-wasm-js
+        task: ":kheck-knot:publishWasmJsPublicationToDavilsRepository"
+      - path: com/davils/kheck-knot
+        artifact: kheck-knot
+        task: ":kheck-knot:publishKotlinMultiplatformPublicationToDavilsRepository"
       - path: com/davils/kheck-bom
         artifact: kheck-bom
         task: ":kheck-bom:publishMavenPublicationToDavilsRepository"
@@ -144,8 +144,8 @@ release:
       - "kheck-jul/build/libs/*.jar"
       - "kheck-testing/build/libs/*.jar"
       - "kheck-testing/build/libs/*.klib"
-      - "kheck-kollect/build/libs/*.jar"
-      - "kheck-kollect/build/libs/*.klib"
+      - "kheck-knot/build/libs/*.jar"
+      - "kheck-knot/build/libs/*.klib"
   github-release:
     enabled: false
 
